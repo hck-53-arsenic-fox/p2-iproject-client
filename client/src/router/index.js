@@ -32,6 +32,11 @@ const router = createRouter({
       name: 'playerprofile',
       component: PlayerProfile
     },
+    {
+      path: '/players/favorites',
+      name: 'favorites',
+      component: FavoritesPage
+    },
   ]
 })
 

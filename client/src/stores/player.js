@@ -46,6 +46,22 @@ export const usePlayerStore = defineStore('player', {
             } catch (error) {
                 console.log(error, '<---- error fetchOnePlayer');
             }
+        },
+
+        async addFavorite(playerId) {
+            console.log(playerId, '<---- playerId addFavorite');
+            try {
+                const { data } = await axios({
+                    url: `${baseUrl}/users/${playerId}`,
+                    method: 'post',
+                    headers: {access_token: localStorage.access_token}
+                })
+
+                console.log(data, '<------- data addFavorite');
+                this.router.push('/players/favorites')
+            } catch (error) {
+                console.log(error, '<---- error addFavorite');
+            }
         }
     },
 })

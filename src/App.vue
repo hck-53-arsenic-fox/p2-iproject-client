@@ -8,7 +8,7 @@ export default {
 </script>
 
 <template>
-  <Navbar v-if="this.$route.name !== 'loginPage'"/>
+  <Navbar v-if="this.$route.name !== 'loginPage' && this.$route.name !== 'registerPage'"/>
   <div class="container flex flex-col min-h-[89vh] justify-between">
     <RouterView />
     <Footer/>

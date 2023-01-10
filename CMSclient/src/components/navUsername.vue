@@ -9,5 +9,5 @@ export default {
 </script>
 
 <template>
-    <a class="nav-link fontstyle active">Hi, {{ username }} </a>
+    <a class="nav-link fontstyle active ms-5">Hi, {{ username }} </a>
 </template>

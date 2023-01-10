@@ -9,6 +9,7 @@ import Logout from "./logout.vue"
 export default {
   computed: {
     ...mapState(useUserStore, ['isLogin']),
+    ...mapState(useUserStore, ['role']),
   },
   methods: {
   },
@@ -23,7 +24,7 @@ export default {
 
 <template>
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark" style="z-index: 10">
+  <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
       <img src="../assets/sneakers_logo-removebg-preview.png" alt="" witdh="70" height="56" />
       <SignUp v-if="isLogin === false">Sign Up</SignUp>
@@ -41,22 +42,23 @@ export default {
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse ms-2" id="navbarSupportedContent">
-        <ul class="navbar-nav mb-2 mb-lg-0">
+        <ul class="navbar-nav mb-2 mb-lg-0 me-auto">
           <RouterLink to="/" class="nav-link" href="#">About</RouterLink>
           <li class="nav-item">
-            <a class="nav-link" href="#">Services</a>
+            <RouterLink to="/services" class="nav-link" href="#">Services</RouterLink>
           </li>
           <li class="nav-item">
             <Login v-if="isLogin === false">Login</Login>
             <Logout v-if="isLogin">logout</Logout>
           </li>
         </ul>
-        <ul v-if="isLogin" class="navbar-nav mb-2 mb-lg-0">
+        <ul v-if="isLogin" class="navbar-nav mb-2 mb-lg-0 ms-auto">
           <li>
             <a class="nav-link" href="#">Create Order</a>
           </li>
           <li>
-            <a class="nav-link" href="#">Check Order Status</a>
+            <a v-if="role === 'customer'" class="nav-link" href="#">My Order History</a>
+            <a v-if="role === 'admin'" class="nav-link" href="#">Customer Log</a>
           </li>
         </ul>
       </div>

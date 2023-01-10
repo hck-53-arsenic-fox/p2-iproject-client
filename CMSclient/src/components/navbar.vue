@@ -4,17 +4,19 @@ import { useUserStore } from "../stores/user";
 import NavUsername from "./navUsername.vue";
 import SignUp from "./signUp.vue"
 import Login from "./log_in.vue"
+import Logout from "./logout.vue"
 
 export default {
   computed: {
-    ...mapState(useUserStore, ["isLogin"]),
+    ...mapState(useUserStore, ['isLogin']),
   },
   methods: {
   },
   components: {
     NavUsername,
     SignUp,
-    Login
+    Login,
+    Logout
   },
 };
 </script>
@@ -46,7 +48,7 @@ export default {
           </li>
           <li class="nav-item">
             <Login v-if="isLogin === false">Login</Login>
-            <a v-if="isLogin" class="nav-link" href="#">Logout</a>
+            <Logout v-if="isLogin">logout</Logout>
           </li>
         </ul>
         <ul v-if="isLogin" class="navbar-nav mb-2 mb-lg-0">

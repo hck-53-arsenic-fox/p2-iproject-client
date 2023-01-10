@@ -12,6 +12,7 @@ export const useUserStore = defineStore("user", {
       password: "",
       phoneNumber: "",
       address: "",
+      role: "",
       isLogin: true,
     };
   },
@@ -56,6 +57,7 @@ export const useUserStore = defineStore("user", {
         this.username = data.username;
         localStorage.setItem("access_token", data.access_token);
         localStorage.setItem("username", data.username);
+        localStorage.setItem("role", data.role);
         this.isLogin = true
           this.password = ""
           this.email = ""
@@ -75,6 +77,28 @@ export const useUserStore = defineStore("user", {
           title: "Oops...",
           text: `${error.response.data.message}`
         });
+      }
+    },
+    async logout() {
+      try {
+        Swal.fire({
+          title: `Bey bye~ ${this.username}`,
+          showClass: {
+            popup: "animate__animated animate__fadeInDown",
+          },
+          hideClass: {
+            popup: "animate__animated animate__fadeOutUp",
+          }
+        })
+        localStorage.clear();
+        this.username = ""
+        this.role = ""
+        this.email = "";
+        this.password = "";
+        this.isLogin = false;
+        this.router.push("/");
+      } catch (error) {
+        console.log(error);
       }
     },
   },

@@ -1,5 +1,15 @@
 <script>
+import { mapActions, mapState } from "pinia";
+import { RouterLink } from "vue-router";
+import { useCounterStore } from "../stores/counter";
+export default {
+    name: "Navbar",
+    computed:{
+        ...mapState(useCounterStore, ['isLogin'])
+    },
+}
 </script>
+
 
 <template>
       <div>
@@ -8,12 +18,12 @@
       style="height: 60px; background-color: black"
     >
       <div class="container">
-        <a
-          @click.prevent="clearParams"
+        <RouterLink
+        to="/"
           class="navbar-brand"
           style="font-weight: 600; color: white"
           href="#!"
-          >BlackDoorz</a
+          >BlackDoorz</RouterLink
         >
         <button
           class="navbar-toggler"
@@ -31,7 +41,7 @@
           <ul class="navbar-nav ms-auto">
             <li class="nav-item nav-button" v-if="isLogin">
               <RouterLink
-                to="/"
+                to="/food"
                 class="nav-link"
                 style="font-weight: bold; color: white"
                 href="#!"
@@ -40,11 +50,11 @@
             </li>
             <li class="nav-item nav-button" v-if="isLogin">
               <RouterLink
-                to="/favorite"
+                to="/room"
                 class="nav-link"
                 style="font-weight: bold; color: white"
                 href="#!"
-                >Favorite</RouterLink
+                >Our Room</RouterLink
               >
             </li>
             <li class="nav-item nav-button" v-if="!isLogin">
@@ -66,13 +76,12 @@
               >
             </li>
             <li class="nav-item nav-button" v-if="isLogin">
-              <RouterLink
+              <a
                 to=""
                 class="nav-link"
                 style="font-weight: bold; color: white"
                 href="#!"
-                @click.prevent="handleLogOut"
-                >Log-Out</RouterLink
+                >Log-Out</a
               >
             </li>
           </ul>

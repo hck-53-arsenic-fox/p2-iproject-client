@@ -1,4 +1,19 @@
 <script>
+import { mapActions } from 'pinia';
+import {useCounterStore} from "../stores/counter"
+export default {
+    data(){
+        return {
+            value : {
+                email : "",
+                password : ""
+            }
+        }
+    },
+    methods : {
+        ...mapActions(useCounterStore, ['handleRegister'])
+    }
+}
 </script>
 
 <template>
@@ -10,23 +25,23 @@
         <div class="col-xl-4 col-lg-5 mt-5 col-md-6 col-sm-8 col-xs-12 ms-auto">
           <div class="bg-white rounded shadow-lg">
             <h1 class="text-center h5 pt-5 pb-3"><strong>REGISTER</strong></h1>
-            <form class="py-2">
+            <form class="py-2" @submit.prevent="handleRegister(this.value)">
               <div class="position-relative maxWidth320 px-2">
                 <div class="inlineLogo"><i class="text-accent fas fa-at"></i></div>
-                <input type="email" placeholder="Email ID" class="border-0  w-100" />
+                <input type="email" placeholder="enter your email here..." class="border-0  w-100" v-model="value.email" />
               </div>
               <div class="position-relative maxWidth320 px-2 d-flex align-items-end justify-content-between">
                 <div>
                   <div class="inlineLogo"><i class="text-accent fas fa-key"></i></div>
-                  <input type="password" placeholder="Password" class="border-0  w-100" />
+                  <input type="password" placeholder="enter your password here..." class="border-0  w-100" v-model="value.password" />
                 </div>
               </div>
               <div id="submitBtn" class="text-center">
-                <button class="btn w-50 btn-lg shadow-sm rounded-pill">Register</button>
+                <button type="submit" class="btn w-50 btn-lg shadow-sm rounded-pill">Register</button>
               </div>
             </form>
             <div class="text-center pb-4">
-              Have an account? <a href="#">Login</a>
+              Have an account? <a href="#" @click.prevent="this.$router.push('/login')">Login</a>
             </div>
           </div>
           <div class="p-2 mx-2 rounded-bottom shadow bg-accent border-bottom border-dark"></div>

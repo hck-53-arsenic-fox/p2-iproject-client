@@ -185,7 +185,7 @@
       <img src="./assests/3948480.jpg" alt="" class="w-[560px] rounded-2xl hidden md:block">
 
       <!-- right side -->
-      <div class="p-6 md:p-10">
+      <div class="p-6 md:p-6">
         <!-- top content -->
         <h2 class="mb-3 text-4xl font-bold">Add New Hotel</h2>
         <p class="max-w-sm mb-12 font-light text-grey-600">
@@ -207,8 +207,8 @@
           <input type="text" class="w-full p-3 mb-3 border border-gray-300 rounded-md placeholder:font-light"
             placeholder="Enter Description">
 
-          <div class="flex items-center justify-center mt-5">
-            <button class="bg-[#F68247] hover:bg-[#F56D29] py-3 px-10 text-white rounded-xl mt-4">
+          <div class="flex items-center justify-center mt-2">
+            <button class="bg-[#F68247] hover:bg-[#F56D29] py-3 px-10 text-white rounded-xl mt-2">
               Register
             </button>
           </div>
@@ -226,7 +226,64 @@
 
 
   <!-- Detail Form -->
+  <section class="flex items-center justify-center h-screen bg-[#EBF1FF] bg-cover">
 
+    <!-- card container -->
+    <div
+      class="relative flex flex-col m-6 space-y-10 bg-white shadow-xl rounded-2xl md:flex-row md:space-y-0 md:m-0 md:h-5/6 md:w-5/6 bg-opacity-50 h-full w-full">
+
+      <!-- left side -->
+      <div class="flex basis-1/3 p-4 md:p-5 bg-white w-full rounded-2xl flex-col justify-center">
+
+        <!-- Top -->
+        <div class="p-2 m-2 rounded-xl">
+          <img src="./assests/3948480.jpg" alt="" class="w-full rounded-xl">
+        </div>
+
+        <!-- bottom -->
+        <div class="w-full rounded-xl p-2 m-1 justify-center items-center">
+          <textarea class="rounded-lg border-gray-100 bg-[#EBF1FF] align-center ml-4" name="" id="" cols="40"
+            rows="5"></textarea>
+          <div class="flex items-center justify-center mt-2">
+            <button class="bg-[#F68247] hover:bg-[#F56D29] py-2 px-5 text-white rounded-xl mt-2">
+              Add Review
+            </button>
+          </div>
+        </div>
+
+
+
+      </div>
+
+      <!-- right side -->
+      <div class="flex flex-col basis-2/3 p-4 md:p-5 bg-white w-full h-full rounded-2xl">
+
+        <!-- top -->
+        <div class="flex flex-col justify-center items-center py-4">
+          <h2 class="mb-3 text-4xl font-light p-3">Hotel Name</h2>
+          <img
+            src="https://media.istockphoto.com/id/1213840216/photo/luxury-travel-romantic-couple-in-beach-hotel.jpg?b=1&s=612x612&w=0&k=20&c=io3av54KBbpkMIv8yKOIwINbA-NPfZ9PE3Ee5AaE1CA="
+            alt="" class="rounded object-cover duration-200 w-80 hover:scale-105">
+        </div>
+
+        <!-- bottom -->
+        <div class="flex flex-col justify-center items-center p-4">
+          <p class="max-w-sm mb-3 font-light text-grey-600 text-left p-2">
+            Description
+          </p>
+          <p class="max-w-sm mb-3 font-light text-grey-600 text-left p-2">
+            Price
+          </p>
+          <p class="max-w-sm mb-3 font-light text-grey-600 text-left p-2">
+            Location
+          </p>
+        </div>
+
+
+      </div>
+
+    </div>
+  </section>
   <!-- End of Detail form -->
 </body>
 

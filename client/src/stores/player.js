@@ -7,6 +7,7 @@ export const usePlayerStore = defineStore('player', {
     state: () => ({
         players: [],
         favorite: [],
+        onePlayer: {},
     }),
     actions: {
         logout() {
@@ -26,6 +27,24 @@ export const usePlayerStore = defineStore('player', {
                 this.players = data
             } catch (error) {
                 console.log(error, '<---- error fetchPlayers');
+            }
+        },
+
+        async fetchOnePlayer(id) {
+            console.log(id, '<----- id fetchOnePlayer');
+            try {
+                const {data} = await axios({
+                    url: `${baseUrl}/players/${id}`,
+                    method: 'get',
+                    headers: {access_token: localStorage.access_token}
+                })
+
+                console.log(data, '<---- data fetchOnePlayer');
+                
+                this.onePlayer = data
+                this.router.push(`/players/${id}`)
+            } catch (error) {
+                console.log(error, '<---- error fetchOnePlayer');
             }
         }
     },

@@ -4,7 +4,7 @@ import Navbar from './components/Navbar.vue';
 </script>
 
 <template>
-  <Navbar v-if="$route.name !== 'login'"/>
+  <Navbar v-if="$route.name !== 'login' && $route.name !== 'players' && $route.name !== 'playerprofile'"/>
 
   <RouterView />
 </template>

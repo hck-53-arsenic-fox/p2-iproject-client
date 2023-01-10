@@ -2,25 +2,28 @@
 import { mapActions, mapState } from 'pinia';
 import { usePlayerStore } from '../stores/player'
 import PlayerCard from '../components/PlayerCard.vue';
+import NavbarTwo from '../components/NavbarTwo.vue';
 
 export default {
     name: "PlayersPage",
-    components: { PlayerCard },
+    components: { PlayerCard, NavbarTwo },
     methods: {
-        ...mapActions(usePlayerStore, ['fetchPlayers'])
+        ...mapActions(usePlayerStore, ['fetchPlayers', 'fetchOnePlayer'])
     },
     computed: {
         ...mapState(usePlayerStore, ['players'])
     },
     created() {
         this.fetchPlayers()
+        
     }
 }
 </script>
 
 <template>
+    <NavbarTwo />
     <div class="site-section" id="classes-section">
-        <div class="container">
+        <div class="container mt-5">
             <div class="row justify-content-center text-center mb-5">
                 <div class="col-md-8  section-heading">
                     <span class="subheading">NBA</span>

@@ -5,13 +5,14 @@ import { useUserStore } from '../stores/user';
 export default {
     name: 'EventView',
     methods: {
-        ...mapActions(useUserStore, ['subscribe', 'profile'])
+        ...mapActions(useUserStore, ['subscribe', 'profile', 'fetchAllEvents'])
     },
     computed: {
-        ...mapState(useUserStore, ['isSubs', 'oneProfile'])
+        ...mapState(useUserStore, ['isSubs', 'oneProfile', 'allEvents'])
     },
     created() {
         this.profile()
+        this.fetchAllEvents()
     },
 }
 </script>
@@ -31,10 +32,9 @@ export default {
     <!---Past Event--->
     <div style="margin-top: 50px;">
         <div class="d-flex justify-content-between"
-            style="text-align: center;padding-top:30px;width: 50%;margin: auto;">
+            style="text-align: center;padding-top:30px;width: 50%;margin: auto;" v-for="event in allEvents.competitions" :key="event.id">
             <div class="p-2">
-                <h5>UFC Fight Night: Kattar vs. Chikadze</h5>
-                <p>2022-01-15T17:00:00</p>
+                <h5>{{ event.name }}</h5>
             </div>
             <div class="p-2" v-if="!oneProfile.isSubscribed">
                 <button type="button" class="btn btn-primary" @click.prevent="subscribe">Subscribe to watch</button>

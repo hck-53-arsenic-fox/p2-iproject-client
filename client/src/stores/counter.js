@@ -130,7 +130,7 @@ export const useCounterStore = defineStore("counter", {
 
     async editData(id, data){
       const res = await axios({
-        method: "PATCH",
+        method: "PUT",
         url: `http://localhost:3000/transactions/${id}`,
         headers:{
           access_token: localStorage.getItem("access_token")
@@ -139,6 +139,24 @@ export const useCounterStore = defineStore("counter", {
       })
 
       this.router.push('/transactions')
+    },
+
+    async handleGoogleLogin(response){
+      try {
+        const res = await axios({
+          method: 'POST',
+          url: "http://localhost:3000/users/google-sign-in",
+          headers:{
+              google_token: response
+          }
+        })
+        localStorage.setItem("access_token", res.data.access_token)
+        this.router.push("/")
+        this.isAuth = true
+        // this.router.push("/")
+      } catch (error) {
+        console.log(error);
+      }
     },
 
     async handleLogout(){

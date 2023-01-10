@@ -1,6 +1,12 @@
 <script>
+import { mapActions } from 'pinia';
+import { usePlayerStore } from '../stores/player';
+
 export default {
-    name: 'Navbar'
+    name: 'Navbar',
+    methods: {
+        ...mapActions(usePlayerStore, ['logout'])
+    }
 }
 </script>
 
@@ -15,10 +21,10 @@ export default {
                         <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
                             <li><RouterLink to="/" class="nav-link">Home</RouterLink></li>
                             <li><RouterLink to="/players" class="nav-link">Players</RouterLink></li>
-                            <li><a href="#schedule-section" class="nav-link">Schedule</a></li>
+                            <li><RouterLink to="/plaas/following" class="nav-link">Following</RouterLink></li>
                             <li><a href="#trainer-section" class="nav-link">Trainer</a></li>
-                            <li><a href="#services-section" class="nav-link">Services</a></li>
-                            <li><a href="#contact-section" class="nav-link">Contact</a></li>
+                            <li><RouterLink to="/login" class="nav-link">Login</RouterLink></li>
+                            <li><a @click.prevent="logout" class="nav-link">Logout</a></li>
                         </ul>
                     </nav>
                     <a href="#" class="d-inline-block d-lg-none site-menu-toggle js-menu-toggle float-right"><span

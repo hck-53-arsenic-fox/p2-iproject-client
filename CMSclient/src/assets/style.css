@@ -33,7 +33,19 @@ color: #fff;
     background-color: rgba(255,255,255,0.9);
 }
 
-/* services card */
   
-/* end services card */
-
+  th,
+  td {
+    width: 200px;
+  }
+  
+  thead>tr {
+    position: relative;
+    display: block;
+  }
+  
+  tbody {
+    display: block;
+    height: 400px;
+    overflow: auto;
+  }

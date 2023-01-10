@@ -12,7 +12,7 @@ export const useUserStore = defineStore("user", {
       password: "",
       phoneNumber: "",
       address: "",
-      role: "",
+      role: "customer",
       isLogin: true,
     };
   },

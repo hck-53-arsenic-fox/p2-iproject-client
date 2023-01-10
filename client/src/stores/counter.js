@@ -43,6 +43,26 @@ export const useCounterStore = defineStore('counter', {
         });
     },
 
+    // GOOGLELOGIN
+    handleGoogleLogin(response) {
+      axios({
+        method: "POST",
+        url: `${BASE_URL}/googleSignIn`,
+        headers: {
+          google_token: response.credential,
+        },
+      })
+        .then((res) => {
+          localStorage.setItem("access_token", res.data.access_token);
+          localStorage.setItem("email", res.data.email);
+          this.isLogin = true;
+          this.router.push("/");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+
     // FETCH DATA ROOM
     fetchDataRoom() {
       axios({

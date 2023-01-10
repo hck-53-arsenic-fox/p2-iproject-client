@@ -43,5 +43,39 @@ export const useUserStore = defineStore("user", {
         });
       }
     },
+    async login(dataLogin) {
+      try {
+        const { data } = await axios({
+          method: "POST",
+          url: server + "customers/login",
+          data: {
+            email: dataLogin.email,
+            password: dataLogin.password,
+          },
+        });
+        this.username = data.username;
+        localStorage.setItem("access_token", data.access_token);
+        localStorage.setItem("username", data.username);
+        this.isLogin = true
+          this.password = ""
+          this.email = ""
+          Swal.fire({
+            title: `Welcome on board ${data.username}`,
+            showClass: {
+              popup: "animate__animated animate__fadeInDown",
+            },
+            hideClass: {
+              popup: "animate__animated animate__fadeOutUp",
+            }
+          })
+          this.router.push("/")
+      } catch (error) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: `${error.response.data.message}`
+        });
+      }
+    },
   },
 });

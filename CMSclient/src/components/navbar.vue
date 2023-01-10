@@ -3,6 +3,7 @@ import { mapState } from "pinia";
 import { useUserStore } from "../stores/user";
 import NavUsername from "./navUsername.vue";
 import SignUp from "./signUp.vue"
+import Login from "./log_in.vue"
 
 export default {
   computed: {
@@ -12,7 +13,8 @@ export default {
   },
   components: {
     NavUsername,
-    SignUp
+    SignUp,
+    Login
   },
 };
 </script>
@@ -43,7 +45,7 @@ export default {
             <a class="nav-link" href="#">Services</a>
           </li>
           <li class="nav-item">
-            <a v-if="isLogin === false" class="nav-link" href="#">Login</a>
+            <Login v-if="isLogin === false">Login</Login>
             <a v-if="isLogin" class="nav-link" href="#">Logout</a>
           </li>
         </ul>

@@ -7,6 +7,9 @@ export default {
     computed:{
         ...mapState(useCounterStore, ['isLogin'])
     },
+    methods: {
+        ...mapActions(useCounterStore, ['handleLogOut'])
+    }
 }
 </script>
 
@@ -39,7 +42,7 @@ export default {
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto">
-            <li class="nav-item nav-button" v-if="isLogin">
+            <li class="nav-item nav-button">
               <RouterLink
                 to="/food"
                 class="nav-link"
@@ -48,7 +51,7 @@ export default {
                 >Our Menu</RouterLink
               >
             </li>
-            <li class="nav-item nav-button" v-if="isLogin">
+            <li class="nav-item nav-button">
               <RouterLink
                 to="/room"
                 class="nav-link"
@@ -81,6 +84,7 @@ export default {
                 class="nav-link"
                 style="font-weight: bold; color: white"
                 href="#!"
+                @click.prevent="handleLogOut"
                 >Log-Out</a
               >
             </li>

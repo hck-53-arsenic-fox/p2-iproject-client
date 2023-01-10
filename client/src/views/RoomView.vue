@@ -1,9 +1,25 @@
 <script>
+import { mapActions, mapState } from 'pinia';
+import { useCounterStore } from '../stores/counter';
+import Card from "../components/Card.vue"
+
+export default {
+    components : {Card},
+    methods: {
+        ...mapActions(useCounterStore, ['fetchDataRoom'])
+    },
+    computed : {
+        ...mapState(useCounterStore, ['room'])
+    },
+    created(){
+        this.fetchDataRoom()
+    }
+}
 </script>
 
 <template>
     <!-- ROOM PAGE -->
-<div class="container mb-5 mt-5" >
+<div class="container mb-5" style="margin-top:85px">
       <div class="d-flex justify-content-between gap-5">
         <div class="mt-4" style="width:1000px">
             <h3 class="title">Rooms & Suites</h3>
@@ -21,4 +37,11 @@
         </div>
       </div>
     </div>
+    <div
+    class="container row row-cols-2 row-cols-md-2 g-4"
+    style="margin-left: 5%"
+  >
+    <Card v-for="item in room" :key="item.id" :item="item"/>
+  </div>
+
 </template>

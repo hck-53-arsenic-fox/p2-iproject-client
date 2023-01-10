@@ -5,7 +5,9 @@ import axios from 'axios'
 const BASE_URL = "http://localhost:3000";
 export const useCounterStore = defineStore('counter', {
   state: ()=>({
-    isLogin : false
+    isLogin : false,
+    room : [],
+    detailRoom : {}
   }),
   actions: {
     // REGISTER
@@ -41,7 +43,40 @@ export const useCounterStore = defineStore('counter', {
         });
     },
 
+    // FETCH DATA ROOM
+    fetchDataRoom() {
+      axios({
+        method: "get",
+        url: `${BASE_URL}/room`,
+      })
+        .then((res) => {
+          this.room = res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
 
+    // ROOM DETAIL BY ID
+    handleDetailRoomById(id) {
+      axios({
+        method: "get",
+        url: `${BASE_URL}/room/${id}`,
+      })
+        .then((res) => {
+          this.detailRoom = res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+
+    // LOGOUT 
+    handleLogOut() {
+      localStorage.clear();
+      this.router.push("/");
+      this.isLogin = false;
+    },
   }
 
 })

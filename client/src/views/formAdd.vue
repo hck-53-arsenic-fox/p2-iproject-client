@@ -7,7 +7,12 @@ export default{
     data(){
         return{
             doctors:{
-                name: ''
+                name: '',
+                id: ''
+            },
+            doctor:{
+                name: '',
+                date: ''
             }
         }
     },
@@ -15,13 +20,14 @@ export default{
 
     },
     methods:{
-        ...mapActions(useCounterStore, ['detailDoctors'])
+        ...mapActions(useCounterStore, ['detailDoctors', 'addForm'])
         
         
     },
     async created(){
         const {data} = await this.detailDoctors(this.$route.params.id)
         this.doctors.name = data.name
+        this.doctors.id = data.id
     }
 }
 
@@ -34,15 +40,15 @@ export default{
         <div class="formCreate">
             <div class="form-contents">
                 <div class="text">Formulir</div>
-                <form>
+                <form @submit.prevent="addForm(doctors.id, doctor)">
                     <div class="field">
                         <span class="fas fa-user"></span>
-                        <input type="text" placeholder="input your name">
+                        <input v-model="doctor.name" type="text" placeholder="input your name">
                     </div>
                     <div class="field">
                         <label class="dateform" for="date">Tanggal Pertemuan:</label>
                         <span class="fas"></span>
-                        <input type="date">
+                        <input v-model="doctor.date" type="date">
                     </div>
                     <div class="field">
                         <label class="dateform" for="date">Doctor:</label>

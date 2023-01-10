@@ -100,6 +100,23 @@ export const useCounterStore = defineStore("counter", {
       }
     },
 
+    async addForm(id, data){
+      try {
+        const res = await axios({
+          method: 'POST',
+          url: `http://localhost:3000/transactions/${id}`,
+          headers:{
+            access_token: localStorage.getItem("access_token")
+          },
+  
+          data:data
+        })
+        this.router.push('/transactions')
+        
+      } catch (error) {
+        console.log(error);
+      }
+    },
 
     async handleLogout(){
       try {

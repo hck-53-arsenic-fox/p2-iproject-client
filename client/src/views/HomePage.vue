@@ -16,9 +16,8 @@ export default {
       <div class="site-mobile-menu-body"></div>
     </div>
 
-
     
-
+    
     <a id="bgndVideo" class="player"
       data-property="{videoURL:'https://www.youtube.com/watch?v=EOQTo3GsJeY',showYTLogo:false, showAnnotations: false, showControls: false, cc_load_policy: false, containment:'#home-section',autoPlay:true, mute:true, startAt:22, stopAt: 40, opacity:1}">
     </a>
@@ -40,7 +39,7 @@ export default {
       </div>
     </div>
 
-    <div class="schedule-wrap">
+    <!-- <div class="schedule-wrap">
 
 
 
@@ -56,7 +55,7 @@ export default {
           </a>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <div class="site-section">
       <div class="container">
@@ -189,7 +188,7 @@ export default {
               </div>
             </div>
 
-            <div class="class-item d-flex align-items-center">
+            <!-- <div class="class-item d-flex align-items-center">
               <a href="single.html" class="class-item-thumbnail">
                 <img src="images/img_2.jpg" alt="Free website template by Free-Template.co">
               </a>
@@ -199,9 +198,9 @@ export default {
                 <span>By Justin Daniel</span>,
                 <span>30 minutes</span>
               </div>
-            </div>
+            </div> -->
 
-            <div class="class-item d-flex align-items-center">
+            <!-- <div class="class-item d-flex align-items-center">
               <a href="single.html" class="class-item-thumbnail">
                 <img src="images/img_3.jpg" alt="Free website template by Free-Template.co">
               </a>
@@ -211,9 +210,9 @@ export default {
                 <span>By Justin Daniel</span>,
                 <span>30 minutes</span>
               </div>
-            </div>
+            </div> -->
 
-            <div class="class-item d-flex align-items-center">
+            <!-- <div class="class-item d-flex align-items-center">
               <a href="single.html" class="class-item-thumbnail">
                 <img src="images/img_4.jpg" alt="Free website template by Free-Template.co">
               </a>
@@ -223,9 +222,9 @@ export default {
                 <span>By Justin Daniel</span>,
                 <span>30 minutes</span>
               </div>
-            </div>
+            </div> -->
 
-            <div class="class-item d-flex align-items-center">
+            <!-- <div class="class-item d-flex align-items-center">
               <a href="single.html" class="class-item-thumbnail">
                 <img src="images/img_1.jpg" alt="Free website template by Free-Template.co">
               </a>
@@ -235,11 +234,11 @@ export default {
                 <span>By Justin Daniel</span>,
                 <span>30 minutes</span>
               </div>
-            </div>
+            </div> -->
 
 
           </div>
-          <div class="col-lg-6">
+          <!-- <div class="col-lg-6">
             <div class="class-item d-flex align-items-center">
               <a href="single.html" class="class-item-thumbnail">
                 <img src="images/img_1.jpg" alt="Free website template by Free-Template.co">
@@ -250,9 +249,9 @@ export default {
                 <span>By Justin Daniel</span>,
                 <span>30 minutes</span>
               </div>
-            </div>
+            </div> -->
 
-            <div class="class-item d-flex align-items-center">
+            <!-- <div class="class-item d-flex align-items-center">
               <a href="single.html" class="class-item-thumbnail">
                 <img src="images/img_2.jpg" alt="Free website template by Free-Template.co">
               </a>
@@ -262,9 +261,9 @@ export default {
                 <span>By Justin Daniel</span>,
                 <span>30 minutes</span>
               </div>
-            </div>
+            </div> -->
 
-            <div class="class-item d-flex align-items-center">
+            <!-- <div class="class-item d-flex align-items-center">
               <a href="single.html" class="class-item-thumbnail">
                 <img src="images/img_3.jpg" alt="Free website template by Free-Template.co">
               </a>
@@ -274,9 +273,9 @@ export default {
                 <span>By Justin Daniel</span>,
                 <span>30 minutes</span>
               </div>
-            </div>
+            </div> -->
 
-            <div class="class-item d-flex align-items-center">
+            <!-- <div class="class-item d-flex align-items-center">
               <a href="single.html" class="class-item-thumbnail">
                 <img src="images/img_4.jpg" alt="Free website template by Free-Template.co">
               </a>
@@ -286,9 +285,9 @@ export default {
                 <span>By Justin Daniel</span>,
                 <span>30 minutes</span>
               </div>
-            </div>
+            </div> -->
 
-            <div class="class-item d-flex align-items-center">
+            <!-- <div class="class-item d-flex align-items-center">
               <a href="single.html" class="class-item-thumbnail">
                 <img src="images/img_1.jpg" alt="Free website template by Free-Template.co">
               </a>
@@ -298,7 +297,7 @@ export default {
                 <span>By Justin Daniel</span>,
                 <span>30 minutes</span>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -1299,7 +1298,7 @@ export default {
 
 
 
-    <div class="site-section" id="trainer-section">
+    <!-- <div class="site-section" id="trainer-section">
       <div class="container">
         <div class="row justify-content-center text-center mb-5" data-aos="fade-up">
           <div class="col-md-8  section-heading">
@@ -1356,9 +1355,9 @@ export default {
 
         </div>
       </div>
-    </div>
+    </div> -->
 
-    <div class="site-section" id="services-section">
+    <!-- <div class="site-section" id="services-section">
       <div class="container">
         <div class="row justify-content-center text-center mb-5" data-aos="fade-up">
           <div class="col-md-8  section-heading">
@@ -1444,9 +1443,9 @@ export default {
 
         </div>
       </div>
-    </div>
+    </div> -->
 
-    <div class="site-section bg-light contact-wrap" id="contact-section">
+    <!-- <div class="site-section bg-light contact-wrap" id="contact-section">
       <div class="container">
 
         <div class="row justify-content-center text-center mb-5">
@@ -1501,9 +1500,9 @@ export default {
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
-    <div class="schedule-wrap2 clearfix">
+    <!-- <div class="schedule-wrap2 clearfix">
       <div class="d-md-flex align-items-center">
         <div class="hours mr-md-4 mb-4 mb-lg-0">
           <strong class="d-block">Hours</strong>
@@ -1516,7 +1515,7 @@ export default {
           </a>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <footer class="footer-section">
       <div class="container">
@@ -1556,7 +1555,7 @@ export default {
           <div class="col-md-12">
             <div class=" pt-5">
               <!-- Link back to Free-Template.co can't be removed. Template is licensed under CC BY 3.0. -->
-              
+
             </div>
           </div>
 
@@ -1566,5 +1565,5 @@ export default {
 
 
 
-  </div>
+  <!-- </div> -->
 </template>

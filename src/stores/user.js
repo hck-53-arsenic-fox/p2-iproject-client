@@ -1,11 +1,15 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 import { auth, firebaseAuth } from "../auth/auth.service";
+import { useToast } from "vue-toastification";
 
 const BASE_URL = "http://localhost:3000";
+const toast = useToast();
 
 export const useUserStore = defineStore("user", {
-  state: () => ({}),
+  state: () => ({
+    isLogin: false
+  }),
   actions: {
     async firebaseLogin({ email, password }) {
       try {
@@ -20,9 +24,12 @@ export const useUserStore = defineStore("user", {
           method: "POST",
           data: { idToken },
         });
-        console.log(data);
+        toast.info("Success Login");
+        localStorage.setItem("access_token", data.access_token);
+        this.router.push({ name: "homePage" });
+        this.isLogin = true
       } catch (err) {
-        console.log(err.message);
+        toast.error(err.message);
       }
     },
     async firebaseRegister({ email, password }) {
@@ -39,8 +46,11 @@ export const useUserStore = defineStore("user", {
             email,
             password
           );
+
+        toast.success("Please Login First");
+        this.router.push({ name: "loginPage" });
       } catch (err) {
-        console.log(err.message);
+        toast.error(err.message);
       }
     },
   },

@@ -24,4 +24,4 @@ const options = {
 
 app.use(Toast, options);
 
-app.mount(#app)
+app.mount('#app')

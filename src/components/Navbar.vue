@@ -1,5 +1,12 @@
 <script>
+import { mapState } from "pinia";
 import { RouterLink } from "vue-router";
+import { useUserStore } from "../stores/user";
+export default {
+  computed: {
+    ...mapState(useUserStore, ['isLogin'])
+  }
+}
 </script>
 
 <template>
@@ -25,10 +32,10 @@ import { RouterLink } from "vue-router";
         <li>
           <RouterLink to="/cart" href="">Cart</RouterLink>
         </li>
-        <li>
+        <li v-if="!isLogin">
           <RouterLink to="/login" href="">Login</RouterLink>
         </li>
-        <li>
+        <li v-if="isLogin">
           <a href="">Logout</a>
         </li>
       </ul>

@@ -18,9 +18,9 @@ import { RouterLink } from "vue-router";
           <div>
               <p>PS4</p>
           </div>
-          <div>
-              <p>Rp 100.000</p>
-          </div>
+          <div class="flex gap-2">
+              <p>Rp 100.000</p><a href="">✖️</a>
+            </div>
       </div>
     </div>
     <div class="border-t-2 border-black"></div>
@@ -34,9 +34,16 @@ import { RouterLink } from "vue-router";
               <p>CALL OF DUTY: WARFARE</p>
           </div>
           <div>
-              <p>Rp 50.000</p>
-              <p>Rp 50.000</p>
-              <p>Rp 50.000</p>
+            <div class="flex gap-2">
+              <p>Rp 50.000</p><a href="">✖️</a>
+            </div>
+            <div class="flex gap-2">
+              <p>Rp 50.000</p><a href="">✖️</a>
+            </div>
+            <div class="flex gap-2">
+              <p>Rp 50.000</p><a href="">✖️</a>
+            </div>
+              
           </div>
       </div>
     </div>

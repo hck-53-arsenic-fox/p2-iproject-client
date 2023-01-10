@@ -27,11 +27,10 @@ export default {
 
         <div class="row align-items-center">
           <div class="col-lg-12 mx-auto text-center" data-aos="fade-up">
-            <h1 class="mb-3">We Believe Little Things Matter</h1>
-            <p class="lead mx-auto desc mb-5">A new free template for fitness website template created with love by the
-              fine folks at <a href="https://free-template.co" target="_blank">Free-Template.co</a></p>
+            <h1 class="mb-3">Find the best player around the world</h1>
+            <p class="lead mx-auto desc mb-5">You will be able to see who are the best players from various parts of the state</p>
             <p class="text-center">
-              <a href="#" class="btn btn-outline-white py-3 px-5">Get Started</a>
+              <RouterLink to="/players" class="btn btn-outline-white py-3 px-5">Get Started</RouterLink>
             </p>
           </div>
         </div>

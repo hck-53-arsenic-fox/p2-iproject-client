@@ -1,11 +1,11 @@
 <script>
 export default {
-    name: 'Navbar'
+    name: 'NavbarTwo'
 }
 </script>
 
 <template>
-    <header class="site-navbar py-4 js-sticky-header site-navbar-target" role="banner">
+    <header class="site-navbar py-4 js-sticky-header site-navbar-target" style="background-color: black;" role="banner">
 
         <div class="container-fluid">
             <div class="d-flex align-items-center">

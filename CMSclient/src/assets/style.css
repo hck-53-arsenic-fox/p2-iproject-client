@@ -1,0 +1,96 @@
+body, html {
+    height: 100%;
+  }
+
+body {
+background-color: rgb(0, 0, 0);
+color: #fff;
+
+  /* background-image: url("https://images.unsplash.com/photo-1486520299386-6d106b22014b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80");
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover; */
+}
+.fontstyle {
+    font-family: 'Fredoka One'
+}
+
+.navbar {
+    backdrop-filter: blur(1rem);
+    box-shadow: 1.3rem 1.3rem 1.3rem rgba(0, 0, 0, 0,5);
+
+    background-color: rgba(255,255,255,0.1);
+}
+.card1 {
+    backdrop-filter: blur(1rem);
+    box-shadow: 1.3rem 1.3rem 1.3rem rgba(0, 0, 0, 0,5);
+    background-color: rgba(255,255,255,0.5);
+}
+.card2 {
+    backdrop-filter: blur(1rem);
+    box-shadow: 1.3rem 1.3rem 1.3rem rgba(0, 0, 0, 0,5);
+    background-color: rgba(255,255,255,0.9);
+}
+
+.pagination-outer{ text-align: center; }
+.pagination{
+    font-family: 'Work Sans', sans-serif;
+    display: inline-flex;
+}
+.pagination li a.page-link{
+    color: #555;
+    backdrop-filter: blur(1rem);
+    background-color: rgba(255,255,255,0.5);
+    font-size: 24px;
+    font-weight: 600;
+    padding: 6px 15px;
+    margin: 0 7px;
+    border: none;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+.pagination li.active a.page-link,
+.pagination li a.page-link:hover,
+.pagination li.active a.page-link:hover{
+    color: #fff;
+    background-color: transparent;
+    text-shadow: 0 0 2px #000;
+}
+.pagination li a.page-link:before,
+.pagination li a.page-link:after{
+    content: '';
+    background-color: #1e3799;
+    height: 75%;
+    width: 75%;
+    opacity: 0;
+    transform: translateX(-50%) translateY(-50%);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: -1;
+    transition: all 0.3s ease 0s;
+}
+.pagination li.active a.page-link:before,
+.pagination li a.page-link:hover:before{
+    opacity: 1;
+    left: 43%;
+    top: 43%;
+}
+.pagination li.active a.page-link:after,
+.pagination li a.page-link:hover:after{
+    opacity: 1;
+    left: 57%;
+    top: 57%;
+}
+@media only screen and (max-width: 480px){
+    .pagination{ display: block; }
+    .pagination li{
+        display: inline-block;
+        margin: 0 0 5px;
+    }
+}
+
+/* */
+

@@ -7,7 +7,8 @@ export const useCounterStore = defineStore('counter', {
   state: ()=>({
     isLogin : false,
     room : [],
-    detailRoom : {}
+    detailRoom : {},
+    qrCode: {}
   }),
   actions: {
     // REGISTER
@@ -24,7 +25,6 @@ export const useCounterStore = defineStore('counter', {
           console.log(err);
         });
     },
-
     // LOGIN
     handleLogin(input) {
       axios({
@@ -65,12 +65,31 @@ export const useCounterStore = defineStore('counter', {
       })
         .then((res) => {
           this.detailRoom = res.data;
+          this.handleQrCode(id)
         })
         .catch((err) => {
           console.log(err);
         });
     },
 
+    // HANDLE QR-CODE
+    handleQrCode(id) {
+      axios({
+        method: "get",
+        url: "https://api.happi.dev/v1/qrcode",
+        params: {
+          apikey: "18e25c87m8KH3du3w6mEXDesLnU6JtdrLgaXiwm06vIWOUlaC82tz1xx",
+          data: `http://localhost:3000/room/${id}`,
+          width: 50
+        },
+      })
+        .then((res) => {
+          this.qrCode = res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
     // LOGOUT 
     handleLogOut() {
       localStorage.clear();

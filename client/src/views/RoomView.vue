@@ -24,7 +24,7 @@ export default {
         <div class="mt-4" style="width:1000px">
             <h3 class="title">Rooms & Suites</h3>
             <p class="text">
-              Experience the finest in luxury hotel stays at Park Hyatt Jakarta, with 220 oversized rooms, including 36 suites within our smoke free property. Sophisticated, spacious and contemporary guest rooms, designed with Indonesian touches and materials, all with uninterrupted views of Jakarta starting from the 25th floor. Unwind in the deep-soaking marble bath, with custom Le Labo® products, or enjoy the large, flat-screen TVs and integrated media hub. Upgrade your stay with one of our elegant suites, many featuring additional spaces such as dining and sitting areas.
+              Experience the finest in luxury hotel stays at BlackDoorz Jakarta, with 220 oversized rooms, including 36 suites within our smoke free property. Sophisticated, spacious and contemporary guest rooms, designed with Indonesian touches and materials, all with uninterrupted views of Jakarta starting from the 25th floor. Unwind in the deep-soaking marble bath, with custom Le Labo® products, or enjoy the large, flat-screen TVs and integrated media hub. Upgrade your stay with one of our elegant suites, many featuring additional spaces such as dining and sitting areas.
             </p>
         </div>
         <div class="">

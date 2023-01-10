@@ -7,7 +7,8 @@ export const useUserStore = defineStore('user', {
     state: () => {
         return {
             isSubs: false,
-            oneProfile: {}
+            oneProfile: {},
+            allFighters: []
         }
     },
     getters: {
@@ -83,7 +84,7 @@ export const useUserStore = defineStore('user', {
         },
         async profile() {
             try {
-                const {data} = await axios({
+                const { data } = await axios({
                     method: 'GET',
                     url: `${baseUrl}/profile`,
                     headers: {
@@ -91,6 +92,17 @@ export const useUserStore = defineStore('user', {
                     }
                 })
                 this.oneProfile = data
+            } catch (error) {
+                console.log(error)
+            }
+        },
+        async fetchFighter() {
+            try {
+                const { data } = await axios({
+                    method: 'GET',
+                    url: `${baseUrl}/rankings`
+                })
+                this.allFighters = data
             } catch (error) {
                 console.log(error)
             }

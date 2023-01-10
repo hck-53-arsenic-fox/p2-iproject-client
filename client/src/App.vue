@@ -8,16 +8,16 @@ import navbar from './views/navbar.vue'
 export default {
   name: 'App',
   components: {
-
+    navbar
   },
   computed: {
 
   },
   methods: {
-
+    ...mapActions(useResortStore, ['fetchResorts', 'fetchOneResort']),
   },
   created() {
-
+    this.fetchResorts()
   }
 }
 </script>

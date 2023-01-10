@@ -14,10 +14,9 @@ export default {
 
   },
   methods: {
-
+    ...mapActions(useResortStore, ['fetchOneResort']),
   },
   created() {
-
   }
 }
 
@@ -25,7 +24,7 @@ export default {
 
 <template>
   <div
-    class="my-6 p-5 w-4/5 bg-white flex flex-col rounded shadow-lg rounded-3xl items-center md:flex-row bg-opacity-80">
+    class="my-6 p-5 w-4/5 bg-white flex flex-col rounded shadow-lg rounded-2xl items-center md:flex-row bg-opacity-80">
 
     <!-- left part -->
     <div class="justify-center">
@@ -46,10 +45,11 @@ export default {
       </p>
     </div>
 
-    <div class="p-3 self-end">
-      <button class="bg-[#F68247] hover:bg-[#F56D29] text-white font-bold p-4 rounded-xl">
+    <div class="p-3 self-center">
+      <Button @click="$router.push('/resorts/' + resort.id)"
+        class=" bg-[#05B384]  hover:bg-[#06D6A0] text-white font-bold p-4 rounded-xl">
         View Detail
-      </button>
+      </Button>
     </div>
   </div>
 </template>

@@ -24,7 +24,10 @@ export default {
 
 <template>
   <section class="">
-    <nav class="relative px-4 py-1 flex justify-between items-center bg-[#FA9746]">
+    <nav class="relative px-4 py-1 flex items-center bg-[#06D6A0]">
+
+      <a class="hidden lg:inline-block py-1 px-6  text-sm text-white font-bold rounded-xl transition duration-200 hover:bg-gray-100 text-sm text-gray-900 font-bold  rounded-xl transition duration-200"
+        href="#">Home</a>
       <a class="text-3xl font-bold leading-none" href="#">
         <img src="" alt="">
       </a>
@@ -34,7 +37,7 @@ export default {
         </button>
       </div>
 
-      <a class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold  rounded-xl transition duration-200"
+      <a class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-1 px-3 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold  rounded-xl transition duration-200"
         href="#">Sign In</a>
       <a class="hidden lg:inline-block py-2 px-6  text-sm text-white font-bold rounded-xl transition duration-200"
         href="#">Sign up</a>
@@ -60,9 +63,7 @@ export default {
             <a class="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-[#F68247] hover:bg-[#F56D29] rounded-xl"
               href="#">Sign Up</a>
           </div>
-          <p class="my-4 text-xs text-center text-gray-400">
-            <span>Copyright © 2021</span>
-          </p>
+
         </div>
       </nav>
     </div>

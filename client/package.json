@@ -9,7 +9,9 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "@mapbox/mapbox-sdk": "^0.14.0",
     "axios": "^1.2.2",
+    "mapbox-gl": "^2.12.0",
     "pinia": "^2.0.28",
     "vue": "^3.2.45",
     "vue-router": "^4.1.6"

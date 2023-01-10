@@ -1,6 +1,6 @@
 <script>
 import { RouterLink, RouterView } from 'vue-router'
-import { useResortStore } from '../stores/resortStore'
+import { useResortStore } from '../stores/resort'
 import { mapState, mapActions } from 'pinia'
 
 
@@ -23,7 +23,52 @@ export default {
 </script>
 
 <template>
+  <section class="flex items-center justify-center h-screen bg-[#EBF1FF] bg-cover">
 
+    <!-- card container -->
+    <div
+      class="relative flex flex-col m-6 space-y-10 bg-white shadow-xl rounded-2xl md:flex-row md:space-y-0 md:m-0 md:h-4/5 md:w-4/5 bg-opacity-50">
+
+      <!-- left side -->
+      <img src="../assets/4559992.jpg" alt="" class="w-[560px] rounded-2xl hidden md:block">
+
+      <!-- right side -->
+      <div class="p-6 md:p-6">
+        <!-- top content -->
+        <h2 class="mb-3 text-4xl font-bold">Add New Hotel</h2>
+        <p class="max-w-sm mb-12 font-light text-grey-600">
+          Let's add new hotel!
+        </p>
+        <form action="">
+          <input type="text" class="w-full p-3 mb-3 border border-gray-300 rounded-md placeholder:font-light"
+            placeholder="Name">
+
+          <input type="number" class="w-full p-3 mb-3 border border-gray-300 rounded-md placeholder:font-light"
+            placeholder="Price per Night">
+
+          <input type="text" class="w-full p-3 mb-3 border border-gray-300 rounded-md placeholder:font-light"
+            placeholder="Enter Location">
+
+          <input type="file" class="w-full p-3 mb-3 border border-gray-300 rounded-md placeholder:font-light"
+            placeholder="Upload the Photo">
+
+          <input type="text" class="w-full p-3 mb-3 border border-gray-300 rounded-md placeholder:font-light"
+            placeholder="Enter Description">
+
+          <div class="flex items-center justify-center mt-2">
+            <button class="bg-[#05B384] hover:bg-[#06D6A0] py-3 px-10 text-white rounded-xl mt-2">
+              Submit
+            </button>
+          </div>
+
+        </form>
+
+
+
+      </div>
+
+    </div>
+  </section>
 </template>
 
 

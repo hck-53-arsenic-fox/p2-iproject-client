@@ -16,7 +16,12 @@ export default{
 
     },
     methods:{
-        ...mapActions(useCounterStore, ['handleLogin'])
+        ...mapActions(useCounterStore, ['handleLogin', 'handleGoogleLogin']),
+        callback(response){
+            // this.$emit('handleLoginGoogle', response.credential)
+            this.handleGoogleLogin(response.credential)
+
+        }
     },
     created(){
 
@@ -45,6 +50,8 @@ export default{
                     <div class="sign-up-link">Not a member?
                         <RouterLink to="/register" >Signup now</RouterLink>
                     </div>
+
+                    <GoogleLogin :callback="callback" />
                 </form>
             </div>
         </div>

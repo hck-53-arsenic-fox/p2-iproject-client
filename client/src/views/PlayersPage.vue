@@ -23,21 +23,20 @@ export default {
         <div class="container">
             <div class="row justify-content-center text-center mb-5">
                 <div class="col-md-8  section-heading">
-                    <span class="subheading">Fitness Class</span>
-                    <h2 class="heading mb-3">Classes</h2>
-                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there
-                        live the
-                        blind texts.
-                        Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language
-                        ocean.</p>
+                    <span class="subheading">NBA</span>
+                    <h2 class="heading mb-3">Player list</h2>
+                    <p>Looking for a player you like? You can click on the player's name to see the profile of the player with details. Click the favorite button to add players to your favorite player list</p>
                 </div>
             </div>
             <!-- Card -->
-            <PlayerCard 
+            <div class="justify-content-center row" style="margin-left: 150px;">
+                <PlayerCard 
                 v-for="player in players"
                 :key="player.id"
                 :player="player"
             />
+            </div>
+            
         </div>
     </div>
 </template>

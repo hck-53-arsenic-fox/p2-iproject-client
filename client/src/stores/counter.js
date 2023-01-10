@@ -118,6 +118,29 @@ export const useCounterStore = defineStore("counter", {
       }
     },
 
+    async detailTransactions(id){
+      return await axios({
+        method: 'GET',
+        url: `http://localhost:3000/transactions/${id}`,
+        headers:{
+          access_token: localStorage.getItem("access_token")
+        }
+      })
+    },
+
+    async editData(id, data){
+      const res = await axios({
+        method: "PATCH",
+        url: `http://localhost:3000/transactions/${id}`,
+        headers:{
+          access_token: localStorage.getItem("access_token")
+        },
+        data:data
+      })
+
+      this.router.push('/transactions')
+    },
+
     async handleLogout(){
       try {
         localStorage.clear()

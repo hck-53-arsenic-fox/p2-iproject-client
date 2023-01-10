@@ -18,7 +18,7 @@ const routes = [
   {path: '/register', name: 'register', component: Register},
   {path: '/transactions', name: 'transactions', component: Transactions},
   {path: '/doctors/form/:id', name: 'form', component: Form},
-  {path: '/transactions/form', name: 'formEdit', component: FormEdit},
+  {path: '/transactions/form/:id', name: 'formEdit', component: FormEdit},
   {path: '/doctors/:id', name: 'detail', component: Detail},
 ]
 

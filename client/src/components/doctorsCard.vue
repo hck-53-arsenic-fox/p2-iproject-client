@@ -20,7 +20,7 @@ export default{
      <div class="row">
                 <img :src="doctor.imageUrl" style="width:300px !important">
                 <div class="courses-text">
-                    <a v-if="$route.path === '/transactions'"><i class='bx bxs-edit-alt' ></i></a>
+                    <a v-if="$route.path === '/transactions'" @click.prevent="$router.push(`/transactions/form/${doctors.id}`)"><i class='bx bxs-edit-alt' ></i></a>
                     <a v-if="$route.path === '/transactions'" @click.prevent="deleteDataTransaction(doctors.id)"><i class='bx bx-x'></i></a>
                     <h5>Rp {{ doctor.price }}</h5>
                     <h3>{{doctor.name}}</h3>

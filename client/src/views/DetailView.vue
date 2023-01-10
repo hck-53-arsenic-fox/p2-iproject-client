@@ -6,12 +6,14 @@ export default {
     ...mapState(useCounterStore, ["detailRoom", "qrCode"]),
   },
   methods: {
-    ...mapActions(useCounterStore, ["handleDetailRoomById"]),
+    ...mapActions(useCounterStore, ["handleDetailRoomById", "rupiah", "handleAddTransactions"]),
+
   },
   created() {
     this.handleDetailRoomById(this.$route.params.id);
   },
 };
+
 </script>
 
 <template>
@@ -23,8 +25,8 @@ export default {
         <p class="text mt-3">
           {{ detailRoom.description }}
         </p>
-        <h5 class="mt-3">Rp. {{ detailRoom.price }}/Night</h5>
-        <button class="btn btn-warning mt-3">Booking Now</button>
+        <h5 class="mt-3">{{ rupiah(detailRoom.price) }}/Night</h5>
+        <button class="btn btn-warning mt-3" @click.prevent="handleAddTransactions(detailRoom.id)">Booking Now</button>
         <!-- Vertically centered modal -->
         <button
           type="button"

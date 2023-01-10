@@ -5,6 +5,7 @@ import RegisterView from '../views/RegisterPage.vue'
 import RoomView from '../views/RoomView.vue'
 import DetailView from '../views/DetailView.vue'
 import FoodView from '../views/FoodView.vue'
+import CartPage from '../views/CartPage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -39,13 +40,18 @@ const router = createRouter({
       name: 'food',
       component: FoodView
     },
+    {
+      path: '/cart',
+      name: 'cart',
+      component: CartPage
+    },
   ]
 })
 
 router.beforeEach(async (to, from)=>{
-  // if (!localStorage.access_token && to.name === "favorite"){
-  //   return {name: "login"}
-    if ((localStorage.access_token && to.name === "login") || (localStorage.access_token && to.name === "register") ){
+  if (!localStorage.access_token && to.name === "cart"){
+    return {name: "login"}
+   } else if ((localStorage.access_token && to.name === "login") || (localStorage.access_token && to.name === "register") ){
     return {name: "home"}
     }
 })

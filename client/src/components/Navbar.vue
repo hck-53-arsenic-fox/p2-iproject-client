@@ -48,7 +48,7 @@ export default {
                 class="nav-link"
                 style="font-weight: bold; color: white"
                 href="#!"
-                >Our Menu</RouterLink
+                >Dining</RouterLink
               >
             </li>
             <li class="nav-item nav-button">
@@ -57,7 +57,7 @@ export default {
                 class="nav-link"
                 style="font-weight: bold; color: white"
                 href="#!"
-                >Our Room</RouterLink
+                >Room</RouterLink
               >
             </li>
             <li class="nav-item nav-button" v-if="!isLogin">
@@ -76,6 +76,15 @@ export default {
                 style="font-weight: bold; color: white"
                 href="#!"
                 >Sign Up</RouterLink
+              >
+            </li>
+            <li class="nav-item nav-button" v-if="isLogin">
+              <RouterLink
+                to="/cart"
+                class="nav-link"
+                style="font-weight: bold; color: white"
+                href="#!"
+                >Cart</RouterLink
               >
             </li>
             <li class="nav-item nav-button" v-if="isLogin">

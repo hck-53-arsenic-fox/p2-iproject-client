@@ -5,7 +5,7 @@
  <section>
     <div
       style="
-        background-image: url('https://assets.hyatt.com/content/dam/hyatt/hyattdam/images/2018/02/27/1255/Park-Hyatt-Jakarta-P001-Location.jpg/Park-Hyatt-Jakarta-P001-Location.16x9.jpg?imwidth=1280');
+        background-image : url('https://assets.hyatt.com/content/dam/hyatt/hyattdam/images/2018/02/27/1255/Park-Hyatt-Jakarta-P001-Location.jpg/Park-Hyatt-Jakarta-P001-Location.16x9.jpg?imwidth=1280');
         min-height: 100vh;
       "
     >
@@ -113,7 +113,7 @@
               Jakarta, with 220 oversized rooms, including 36 suites within our
               property.
             </p>
-            <button class="btn btn-outline-secondary">View More</button>
+            <button class="btn btn-outline-secondary" @click.prevent="this.$router.push('/room')">View More</button>
           </div>
         </div>
       </div>

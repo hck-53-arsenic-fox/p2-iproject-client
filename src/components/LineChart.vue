@@ -48,5 +48,10 @@ export default {
 </script>
 
 <template>
-  <Line id="my-chart-id" :options="chartOptions" :data="chartData" />
+  <Line
+    class="w-full"
+    id="my-chart-id"
+    :options="chartOptions"
+    :data="chartData"
+  />
 </template>

@@ -9,6 +9,39 @@ const baseUrl = "http://localhost:3001";
 const store = useCountryBMI();
 store.fetchCountries();
 let selectedCountry = ref("");
+
+function handleFetchData(countryCode) {
+  store.fetchSelectedCountryData(countryCode);
+  store.fetchByCountry(countryCode);
+}
+
+const lastUpdate = computed(() => {
+  return store.state.historicalDate[store.state.historicalDate.length - 1];
+});
+
+const lastBigMacUsd = computed(() => {
+  return (store.state.latestData[1] / store.state.latestData[4]).toFixed(2);
+});
+
+const BMILastUpdate = computed(() => {
+  if (!store.state.historicalBMI.length) return;
+  const num = store.state.historicalBMI
+    .at(store.state.historicalBMI.length - 1)
+    .toFixed(1);
+  const status = num > 0 ? "overvalued" : "undervalued";
+  return `${num}% ${status}`;
+});
+
+const historicalDateRange = computed(() => {
+  if (!store.state.historicalDate.length) return;
+  return (
+    store.state.historicalDate?.at(0).split("-")[0] +
+    "-" +
+    store.state.historicalDate
+      ?.at(store.state.historicalDate.length - 1)
+      .split("-")[0]
+  );
+});
 </script>
 
 <template>
@@ -18,7 +51,7 @@ let selectedCountry = ref("");
       <form>
         <div class="flex">
           <select
-            @change.prevent="store.fetchByCountry(selectedCountry)"
+            @change.prevent="handleFetchData(selectedCountry)"
             v-model="selectedCountry"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-1.5 mt-2 md:m-0"
           >
@@ -36,32 +69,58 @@ let selectedCountry = ref("");
     </div>
 
     <div class="grid grid-cols-1 gap-5 md:grid-cols-2" id="grid-container">
-      <h2 class="text-md font-semibold md:hidden">
-        The Indonesia IDR is -54.6% undervalued against the US dollar
-      </h2>
+      <h2 class="text-md font-semibold md:hidden">heheh</h2>
 
       <div class="md:order-2">
-        <BarChart v-if="store.state.rawData" />
+        <p class="text-md font-semibold hidden md:flex">
+          Exchange Rate: Big Mac vs Actual
+        </p>
+        <p v-if="selectedCountry" class="text-sm hidden md:flex">
+          {{ lastUpdate }}
+        </p>
+        <div class="md:mt-5">
+          <BarChart
+            v-if="
+              store.state.bigMacExchangeRate && store.state.actualExchangeRate
+            "
+          />
+        </div>
       </div>
 
-      <div class="md:order-1 md:flex md:flex-col md:justify-evenly">
-        <h2 class="text-md font-semibold hidden md:flex md:text-2xl lg:w-3/4">
-          The Indonesia IDR is -54.6% undervalued against the US dollar
+      <div
+        v-if="store.state.selectedCountryData"
+        class="md:order-1 md:col-span-2 md:w-3/4 md:flex md:flex-col md:justify-evenly md:my-5"
+      >
+        <h2 class="text-md font-semibold hidden md:flex md:text-2xl">
+          The {{ store.state.selectedCountryData.country }}
+          {{ store.state.selectedCountryData.currency_code }} is
+          {{ BMILastUpdate }} against the US dollar
         </h2>
 
-        <p class="text-md lg:w-3/4">
-          A Big Mac costs 35,000 rupiah in Indonesia and US$5.15 in the United
-          States. The implied exchange rate is 6,796.12. The difference between
-          this and the actual exchange rate, 14,977.50, suggests the Indonesian
-          rupiah is 54.6% undervalued
+        <p class="text-md">
+          A Big Mac costs {{ store.state.selectedCountryData.currency_code }}
+          {{ store.state.latestData[1] }} in
+          {{ store.state.selectedCountryData.country }}
+          and USD {{ lastBigMacUsd }} in the United States. The implied exchange
+          rate is {{ store.state.latestData[4].toFixed(2) }}. The difference
+          between this and the actual exchange rate,
+          {{ store.state.latestData[2].toFixed(2) }}, suggests the
+          {{ store.state.selectedCountryData.country }}
+          {{ store.state.selectedCountryData.currency_code }} is
+          {{ BMILastUpdate }}.
         </p>
       </div>
 
-      <div class="md:col-span-2 md:order-3">
+      <div class="md:order-3">
         <p class="text-md font-semibold">Historical Data</p>
-        <p class="text-sm">2000 - 2022</p>
+        <p v-if="selectedCountry" class="text-sm">{{ historicalDateRange }}</p>
         <div class="md:mt-5">
-          <LineChart />
+          <LineChart
+            v-if="
+              store.state.historicalDate.length &&
+              store.state.historicalBMI.length
+            "
+          />
         </div>
       </div>
     </div>

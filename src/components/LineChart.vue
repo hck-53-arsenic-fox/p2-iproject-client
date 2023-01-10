@@ -1,5 +1,8 @@
-<script>
+<script setup>
 import { Line } from "vue-chartjs";
+import { useCountryBMI } from "../stores/countryBMI";
+import { ref, computed, reactive } from "vue";
+
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -20,31 +23,33 @@ ChartJS.register(
   Tooltip
 );
 
-export default {
-  components: { Line },
-  data() {
-    return {
-      chartData: {
-        labels: ["2022-07-31", "February", "March", "April", "May", "June"],
-        datasets: [
-          {
-            data: [-40, -20, -12, -40, -20, -12],
-            backgroundColor: "#FB923C",
-          },
-        ],
+const store = useCountryBMI();
+
+const chartData = computed(() => {
+  return {
+    labels: store.state.historicalDate,
+    datasets: [
+      {
+        data: store.state.historicalBMI,
+        backgroundColor: ["#FB923C"],
       },
-      chartOptions: {
-        responsive: true,
-        scales: {
-          y: {
-            suggestedMin: -60,
-            suggestedMax: 60,
-          },
-        },
+    ],
+  };
+});
+
+const chartOptions = computed(() => {
+  return {
+    responsive: true,
+    tension: 0.3,
+    pointRadius: 3,
+    pointHoverRadius: 6,
+    scales: {
+      y: {
+        suggestedMax: 0,
       },
-    };
-  },
-};
+    },
+  };
+});
 </script>
 
 <template>

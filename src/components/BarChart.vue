@@ -15,33 +15,13 @@ import {
 ChartJS.register(Title, Tooltip, BarElement, CategoryScale, LinearScale);
 
 const store = useCountryBMI();
-const state = reactive({
-  chartData: {
-    labels: [" Big Mac Exchange Rate", "Actual Exchange Rate"],
-    datasets: [
-      {
-        data: [
-          store.state.rawData.dataset.data[0][2],
-          store.state.rawData.dataset.data[0][4],
-        ],
-        backgroundColor: ["#FB923C", "#808080"],
-      },
-    ],
-  },
-  chartOptions: {
-    responsive: true,
-  },
-});
 
 const chartData = computed(() => {
   return {
     labels: [" Big Mac Exchange Rate", "Actual Exchange Rate"],
     datasets: [
       {
-        data: [
-          store.state.rawData.dataset.data[0][2],
-          store.state.rawData.dataset.data[0][4],
-        ],
+        data: [store.state.bigMacExchangeRate, store.state.actualExchangeRate],
         backgroundColor: ["#FB923C", "#808080"],
       },
     ],

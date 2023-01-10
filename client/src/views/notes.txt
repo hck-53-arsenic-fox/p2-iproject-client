@@ -1,0 +1,5 @@
+Belum kelar: 
+Detail page,
+Page get started belum di edit
+Navbar juga belum di edit
+Home belum fix stylingnya

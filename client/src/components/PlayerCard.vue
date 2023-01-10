@@ -11,9 +11,9 @@ export default {
     computed: {
         ...mapState(usePlayerStore, ['onePlayer'])
     },
-    created() {
-        this.fetchOnePlayer()
-    }
+    // created() {
+    //     this.fetchOnePlayer()
+    // }
 }
 </script>
 

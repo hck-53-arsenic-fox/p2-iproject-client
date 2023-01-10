@@ -1,0 +1,20 @@
+{
+  "name": "p2-iproject-client",
+  "version": "1.0.0",
+  "description": "Individual Project - Client",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flamousz/p2-iproject-client.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/flamousz/p2-iproject-client/issues"
+  },
+  "homepage": "https://github.com/flamousz/p2-iproject-client#readme"
+}

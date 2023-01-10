@@ -54,11 +54,11 @@ export default {
         </ul>
         <ul v-if="isLogin" class="navbar-nav mb-2 mb-lg-0 ms-auto">
           <li>
-            <a class="nav-link" href="#">Create Order</a>
+            <RouterLink to="/order" class="nav-link" href="#">Create Order</RouterLink>
           </li>
           <li>
             <a v-if="role === 'customer'" class="nav-link" href="#">My Order History</a>
-            <a v-if="role === 'admin'" class="nav-link" href="#">Customer Log</a>
+            <a v-if="role === 'admin'" class="nav-link" href="#">Order Log</a>
           </li>
         </ul>
       </div>

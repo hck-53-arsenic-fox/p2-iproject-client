@@ -2,6 +2,7 @@
 import { mapState } from "pinia";
 import { useUserStore } from "../stores/user";
 import NavUsername from "./navUsername.vue";
+import SignUp from "./signUp.vue"
 
 export default {
   computed: {
@@ -11,6 +12,7 @@ export default {
   },
   components: {
     NavUsername,
+    SignUp
   },
 };
 </script>
@@ -20,8 +22,8 @@ export default {
   <nav class="navbar navbar-expand-lg navbar-dark" style="z-index: 10">
     <div class="container">
       <img src="../assets/sneakers_logo-removebg-preview.png" alt="" witdh="70" height="56" />
-      <a v-if="isLogin === false" class="nav-link ms-5" href="#">Sign Up</a>
-      <NavUsername v-if="isLogin"></NavUsername>
+      <SignUp v-if="isLogin === false">Sign Up</SignUp>
+      <NavUsername v-else-if="isLogin"></NavUsername>
       
       <button
         class="navbar-toggler"

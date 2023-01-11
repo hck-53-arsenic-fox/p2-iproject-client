@@ -22,7 +22,7 @@
     <script>
       window.fbInit = function () {
         FB.init({
-          appId: "210722825747843",
+          appId: "2984034805226590",
           cookie: true,
           xfbml: true,
           version: "v15.0",
@@ -30,14 +30,7 @@
 
         FB.AppEvents.logPageView();
 
-        FB.getLoginStatus(function (response) {
-          console.log(response);
-          if (response.status === "connected") {
-            console.log("connected");
-          } else {
-            console.log("not connected");
-          }
-        });
+        window.dispatchEvent(new Event('fb-sdk-ready'))
       };
 
       (function (d, s, id) {

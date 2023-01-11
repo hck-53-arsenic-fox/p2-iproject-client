@@ -21,9 +21,10 @@ export default {
       window.fbAsyncInit = function () {
         FB.Event.subscribe("auth.statusChange", (response) => {
           if (response.status === "connected") {
-            // console.log("Access token: ", response.authResponse.accessToken);
             const accessTokenFromFacebook = response.authResponse.accessToken;
-            this.handleFacebookLogin(accessTokenFromFacebook);
+            if (this.handleFacebookLogin) {
+              this.handleFacebookLogin(accessTokenFromFacebook);
+            }
           }
         });
       };

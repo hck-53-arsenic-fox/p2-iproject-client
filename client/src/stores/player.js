@@ -8,6 +8,7 @@ export const usePlayerStore = defineStore('player', {
         players: [],
         following: [],
         onePlayer: {},
+        userProfile: {},
     }),
     actions: {
         logout() {
@@ -24,11 +25,21 @@ export const usePlayerStore = defineStore('player', {
                     data: formLogin
                 })
 
-                // console.log(data, '<-----');
+                console.log(data, '<----- data login');
                 localStorage.setItem('access_token', data.access_token)
+                localStorage.setItem('username', data.username)
                 this.router.push('/')
             } catch (error) {
                 console.log(error, '<---- error login');
+            }
+        },
+
+        async register(formRegister) {
+            console.log(formRegister, '<---- formREGISTER');
+            try {
+                
+            } catch (error) {
+                console.log(error, '<----- error register');      
             }
         },
 
@@ -75,7 +86,7 @@ export const usePlayerStore = defineStore('player', {
                 })
 
                 console.log(data, '<------- data addFavorite');
-                this.router.push('/players/favorites')
+                this.router.push('/users/user/following')
             } catch (error) {
                 console.log(error, '<---- error addFavorite');
             }
@@ -97,5 +108,20 @@ export const usePlayerStore = defineStore('player', {
             }
         },
 
+        async fetchUserProfile(username) {
+            console.log(username, '<----- usrname   ');
+            try {
+                const { data } = await axios({
+                    url: `${baseUrl}/users/${username}`,
+                    method: 'get',
+                    headers: {access_token: localStorage.access_token}
+                })
+
+                console.log(data, '<---- data fetchUserProfie');
+                this.userProfile = data
+            } catch (error) {
+                console.log(error, '<---- error fetchUserProfile');
+            }
+        }
     },
 })

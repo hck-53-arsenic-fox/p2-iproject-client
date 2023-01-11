@@ -19,10 +19,10 @@ export default {
 </script>
 
 <template>
-    <!-- <NavbarTwo /> -->
-    <section class="container">
+    <NavbarTwo />
+    <section class="container" >
         <div class="card d-flex justify-content-center">
-            <div class="row">
+            <div class="row" style="padding-top: 50px;">
                 <div class="col-6">
                     <div class="card-img">
                         <img :src="onePlayer.imgUrl" width="670" height="684">
@@ -30,7 +30,7 @@ export default {
                 </div>
                 <div class="col-6">
                     <img :src="onePlayer.logoUrl" width="230" class="ml-5">
-                    <div class="d-flex justify-content" style="margin-top: 120px; margin-left: 60px;">
+                    <div class="d-flex justify-content" style="margin-top: 90px; margin-left: 60px;">
                         <h3 style="font-size: 40px;"><strong>{{ onePlayer.name }}</strong></h3>
                     </div>
                     <div class="d-flex justify-content" style=" margin-left: 60px;">
@@ -42,7 +42,7 @@ export default {
 
             <div class="row">
                 <div class="col">
-                    <h3 class="card-info-code ml-4">{{ onePlayer.country }}</h3>
+                    <h3 class="card-info-code ml-4">Country: {{ onePlayer.country }}</h3>
                     <div class="mt-5 ml-4">
                         <dl class="data-list">
                             <div class="data-list-row">
@@ -65,7 +65,7 @@ export default {
                     </div>
 
                 </div>
-                <div class="card-container">
+                <div class="card-container mt-5">
                     <div class="card-info">
                         <h1 class="card-info-item"><strong>EXPERIENCE: {{ onePlayer.experience }} YEARS</strong></h1>
 

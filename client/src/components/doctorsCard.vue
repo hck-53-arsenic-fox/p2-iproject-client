@@ -9,7 +9,7 @@ export default{
     ],
     computed: {},
     methods: {
-        ...mapActions(useCounterStore, ["deleteDataTransaction"])
+        ...mapActions(useCounterStore, ["deleteDataTransaction", "paymentConfirm"])
     },
     
 }
@@ -37,7 +37,7 @@ export default{
                     </div>
 
                     <div v-if="$route.path === '/transactions'" class="payment">
-                        <a class="btn">Book Now</a>
+                        <a @click.prevent="paymentConfirm(doctor.price)" class="btn">Book Now</a>
                     </div>
                 </div>
      </div>

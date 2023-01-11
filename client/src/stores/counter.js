@@ -8,6 +8,7 @@ export const useCounterStore = defineStore("counter", {
     doctors:[],
     doctor:{},
     transactions:[],
+    order_Id: ''
   }),
   getters:{},
   actions:{
@@ -158,6 +159,42 @@ export const useCounterStore = defineStore("counter", {
         console.log(error);
       }
     },
+
+    async paymentConfirm(price) {
+      try {
+          let { data } = await axios({
+              method: 'POST',
+              url: "http://localhost:3000/payments/get-token-payment",
+              data: {
+                  price: price
+              },
+              headers:{
+                access_token: localStorage.getItem("access_token")
+              }
+          })
+
+          // console.log(price, 'ini priceeeeeeeeeeee')
+
+
+          this.order_Id = data.orderId
+          window.snap.pay(`${data.token.token}`, {
+              onSuccess: async (result) => {
+                  await this.statusPayment()
+              },
+              onPending: function (result) {
+                  alert("wating your payment!"); console.log(result);
+              },
+              onError: function (result) {
+                  alert("payment failed!"); console.log(result);
+              },
+              onClose: function () {
+                  alert('you closed the popup without finishing the payment');
+              }
+          })
+      } catch (error) {
+          console.log(error)
+      }
+  },
 
     async handleLogout(){
       try {

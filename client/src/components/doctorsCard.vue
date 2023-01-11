@@ -20,8 +20,8 @@ export default{
      <div class="row">
                 <img :src="doctor.imageUrl" style="width:300px !important">
                 <div class="courses-text">
-                    <a v-if="$route.path === '/transactions'" @click.prevent="$router.push(`/transactions/form/${doctors.id}`)"><i class='bx bxs-edit-alt' ></i></a>
-                    <a v-if="$route.path === '/transactions'" @click.prevent="deleteDataTransaction(doctors.id)"><i class='bx bx-x'></i></a>
+                    <a v-if="$route.path === '/transactions' && doctors.status === `process`" @click.prevent="$router.push(`/transactions/form/${doctors.id}`)"><i class='bx bxs-edit-alt' ></i></a>
+                    <a v-if="$route.path === '/transactions' && doctors.status === `process`" @click.prevent="deleteDataTransaction(doctors.id)"><i class='bx bx-x'></i></a>
                     <h5>Rp {{ doctor.price }}</h5>
                     <h3>{{doctor.name}}</h3>
                     <h6>{{doctor.duration}} menit</h6>
@@ -36,8 +36,11 @@ export default{
                         </div>
                     </div>
 
-                    <div v-if="$route.path === '/transactions'" class="payment">
-                        <a @click.prevent="paymentConfirm(doctor.price)" class="btn">Book Now</a>
+                    <div v-if="$route.path === '/transactions' && doctors.status === `process`" class="payment">
+                        <a @click.prevent="paymentConfirm(doctor.price, doctors.id)" class="btn">Book Now</a>
+                    </div>
+                    <div v-if="$route.path === '/transactions' && doctors.status === `success`" class="payment">
+                        <p>Payment success</p>
                     </div>
                 </div>
      </div>

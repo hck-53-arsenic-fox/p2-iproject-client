@@ -219,11 +219,11 @@ export const useCounterStore = defineStore("counter", {
       }
     },
 
-    async paymentConfirm(price) {
+    async paymentConfirm(price, id) {
       try {
           let { data } = await axios({
               method: 'POST',
-              url: "http://localhost:3000/payments/get-token-payment",
+              url: `http://localhost:3000/payments/get-token-payment/${id}`,
               data: {
                   price: price
               },
@@ -240,6 +240,7 @@ export const useCounterStore = defineStore("counter", {
               onSuccess: async (result) => {
                   // await this.statusPayment()
                   this.router.push('/')
+                  
               },
               onPending: function (result) {
                   alert("wating your payment!"); console.log(result);

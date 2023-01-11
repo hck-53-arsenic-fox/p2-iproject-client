@@ -268,6 +268,11 @@ section{
     margin-top: 20px;
 }
 
+.payment p{
+    color: green;
+    font-weight: bolder;
+}
+
 .star i{
     color: var(--main-color);
     margin-right: 2px;

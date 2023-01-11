@@ -12,8 +12,8 @@ export const useUserStore = defineStore("user", {
       password: "",
       phoneNumber: "",
       address: "",
-      role: "customer",
-      isLogin: true,
+      role: "",
+      isLogin: false,
     };
   },
   actions: {
@@ -21,7 +21,7 @@ export const useUserStore = defineStore("user", {
       try {
         await axios({
           method: "POST",
-          url: server + "customers/register",
+          url: server + "users/register",
           data: {
             username: dataRegis.username,
             email: dataRegis.email,
@@ -48,17 +48,18 @@ export const useUserStore = defineStore("user", {
       try {
         const { data } = await axios({
           method: "POST",
-          url: server + "customers/login",
+          url: server + "users/login",
           data: {
             email: dataLogin.email,
             password: dataLogin.password,
           },
         });
         this.username = data.username;
+        this.isLogin = true
+        this.role = data.role
         localStorage.setItem("access_token", data.access_token);
         localStorage.setItem("username", data.username);
         localStorage.setItem("role", data.role);
-        this.isLogin = true
           this.password = ""
           this.email = ""
           Swal.fire({

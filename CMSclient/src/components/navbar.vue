@@ -8,8 +8,7 @@ import Logout from "./logout.vue"
 
 export default {
   computed: {
-    ...mapState(useUserStore, ['isLogin']),
-    ...mapState(useUserStore, ['role']),
+    ...mapState(useUserStore, ['isLogin','role'])
   },
   methods: {
   },
@@ -49,7 +48,7 @@ export default {
           </li>
           <li class="nav-item">
             <Login v-if="isLogin === false">Login</Login>
-            <Logout v-if="isLogin">logout</Logout>
+            <Logout v-else-if="isLogin">logout</Logout>
           </li>
         </ul>
         <ul v-if="isLogin" class="navbar-nav mb-2 mb-lg-0 ms-auto">
@@ -57,8 +56,8 @@ export default {
             <RouterLink to="/order" class="nav-link" href="#">Create Order</RouterLink>
           </li>
           <li>
-            <RouterLink to="/history" class="nav-link" href="#">My Order History</RouterLink>
-            <RouterLink to="/log" class="nav-link" href="#">Customer Order Log</RouterLink>
+            <RouterLink to="/history" v-if="role === 'customer'" class="nav-link" href="#">My Order History</RouterLink>
+            <RouterLink to="/log" v-else-if="role === 'admin'" class="nav-link" href="#">Customer Order Log</RouterLink>
           </li>
         </ul>
       </div>

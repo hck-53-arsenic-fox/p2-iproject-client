@@ -13,7 +13,7 @@ export default {
   },
   methods: {
     ...mapActions(useUserStore, ["login"]),
-    async custLogin() {
+    async userLogin() {
       this.login(this.dataLogin);
     },
   },
@@ -59,7 +59,7 @@ export default {
             </div>
 
             <button
-              @click.prevent="custLogin"
+              @click.prevent="userLogin"
               class="btn btn-outline-primary btn-sm btn-block border text-white"
               type="submit"
             >

@@ -7,7 +7,6 @@ export default {
     Navbar
   }
 }
-
 </script>
 
 <template>

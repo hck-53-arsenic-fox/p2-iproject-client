@@ -7,7 +7,7 @@ export const useCounterStore = defineStore("counter", {
       products: [],
       product: {},
       isLogin: false,
-      username: "",
+      name: "",
       province: [],
       city: [],
       cost: {},
@@ -40,7 +40,7 @@ export const useCounterStore = defineStore("counter", {
         localStorage.setItem("access_token", data.access_token);
         localStorage.setItem("email", data.email);
         localStorage.setItem("name", data.name);
-        this.username = localStorage.getItem("userName");
+        this.name = localStorage.getItem("name");
         this.isLogin = true;
         this.router.push("/");
         // console.log("berhasil login");

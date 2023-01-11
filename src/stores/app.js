@@ -9,13 +9,19 @@ Notify.init({ clickToClose: true });
 
 export const useAppStore = defineStore("app", {
 	state() {
-		return {};
+		return {
+			userInfo: "",
+		};
 	},
 	getters: {},
 	actions: {
 		errorHandler(error) {
 			Report.failure("Login Error", error.response.data.message, "Aww");
 			Loading.remove();
+		},
+		setUserInfo() {
+			const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+			this.userInfo = userInfo;
 		},
 		async handleLogin(loginData) {
 			try {

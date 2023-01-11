@@ -1,18 +1,18 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 import Login from "../views/Login.vue";
-import Home from "../views/Home.vue";
+import ChatPage from "../views/ChatPage.vue";
 
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
 	routes: [
 		{
 			path: "/",
-			name: "home",
-			component: Home,
+			name: "chat",
+			component: ChatPage,
 			beforeEnter: (to, from, next) => {
 				if (!localStorage.getItem("userInfo")) {
-					router.push("/login");
+					next("/login");
 				} else {
 					next();
 				}

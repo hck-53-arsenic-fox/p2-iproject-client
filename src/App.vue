@@ -29,6 +29,10 @@ body {
   position: relative;
 }
 
+body::-webkit-scrollbar {
+  display: none;
+}
+
 .background {
   height: 100vh;
   width: 100vw;

@@ -22,8 +22,8 @@ export default {
 </script>
 
 <template>
-    <Navbar />
-    <!-- <NavbarTwo /> -->
+    <!-- <Navbar /> -->
+    <NavbarTwo />
 
     <section class="container">
         <div class="row justify-content-start mb-5"  style="padding-top: 100px;">

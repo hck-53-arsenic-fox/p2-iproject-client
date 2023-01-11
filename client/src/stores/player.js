@@ -1,7 +1,9 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
 const baseUrl = 'http://localhost:3000'
+import { useToast } from "vue-toastification";
 
+const toast = useToast();
 
 export const usePlayerStore = defineStore('player', {
     state: () => ({
@@ -32,12 +34,15 @@ export const usePlayerStore = defineStore('player', {
                     data: formLogin
                 })
 
-                console.log(data, '<----- data login');
+                // console.log(data, '<----- data login');
                 localStorage.setItem('access_token', data.access_token)
                 localStorage.setItem('username', data.username)
+                toast.success("You're in mate");
+
                 this.router.push('/')
             } catch (error) {
-                console.log(error, '<---- error login');
+                // console.log(error, '<---- error login');
+                toast.error(error.response.data.message);
             }
         },
 
@@ -51,13 +56,12 @@ export const usePlayerStore = defineStore('player', {
                 console.log(data, '<--- data google login');
                 localStorage.setItem('access_token', data.access_token)
 
-                // Swal.fire({
-                //     icon: 'success',
-                //     title: 'Success login!',
-                // })
+                toast.success("You're in mate");
+                
 
                 this.router.push('/')
             } catch (error) {
+                toast.error(error.response.data.message);
                 // console.log(error, '<<---- google login');
                 // const msg = error.response.data.message
                 // Swal.fire({
@@ -84,10 +88,13 @@ export const usePlayerStore = defineStore('player', {
                     data: multerData
                 })
 
+                toast.success("Welcome to the gang!");
+
                 this.router.push('/login');
 
             } catch (error) {
-                console.log(error, '<----- error register');
+                // console.log(error, '<----- error register');
+                toast.error(error.response.data.message);
             }
         },
 
@@ -99,10 +106,13 @@ export const usePlayerStore = defineStore('player', {
                     headers: { access_token: localStorage.access_token }
                 })
 
-                console.log(data, '<---- data fetchPlayers');
+                // toast.success("You're in mate");
+                
                 this.players = data
             } catch (error) {
-                console.log(error, '<---- error fetchPlayers');
+                // console.log(error, '<---- error fetchPlayers');
+                
+                toast.error(error.response.data.message);
             }
         },
 
@@ -120,7 +130,9 @@ export const usePlayerStore = defineStore('player', {
                 this.onePlayer = data
                 this.router.push(`/players/${id}`)
             } catch (error) {
-                console.log(error, '<---- error fetchOnePlayer');
+                // console.log(error, '<---- error fetchOnePlayer');
+                
+                toast.error(error.response.data.message);
             }
         },
 
@@ -133,10 +145,13 @@ export const usePlayerStore = defineStore('player', {
                     headers: { access_token: localStorage.access_token }
                 })
 
-                console.log(data, '<------- data addFavorite');
+                toast.success("You followed this player");
+                // console.log(data, '<------- data addFavorite');
                 this.router.push('/users/user/following')
             } catch (error) {
-                console.log(error, '<---- error addFavorite');
+                // console.log(error, '<---- error addFavorite');
+                
+                toast.error(error.response.data.message);
             }
         },
 
@@ -149,12 +164,16 @@ export const usePlayerStore = defineStore('player', {
                     headers: { access_token: localStorage.access_token }
                 })
 
-                console.log(data, '<----- data changeStausPro');
+                // console.log(data, '<----- data changeStausPro');
+                toast.success("You are a pro member now!");
+                
 
                 this.fetchUserProfile()
                 this.router.push('/users/asd')
             } catch (error) {
-                console.log(error, '<---- error di changeStatus');
+                // console.log(error, '<---- error di changeStatus');
+                
+                toast.error(error.response.data.message);
             }
         },
 
@@ -211,10 +230,12 @@ export const usePlayerStore = defineStore('player', {
                     headers: { access_token: localStorage.access_token }
                 })
 
-                console.log(data, '<----- data fetchFollowing');
+                // console.log(data, '<----- data fetchFollowing');
                 this.following = data
             } catch (error) {
-                console.log(error, '<---- error fetch following');
+                // console.log(error, '<---- error fetch following');
+                
+                toast.error(error.response.data.message);
             }
         },
 
@@ -227,10 +248,12 @@ export const usePlayerStore = defineStore('player', {
                     headers: { access_token: localStorage.access_token }
                 })
 
-                console.log(data, '<---- data fetchUserProfie');
+                // console.log(data, '<---- data fetchUserProfie');
                 this.userProfile = data
             } catch (error) {
-                console.log(error, '<---- error fetchUserProfile');
+                // console.log(error, '<---- error fetchUserProfile');
+                
+                toast.error(error.response.data.message);
             }
         },
 
@@ -244,7 +267,8 @@ export const usePlayerStore = defineStore('player', {
                 console.log(data, '<----');
                 this.teams = data
             } catch (error) {
-                console.log(error, '<---- error fetchTeams');
+                // console.log(error, '<---- error fetchTeams');
+                toast.error(error.response.data.message);
             }
         }
     },

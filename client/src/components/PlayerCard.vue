@@ -18,7 +18,7 @@ export default {
 </script>
 
 <template>
-    <div class="col-6 mt-5" @click="this.fetchOnePlayer(player.id)" style="cursor: pointer;">
+    <div class="col-4 mt-5" @click="this.fetchOnePlayer(player.id)" style="cursor: pointer;">
         <div class="class-item d-flex align-items-center">
             <a @click="this.fetchOnePlayer(player.id)" class="class-item-thumbnail" style="cursor: pointer;">
                 <img :src="player.imgUrl" alt="Free website template by Free-Template.co">

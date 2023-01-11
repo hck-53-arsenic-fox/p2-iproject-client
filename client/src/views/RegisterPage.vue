@@ -127,7 +127,7 @@ export default {
     </div> -->
 </template>
 
-<style>
+<style scoped>
 .customfile {
     border: 5px solid #000;
     border-radius: 50px;

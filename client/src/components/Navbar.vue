@@ -1,7 +1,8 @@
 <script>
     import { RouterLink } from 'vue-router';
+    import Modal from '../components/ModalComment.vue'
     export default {
-
+        components: { Modal }
     }
 </script>
 
@@ -37,7 +38,7 @@
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled">Disabled</a>
+          <Modal class="nav-link"/>
         </li>
       </ul>
       <form class="d-flex" role="search">

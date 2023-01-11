@@ -27,7 +27,7 @@ export default {
    <form @submit.prevent="handleAddIdentity(this.$route.params.id, this.value)">
   <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label">Phone Number</label>
-    <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Insert your Phone Number" v-model="value.phoneNumber">
+    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Insert your Phone Number" v-model="value.phoneNumber">
   </div>
   <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label">Image</label>

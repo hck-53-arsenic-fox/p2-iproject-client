@@ -1,6 +1,8 @@
 import { ref, computed } from "vue";
 import { defineStore } from "pinia";
 import axios from "axios";
+import Toastify from "toastify-js";
+
 
 const BASE_URL = "http://localhost:3000";
 export const useCounterStore = defineStore("counter", {
@@ -22,9 +24,20 @@ export const useCounterStore = defineStore("counter", {
       })
         .then((res) => {
           this.router.push("/login");
+          Toastify({
+            text: `success create account`,
+            style: {
+              background: "linear-gradient(to right, #362207, #222831)",
+            },
+          }).showToast();
         })
         .catch((err) => {
-          console.log(err);
+          Toastify({
+            text: `${err.response.data.message}`,
+            style: {
+              background: "linear-gradient(to right, #362207, #222831)",
+            },
+          }).showToast();
         });
     },
     // LOGIN
@@ -35,13 +48,24 @@ export const useCounterStore = defineStore("counter", {
         data: input,
       })
         .then((res) => {
+          Toastify({
+            text: `Hola ${res.data.email}, Long time no see! `,
+            style: {
+              background: "linear-gradient(to right, #362207, #222831)",
+            },
+          }).showToast();
           localStorage.setItem("access_token", res.data.access_token);
           localStorage.setItem("email", res.data.email);
           this.router.push("/");
           this.isLogin = true;
         })
         .catch((err) => {
-          console.log(err);
+          Toastify({
+            text: `${err.response.data.message}`,
+            style: {
+              background: "linear-gradient(to right, #362207, #222831)",
+            },
+          }).showToast();
         });
     },
 
@@ -55,13 +79,24 @@ export const useCounterStore = defineStore("counter", {
         },
       })
         .then((res) => {
+          Toastify({
+            text: `Hola ${res.data.email}, Long time no see! `,
+            style: {
+              background: "linear-gradient(to right, #362207, #222831)",
+            },
+          }).showToast();
           localStorage.setItem("access_token", res.data.access_token);
           localStorage.setItem("email", res.data.email);
           this.isLogin = true;
           this.router.push("/");
         })
         .catch((err) => {
-          console.log(err);
+          Toastify({
+            text: `${err.response.data.message}`,
+            style: {
+              background: "linear-gradient(to right, #362207, #222831)",
+            },
+          }).showToast();
         });
     },
 
@@ -75,7 +110,12 @@ export const useCounterStore = defineStore("counter", {
           this.room = res.data;
         })
         .catch((err) => {
-          console.log(err);
+          Toastify({
+            text: `${err.response.data.message}`,
+            style: {
+              background: "linear-gradient(to right, #362207, #222831)",
+            },
+          }).showToast();
         });
     },
 
@@ -90,7 +130,12 @@ export const useCounterStore = defineStore("counter", {
           this.handleQrCode(id);
         })
         .catch((err) => {
-          console.log(err);
+          Toastify({
+            text: `${err.response.data.message}`,
+            style: {
+              background: "linear-gradient(to right, #362207, #222831)",
+            },
+          }).showToast();
         });
     },
 
@@ -109,11 +154,22 @@ export const useCounterStore = defineStore("counter", {
           this.qrCode = res.data;
         })
         .catch((err) => {
-          console.log(err);
+          Toastify({
+            text: `${err.response.data.message}`,
+            style: {
+              background: "linear-gradient(to right, #362207, #222831)",
+            },
+          }).showToast();
         });
     },
     // LOGOUT
     handleLogOut() {
+      Toastify({
+        text: `see u next time!`,
+        style: {
+          background: "linear-gradient(to right, #362207, #222831)",
+        },
+      }).showToast();
       localStorage.clear();
       this.router.push("/");
       this.isLogin = false;
@@ -142,7 +198,12 @@ export const useCounterStore = defineStore("counter", {
           this.food = res.data
         })
         .catch((err) => {
-          console.log(err);
+          Toastify({
+            text: `${err.response.data.message}`,
+            style: {
+              background: "linear-gradient(to right, #362207, #222831)",
+            },
+          }).showToast();
         });
     },
 
@@ -155,7 +216,12 @@ export const useCounterStore = defineStore("counter", {
             access_token: localStorage.access_token,
           },
       })
-      .then((res)=>{
+      .then((res)=>{Toastify({
+        text: `yashhh! success payment`,
+        style: {
+          background: "linear-gradient(to right, #362207, #222831)",
+        },
+      }).showToast();
         const status = this.handleStatus;
         window.snap.pay(res.data.token, {
           onSuccess: function (result) {
@@ -165,7 +231,12 @@ export const useCounterStore = defineStore("counter", {
         });
       })
       .catch((err)=>{
-        console.log(err);
+        Toastify({
+            text: `${err.response.data.message}`,
+            style: {
+              background: "linear-gradient(to right, #362207, #222831)",
+            },
+          }).showToast();
       })
     },
 
@@ -179,10 +250,21 @@ export const useCounterStore = defineStore("counter", {
           },
       })
       .then((res)=>{
+        Toastify({
+          text: `wohooo! thankyou for payment. lets verified your self!`,
+          style: {
+            background: "linear-gradient(to right, #362207, #222831)",
+          },
+        }).showToast();
         this.handleFetchTransaction()
       })
       .catch((err)=>{
-        console.log(err);
+        Toastify({
+            text: `${err.response.data.message}`,
+            style: {
+              background: "linear-gradient(to right, #362207, #222831)",
+            },
+          }).showToast();
       })
     },
 
@@ -204,10 +286,21 @@ export const useCounterStore = defineStore("counter", {
           },
       })
       .then((res)=>{
+        Toastify({
+          text: `yasss! your room waiting to payment`,
+          style: {
+            background: "linear-gradient(to right, #362207, #222831)",
+          },
+        }).showToast();
         this.router.push("/cart")
       })
       .catch((err)=>{
-        console.log(err);
+        Toastify({
+            text: `${err.response.data.message}`,
+            style: {
+              background: "linear-gradient(to right, #362207, #222831)",
+            },
+          }).showToast();
       })
     },
 
@@ -224,7 +317,12 @@ export const useCounterStore = defineStore("counter", {
         this.transaction = res.data
       })
       .catch((err)=>{
-        console.log(err);
+        Toastify({
+            text: `${err.response.data.message}`,
+            style: {
+              background: "linear-gradient(to right, #362207, #222831)",
+            },
+          }).showToast();
       })
     },
 
@@ -242,11 +340,22 @@ export const useCounterStore = defineStore("counter", {
           },
       })
       .then((res)=>{
+        Toastify({
+          text: `yesss! happy staycation!`,
+          style: {
+            background: "linear-gradient(to right, #362207, #222831)",
+          },
+        }).showToast();
         this.handleFetchTransaction()
         this.router.push('/cart')
       })
       .catch((err)=>{
-        console.log(err);
+        Toastify({
+            text: `${err.response.data.message}`,
+            style: {
+              background: "linear-gradient(to right, #362207, #222831)",
+            },
+          }).showToast();
       })
     }
   },

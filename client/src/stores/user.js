@@ -6,7 +6,8 @@ export const useUserStore = defineStore('user', {
         return {
             email: '',
             password: '',
-            acces_token:''
+            acces_token:'',
+            movieFav:[]
         }
     },
     actions: {
@@ -61,6 +62,65 @@ export const useUserStore = defineStore('user', {
                 this.username= ''
                 this.email= ''
                 this.password= ''
+            } catch (error) {
+                console.log(error);
+            }
+        },
+        async Fav(id){
+            try {
+                const { data }= await axios({
+                    method:"POST",
+                    url:'http://localhost:3000/movie/favorite/'+id,
+                    headers:{
+                        acces_token: localStorage.getItem('acces_token')
+                    }
+                })
+                Swal.fire({
+                    title: 'Success Add To Favorite',
+                    text: `Add more If You Want`,
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                })
+            } catch (error) {
+                Swal.fire({
+                    title: 'Error!',
+                    text: "Movie Already Added",
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                })
+            }
+        },
+        async bookmark(){
+            try {
+                const { data }= await axios({
+                    method:"GET",
+                    url:'http://localhost:3000/movie/favorite/allfavorite',
+                    headers:{
+                        acces_token: localStorage.getItem('acces_token')
+                    }
+                })
+                this.movieFav = data
+            } catch (error) {
+                console.log(error);
+            }
+        },
+        async deleteFav(id){
+            try {
+                const { data } = await axios({
+                    method:'DELETE',
+                    url:'http://localhost:3000/movie/favorite/'+id,
+                    headers:{
+                        acces_token: localStorage.getItem('acces_token')
+                    }
+                })
+                Swal.fire({
+                    title: 'Success Delete',
+                    text: `delete movie succes`,
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                })
+                this.bookmark()
+                this.router.push('/favorite')
             } catch (error) {
                 console.log(error);
             }

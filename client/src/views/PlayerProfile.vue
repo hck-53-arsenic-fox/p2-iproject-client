@@ -20,29 +20,35 @@ export default {
 
 <template>
     <NavbarTwo />
-    <section class="container" >
-        <div class="card d-flex justify-content-center">
-            <div class="row" style="padding-top: 50px;">
+    <section class="container" style="padding-top: 150px;">
+        <div class="card d-flex justify-content-center" style="background-color: black;">
+            <div class="row">
                 <div class="col-6">
                     <div class="card-img">
-                        <img :src="onePlayer.imgUrl" width="670" height="684">
+                        <img :src="onePlayer.imgUrl" width="670" style="max-height: 100%;">
                     </div>
                 </div>
-                <div class="col-6">
-                    <img :src="onePlayer.logoUrl" width="230" class="ml-5">
-                    <div class="d-flex justify-content" style="margin-top: 90px; margin-left: 60px;">
-                        <h3 style="font-size: 40px;"><strong>{{ onePlayer.name }}</strong></h3>
+                <div class=" d-flex col-6">
+                    <div class="row">
+                        <div class="col">
+
+                            <img :src="onePlayer.logoUrl" width="230">
+                            <div class="d-flex justify-content" style="margin-top: 90px; margin-left: 60px;">
+                                <h3 style="font-size: 40px; color: white;"><strong>{{ onePlayer.name }}</strong></h3>
+                            </div>
+                        </div>
                     </div>
-                    <div class="d-flex justify-content" style=" margin-left: 60px;">
-                        <h5>{{ onePlayer.teamName }} | {{ onePlayer.teamShort }}</h5>
-                    </div>
+
+                    <!-- <div class="d-flex justify-content"> -->
+                        <h5 style="color: white;">{{ onePlayer.teamName }} | {{ onePlayer.teamShort }}</h5>
+                    <!-- </div> -->
 
                 </div>
             </div>
 
             <div class="row">
                 <div class="col">
-                    <h3 class="card-info-code ml-4">Country: {{ onePlayer.country }}</h3>
+                    <h3 class="card-info-code ml-4 mt-1">Country: {{ onePlayer.country }}</h3>
                     <div class="mt-5 ml-4">
                         <dl class="data-list">
                             <div class="data-list-row">
@@ -65,7 +71,7 @@ export default {
                     </div>
 
                 </div>
-                <div class="card-container mt-5">
+                <div class="card-container mt-5" style="background-color: black;">
                     <div class="card-info">
                         <h1 class="card-info-item"><strong>EXPERIENCE: {{ onePlayer.experience }} YEARS</strong></h1>
 
@@ -79,7 +85,7 @@ export default {
                         <h3><strong></strong></h3>
                         <h3><strong></strong></h3> -->
 
-                        
+
                         <!-- <div class="card-info-block">
                         <p class="card-info-price">{{ onePlayer.teamShort }} | {{ onePlayer.teamName }}</p>
                         <div role="img" aria-label="Рейтинг 5 из 5" class="card-info-rate">
@@ -159,8 +165,50 @@ main {
 }
 
 .card {
-    display: flex;
+    border: none;
+
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    cursor: pointer;
 }
+
+.card:before {
+
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    background-color: #000000;
+    transform: scaleY(1);
+    transition: all 0.5s;
+    transform-origin: bottom
+}
+
+.card:after {
+
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 13px;
+    height: 100%;
+    background-color: #aa2438;
+    transform: scaleY(0);
+    transition: all 0.5s;
+    transform-origin: bottom
+}
+
+.card:hover::after {
+    transform: scaleY(1);
+}
+
+/* 
+.card {
+    display: flex;
+} */
 
 .card-img {
     box-sizing: border-box;
@@ -191,7 +239,7 @@ main {
 
 .card-info-code {
     line-height: 19px;
-    color: #787878;
+    color: #ffffff;
     margin-top: 0;
     margin-bottom: 0;
 }

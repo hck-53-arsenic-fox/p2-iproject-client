@@ -58,11 +58,11 @@ export default {
                             <li><i class="fa fa-google"></i></li>
                         </ul>
 
-                        <div class="buttons">
-                            <p>Followed Player</p>
+                        <p style="font-weight: bold; color: ;">Followed Player</p>
+                        <div class="d-flex justify-content-center buttons">
                             <!-- <button class="btn btn-outline-primary px-4">Message</button>
                             <button class="btn btn-primary px-4 ms-3">Contact</button> -->
-                            <div v-for="favorite in userProfile.Favorites">
+                            <div v-for="favorite in userProfile.Favorites" style="padding: 20px;">
                                 <div class="text-center">
                                     <img :src="favorite.Player.imgUrl" width="100" class="rounded-circle">
                                     <h6 style="color: white;">{{ favorite.Player.name }}</h6>

@@ -28,6 +28,7 @@ export default {
                         <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
                             <li><RouterLink to="/" class="nav-link">Home</RouterLink></li>
                             <li><RouterLink to="/players" class="nav-link">Players</RouterLink></li>
+                            <li><RouterLink to="/teams" class="nav-link">Teams</RouterLink></li>
                             <li><a @click.prevent="$router.push('/users/' + userProfile.username + '/following')" class="nav-link">Following</a></li>
                             <li><a @click.prevent="$router.push('/users/' + userProfile.username)" class="nav-link" style="cursor: pointer;">My Profile</a></li>
                             <li><RouterLink to="/login" class="nav-link">Login</RouterLink></li>

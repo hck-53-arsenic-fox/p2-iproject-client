@@ -10,6 +10,7 @@ export const usePlayerStore = defineStore('player', {
         onePlayer: {},
         userProfile: {},
         isPro: false,
+        teams: [],
     }),
     actions: {
         logout() {
@@ -198,6 +199,20 @@ export const usePlayerStore = defineStore('player', {
                 this.userProfile = data
             } catch (error) {
                 console.log(error, '<---- error fetchUserProfile');
+            }
+        },
+
+        async fetchTeams() {
+            try {
+                const { data } = await axios({
+                    url: `https://www.balldontlie.io/api/v1/teams`,
+                    method: 'get',
+                })
+
+                console.log(data, '<----');
+                this.teams = data
+            } catch (error) {
+                console.log(error, '<---- error fetchTeams');
             }
         }
     },

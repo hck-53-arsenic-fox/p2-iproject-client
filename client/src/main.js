@@ -6,6 +6,7 @@ import router from './router'
 import vue3GoogleLogin from "vue3-google-login";
 import "toastify-js/src/toastify.css"
 
+import "./assets/style.css"
 
 const app = createApp(App)
 const pinia = createPinia();

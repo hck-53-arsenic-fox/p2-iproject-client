@@ -68,7 +68,7 @@ export default {
                 ></button>
               </div>
               <div class="modal-body text-center">
-                <img :src="qrCode.qrcode" alt="" />
+                <img :src="qrCode.url" alt="" />
               </div>
             </div>
           </div>

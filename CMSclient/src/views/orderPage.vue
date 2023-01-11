@@ -28,10 +28,10 @@ export default {};
               <label for="photo" class="col-form-label">Photo:</label
               ><br /><br /><br />
               <label for="service" class="col-form-label">Service:</label><br />
-              <label for="address" class="col-form-label">Address:</label><br />
+              <label for="address" class="col-form-label">Pick up Address:</label><br />
             </div>
 
-            <div class="col-8 pt-1 ms-3 mb-3">
+            <div class="col-8 pt-1 ms-3 mb-1">
               <input type="text" class="form-control form-control-sm mb-2" />
               <input type="text" class="form-control form-control-sm mb-2" />
               <input type="text" class="form-control form-control-sm mb-2" />
@@ -49,6 +49,7 @@ export default {};
                 class="form-control form-control-sm mb-2"
                 rows="3"
               ></textarea>
+              
               <select class="form-select form-select-sm mb-2">
                 <option selected>--- Select One ---</option>
                 <option value="standard">Standard Cleaning</option>
@@ -62,9 +63,10 @@ export default {};
                 rows="3"
               ></textarea>
             </div>
-          </div>
         </div>
-
+        <label class="text-light mb-2">please confirm pick up location to our admin at (081231561670)</label>
+    </div>
+    
         <button
           type="submit"
           class="btn btn-outline-primary btn-block mb-3 col-2 me-3 border text-white"

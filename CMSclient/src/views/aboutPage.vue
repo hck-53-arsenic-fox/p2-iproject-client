@@ -37,7 +37,7 @@ export default {}
   <div class="container">
     <div class="row">
       <div class="col-12 text-center" style="font-size: 10px">
-        <p>Phone: 0812 3156 1670</p>
+        <p>Phone: 0812 3156 1670 (WA)</p>
         <p>
           Location: Jl. KH. Ahmad Dahlan No.61, Petir, Kec. Cipondoh, Kota
           Tangerang, Banten 15147

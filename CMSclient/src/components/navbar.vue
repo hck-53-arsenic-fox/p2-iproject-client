@@ -58,7 +58,7 @@ export default {
           </li>
           <li>
             <RouterLink to="/history" class="nav-link" href="#">My Order History</RouterLink>
-            <RouterLink to="/log" class="nav-link" href="#">Custmer Order Log</RouterLink>
+            <RouterLink to="/log" class="nav-link" href="#">Customer Order Log</RouterLink>
           </li>
         </ul>
       </div>

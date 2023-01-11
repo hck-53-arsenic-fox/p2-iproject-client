@@ -3,15 +3,15 @@ export default {};
 </script>
 
 <template>
-    <div class="container py-5">
+    <div class="container mt-3 my-2">
       <div class="row">
-        <div class="col-12 my-2 text-center">
+        <div class="col-12 text-center">
           <h1 class="fontstyle">Our Services</h1>
         </div>
       </div>
     </div>
   <div class="row d-flex justify-content-center mx-auto">
-    <div class="col-md-4 mb-4">
+    <!-- <div class="col-md-4 mb-4">
       <div class="card card1 border mx-5 mb-5">
         <img src="../assets/standard cleaning.png" class="card-img-top px-3 pt-3" />
         <div class="card-body">
@@ -22,20 +22,21 @@ export default {};
           <a class="btn btn-outline-dark btn-sm me-2">Order</a>
         </div>
       </div>
-    </div>
+    </div> -->
     <div class="col-md-4 mb-4">
-      <div class="card card1 border mx-5 mb-5">
+      <div class="card card1 border mx-5 mb-2">
         <img src="../assets/premium cleaning.png" class="card-img-top px-3 pt-3" />
         <div class="card-body">
           <h5 class="card-title ">Premium Cleaning</h5>
           <p class="card-text">
-            <span class="">Price:</span> Rp 50.000
+            <span class="">Price:</span> Rp 50.000 <br>
+            <span class="">Estimated Day to Finish:</span> 3 Days
           </p>
           <a class="btn btn-outline-dark btn-sm me-2">Order</a>
         </div>
       </div>
     </div>
-    <div class="col-md-4 mb-4">
+    <!-- <div class="col-md-4 mb-4">
       <div class="card card1 border mx-5 mb-5">
         <img src="../assets/istockphoto-629962200-612x612.jpeg" class="card-img-top px-3 pt-3" />
         <div class="card-body">
@@ -46,8 +47,8 @@ export default {};
           <a class="btn btn-outline-dark btn-sm me-2">Order</a>
         </div>
       </div>
-    </div>
-    <div class="col-md-4 mb-4">
+    </div> -->
+    <!-- <div class="col-md-4 mb-4">
       <div class="card card1 border mx-5 mb-5">
         <img src="../assets/istockphoto-1250208695-612x612.jpeg" class="card-img-top px-3 pt-3" />
         <div class="card-body">
@@ -58,8 +59,8 @@ export default {};
           <a class="btn btn-outline-dark btn-sm me-2">Order</a>
         </div>
       </div>
-    </div>
-    <div class="col-md-4 mb-4">
+    </div> -->
+    <!-- <div class="col-md-4 mb-4">
       <div class="card card1 border mx-5 mb-5">
         <img src="../assets/unyellow-4.jpeg" class="card-img-top px-3 pt-3" />
         <div class="card-body">
@@ -70,8 +71,8 @@ export default {};
           <a class="btn btn-outline-dark btn-sm me-2">Order</a>
         </div>
       </div>
-    </div>
-    <div class="col-md-4 mb-4">
+    </div> -->
+    <!-- <div class="col-md-4 mb-4">
       <div class="card card1 border mx-5 mb-5">
         <img src="../assets/repaint.jpeg" class="card-img-top px-3 pt-3" />
         <div class="card-body">
@@ -83,6 +84,6 @@ export default {};
           <a class="btn btn-outline-dark btn-sm me-2">Order</a>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>

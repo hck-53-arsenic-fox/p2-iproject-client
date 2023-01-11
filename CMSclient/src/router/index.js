@@ -7,6 +7,7 @@ import Order from "../views/orderPage.vue"
 import MyOrderHistory from "../views/myOrderHistory.vue"
 import OrderDetail from "../views/orderDetail.vue"
 import OrderLog from "../views/orderLog.vue"
+import Update from "../views/updateOrderStatus.vue"
 
 const routes = [
   {
@@ -48,6 +49,11 @@ const routes = [
     path: "/log",
     name: "OrderLog",
     component: OrderLog,
+  },
+  {
+    path: "/update",
+    name: "Update",
+    component: Update,
   },
 ];
 

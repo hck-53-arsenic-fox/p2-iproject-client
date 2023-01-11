@@ -22,8 +22,8 @@ export default {};
           <h6>Shoes Material:</h6>
           <h6>Service Name:</h6>
           <h6>Order Date:</h6>
-          <h6>Order Status:</h6>
           <h6>Complete Date:</h6>
+          <h6>Order Status:</h6>
         </div>
         <div class="col-auto text-start">
           <h6>Ibnu</h6>
@@ -34,8 +34,8 @@ export default {};
           <h6>Leather</h6>
           <h6>Premium Cleaning</h6>
           <h6>Now</h6>
-          <h6>On Process</h6>
           <h6>3 days ETC</h6>
+          <h6>complete on complete date</h6>
         </div>
       </div>
       <div class="row g-3 align-items-start pt-3 px-3">

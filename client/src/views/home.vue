@@ -2,6 +2,8 @@
 import { mapActions, mapState, mapWritableState } from 'pinia';
 import { useUserStore } from '../stores/user';
 import { useMovieStore } from '../stores/movie';
+import navbarVue from '../views/navbar.vue';
+
 export default {
   computed:{
     ...mapState(useMovieStore,['movies','movieDetail','totalPage','query']),
@@ -19,10 +21,14 @@ export default {
   created(){
     this.fetchMovies()
     this.acces_token=localStorage.getItem('acces_token')
+  },
+  components:{
+    navbarVue
   }
 }
 </script>
 <template>
+  <navbarVue></navbarVue>
   <div class="container mx-auto mt-4">
     <div class="row ">
       <div class="col-md-4 " v-for="movie in movies" :key="movie.id">
@@ -44,7 +50,7 @@ export default {
       </div>
     </div>
     <br>
-    <div style="margin-left: 50%;">
+    <div style="margin-left: 40%;">
       <nav aria-label="...">
         <ul class="pagination">
           <!-- <li class="page-item disabled">

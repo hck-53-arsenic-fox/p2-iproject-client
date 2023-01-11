@@ -1,6 +1,8 @@
 <script>
 import { mapActions, mapState, mapWritableState } from 'pinia';
+import NavbarFav from '../views/navbarFav.vue';
 import { useUserStore } from '../stores/user';
+
 export default{
     computed:{
         ...mapState(useUserStore,['movieFav'])
@@ -10,11 +12,15 @@ export default{
     },
     created(){
         this.bookmark()
+    },
+    components:{
+        NavbarFav
     }
 }
 </script>
 
 <template>
+    <NavbarFav></NavbarFav>
     <div class="container mx-auto mt-4">
       <div class="row">
         <div class="col-md-4" v-for="movieFavs in movieFav" :key="movieFavs.id" >

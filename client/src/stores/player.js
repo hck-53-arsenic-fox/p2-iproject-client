@@ -18,6 +18,11 @@ export const usePlayerStore = defineStore('player', {
             this.router.push('/login')
         },
 
+        loginNavbar() {
+            console.log(this.status);
+            this.router.push('/login')
+        },
+
         async login(formLogin) {
             console.log(formLogin, '<----- formLogin');
             try {
@@ -33,6 +38,33 @@ export const usePlayerStore = defineStore('player', {
                 this.router.push('/')
             } catch (error) {
                 console.log(error, '<---- error login');
+            }
+        },
+
+        async loginGoogle(response) {
+            try {
+                const { data } = await axios({
+                    method: 'post',
+                    url: baseUrl + '/users/google-login',
+                    headers: { google_token: response }
+                })
+                console.log(data, '<--- data google login');
+                localStorage.setItem('access_token', data.access_token)
+
+                // Swal.fire({
+                //     icon: 'success',
+                //     title: 'Success login!',
+                // })
+
+                this.router.push('/')
+            } catch (error) {
+                // console.log(error, '<<---- google login');
+                // const msg = error.response.data.message
+                // Swal.fire({
+                //     icon: 'error',
+                //     title: 'Oops...',
+                //     text: `${error}`
+                // })
             }
         },
 
@@ -157,7 +189,7 @@ export const usePlayerStore = defineStore('player', {
 
                 console.log(data, '<---- data midtrans');
                 const cb = this.changeStatusPro;
-                
+
                 window.snap.pay(data.token, {
                     onSuccess: function (result) {
                         // toast.success("Payment Success");

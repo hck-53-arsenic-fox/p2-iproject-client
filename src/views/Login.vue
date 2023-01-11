@@ -1,4 +1,8 @@
 <script>
+import { Notify } from 'notiflix'
+import { mapActions } from 'pinia'
+import { useAppStore } from '../stores/app'
+
 export default {
     data() {
         return {
@@ -33,10 +37,19 @@ export default {
             console.log(event.target.files[0]);
             // this.registerData.pic = ''
         },
-        handleLoginComponent() {
 
+        ...mapActions(useAppStore, ['handleLogin', 'handleRegister']),
+
+        handleLoginComponent() {
+            this.handleLogin(this.loginData)
         },
         handleRegisterComponent() {
+            if (this.registerData.password !== this.registerData.confirmPassword) {
+                return Notify.failure("Passwords do not match")
+            }
+
+            const { name, email, password, pic, } = this.registerData
+            this.handleRegister(name, email, password, pic)
 
         }
     }

@@ -39,6 +39,31 @@ export const useUserStore = defineStore('user', {
                     confirmButtonText: 'OK'
                 })
             }
+        },
+        async register(dataRegister) {
+            try {
+                const { data } = await axios({
+                    method: 'POST',
+                    url: 'http://localhost:3000/user/register',
+                    data: {
+                        username: dataRegister.username,
+                        email: dataRegister.email,
+                        password: dataRegister.password
+                    }
+                })
+                Swal.fire({
+                    title: 'Success Register',
+                    text: `Lets Login`,
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                })
+                this.router.push('login')
+                this.username= ''
+                this.email= ''
+                this.password= ''
+            } catch (error) {
+                console.log(error);
+            }
         }
     }
 })

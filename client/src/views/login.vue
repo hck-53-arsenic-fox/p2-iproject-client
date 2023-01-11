@@ -39,7 +39,6 @@ export default{
               <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
                 <p class="lead fw-normal mb-0 me-3" style="color: aliceblue;">Sign in with</p>
               </div>
-              <GoogleLogin :callback="callback"/>
               <div class="divider d-flex align-items-center my-4">
                 <p class="text-center fw-bold mx-3 mb-0" style="color: aliceblue;">Or</p>
               </div>

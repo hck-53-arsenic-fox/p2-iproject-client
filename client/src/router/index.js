@@ -38,7 +38,11 @@ const router = createRouter({
 
 router.beforeEach(async (to, from) => {
   if (localStorage.access_token && (to.name === 'login' || to.name === 'register')) {
-      return { name: 'home' }
+    return { name: 'home' }
+  }
+
+  if (!localStorage.access_token && to.name === 'event') {
+    return { name: 'home' }
   }
 })
 

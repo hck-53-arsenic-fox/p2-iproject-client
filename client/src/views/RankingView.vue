@@ -32,7 +32,7 @@ export default {
                     <tbody>
                         <tr v-for="fighter in allFighters.pound_for_pound" :key="`fighter1-${fighter.id}`">
                             <th scope="row">{{ fighter.rank }}</th>
-                            <td>{{ fighter.name }}</td>
+                            <td><RouterLink :to="`/fighter/${fighter.id}`">{{ fighter.name }}</RouterLink></td>
                         </tr>
                     </tbody>
                 </table>

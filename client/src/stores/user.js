@@ -112,11 +112,15 @@ export const useUserStore = defineStore('user', {
                 console.log(error)
             }
         },
-        async fetchAllEvents(index) {
+        async fetchAllEvents(index, search) {
             try {
                 const { data } = await axios({
                     method: 'GET',
-                    url: `${baseUrl}/events?page=6,${index}`,
+                    url: `${baseUrl}/events`,
+                    params: {
+                        page: `6,${index}`,
+                        search: search
+                    },
                     headers: {
                         access_token: localStorage.getItem('access_token')
                     }

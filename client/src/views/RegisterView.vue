@@ -1,6 +1,7 @@
 <script>
 import { useAppStore } from "@/stores/app";
 import { mapState, mapActions } from "pinia";
+import Swal from "sweetalert2";
 
 export default {
   data() {
@@ -16,23 +17,47 @@ export default {
     handleFormSubmit() {
       this.handleRegister({ email: this.email, password: this.password });
     },
-
-    listenToSuccessfulFBLogin() {
-      window.fbAsyncInit = function () {
-        FB.Event.subscribe("auth.statusChange", (response) => {
-          if (response.status === "connected") {
-            const accessTokenFromFacebook = response.authResponse.accessToken;
-            if (this.handleFacebookLogin) {
-              this.handleFacebookLogin(accessTokenFromFacebook);
-            }
-          }
-        });
-      };
-    },
   },
   computed: {},
   mounted() {
-    this.listenToSuccessfulFBLogin();
+    window.fbInit = function () {
+      FB.init({
+        appId: "2984034805226590",
+        cookie: true,
+        xfbml: true,
+        version: "v15.0",
+      });
+
+      FB.AppEvents.logPageView();
+
+      window.FB.Event.subscribe("auth.statusChange", (response) => {
+        if (response.status === "connected") {
+          const accessTokenFromFacebook = response.authResponse.accessToken;
+          fetch(`${import.meta.env.VITE_ORIGIN_URL}/users/facebooklogin`, {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${accessTokenFromFacebook}`,
+            },
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              Swal.fire(
+                "Success",
+                `Successfully logged-in using facebook account!`,
+                "success"
+              );
+              localStorage.setItem("access_token", data.accessToken);
+              setTimeout(() => {
+                window.location.href = "/home";
+              }, 3000);
+            })
+            .catch((error) => {
+              Swal.fire("Error", error.message, "error");
+            });
+        }
+      });
+    };
+    window.fbInit();
   },
 };
 </script>

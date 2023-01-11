@@ -48,7 +48,6 @@ export default {
   },
   computed: {},
   mounted() {
-    // this.listenToSuccessfulFBLogin();
     window.fbInit = function () {
       FB.init({
         appId: "2984034805226590",

@@ -45,9 +45,13 @@ export const useMovieStore = defineStore('movie',{
             try {
                 const { data } = await axios({
                    method:'GET',
-                   url:"http://localhost:3000/customer/allmovie/"+id 
+                   url:"http://localhost:3000/movie/detail/"+id,
+                   headers:{
+                    acces_token : localStorage.getItem("acces_token")
+                   } 
                 })
-                this.qrCode(`http://localhost:5173/detail/${id}`)
+                console.log(data);
+                // this.qrCode(`http://localhost:5173/detail/${id}`)
                 this.movieDetail = data
             } catch (error) {
                 console.log(error);

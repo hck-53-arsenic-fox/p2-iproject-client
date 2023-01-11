@@ -8,7 +8,8 @@ const baseUrl = "http://localhost:3001";
 
 const store = useCountryBMI();
 store.fetchCountries();
-let selectedCountry = ref("");
+let selectedCountry = ref("IDN");
+handleFetchData("IDN");
 
 function handleFetchData(countryCode) {
   store.fetchSelectedCountryData(countryCode);
@@ -69,7 +70,11 @@ const historicalDateRange = computed(() => {
     </div>
 
     <div class="grid grid-cols-1 gap-5 md:grid-cols-2" id="grid-container">
-      <h2 class="text-md font-semibold md:hidden">heheh</h2>
+      <h2 class="text-md font-semibold md:hidden">
+        The {{ store.state.selectedCountryData.country }}
+        {{ store.state.selectedCountryData.currency_code }} is
+        {{ BMILastUpdate }} against the US dollar
+      </h2>
 
       <div class="md:order-2">
         <p class="text-md font-semibold hidden md:flex">
@@ -97,14 +102,14 @@ const historicalDateRange = computed(() => {
           {{ BMILastUpdate }} against the US dollar
         </h2>
 
-        <p class="text-md">
+        <p class="text-md md:text-lg md:mt-5">
           A Big Mac costs {{ store.state.selectedCountryData.currency_code }}
           {{ store.state.latestData[1] }} in
           {{ store.state.selectedCountryData.country }}
           and USD {{ lastBigMacUsd }} in the United States. The implied exchange
-          rate is {{ store.state.latestData[4].toFixed(2) }}. The difference
-          between this and the actual exchange rate,
-          {{ store.state.latestData[2].toFixed(2) }}, suggests the
+          rate is {{ store.state.bigMacExchangeRate }}. The difference between
+          this and the actual exchange rate,
+          {{ store.state.actualExchangeRate }}, suggests the
           {{ store.state.selectedCountryData.country }}
           {{ store.state.selectedCountryData.currency_code }} is
           {{ BMILastUpdate }}.

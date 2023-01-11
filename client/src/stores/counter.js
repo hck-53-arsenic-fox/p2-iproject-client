@@ -142,15 +142,17 @@ export const useCounterStore = defineStore("counter", {
     // HANDLE QR-CODE
     handleQrCode(id) {
       axios({
-        method: "get",
-        url: "https://api.happi.dev/v1/qrcode",
-        params: {
-          apikey: "18e25c87m8KH3du3w6mEXDesLnU6JtdrLgaXiwm06vIWOUlaC82tz1xx",
-          data: `http://localhost:3000/room/${id}`,
-          width: 50,
-        },
+        method: "GET",
+          url: "https://codzz-qr-cods.p.rapidapi.com/getQrcode",
+          params: { type: "url", value: `${BASE_URL}/room/${id}`},
+          headers: {
+            "X-RapidAPI-Key":
+              "9601e56a7emsh069af09cf95f7d9p1a8750jsn9341f472c2e9",
+            "X-RapidAPI-Host": "codzz-qr-cods.p.rapidapi.com",
+          },
       })
         .then((res) => {
+          console.log(res.data);
           this.qrCode = res.data;
         })
         .catch((err) => {
@@ -186,13 +188,12 @@ export const useCounterStore = defineStore("counter", {
     // FETCH DATA PIZZA (THIRD API)
     fetchDataFood() {
       axios({
-        method: "GET",
-        url: "https://pizza-and-desserts.p.rapidapi.com/pizzas",
+        method: 'GET',
+        url: 'https://pizza-and-desserts.p.rapidapi.com/pizzas',
         headers: {
-          "X-RapidAPI-Key":
-            "0e583854eamsh7f19937962c2f5cp1f7294jsn9502051301df",
-          "X-RapidAPI-Host": "pizza-and-desserts.p.rapidapi.com",
-        },
+          'X-RapidAPI-Key': '7dbfb72658mshe58852d7f8cbba3p108f5ajsnab8d443ee2e5',
+          'X-RapidAPI-Host': 'pizza-and-desserts.p.rapidapi.com'
+        }
       })
         .then((res) => {
           this.food = res.data
@@ -216,12 +217,7 @@ export const useCounterStore = defineStore("counter", {
             access_token: localStorage.access_token,
           },
       })
-      .then((res)=>{Toastify({
-        text: `yashhh! success payment`,
-        style: {
-          background: "linear-gradient(to right, #362207, #222831)",
-        },
-      }).showToast();
+      .then((res)=>{
         const status = this.handleStatus;
         window.snap.pay(res.data.token, {
           onSuccess: function (result) {

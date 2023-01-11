@@ -21,6 +21,7 @@ export default {
       style="height: 60px; background-color: black"
     >
       <div class="container">
+        <img src="../assets/360_F_405839654_z6mT3k8F6lCNCxEdAEC8Y5V87LCNbvzR.jpg" width="35" class="rounded" alt="">
         <RouterLink
         to="/"
           class="navbar-brand"

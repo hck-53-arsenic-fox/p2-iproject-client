@@ -38,7 +38,6 @@ export const usePlayerStore = defineStore('player', {
             console.log('masukkkk register');
             console.log(formRegister, '<---- formREGISTER');
             try {
-<<<<<<< HEAD
                 const multerData = new FormData();
                 multerData.append("imgProfile", formRegister.imgProfile);
                 multerData.append("username", formRegister.username);
@@ -52,9 +51,7 @@ export const usePlayerStore = defineStore('player', {
                 })
 
                 this.router.push('/login');
-=======
 
->>>>>>> feat/user-profile
             } catch (error) {
                 console.log(error, '<----- error register');
             }
@@ -119,7 +116,7 @@ export const usePlayerStore = defineStore('player', {
                 })
 
                 console.log(data, '<----- data changeStausPro');
-                
+
                 this.fetchUserProfile()
                 this.router.push('/users/asd')
             } catch (error) {

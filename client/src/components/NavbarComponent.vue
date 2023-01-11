@@ -20,13 +20,13 @@ export default {
       <div class="container-fluid">
         <RouterLink to="/" class="navbar-brand">
           <img
-            src="../assets/Ucan_Donut_Logo_wBackGround.png"
+            src="../../public/image/neighborhud.jpg"
             alt="Logo"
             width="30"
             height="24"
             class="d-inline-block align-text-top"
           />
-          U Can Donut
+          NeighborHud
         </RouterLink>
       </div>
       <div class="navbar-brand">
@@ -36,10 +36,16 @@ export default {
       </div>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
+          <li class="nav-item" v-if="isLogin === true">
             <RouterLink to="/" class="nav-link active" aria-current="page"
               >Home</RouterLink
             >
+          </li>
+          <li class="nav-item" v-if="isLogin === false">
+            <RouterLink to="/register" class="nav-link">Register</RouterLink>
+          </li>
+          <li class="nav-item" v-if="isLogin === false">
+            <RouterLink to="/login" class="nav-link">Login</RouterLink>
           </li>
           <li class="nav-item" v-if="isLogin === true">
             <RouterLink to="/" class="nav-link">MyBills</RouterLink>

@@ -1,6 +1,30 @@
 <script>
+import { mapActions } from "pinia";
+import { useUserStore } from "../stores/user";
 export default {
   name: "RegisterPage",
+  data() {
+    return {
+      username: "",
+      email: "",
+      password: "",
+      homeNumber: "",
+      image: "",
+    };
+  },
+  methods: {
+    ...mapActions(useUserStore, ["registerUser"]),
+    register() {
+      let user = {
+        username: this.username,
+        email: this.email,
+        password: this.password,
+        homeNumber: this.phoneNumber,
+        image: this.address,
+      };
+      this.registerUser(user);
+    },
+  },
 };
 </script>
 
@@ -14,7 +38,7 @@ export default {
       class="mt-2 w-100 border border-dark p-5 rounded-3"
       style="max-width: 500px"
     >
-      <h1 class="fw-bold text-center">Register</h1>
+      <h1 class="fw-bold text-center">Register to NeighborHud</h1>
       <form @submit.prevent="register">
         <div class="mb-3">
           <label for="registerUsername" class="form-label">Username</label>
@@ -48,24 +72,24 @@ export default {
         </div>
         <div class="mb-3">
           <label for="register-phoneNumber" class="form-label"
-            >Phone Number</label
+            >Home Number</label
           >
           <input
-            v-model="phoneNumber"
+            v-model="homeNumber"
             type="text"
             class="form-control"
             id="register-phoneNumber"
-            placeholder="Enter your phone number (optional) ..."
+            placeholder="Enter your home number ..."
           />
         </div>
         <div class="mb-3">
-          <label for="register-address" class="form-label">Address</label>
+          <label for="register-address" class="form-label">Photo</label>
           <input
-            v-model="address"
+            v-model="image"
             type="text"
             class="form-control"
             id="register-address"
-            placeholder="Enter your address (optional) ..."
+            placeholder="Enter your photo ..."
           />
         </div>
         <div class="mt-5 d-flex justify-content-center">

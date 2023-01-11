@@ -3,20 +3,21 @@ import LoginPage from '../views/LoginPage.vue'
 import HomePage from '../views/HomePage.vue'
 import BillDetailPage from '../views/BillDetailPage.vue'
 import ChatPage from '../views/ChatPage.vue'
+import RegisterPage from '../views/RegisterPage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/billUser',
+      path: '/',
       name: 'home',
       component: HomePage
     },
-    // {
-    //   path: '/register',
-    //   name: 'register',
-    //   component: RegisterPage
-    // },
+    {
+      path: '/register',
+      name: 'register',
+      component: RegisterPage
+    },
     {
       path: '/login',
       name: 'login',
@@ -28,7 +29,7 @@ const router = createRouter({
       component: ChatPage
     },
     {
-      path: '/',
+      path: '/billUser',
       name: 'BillDetailPage',
       component: BillDetailPage
     },
@@ -38,11 +39,23 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const accessTokenLogin = localStorage.getItem('access_token')
 
-  if (to.name === 'login') {
+  if (to.name === 'login' || to.name === 'register') {
     if (accessTokenLogin) {
-      next({ name: 'BillDetailPage' });
+      next({ name: 'home' });
     } else {
-      next({ name: 'login' });
+      next();
+    }
+  } else if (to.name === 'home') {
+    if (accessTokenLogin) {
+      next()
+    } else {
+      next({ name: 'login' })
+    }
+  } else if (to.name === 'ChatPage') {
+    if (accessTokenLogin) {
+      next()
+    } else {
+      next({ name: 'login' })
     }
   } else if (to.name === 'BillDetailPage') {
     if (accessTokenLogin) {
@@ -54,5 +67,6 @@ router.beforeEach((to, from, next) => {
     next()
   }
 });
+
 
 export default router

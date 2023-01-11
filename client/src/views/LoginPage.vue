@@ -1,6 +1,7 @@
 <script>
 import { mapActions } from "pinia";
 import { useUserStore } from "../stores/user";
+import NavbarComponent from "../components/NavbarComponent.vue";
 
 export default {
   name: "LoginPage",
@@ -9,6 +10,9 @@ export default {
       email: "",
       password: "",
     };
+  },
+  components: {
+    NavbarComponent,
   },
   methods: {
     ...mapActions(useUserStore, ["loginUser"]),
@@ -24,21 +28,18 @@ export default {
 </script>
 
 <template>
+  <NavbarComponent />
   <!-- Login -->
   <div
     class="container-fluid d-flex justify-content-center align-items-center"
-    style="background-color: #f59e0b; height: 100vh"
+    style="
+      background-image: url('../../public/image/zero-take-WvHrrR1C5Po-unsplash.jpg');
+      height: 100vh;
+    "
   >
-    <div class="border w-75 p-5 my-5 bg-white rounded-3 shadow">
+    <div class="border w-50 p-5 my-5 bg-white rounded-3 shadow">
       <div class="row">
-        <div class="col-6">
-          <img
-            src="../assets/undraw_Online_learning_re_qw08.png"
-            alt="login-img"
-            width="100%"
-          />
-        </div>
-        <div class="col-6 align-self-center">
+        <div class="col align-self-center">
           <form @submit.prevent="login">
             <div class="mb-3">
               <img

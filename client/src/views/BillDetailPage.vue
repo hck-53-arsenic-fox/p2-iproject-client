@@ -17,7 +17,7 @@ export default {
   <NavbarComponent />
   <!-- My Course -->
   <div class="container my-4">
-    <h3 class="text-center my-4">My Courses</h3>
+    <h3 class="text-center my-4">My Bills</h3>
     <div class="row">
       <!-- MyCourseCard -->
       <div class="col-4 mb-3">

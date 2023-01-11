@@ -21,15 +21,15 @@ export default {
       <div class="col-4 mb-3">
         <div class="card p-3 rounded-3">
           <div class="row align-items-center">
-            <div class="col-3">
+            <div class="col-5">
               <img
                 src="../../public/image/bailey-anselme-Bkp3gLygyeA-unsplash.jpg"
                 alt="logo"
                 class="mx-auto d-block"
-                style="width: 70px"
+                style="width: 100px"
               />
             </div>
-            <div class="col-9">
+            <div class="col-7">
               <h5 class="mb-0">Name</h5>
               <p class="mb-0">Instructor : <strong>Home Number</strong></p>
               <p class="mb-0">Schedule :</p>

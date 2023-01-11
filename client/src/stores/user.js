@@ -77,6 +77,30 @@ export const useUserStore = defineStore('user', {
       } catch (error) {
         console.log(error);
       }
-    }
+    },
+
+    async registerUser(user) {
+      try {
+        const { data } = await axios({
+          method: 'post',
+          url: `${localhost}/users/register`,
+          data: user
+        })
+        this.router.push('/login')
+        Swal.fire({
+          title: "Success!",
+          text: "Register success!",
+          icon: "success",
+          confirmButtonText: "OK",
+        });
+      } catch (error) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: `${error.response.data.message}`,
+        });
+      }
+    },
+
   }
 })

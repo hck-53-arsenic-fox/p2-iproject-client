@@ -15,8 +15,10 @@ export const useCounterStore = defineStore("counter", {
       products: [],
       categories: [],
       detailProduct: {},
-      carts: []
+      carts: [],
     };
+  },
+  created() {
   },
   actions: {
     async postCart(amount, id){
@@ -66,6 +68,9 @@ export const useCounterStore = defineStore("counter", {
             console.log(result);
           }
         })
+
+        this.fetchCart()
+        this.router.push('/cart')
       } catch (err) {
         console.log(err)
       }
@@ -87,8 +92,7 @@ export const useCounterStore = defineStore("counter", {
         Swal.fire({
           title: 'Sweet!',
           text: 'Modal with a custom image.',
-          imageUrl: 'https://unsplash.it/400/200',
-          imageWidth: 400,
+          imageUrl: 'https://cataas.com/cat/cute/says/Aww...',
           imageHeight: 200,
           imageAlt: 'Custom image',
         })

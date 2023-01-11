@@ -28,8 +28,6 @@ export const useWorkingTimesStore = defineStore("workingTimes", () => {
       });
 
       state.backgroundColor[index] = "#FB923C";
-
-      console.log(index);
     } catch (error) {
       console.log(error);
     }

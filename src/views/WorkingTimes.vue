@@ -12,16 +12,16 @@ let selectedCountry = ref("IDN");
 <template>
   <main class="md:px-20">
     <div id="title-container" class="mb-5 flex flex-col md:gap-2">
-      <h2 class="text-2xl font-semibold w-3/4">
+      <h2 class="text-2xl font-semibold w-3/4 mb-2">
         Working times needed to buy a Big Mac
       </h2>
 
       <form>
-        <div class="flex">
+        <div class="flex flex-row gap-3">
           <select
             @change.prevent="store.fetchWorkingTimesByCountry(selectedCountry)"
             v-model="selectedCountry"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-1.5 mt-2 md:m-0"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-1.5 md:m-0"
           >
             <option selected disabled value="">Choose a country</option>
             <option
@@ -31,6 +31,12 @@ let selectedCountry = ref("IDN");
               {{ country.countryName }}
             </option>
           </select>
+
+          <img
+            :src="`https://countryflagsapi.com/svg/${selectedCountry}`"
+            crossorigin="anonymous"
+            class="border h-7 md:hidden my-auto"
+          />
         </div>
       </form>
     </div>
@@ -40,14 +46,25 @@ let selectedCountry = ref("IDN");
         id="detail-container"
         class="md:w-1/2 md:order-2 md:p-10 md:flex md:flex-col md:justify-center md:-mt-5"
       >
-        <h2 class="text-2xl font-semibold hidden md:flex md:w-3/4 md:mb-5">
+        <img
+          :src="`https://countryflagsapi.com/svg/${selectedCountry}`"
+          crossorigin="anonymous"
+          class="border w-1/6 mb-2 hidden md:block"
+        />
+
+        <h2 class="text-lg font-semibold hidden md:inline md:w-3/4 md:mb-5">
           On average, people in
+          <!-- <img
+            :src="`https://countryflagsapi.com/svg/${selectedCountry}`"
+            crossorigin="anonymous"
+            class="inline h-4 border"
+          /> -->
           {{ store.state.workingTimesByCountry.countryName }} need
           {{ store.state.workingTimesByCountry.minutesToBuyBigMac }} minutes of
           working times to be able to buy a Big Mac
         </h2>
 
-        <div class="flex flex-row gap-5 text-lg">
+        <div class="flex flex-row gap-5 md:text-md">
           <div>
             <i class="fa-solid fa-clock"></i>
             {{ store.state.workingTimesByCountry.minutesToBuyBigMac }} Minutes

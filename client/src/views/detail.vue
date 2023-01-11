@@ -51,7 +51,6 @@ export default {
 
         <!-- Top -->
         <div class="p-2 m-2 rounded-xl">
-          <div id='map' style='width: 350px; height: 350px;' class="rounded-2xl"></div>
 
         </div>
 
@@ -75,7 +74,7 @@ export default {
 
         <!-- top -->
         <div class="flex flex-col justify-center items-center py-4">
-          <h2 class="mb-3 text-4xl font-light p-3">{{ resort.name }}</h2>
+          <h2 class="mb-3 text-4xl font-light p-3">{{ resort.title }}</h2>
           <img :src="resort.imageUrl" alt="" class="rounded object-cover duration-200 w-80 hover:scale-105">
         </div>
 

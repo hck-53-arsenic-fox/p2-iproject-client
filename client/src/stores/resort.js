@@ -87,18 +87,18 @@ export const useResortStore = defineStore('resort', {
     },
 
     //? Create a resort
-    async createResort(title, location, description, imageUrl, price) {
+    async createResort(value) {
       try {
+        let multerData = new FormData()
+        multerData.append('image', value.imageUrl)
+        multerData.append('title', value.title)
+        multerData.append('location', value.location)
+        multerData.append('description', value.description)
+        multerData.append('price', value.price)
         let { data } = await axios({
           method: 'POST',
           url: `${origin}/resorts`,
-          data: {
-            title: title,
-            location: location,
-            description: description,
-            imageUrl: imageUrl,
-            price: price,
-          },
+          data: multerData,
           headers: {
             access_token: localStorage.getItem('access_token')
           }
@@ -110,6 +110,26 @@ export const useResortStore = defineStore('resort', {
       }
     },
 
+    //? Google Login
+    async googleLogin(credential) {
+      console.log(credential);
+      try {
+        let { data } = await axios({
+          method: 'POST',
+          url: origin + '/users/google-sign-in',
+          headers: {
+            google_auth_token: credential
+          }
+        })
+        this.router.push('/')
+        localStorage.setItem('access_token', data.access_token)
+        localStorage.setItem('email', data.email)
+        this.isLogin = true
+      } catch (error) {
+        console.log(error);
+      }
+
+    },
 
   }
 })

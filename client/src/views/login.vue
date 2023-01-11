@@ -13,10 +13,15 @@ export default {
 
   },
   methods: {
-    ...mapActions(useResortStore, ['handleLogin']),
+    ...mapActions(useResortStore, ['handleLogin', 'googleLogin']),
     onClickLogin() {
       this.handleLogin(this.email, this.password)
-    }
+    },
+    callback(response) {
+      console.log('clicked');
+      this.googleLogin(response.credential)
+      console.log(response);
+    },
   },
   created() {
 
@@ -58,6 +63,8 @@ export default {
               Login
             </button>
           </div>
+
+          <GoogleLogin class="py-3 px-10 rounded-xl mt-4" :callback="callback" prompt />
 
         </form>
 

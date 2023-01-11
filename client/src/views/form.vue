@@ -4,8 +4,20 @@ import { useResortStore } from '../stores/resort'
 import { mapState, mapActions } from 'pinia'
 
 
+
 export default {
   name: 'form',
+  data() {
+    return {
+      value: {
+        title: '',
+        location: '',
+        price: '',
+        description: '',
+        imageUrl: ''
+      }
+    }
+  },
   components: {
 
   },
@@ -14,9 +26,12 @@ export default {
   },
   methods: {
     ...mapActions(useResortStore, ['createResort']),
+    upload() {
+      this.value.imageUrl = this.$refs.file.files[0]
+    },
     onClickAdd() {
-      this.createResort(this.title, this.location, this.description, this.imageUrl, this.price)
-    }
+      this.createResort(this.value)
+    },
   },
   created() {
 
@@ -43,26 +58,26 @@ export default {
           Let's add new hotel!
         </p>
         <form @submit.prevent="onClickAdd" action="" class="justify-center items-center">
-          <input v-model="title" type="text"
+          <input v-model="value.title" type="text"
             class="w-full p-3 mb-3 border border-gray-300 rounded-md placeholder:font-light" placeholder="Name">
 
-          <input v-model="location" type="text"
+          <input v-model="value.location" type="text"
             class="w-full p-3 mb-3 border border-gray-300 rounded-md placeholder:font-light"
             placeholder="Enter Location">
 
 
-          <input v-model="price" type="number"
+          <input v-model="value.price" type="number"
             class="w-full p-3 mb-3 border border-gray-300 rounded-md placeholder:font-light"
             placeholder="Price per Night">
 
-          <input v-model="imageUrl" type="url"
-            class="w-full p-3 mb-3 border border-gray-300 rounded-md placeholder:font-light" placeholder="ImageUrl">
+          <!-- <input v-model="imageUrl" type="url" -->
+          <!-- class="w-full p-3 mb-3 border border-gray-300 rounded-md placeholder:font-light" placeholder="ImageUrl"> -->
 
-          <!-- <input name="image" type="file"
+          <input @change="upload" name="image" type="file" ref="file"
             class="w-full p-3 mb-3 border border-gray-300 rounded-md placeholder:font-light"
-            placeholder="Upload the Photo"> -->
+            placeholder="Upload the Photo">
 
-          <input v-model="description" type="text"
+          <input v-model="value.description" type="text"
             class="w-full p-3 mb-3 border border-gray-300 rounded-md placeholder:font-light"
             placeholder="Enter Description">
 

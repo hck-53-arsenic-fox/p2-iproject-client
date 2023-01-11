@@ -44,9 +44,15 @@ const router = createRouter({
 
 //! Navigation Guard
 router.beforeEach((to, from, next) => {
-  if (to.name === 'form' || to.name === 'login' || to.name === 'register') {
+  if (to.name === 'login' || to.name === 'register') {
     if (localStorage.access_token) {
       next({ name: 'home' })
+    } else {
+      next()
+    }
+  } else if (to.name === 'form') {
+    if (!localStorage.access_token) {
+      next({ name: 'login' })
     } else {
       next()
     }
@@ -54,6 +60,8 @@ router.beforeEach((to, from, next) => {
     next()
   }
 })
+
+//? Twitter Login
 
 
 export default router

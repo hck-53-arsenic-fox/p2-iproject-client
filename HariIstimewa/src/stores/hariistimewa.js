@@ -61,18 +61,17 @@ export const useHawaStore = defineStore("hawa", {
           localStorage.setItem("email", result.data.email);
           localStorage.setItem("role", result.data.role);
           this.access_token = result.data.access_token;
-          this.login.email = result.data.email;
-          this.login.password = "";
+          this.email = result.data.email;
+          this.password = "";
 
           this.router.push('/register')
         })
         .catch((err) => {
-          console.log(err);
-          // swal.fire({
-          //   title: `${err.response.data.message}`,
-          //   icon: "error",
-          //   confirmButtonColor: "#fa98d0",
-          // });
+          swal.fire({
+            title: `${err.response.data.message}`,
+            icon: "error",
+            confirmButtonColor: "#fa98d0",
+          });
         });
     },
 
@@ -92,7 +91,7 @@ export const useHawaStore = defineStore("hawa", {
         localStorage.setItem("email", result.data.email);
         localStorage.setItem("role", result.data.role);
         this.access_token = result.data.access_token;
-        this.login.email = result.data.email;
+        this.email = result.data.email;
         this.router.push('/')
       })
       .catch((err) => {

@@ -38,6 +38,7 @@ export const usePlayerStore = defineStore('player', {
             console.log('masukkkk register');
             console.log(formRegister, '<---- formREGISTER');
             try {
+<<<<<<< HEAD
                 const multerData = new FormData();
                 multerData.append("imgProfile", formRegister.imgProfile);
                 multerData.append("username", formRegister.username);
@@ -51,6 +52,9 @@ export const usePlayerStore = defineStore('player', {
                 })
 
                 this.router.push('/login');
+=======
+
+>>>>>>> feat/user-profile
             } catch (error) {
                 console.log(error, '<----- error register');
             }
@@ -102,6 +106,24 @@ export const usePlayerStore = defineStore('player', {
                 this.router.push('/users/user/following')
             } catch (error) {
                 console.log(error, '<---- error addFavorite');
+            }
+        },
+
+        async changeStatusPro() {
+            try {
+                const { data } = await axios({
+                    url: `${baseUrl}/users/status`,
+                    method: 'patch',
+                    data: { status: 'Pro' },
+                    headers: { access_token: localStorage.access_token }
+                })
+
+                console.log(data, '<----- data changeStausPro');
+                
+                this.fetchUserProfile()
+                this.router.push('/users/asd')
+            } catch (error) {
+                console.log(error, '<---- error di changeStatus');
             }
         },
 

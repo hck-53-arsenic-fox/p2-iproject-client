@@ -46,10 +46,8 @@ export const useAppStore = defineStore("app", {
           data: dataRegister,
         });
 
-        if (!result?.data?.access_token) {
-          throw new Error(
-            "Frontend error: somehow unable to get result.data.access_token"
-          );
+        if (!result?.data) {
+          throw new Error("Frontend error: somehow unable to get result.data");
         }
 
         Swal.fire({

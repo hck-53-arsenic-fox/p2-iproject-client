@@ -10,7 +10,9 @@ export const useUserStore = defineStore('user', {
             allFighters: [],
             allEvents: {},
             allLogs: [],
-            totalPage: 0
+            totalPage: 0,
+            oneFighter: {},
+            winRate: 0
         }
     },
     getters: {
@@ -141,6 +143,18 @@ export const useUserStore = defineStore('user', {
                     }
                 })
                 this.allLogs = data
+            } catch (error) {
+                console.log(error)
+            }
+        },
+        async fetchOneFighter(id) {
+            try {
+                const { data } = await axios({
+                    method: 'GET',
+                    url: `${baseUrl}/fighters/${id}`
+                })
+                this.oneFighter = data
+                this.winRate = Math.floor(data.win / (data.win + data.lose + data.draw) * 100)
             } catch (error) {
                 console.log(error)
             }

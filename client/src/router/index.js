@@ -4,6 +4,7 @@ import EventView from "../views/EventView.vue";
 import RankingView from "../views/RankingView.vue";
 import LoginView from "../views/LoginView.vue";
 import RegisterView from "../views/RegisterView.vue";
+import FighterDetailView from "../views/FighterDetailView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -32,6 +33,11 @@ const router = createRouter({
       path: "/ranking",
       name: "ranking",
       component: RankingView,
+    },
+    {
+      path: "/fighter/:id",
+      name: "fighterDetail",
+      component: FighterDetailView,
     },
   ],
 });

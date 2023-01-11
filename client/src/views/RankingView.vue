@@ -32,7 +32,7 @@ export default {
                     <tbody>
                         <tr v-for="fighter in allFighters.pound_for_pound" :key="`fighter1-${fighter.id}`">
                             <th scope="row">{{ fighter.rank }}</th>
-                            <td><RouterLink :to="`/fighter/${fighter.id}`">{{ fighter.name }}</RouterLink></td>
+                            <td><RouterLink :to="`/fighter/${fighter.id}`" style="text-decoration: none;color:black">{{ fighter.name }}</RouterLink></td>
                         </tr>
                     </tbody>
                 </table>
@@ -49,7 +49,7 @@ export default {
                     <tbody>
                         <tr v-for="fighter in allFighters.heavyweight" :key="`fighter2-${fighter.id}`">
                             <th scope="row">{{ fighter.rank + 1 }}</th>
-                            <td>{{ fighter.name }}</td>
+                            <td><RouterLink :to="`/fighter/${fighter.id}`" style="text-decoration: none;color:black">{{ fighter.name }}</RouterLink></td>
                         </tr>
                     </tbody>
                 </table>
@@ -66,7 +66,7 @@ export default {
                     <tbody>
                         <tr v-for="fighter in allFighters.light_heavyweight" :key="`fighter3-${fighter.id}`">
                             <th scope="row">{{ fighter.rank + 1 }}</th>
-                            <td>{{ fighter.name }}</td>
+                            <td><RouterLink :to="`/fighter/${fighter.id}`" style="text-decoration: none;color:black">{{ fighter.name }}</RouterLink></td>
                         </tr>
                     </tbody>
                 </table>
@@ -83,7 +83,7 @@ export default {
                     <tbody>
                         <tr v-for="fighter in allFighters.middleweight" :key="`fighter3-${fighter.id}`">
                             <th scope="row">{{ fighter.rank + 1 }}</th>
-                            <td>{{ fighter.name }}</td>
+                            <td><RouterLink :to="`/fighter/${fighter.id}`" style="text-decoration: none;color:black">{{ fighter.name }}</RouterLink></td>
                         </tr>
                     </tbody>
                 </table>
@@ -100,7 +100,7 @@ export default {
                     <tbody>
                         <tr v-for="fighter in allFighters.welterweight" :key="`fighter3-${fighter.id}`">
                             <th scope="row">{{ fighter.rank + 1 }}</th>
-                            <td>{{ fighter.name }}</td>
+                            <td><RouterLink :to="`/fighter/${fighter.id}`" style="text-decoration: none;color:black">{{ fighter.name }}</RouterLink></td>
                         </tr>
                     </tbody>
                 </table>
@@ -117,7 +117,7 @@ export default {
                     <tbody>
                         <tr v-for="fighter in allFighters.lightweight" :key="`fighter3-${fighter.id}`">
                             <th scope="row">{{ fighter.rank + 1 }}</th>
-                            <td>{{ fighter.name }}</td>
+                            <td><RouterLink :to="`/fighter/${fighter.id}`" style="text-decoration: none;color:black">{{ fighter.name }}</RouterLink></td>
                         </tr>
                     </tbody>
                 </table>
@@ -134,7 +134,7 @@ export default {
                     <tbody>
                         <tr v-for="fighter in allFighters.featherweight" :key="`fighter3-${fighter.id}`">
                             <th scope="row">{{ fighter.rank + 1 }}</th>
-                            <td>{{ fighter.name }}</td>
+                            <td><RouterLink :to="`/fighter/${fighter.id}`" style="text-decoration: none;color:black">{{ fighter.name }}</RouterLink></td>
                         </tr>
                     </tbody>
                 </table>
@@ -151,7 +151,7 @@ export default {
                     <tbody>
                         <tr v-for="fighter in allFighters.bantamweight" :key="`fighter3-${fighter.id}`">
                             <th scope="row">{{ fighter.rank + 1 }}</th>
-                            <td>{{ fighter.name }}</td>
+                            <td><RouterLink :to="`/fighter/${fighter.id}`" style="text-decoration: none;color:black">{{ fighter.name }}</RouterLink></td>
                         </tr>
                     </tbody>
                 </table>
@@ -168,7 +168,7 @@ export default {
                     <tbody>
                         <tr v-for="fighter in allFighters.flyweight" :key="`fighter3-${fighter.id}`">
                             <th scope="row">{{ fighter.rank + 1 }}</th>
-                            <td>{{ fighter.name }}</td>
+                            <td><RouterLink :to="`/fighter/${fighter.id}`" style="text-decoration: none;color:black">{{ fighter.name }}</RouterLink></td>
                         </tr>
                     </tbody>
                 </table>

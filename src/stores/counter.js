@@ -8,10 +8,8 @@ export const useCounterStore = defineStore("counter", {
     games: [],
     page_size: 4,
     count: 0,
+    isLogin: false,
   }),
-  getters: {
-    // showMore: (state) => state.page_size + 4,
-  },
   actions: {
     async fetchGames(search) {
       try {
@@ -36,6 +34,10 @@ export const useCounterStore = defineStore("counter", {
 
     async buyGame(slug) {
       try {
+        const { data } = await axios({
+          method: "POST",
+          url: baseUrl + "/games/" + slug,
+        });
       } catch (err) {
         Swal.fire({
           icon: "error",
@@ -43,6 +45,71 @@ export const useCounterStore = defineStore("counter", {
           text: "Something went wrong!",
         });
       }
+    },
+
+    async handleLogin(user) {
+      try {
+        const { data } = await axios({
+          url: baseUrl + "/login",
+          method: "POST",
+          data: user,
+        });
+        localStorage.setItem("access_token", data.access_token);
+        this.router.push({ name: "home" });
+        this.isLogin = true;
+      } catch (err) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: err.response.data.message,
+        });
+      }
+    },
+
+    async handleRegister(user) {
+      try {
+        const { data } = await axios({
+          url: baseUrl + "/register",
+          method: "POST",
+          data: user,
+        });
+        localStorage.setItem("access_token", data.access_token);
+        this.router.push({ name: "home" });
+        this.isLogin = true;
+      } catch (err) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: err.response.data.message,
+        });
+      }
+    },
+
+    async googleLogin(response) {
+      try {
+        const { data } = await axios({
+          url: baseUrl + "/google-login",
+          method: "POST",
+          headers: {
+            google_token: response.credential,
+          },
+        });
+        localStorage.setItem("access_token", data.access_token);
+        this.router.push({ name: "home" });
+        this.isLogin = true;
+      } catch (err) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: err.response.data.message,
+        });
+      }
+    },
+
+    logout() {
+      localStorage.clear();
+      this.router.push({ name: "login" });
+      this.isLogin = false;
     },
   },
 });

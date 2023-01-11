@@ -24,6 +24,7 @@ function drawRegionsMap() {
 
   var options = {
     colorAxis: { colors: ["#fc890d"] },
+    defaultColor: '#884701',
   };
 
   var chart = new google.visualization.GeoChart(
@@ -57,7 +58,13 @@ async function init(countryCode = 'idn') {
       if (el[0] === "Euro area") {
         mapData.splice(i, 1);
       }
+
+      if(el[0] === state.selectedCountry.country) {
+        el[1] = null
+        el[2] = null
+      }
     });
+    // console.log(mapData)
 
     state.mapRenderData = mapData;
     renderMap();
@@ -91,10 +98,30 @@ const totalBigMacPrice = computed(() => {
 
           <form>
             <div class="flex">
+              <div class="my-auto block p-1.5 bg-gray-50 rounded-l-lg border-r-gray-100 border-l border-t border-b border-gray-300">
+
+                <img
+                v-if="state.selectedCountryCode === 'EUZ'"
+                src="../assets/europe.png"
+              class="border h-7"
+               />
+
+
+                <img
+                v-else
+              :src="`https://countryflagsapi.com/svg/${state.selectedCountryCode}`"
+              crossorigin="anonymous"
+              class="border h-7"
+               />
+
+
+              </div>
+    
+
               <select
               v-model="state.selectedCountryCode"
               @change.prevent="init(state.selectedCountryCode)"
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-l-lg focus:ring-blue-500 focus:border-blue-500 block w-3/4 p-2.5"
+              class=" border-t border-b border-r bg-gray-50 border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-3/4 p-2.5"
 
               >
                 <option selected disabled>Choose a country</option>
@@ -149,7 +176,7 @@ const totalBigMacPrice = computed(() => {
               <thead class="text-gray-700 uppercase bg-gray-50">
                 <tr>
                   <th scope="col" class="py-3 px-6 text-center">Country</th>
-                  <th scope="col" class="py-3 px-6 text-center">IDR Price</th>
+                  <th scope="col" class="py-3 px-6 text-center">{{ state.selectedCountry.currency_code }} Price</th>
                   <th scope="col" class="py-3 px-6 text-center">Relative Price</th>
                   <th scope="col" class="py-3 px-6 text-center">Big Macs for {{ state.selectedCountry.currency_code }} {{ totalBigMacPrice }} </th>
                 </tr>
@@ -159,6 +186,7 @@ const totalBigMacPrice = computed(() => {
                 v-for="country in state.relativePrices" :key="'country-' + country.iso_a3"
                 :country="country"
                 :selectedCountry="state.selectedCountry"
+                :selectedCountryCode="country.iso_a3"
                 :totalBigMacPrice="totalBigMacPrice"
                 />
               </tbody>

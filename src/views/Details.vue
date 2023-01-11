@@ -46,13 +46,13 @@ const historicalDateRange = computed(() => {
 <template>
   <main class="md:px-20">
     <div id="title-container" class="mb-5 flex flex-col md:flex-row md:gap-2">
-      <h2 class="text-2xl font-semibold">Big Mac Index</h2>
+      <h2 class="text-2xl font-semibold mb-2">Big Mac Index</h2>
       <form>
-        <div class="flex">
+        <div class="flex gap-3">
           <select
             @change.prevent="handleFetchData(selectedCountry)"
             v-model="selectedCountry"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-1.5 mt-2 md:m-0"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-1.5 md:m-0"
           >
             <option selected disabled value="">Choose a country</option>
             <option
@@ -63,13 +63,26 @@ const historicalDateRange = computed(() => {
               {{ country.country }}
             </option>
           </select>
+
+          <img
+            v-if="selectedCountry === 'EUZ'"
+            src="../assets/europe.png"
+            class="border h-7 md:hidden inline my-auto"
+          />
+
+          <img
+            v-else
+            :src="`https://countryflagsapi.com/svg/${selectedCountry}`"
+            crossorigin="anonymous"
+            class="border h-7 md:hidden inline my-auto"
+          />
         </div>
       </form>
     </div>
 
     <div class="grid grid-cols-1 gap-5 md:grid-cols-2" id="grid-container">
       <h2 class="text-md font-semibold md:hidden">
-        The {{ store.state.selectedCountryData.country }}
+        {{ store.state.selectedCountryData.country }}
         {{ store.state.selectedCountryData.currency_code }} is
         {{ BMILastUpdate }} against the US dollar
       </h2>
@@ -95,7 +108,20 @@ const historicalDateRange = computed(() => {
         class="md:order-1 md:col-span-2 md:w-3/4 md:flex md:flex-col md:justify-evenly md:my-5"
       >
         <h2 class="text-md font-semibold hidden md:flex md:text-2xl">
-          The {{ store.state.selectedCountryData.country }}
+          <img
+            v-if="selectedCountry === 'EUZ'"
+            src="../assets/europe.png"
+            crossorigin="anonymous"
+            class="border h-5 md:inline my-auto hidden mr-2"
+          />
+
+          <img
+            v-else
+            :src="`https://countryflagsapi.com/svg/${selectedCountry}`"
+            crossorigin="anonymous"
+            class="border h-5 md:inline my-auto hidden mr-2"
+          />
+          {{ store.state.selectedCountryData.country }}
           {{ store.state.selectedCountryData.currency_code }} is
           {{ BMILastUpdate }} against the US dollar
         </h2>

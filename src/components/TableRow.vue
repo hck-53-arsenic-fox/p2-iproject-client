@@ -1,7 +1,12 @@
 <script setup>
 import { reactive, computed } from "vue";
 
-const props = defineProps(["country", "selectedCountry", "totalBigMacPrice"]);
+const props = defineProps([
+  "country",
+  "selectedCountry",
+  "totalBigMacPrice",
+  "selectedCountryCode",
+]);
 
 const state = reactive({ overlayArea: 1 });
 
@@ -38,6 +43,19 @@ const relativeBigMacAmount = computed(() => {
       scope="row"
       class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap"
     >
+      <!-- <img
+        v-if="props.selectedCountryCode !== 'EUZ'"
+        :src="`https://countryflagsapi.com/svg/${props.selectedCountryCode}`"
+        crossorigin="anonymous"
+        class="h-auto w-6 inline border mr-1"
+      />
+
+      <img
+        v-else
+        src="../assets/europe.png"
+        alt=""
+        class="h-auto w-6 inline border mr-1"
+      /> -->
       {{ country.country }}
     </th>
     <td

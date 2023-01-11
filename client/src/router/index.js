@@ -9,6 +9,7 @@ import Transactions from '../views/transactions.vue'
 import Detail from '../views/detail.vue'
 import Form from '../views/formAdd.vue'
 import FormEdit from '../views/formEdit.vue'
+import Medicine from '../views/mediciene.vue'
 
 const routes = [
   {path: '/', name: 'home', component:Home},
@@ -17,6 +18,7 @@ const routes = [
   {path: '/login', name: 'login', component: Login},
   {path: '/register', name: 'register', component: Register},
   {path: '/transactions', name: 'transactions', component: Transactions},
+  {path: '/medicine', name: 'medicine', component: Medicine},
   {path: '/doctors/form/:id', name: 'form', component: Form},
   {path: '/transactions/form/:id', name: 'formEdit', component: FormEdit},
   {path: '/doctors/:id', name: 'detail', component: Detail},

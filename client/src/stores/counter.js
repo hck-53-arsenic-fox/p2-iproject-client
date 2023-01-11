@@ -8,7 +8,8 @@ export const useCounterStore = defineStore("counter", {
     doctors:[],
     doctor:{},
     transactions:[],
-    order_Id: ''
+    order_Id: '',
+    medicines:[]
   }),
   getters:{},
   actions:{
@@ -194,7 +195,22 @@ export const useCounterStore = defineStore("counter", {
       } catch (error) {
           console.log(error)
       }
-  },
+    },
+
+    async fetchMedicine(){
+      try {
+        const {data} = await axios({
+          method: 'GET',
+          url: 'http://localhost:3000/medicine/categories'
+        })
+        console.log(data);
+        this.medicines = data
+  
+        
+      } catch (error) {
+        console.log(error);
+      }
+    },
 
     async handleLogout(){
       try {

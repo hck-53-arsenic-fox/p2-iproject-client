@@ -31,7 +31,7 @@ export const useUserStore = defineStore("user", {
           },
         });
         Swal.fire("Great!", "Success create a new account", "success");
-        this.router.push("/");
+        this.router.push("/login");
         (this.email = ""),
           (this.password = ""),
           (this.phoneNumber = ""),

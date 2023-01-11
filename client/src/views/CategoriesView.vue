@@ -20,7 +20,10 @@ export default {
     <div class="row row-cols-1 row-cols-md-3 g-4">
       <div v-for="category in categories" :key="category.id" class="col">
         <!-- dinamis -->
-        <a href="#" class="text-dark text-decoration-none">
+        <a
+          @click="$router.push(`/categories/${category.id}`)"
+          class="text-dark text-decoration-none"
+        >
           <div class="card mb-3">
             <img
               src="https://i.otto.nl/i/otto/12936595/sprei-van-100-polyester-zwart.jpg?$ovnl_seo_index$"

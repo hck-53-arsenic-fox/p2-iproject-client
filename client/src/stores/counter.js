@@ -94,6 +94,22 @@ export const useCounterStore = defineStore("counter", {
         Swal.fire(error.response.data.message);
       }
     },
+    async fetchCategoriesById(id) {
+      console.log(id);
+      try {
+        const { data } = await axios({
+          method: "get",
+          url: baseUrl + "/categories/" + id,
+          headers: {
+            access_token: localStorage.access_token,
+          },
+        });
+        this.products = data.Products;
+        // console.log(data);
+      } catch (error) {
+        Swal.fire(error.response.data.message);
+      }
+    },
     async getProvince() {
       try {
         const { data } = await axios({

@@ -1,8 +1,20 @@
 <script>
     import { RouterLink } from 'vue-router';
+    import { useCounterStore } from '../stores/counter';
+    import { mapWritableState } from 'pinia';
     import Modal from '../components/ModalComment.vue'
     export default {
-        components: { Modal }
+        components: { Modal },
+        computed: {
+          ...mapWritableState(useCounterStore, ['isLogin'])
+        },
+        methods: {
+          logout(){
+            localStorage.clear()
+            this.isLogin = false
+            this.$router.push('/login')
+          }
+        }
     }
 </script>
 
@@ -24,9 +36,12 @@
           <RouterLink to="/login" class="nav-link" href="#">Login</RouterLink>
         </li>
         <li class="nav-item">
+          <a @click.prevent="logout" v-if="isLogin" class="nav-link" href="#">Logout</a>
+        </li>
+        <li class="nav-item">
           <RouterLink to="/register" class="nav-link" href="#">Register</RouterLink>
         </li>
-        <li class="nav-item dropdown">
+        <!-- <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Dropdown
           </a>
@@ -36,15 +51,15 @@
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#">Something else here</a></li>
           </ul>
-        </li>
+        </li> -->
         <li class="nav-item">
           <Modal class="nav-link"/>
         </li>
       </ul>
-      <form class="d-flex" role="search">
+      <!-- <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+      </form> -->
     </div>
   </div>
 </nav>

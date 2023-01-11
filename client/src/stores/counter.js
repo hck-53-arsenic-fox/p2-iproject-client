@@ -229,6 +229,21 @@ export const useCounterStore = defineStore('counter', {
       } catch (error) {
         console.log(error);
       }
+    },
+
+    async handleFormRegister(email, password){
+      try {
+        let res = await axios({
+          method: 'post',
+          url: url + 'users/register',
+          data: {
+            email, password
+          }
+        })
+        this.router.push('/login')
+      } catch (error) {
+        console.log(error);
+      }
     }
 
 

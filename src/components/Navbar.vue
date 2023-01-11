@@ -1,10 +1,14 @@
 <script>
-import { mapState } from "pinia";
+import { mapActions, mapState } from "pinia";
 import { RouterLink } from "vue-router";
+import { useGameStore } from "../stores/game";
 import { useUserStore } from "../stores/user";
 export default {
   computed: {
-    ...mapState(useUserStore, ['isLogin'])
+    ...mapState(useUserStore, ['isLogin']),
+  },
+  methods: {
+    ...mapActions(useUserStore, ['logout'])
   }
 }
 </script>
@@ -29,14 +33,14 @@ export default {
         <li>
           <RouterLink to="/console" href="">Console</RouterLink>
         </li>
-        <li>
+        <li v-if="isLogin">
           <RouterLink to="/cart" href="">Cart</RouterLink>
         </li>
         <li v-if="!isLogin">
           <RouterLink to="/login" href="">Login</RouterLink>
         </li>
         <li v-if="isLogin">
-          <a href="">Logout</a>
+          <a @click.prevent="logout" href="">Logout</a>
         </li>
       </ul>
     </div>

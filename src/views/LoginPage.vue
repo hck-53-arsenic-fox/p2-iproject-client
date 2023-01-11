@@ -13,7 +13,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(useUserStore, ["firebaseLogin", "firebaseRegister"]),
+    ...mapActions(useUserStore, ["firebaseLogin", "firebaseRegister", ]),
     goToRegister() {
       if (this.$route.name == "loginPage") {
         this.$router.push({ name: "registerPage" });

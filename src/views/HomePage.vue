@@ -1,19 +1,20 @@
 <script>
 import CartPage from "./CartPage.vue";
-import { RouterLink } from "vue-router";
-import { mapState } from "pinia";
+import { mapActions, mapState } from "pinia";
 import { useUserStore } from "../stores/user";
+import { useGameStore } from "../stores/game";
 export default {
   components: { CartPage },
   computed: {
-    ...mapState(useUserStore, ['isLogin'])
+    ...mapState(useUserStore, ['isLogin' ])
   },
   methods: {
+    ...mapActions(useGameStore, ['rentGames']),
     goToPage() {
         if(this.isLogin) {
             this.$router.push({name: 'consolePage'}) 
         } else {
-            this.$route.push({name: 'loginPage'})
+            this.$router.push({name: 'loginPage'})
         }
     }
   }

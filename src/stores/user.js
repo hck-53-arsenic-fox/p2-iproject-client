@@ -1,14 +1,12 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 import { auth, firebaseAuth } from "../auth/auth.service";
-import { useToast } from "vue-toastification";
-
-const BASE_URL = "http://localhost:3000";
-const toast = useToast();
+import { BASE_URL, toast } from "../main";
 
 export const useUserStore = defineStore("user", {
   state: () => ({
-    isLogin: false
+    isLogin: false,
+    sls: "",
   }),
   actions: {
     async firebaseLogin({ email, password }) {
@@ -18,6 +16,7 @@ export const useUserStore = defineStore("user", {
           email,
           password
         );
+
         const idToken = await auth.currentUser.getIdToken(true);
         const { data } = await axios({
           url: BASE_URL + "/users/login",
@@ -26,20 +25,15 @@ export const useUserStore = defineStore("user", {
         });
         toast.info("Success Login");
         localStorage.setItem("access_token", data.access_token);
+        localStorage.setItem("email", userCredential.user.email);
         this.router.push({ name: "homePage" });
-        this.isLogin = true
+        this.isLogin = true;
       } catch (err) {
         toast.error(err.message);
       }
     },
     async firebaseRegister({ email, password }) {
       try {
-        const { data } = await axios({
-          url: BASE_URL + "/users/register",
-          method: "POST",
-          data: { email, password },
-        });
-
         const userCredential =
           await firebaseAuth.createUserWithEmailAndPassword(
             auth,
@@ -53,5 +47,12 @@ export const useUserStore = defineStore("user", {
         toast.error(err.message);
       }
     },
+    logout() {
+      localStorage.clear();
+      this.isLogin = false;
+      this.router.replace({ name: "homePage" });
+      toast.error("Logout");
+    },
+    
   },
 });

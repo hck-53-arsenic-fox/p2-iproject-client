@@ -212,6 +212,23 @@ export const useCounterStore = defineStore('counter', {
       } catch (error) {
         console.log(error);
       }
+    },
+
+    async handleGoogleLogin(response){
+      try {
+          let res = await axios ({
+              method: 'POST',
+              url: url + 'users/googleLogin',
+              headers: {
+                google_token: response,
+              }
+          })
+          localStorage.setItem('token', res.data.access_token)
+          localStorage.setItem('email', res.data.email)
+          this.router.push({name: 'home'})
+      } catch (error) {
+        console.log(error);
+      }
     }
 
 

@@ -8,6 +8,7 @@ import TransactionsView from "../views/TransactionsView.vue";
 import ProfileView from "../views/ProfileView.vue";
 import SettingsView from "../views/SettingsView.vue";
 import CurrencyConverterView from "../views/CurrencyConverterView.vue";
+import PrivacyView from "../views/PrivacyView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -92,6 +93,12 @@ const router = createRouter({
       path: "/about",
       name: "about",
       component: AboutView,
+      // component: () => import("../views/AboutView.vue"),
+    },
+    {
+      path: "/privacy",
+      name: "privacy",
+      component: PrivacyView,
       // component: () => import("../views/AboutView.vue"),
     },
   ],

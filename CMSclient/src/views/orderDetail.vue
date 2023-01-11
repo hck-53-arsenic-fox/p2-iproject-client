@@ -43,13 +43,13 @@ export default {};
           <h4>Before</h4>
           <img 
           class="p-2 mb-3 card-size" style="border-radius: 1rem;"
-          src="../assets/istockphoto-1250208695-612x612.jpeg" alt="">
+          src="../assets/Sorry... there's no image yet (.png" alt="">
         </div>
         <div class="col-auto text-center">
           <h4>After</h4>
           <img 
           class="p-2 card-size" style="border-radius: 1rem;"
-          src="../assets/istockphoto-629962200-612x612.jpeg" alt="">
+          src="../assets/Sorry... there's no image yet (.png" alt="">
         </div>
       </div>
     </div>

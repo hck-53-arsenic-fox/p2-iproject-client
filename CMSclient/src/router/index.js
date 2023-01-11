@@ -6,6 +6,7 @@ import Services from "../views/servicesPage.vue";
 import Order from "../views/orderPage.vue"
 import MyOrderHistory from "../views/myOrderHistory.vue"
 import OrderDetail from "../views/orderDetail.vue"
+import OrderLog from "../views/orderLog.vue"
 
 const routes = [
   {
@@ -42,6 +43,11 @@ const routes = [
     path: "/detail",
     name: "OrderDetail",
     component: OrderDetail,
+  },
+  {
+    path: "/log",
+    name: "OrderLog",
+    component: OrderLog,
   },
 ];
 

@@ -7,10 +7,10 @@ export default {
     name: "UserProfile",
     components: { NavbarTwo },
     methods: {
-        ...mapActions(usePlayerStore, ['fetchUserProfile', 'changeStatusPro'])
+        ...mapActions(usePlayerStore, ['fetchUserProfile', 'changeStatusPro', 'upgradeMemberPro'])
     },
     computed: {
-        ...mapState(usePlayerStore, ['userProfile'])
+        ...mapState(usePlayerStore, ['userProfile', 'isPro'])
     },
     created() {
         this.fetchUserProfile()
@@ -29,7 +29,7 @@ export default {
             <div class="col-md-10">
                 <div class="card p-3 py-4 shadow-lg" style="background-color: black;">
                     <div class="d-flex justify-content-end">
-                        <button class="btn btn-danger" @click.prevent="changeStatusPro" v-if="userProfile.status === 'Regular'">Become pro member</button>
+                        <button class="btn btn-danger" @click="upgradeMemberPro" v-if="userProfile.status === 'Regular'">Become pro member</button>
                     </div>
                     <div class="text-center">
                         <img :src="userProfile.imgProfile" width="100" class="rounded-circle">

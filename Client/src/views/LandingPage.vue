@@ -5,7 +5,21 @@
     import Cards from '../components/Cards.vue'
 
     export default {
+        components: {
+            Cards
+        },
 
+        computed: {
+            ...mapState(useGenshinStore, ['charaList'])
+        },
+
+        methods: {
+            ...mapActions(useGenshinStore, ['getChara'])
+        },
+
+        async created(){
+            this.getChara()
+        }
     }
     
 </script>
@@ -13,11 +27,9 @@
 <template>
     <body>
         <div id="Container-Home">
-            <div id="Characters-Home">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTG8Ogg1R2WkRRVnsxMlr_WqdNwhVzo9vvW_42SZm8&s">
-                <h3 style="color:white">Name</h3>
+            <div id="Chara-Cards">
+                <Cards v-for="chara in charaList" :key="chara.id" :chara="chara"></Cards>
             </div>
-            
         </div>
     </body>
 </template>

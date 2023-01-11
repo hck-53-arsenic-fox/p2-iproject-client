@@ -8,6 +8,8 @@ export const useGenshinStore = defineStore("Genshin Impact", {
   state() {
     return {
       token: "",
+      charaList: [],
+      chara: {}
     };
   },
 
@@ -81,8 +83,34 @@ export const useGenshinStore = defineStore("Genshin Impact", {
       });
     },
 
-    getData(){
-        
-    }
+    async getChara() {
+      try {
+        let {data} = await axios({
+            method: 'GET',
+            url: undeployed + '/characters'
+        })
+        this.charaList = data
+      } catch (err) {
+        let showErr = err.response.data.message;
+        Swal.fire({
+          icon: "error",
+          title: "An Error has Occurred",
+          text: showErr,
+        });
+      }
+    },
+
+    async getCharaId(id) {
+        try {
+            let {data} = await axios({
+                method: 'GET',
+                url: undeployed + '/characters/' + id
+            })
+            this.chara = data
+        } catch (err) {
+            console.log(err);
+        }
+    },
+
   },
 });

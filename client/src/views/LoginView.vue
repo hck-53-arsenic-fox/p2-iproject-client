@@ -13,13 +13,16 @@ export default {
         }
     },
     methods: {
-        ...mapActions(useUserStore, ['handleLogin']),
+        ...mapActions(useUserStore, ['handleLogin', 'googleLogin']),
         login(dataLogin) {
             this.handleLogin(dataLogin)
             this.dataLogin = {
                 email: '',
                 password: ''
             }
+        },
+        callback(response) {
+            this.googleLogin(response)
         }
     }
 }
@@ -49,6 +52,10 @@ export default {
                         <button type="submit" class="btn btn-primary">Sign in</button>
                     </div>
                     <p>Or Sign In With</p>
+                    <div>
+                        <GoogleLogin :callback="callback" prompt />
+                        <pre>{{ log }}</pre>
+                    </div>
                 </center>
                 <RouterLink to="/register" style="text-decoration:none">
                     <div id="accountHelp" class="form-text">Don't have an account?</div>

@@ -12,7 +12,8 @@ export const useUserStore = defineStore('user', {
             allLogs: [],
             totalPage: 0,
             oneFighter: {},
-            winRate: 0
+            winRate: 0,
+            allVideo: []
         }
     },
     getters: {
@@ -155,6 +156,32 @@ export const useUserStore = defineStore('user', {
                 })
                 this.oneFighter = data
                 this.winRate = Math.floor(data.win / (data.win + data.lose + data.draw) * 100)
+            } catch (error) {
+                console.log(error)
+            }
+        },
+        async fetchYoutubeVideo() {
+            try {
+                const { data } = await axios({
+                    method: 'GET',
+                    url: `${baseUrl}/youtube`
+                })
+                this.allVideo = data.items
+            } catch (error) {
+
+            }
+        },
+        async googleLogin(response) {
+            try {
+                const { data } = await axios({
+                    method: 'POST',
+                    url: `${baseUrl}/google`,
+                    headers: {
+                        google_token: response.credential
+                    }
+                })
+                localStorage.setItem('access_token', data.access_token)
+                this.router.push('/')
             } catch (error) {
                 console.log(error)
             }

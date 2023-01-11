@@ -1,6 +1,18 @@
 <script>
+import { mapActions, mapState } from 'pinia';
+import { useUserStore } from '../stores/user';
+
 export default {
-  name: 'HomeView'
+  name: 'HomeView',
+  methods: {
+    ...mapActions(useUserStore, ['fetchYoutubeVideo'])
+  },
+  computed: {
+    ...mapState(useUserStore, ['allVideo'])
+  },
+  created() {
+    this.fetchYoutubeVideo()
+  }
 }
 </script>
 
@@ -19,18 +31,10 @@ export default {
   </div>
 
   <!---Video Youtube--->
-  <div>
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/afhOsADGIPY" title="YouTube video player"
+  <div v-for="(video, index) in allVideo" :key="`video-${index + 1}`">
+    <iframe width="560" height="315" :src="`https://www.youtube.com/embed/${video.id.videoId}`" :title="`${video.snippet.title}`"
       frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen class="object-fit-contain"></iframe>
-
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/0yBHiD2USXA" title="YouTube video player"
-      frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen class="object-fit-contain"></iframe>
-
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/Q1S9MvuPL0g" title="YouTube video player"
-      frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen class="object-fit-scale"></iframe>
   </div>
   <!---End Video Youtube--->
 </template>

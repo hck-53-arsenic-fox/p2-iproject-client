@@ -5,6 +5,7 @@ import Login from "../views/login.vue";
 import Services from "../views/servicesPage.vue";
 import Order from "../views/orderPage.vue"
 import MyOrderHistory from "../views/myOrderHistory.vue"
+import OrderDetail from "../views/orderDetail.vue"
 
 const routes = [
   {
@@ -33,9 +34,14 @@ const routes = [
     component: Order,
   },
   {
-    path: "/myOrderHistory",
+    path: "/history",
     name: "MyOrderHistory",
     component: MyOrderHistory,
+  },
+  {
+    path: "/detail",
+    name: "OrderDetail",
+    component: OrderDetail,
   },
 ];
 

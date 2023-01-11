@@ -57,7 +57,7 @@ export default {
             <RouterLink to="/order" class="nav-link" href="#">Create Order</RouterLink>
           </li>
           <li>
-            <RouterLink to="/myOrderHistory" class="nav-link" href="#">My Order History</RouterLink>
+            <RouterLink to="/history" class="nav-link" href="#">My Order History</RouterLink>
             <a v-if="role === 'admin'" class="nav-link" href="#">Order Log</a>
           </li>
         </ul>

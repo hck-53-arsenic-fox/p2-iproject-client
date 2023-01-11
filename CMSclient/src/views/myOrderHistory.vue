@@ -35,7 +35,7 @@ export default {};
           <td>tomorrow</td>
           <td>on process</td>
           <td>next week</td>
-          <td><button class="btn btn-outline-secondary btn-block btn-sm col-10 border border-secondary text-dark">Check Detail</button></td>
+          <td><RouterLink to="/detail" class="btn btn-outline-secondary btn-block btn-sm col-10 border border-secondary text-dark">Check Detail</RouterLink></td>
         </tr>
       </tbody>
     </table>

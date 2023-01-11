@@ -4,13 +4,14 @@ import { useMovieStore } from '../stores/movie';
 
 export default{
   computed:{
-    ...mapState(useMovieStore,['movieDetail'])
+    ...mapState(useMovieStore,['movieDetail','qr'])
   },
   methods:{
-    ...mapActions(useMovieStore,['fetchMovieDetail'])
+    ...mapActions(useMovieStore,['fetchMovieDetail','qrCode'])
   },
   created(){
     this.fetchMovieDetail(this.$route.params.id)
+    this.qrCode(this.$route.params.id)
   }
 }
 </script>
@@ -32,7 +33,7 @@ export default{
       <li class="list-group-item" style="background-color: grey;">Writer: <span v-for="wrt in movieDetail.writers"> {{ `${wrt}   ` }} </span></li>
       <li class="list-group-item" style="background-color: grey;">director:<span v-for="dire in movieDetail.director"> {{ `${dire} ` }} </span></li>
 
-      <!-- <li class="list-group-item text-center" style="background-color: grey;"><img :src="this.qr" alt="" width="100"></li> -->
+      <li class="list-group-item text-center" style="background-color: grey;"><img :src="`data:image/png;base64${this.qr}`" alt="" width="100"></li>
       <li class="list-group-item text-center" style="background-color: grey;">
         <button @click="$router.push('/')" type="button" class="btn btn-primary btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;">Back</button></li>
     </ul>

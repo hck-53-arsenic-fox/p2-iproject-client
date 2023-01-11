@@ -12,7 +12,8 @@ export const useMovieStore = defineStore('movie',{
             rowsPerPage : 5,
             query:{
                 page:1
-            }
+            },
+            qr:''
         }
     },
     actions:{
@@ -50,9 +51,18 @@ export const useMovieStore = defineStore('movie',{
                     acces_token : localStorage.getItem("acces_token")
                    } 
                 })
-                console.log(data);
-                // this.qrCode(`http://localhost:5173/detail/${id}`)
                 this.movieDetail = data
+            } catch (error) {
+                console.log(error);
+            }
+        },
+        async qrCode(id){
+            try {
+                const { data } = await axios({
+                    method:'POST',
+                    url:'http://localhost:3000/genqr/'+id
+                }) 
+                this.qr=data
             } catch (error) {
                 console.log(error);
             }

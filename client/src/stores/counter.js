@@ -238,7 +238,8 @@ export const useCounterStore = defineStore("counter", {
           this.order_Id = data.orderId
           window.snap.pay(`${data.token.token}`, {
               onSuccess: async (result) => {
-                  await this.statusPayment()
+                  // await this.statusPayment()
+                  this.router.push('/')
               },
               onPending: function (result) {
                   alert("wating your payment!"); console.log(result);

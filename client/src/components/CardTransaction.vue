@@ -23,7 +23,8 @@ export default {
       </div>
       <div class="card-footer">
        <button class="btn btn-dark" v-if="item.status === 'Unpaid'" @click.prevent="handlePayment(item.id, item.Room.price)">Payment Now</button>
-       <p v-if="item.status === 'Paid'">Your transaction was successfully!</p>
+       <button class="btn btn-dark" v-if="!item.IdentityUser && item.status === 'Paid'" @click.prevent="this.$router.push(`/verified-identity/${item.id}`)">Verified Now</button>
+       <p v-if="item.status === 'Paid' && item.IdentityUser">Your transaction was successfully!</p>
       </div>
     </div>
   </div>

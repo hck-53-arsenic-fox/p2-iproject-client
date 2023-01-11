@@ -4,6 +4,7 @@ const baseUrl = "http://localhost:3000/customer";
 export const useCounterStore = defineStore("counter", {
   state() {
     return {
+      products: [],
       isLogin: false,
       username: "",
     };
@@ -42,6 +43,18 @@ export const useCounterStore = defineStore("counter", {
         Swal.fire({
           title: "Login Berhasil",
         });
+      } catch (error) {
+        Swal.fire(error.response.data.message);
+      }
+    },
+    async fetchProducts() {
+      try {
+        const { data } = await axios({
+          method: "get",
+          url: baseUrl,
+        });
+        this.products = data;
+        console.log(data);
       } catch (error) {
         Swal.fire(error.response.data.message);
       }

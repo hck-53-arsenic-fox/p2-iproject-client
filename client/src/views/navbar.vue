@@ -26,6 +26,7 @@ export default{
                     <li><RouterLink to="/">Home</RouterLink></li>
                     <li><RouterLink to="/doctors">Our Doctors</RouterLink></li>
                     <li><RouterLink to="/about">About Us</RouterLink></li>
+                    <li><RouterLink to="/medicine">Medicine</RouterLink></li>
                 </ul>
         
                 <div class="header-icons">

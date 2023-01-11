@@ -16,8 +16,14 @@
       </router-link>
     </div>
 
-    <div class="m-auto text-xl"><i class="fa-solid fa-chart-simple"></i></div>
+    <div class="m-auto text-xl">
+      <router-link :to="{ name: 'WorkingTimes' }">
+        <i class="fa-solid fa-clock"></i>
+      </router-link>
+    </div>
 
-    <div class="m-auto text-xl"><i class="fa-solid fa-clock"></i></div>
+    <div class="m-auto text-xl">
+      <i class="fa-solid fa-chart-simple"></i>
+    </div>
   </div>
 </template>

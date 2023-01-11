@@ -2,9 +2,7 @@
 import { reactive, ref, computed } from "vue";
 import BarChart from "../components/BarChart.vue";
 import LineChart from "../components/LineChart.vue";
-import axios from "axios";
 import { useCountryBMI } from "../stores/countryBMI";
-const baseUrl = "http://localhost:3001";
 
 const store = useCountryBMI();
 store.fetchCountries();

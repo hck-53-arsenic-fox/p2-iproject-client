@@ -18,7 +18,6 @@ export const useCountryBMI = defineStore("countryBMI", () => {
     try {
       const { data } = await axios.get(`${baseUrl}/countries`);
       state.countries = data;
-      console.log(data);
     } catch (error) {
       console.log(error);
     }

@@ -25,9 +25,21 @@ export const useCounterStore = defineStore("counter", {
           url: 'http://localhost:3000/users/register',
           data: data
         })
-        this.router.push("/login")  
-      } catch (error) {
-        console.log(error);
+        this.router.push("/login")
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Your account has been registered',
+          showConfirmButton: false,
+          timer: 1500
+        })
+      } catch (err) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: `${err.response.data.message}`
+       })
+        console.log(err);
       }
     },
 
@@ -41,7 +53,19 @@ export const useCounterStore = defineStore("counter", {
         localStorage.setItem('access_token', res.data.access_token)
         this.router.push('/')
         this.isAuth = true
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'You have login',
+          showConfirmButton: false,
+          timer: 1500
+        })
       } catch (error) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: `${error.response.data.message}`,
+      })
         console.log(error);
       }
     },
@@ -97,6 +121,13 @@ export const useCounterStore = defineStore("counter", {
         }) 
         this.router.push('/transactions')
         this.fetchDataTransaction()
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Data successful deleted',
+          showConfirmButton: false,
+          timer: 1500
+        })
       } catch (error) {
         console.log(error);
       }
@@ -114,6 +145,13 @@ export const useCounterStore = defineStore("counter", {
           data:data
         })
         this.router.push('/transactions')
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'data successful added',
+          showConfirmButton: false,
+          timer: 1500
+        })
         
       } catch (error) {
         console.log(error);
@@ -131,16 +169,29 @@ export const useCounterStore = defineStore("counter", {
     },
 
     async editData(id, data){
-      const res = await axios({
-        method: "PUT",
-        url: `http://localhost:3000/transactions/${id}`,
-        headers:{
-          access_token: localStorage.getItem("access_token")
-        },
-        data:data
-      })
+      try {
+        const res = await axios({
+          method: "PUT",
+          url: `http://localhost:3000/transactions/${id}`,
+          headers:{
+            access_token: localStorage.getItem("access_token")
+          },
+          data:data
+        })
+  
+        this.router.push('/transactions')
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'data successful edited',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        
+      } catch (error) {
+        console.log(error);
+      }
 
-      this.router.push('/transactions')
     },
 
     async handleGoogleLogin(response){
@@ -155,6 +206,13 @@ export const useCounterStore = defineStore("counter", {
         localStorage.setItem("access_token", res.data.access_token)
         this.router.push("/")
         this.isAuth = true
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'You have login',
+          showConfirmButton: false,
+          timer: 1500
+        })
         // this.router.push("/")
       } catch (error) {
         console.log(error);
@@ -216,6 +274,13 @@ export const useCounterStore = defineStore("counter", {
       try {
         localStorage.clear()
         this.checkAuth()
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'You have successfully logout',
+          showConfirmButton: false,
+          timer: 1500
+        })
       } catch (error) {
         console.log(error);
       }

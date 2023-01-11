@@ -17,10 +17,28 @@ const routes = [
   {path: '/about', name: 'about', component: About},
   {path: '/login', name: 'login', component: Login},
   {path: '/register', name: 'register', component: Register},
-  {path: '/transactions', name: 'transactions', component: Transactions},
+  {path: '/transactions', name: 'transactions', component: Transactions, beforeEnter:(to, from, next) => {
+    if(localStorage.getItem("access_token")){
+      next()
+    } else {
+      next('/login')
+    }
+  }},
   {path: '/medicine', name: 'medicine', component: Medicine},
-  {path: '/doctors/form/:id', name: 'form', component: Form},
-  {path: '/transactions/form/:id', name: 'formEdit', component: FormEdit},
+  {path: '/doctors/form/:id', name: 'form', component: Form, beforeEnter:(to, from, next) => {
+    if(localStorage.getItem("access_token")){
+      next()
+    } else {
+      next('/login')
+    }
+  }},
+  {path: '/transactions/form/:id', name: 'formEdit', component: FormEdit, beforeEnter:(to, from, next) => {
+    if(localStorage.getItem("access_token")){
+      next()
+    } else {
+      next('/login')
+    }
+  }},
   {path: '/doctors/:id', name: 'detail', component: Detail},
 ]
 

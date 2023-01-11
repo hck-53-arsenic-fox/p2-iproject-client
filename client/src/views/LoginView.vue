@@ -1,6 +1,14 @@
 <script>
+    import { mapActions } from "pinia";
+    import { GoogleLogin } from "vue3-google-login";
+import { useCounterStore } from "../stores/counter";
+    
     export default {
     name: "LoginView",
+    components: { GoogleLogin },
+    methods: {
+        ...mapActions(useCounterStore, ['handleGoogleLogin'])
+    }
     };
 </script>
 
@@ -41,7 +49,9 @@
                 <div class="d-flex justify-content-center mt-3 mb-0">
                   <p>Sign in with Google Account</p>
                 </div>
-
+                <div class="d-flex justify-content-center">
+                    <GoogleLogin :callback="handleGoogleLogin" />
+                  </div>
                 <div class="text-center text-muted mt-3 mb-0">
                   <p style="color: rgb(54, 49, 49)">
                     <b> Create Account Here: </b>

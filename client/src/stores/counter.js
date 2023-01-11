@@ -5,7 +5,7 @@ import axios from 'axios'
 export const useCounterStore = defineStore('counter',  {
     state() {
         return {
-
+            access_token: localStorage.access_token || ''
         }
     },
     actions: {
@@ -20,27 +20,11 @@ export const useCounterStore = defineStore('counter',  {
                 })
               localStorage.setItem('access_token', data.access_token)
               this.access_token = data.access_token
-              Toastify({
-                  text: "Welcome to Uniqli Store",
-                  style: {
-                    background: "linear-gradient(to right, #00aab0, #cdf571)",
-                  },
-      
-                  duration: 2000,
-                }).showToast();
-  
               this.router.push('/')
-              T
+              
               
             } catch (err) {
-              Toastify({
-                  text: `${err.response.data.message}`,
-                  style: {
-                    background: "linear-gradient(to right, #611302, #a62103)",
-                  },
-      
-                  duration: 2000,
-                }).showToast();
+                console.log(err);
             }  
           }
     }

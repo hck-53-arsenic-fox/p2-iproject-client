@@ -4,7 +4,7 @@ import Home from '../views/LandingPage.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import CharDetail from '../views/CharDetail.vue'
-import Account from '../views/Account.vue'
+import SearchAccount from '../views/SearchAccount.vue'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -32,7 +32,7 @@ const router = createRouter({
     {
       path: '/account',
       name: 'account',
-      component: Account
+      component: SearchAccount
     }
   ]
 })

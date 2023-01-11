@@ -9,7 +9,8 @@ export const useGenshinStore = defineStore("Genshin Impact", {
     return {
       token: "",
       charaList: [],
-      chara: {}
+      chara: {},
+      account: {}
     };
   },
 
@@ -111,6 +112,21 @@ export const useGenshinStore = defineStore("Genshin Impact", {
             console.log(err);
         }
     },
+
+    async getAcc(query){
+        console.log(query, '@Store');
+        const {uid} = query
+        console.log(uid, 'uid@store');
+        try {
+            let {data} = await axios({
+                method: 'GET',
+                url: undeployed + '/account?uid=' + uid
+            })
+            this.account = data
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
   },
 });

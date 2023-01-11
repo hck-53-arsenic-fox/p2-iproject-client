@@ -10,7 +10,6 @@ export const useResortStore = defineStore('resort', {
       resort: {},
       mapToken: "pk.eyJ1IjoiZmFsZGkwMTI2IiwiYSI6ImNsY3B0N3UxdzJvbjgzcHA4dW9xdm1pa3gifQ.f_fE0qZ7IPzVnlRm1UEibg",
       isLogin: false,
-
     }
   },
 
@@ -20,7 +19,7 @@ export const useResortStore = defineStore('resort', {
       try {
         let { data } = await axios({
           method: 'POST',
-          url: `${origin}/register`,
+          url: `${origin}/users/register`,
           data: {
             username: username,
             email: email,
@@ -38,7 +37,7 @@ export const useResortStore = defineStore('resort', {
     async handleLogin(email, password) {
       try {
         let { data } = await axios({
-          url: origin + '/login',
+          url: origin + '/users/login',
           method: "POST",
           data: {
             email: email,
@@ -81,6 +80,7 @@ export const useResortStore = defineStore('resort', {
           url: `${origin}/resorts/${id}`,
         })
         this.resort = data
+        console.log(data);
       } catch (error) {
         console.log(error);
       }
@@ -110,9 +110,34 @@ export const useResortStore = defineStore('resort', {
       }
     },
 
+    //? Add a review
+    async addReview(id, review, rating) {
+      console.log(id, review, rating, '<<<<<<<<<');
+      try {
+        let { data } = await axios({
+          method: 'POST',
+          url: `${origin}/resorts/${id}`,
+          data: {
+            review: review,
+            rating: rating
+          },
+          headers: {
+            access_token: localStorage.getItem('access_token')
+          }
+        })
+        this.fetchOneResort(id)
+        this.router.push(`/resorts/${id}`)
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+
+
+    ,
+
     //? Google Login
     async googleLogin(credential) {
-      console.log(credential);
       try {
         let { data } = await axios({
           method: 'POST',
@@ -128,7 +153,6 @@ export const useResortStore = defineStore('resort', {
       } catch (error) {
         console.log(error);
       }
-
     },
 
   }

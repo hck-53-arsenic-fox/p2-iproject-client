@@ -15,6 +15,7 @@ export default {
   methods: {
     ...mapActions(useResortStore, ['handleLogin', 'googleLogin']),
     onClickLogin() {
+      console.log('clicked');
       this.handleLogin(this.email, this.password)
     },
     callback(response) {
@@ -64,10 +65,10 @@ export default {
             </button>
           </div>
 
-          <GoogleLogin class="py-3 px-10 rounded-xl mt-4" :callback="callback" prompt />
 
         </form>
 
+        <GoogleLogin class="py-3 px-10 rounded-xl mt-4" :callback="callback" prompt />
         <!-- middle content -->
         <div class="flex items-center justify-center mt-8 space-y-6 md:flex-row md:space-y-0">
 

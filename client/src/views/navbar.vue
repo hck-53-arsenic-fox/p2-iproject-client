@@ -26,7 +26,7 @@ export default {
 </script>
 
 <template>
-  <section class="">
+  <section class="fixed-top">
     <nav class="relative px-4 py-3 flex items-center bg-[#042A2B]">
 
       <RouterLink to="/resorts" class="flex" href="#">

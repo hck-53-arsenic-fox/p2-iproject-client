@@ -44,23 +44,12 @@ const router = createRouter({
 
 //! Navigation Guard
 router.beforeEach((to, from, next) => {
-  if (to.name === 'login' || to.name === 'register') {
-    if (localStorage.access_token) {
-      next({ name: 'home' })
-    } else {
-      next()
-    }
-  } else if (to.name === 'form') {
-    if (!localStorage.access_token) {
-      next({ name: 'login' })
-    } else {
-      next()
-    }
-  } else {
-    next()
-  }
-})
+  let accToken = localStorage.getItem('access_token')
 
+  if ((to.name === 'form') && !accToken) next({ name: 'login' })
+  else if (((to.name === 'login' || to.name === 'register') && accToken)) next({ name: 'home' })
+  else next()
+})
 //? Twitter Login
 
 

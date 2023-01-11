@@ -40,9 +40,14 @@ export default {
         </div>
 
         <div class="py-3 m-5 p-7">
-          <button class="bg-[#05B384] hover:bg-[#06D6A0] text-white font-bold py-5 px-10 rounded-xl">
+          <RouterLink v-if="isLogin" to="/resorts"
+            class="bg-[#05B384] hover:bg-[#06D6A0] text-white font-bold py-5 px-10 rounded-xl">
             Get Started
-          </button>
+          </RouterLink>
+          <RouterLink v-if="!isLogin" to="/login"
+            class="bg-[#05B384] hover:bg-[#06D6A0] text-white font-bold py-5 px-10 rounded-xl">
+            Get Started
+          </RouterLink>
         </div>
       </div>
 

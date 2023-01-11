@@ -2,7 +2,8 @@
 import { RouterLink, RouterView } from 'vue-router'
 import { useResortStore } from '../stores/resort'
 import { mapState, mapActions } from 'pinia'
-
+import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
 
 export default {
@@ -22,6 +23,7 @@ export default {
 
   },
   computed: {
+    ...mapState(useResortStore, ['mapToken'])
 
   },
   methods: {
@@ -34,6 +36,16 @@ export default {
     },
   },
   created() {
+
+  },
+  mounted() {
+    mapboxgl.accessToken = this.mapToken;
+    const geocoder = new MapboxGeocoder({
+      accessToken: mapboxgl.accessToken,
+    });
+    geocoder.addTo('#geocoder-container');
+
+    // document.getElementById('geocoder').appendChild(geocoder.onAdd());
 
   }
 }
@@ -53,6 +65,8 @@ export default {
       <!-- right side -->
       <div class="p-6 md:p-6">
         <!-- top content -->
+        <!-- <div id='geocoder' class='geocoder'>
+        </div> -->
         <h2 class="mb-3 text-4xl font-bold">Add New Hotel</h2>
         <p class="max-w-sm mb-12 font-light text-grey-600">
           Let's add new hotel!
@@ -61,10 +75,10 @@ export default {
           <input v-model="value.title" type="text"
             class="w-full p-3 mb-3 border border-gray-300 rounded-md placeholder:font-light" placeholder="Name">
 
+
           <input v-model="value.location" type="text"
             class="w-full p-3 mb-3 border border-gray-300 rounded-md placeholder:font-light"
             placeholder="Enter Location">
-
 
           <input v-model="value.price" type="number"
             class="w-full p-3 mb-3 border border-gray-300 rounded-md placeholder:font-light"

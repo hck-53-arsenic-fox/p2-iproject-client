@@ -1,12 +1,15 @@
 <script>
 import { mapActions, mapWritableState } from 'pinia';
+import { useMovieStore } from '../stores/movie';
 import { useUserStore } from '../stores/user';
+
 
 export default{
   computed:{
     ...mapWritableState(useUserStore,['acces_token'])
   },
   methods:{
+    ...mapActions(useMovieStore,['fetchMovies']),
     logout(){
       Swal.fire({
                 title: 'LOGOUT SUCCESS',
@@ -16,7 +19,7 @@ export default{
             })
       localStorage.clear()
       this.acces_token=''
-      this.$router.push('/')
+      this.$router.push('/login')
     }
   },
   created(){
@@ -30,7 +33,7 @@ export default{
     <nav class="navbar navbar-light " style="background-color: black;position: sticky;">
     <div class="container">
       <a class="navbar-brand" href="#">
-        <img src="../assets/images/netflix.png" height="25" alt="Logo" loading="lazy" />
+        <img src="../assets/images/logonav.jpg" height="39" width="150" class="text-center" alt="Logo" loading="lazy" />
       </a>
     </div>
     <div class="d-flex justify-content-center" style="margin-right: 2%;">

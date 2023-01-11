@@ -13,7 +13,8 @@ export const useMovieStore = defineStore('movie',{
             query:{
                 page:1
             },
-            qr:''
+            qr:'',
+            qrtype:''
         }
     },
     actions:{
@@ -53,19 +54,76 @@ export const useMovieStore = defineStore('movie',{
                 })
                 this.movieDetail = data
             } catch (error) {
-                console.log(error);
+                Swal.fire({
+                    title: 'Error!',
+                    text: "Your Status Not Premium",
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                })
             }
         },
         async qrCode(id){
             try {
-                const { data } = await axios({
+                const response  = await axios({
                     method:'POST',
                     url:'http://localhost:3000/genqr/'+id
                 }) 
-                this.qr=data
+                
+                this.qrtype=response.headers['content-type']
+                this.qr=response.data
             } catch (error) {
                 console.log(error);
             }
-        } 
+        },
+        async status(){
+            try {
+                let { data }=await axios({
+                    method:"POST",
+                    url:'http://localhost:3000/movie/genmidtoken',
+                    headers:{
+                        acces_token : localStorage.getItem("acces_token")
+                    }
+                })
+                console.log(data);
+                window.snap.pay(`${data.midtransToken.token}`, {
+                    onSuccess:async (result) =>{
+                      /* You may add your own implementation here */
+                      await this.changeStat()
+                    },
+                    onPending: function(result){
+                      /* You may add your own implementation here */
+                      alert("wating your payment!"); console.log(result);
+                    },
+                    onError: function(result){
+                      /* You may add your own implementation here */
+                      alert("payment failed!"); console.log(result);
+                    },
+                    onClose: function(){
+                      /* You may add your own implementation here */
+                      alert('you closed the popup without finishing the payment');
+                    }
+                  })
+            } catch (error) {
+                Swal.fire({
+                    title: 'Error!',
+                    text: "This account Already Premium",
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                })
+            }
+        }, 
+        async changeStat(){
+            try {
+                const { data }=await axios({
+                    method:'PATCH',
+                    url:'http://localhost:3000/movie/payment',
+                    headers:{
+                        acces_token : localStorage.getItem("acces_token")
+                    }
+                })
+            } catch (error) {
+                console.log(error);
+            }
+        }
     }
 })

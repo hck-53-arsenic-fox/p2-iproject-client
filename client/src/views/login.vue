@@ -22,26 +22,17 @@ export default{
       <nav class="navbar navbar-light " style="background-color: black;position: sticky;">
     <div class="container">
       <a class="navbar-brand" href="#">
-        <img src="../assets/images/netflix.png" height="25" alt="Logo" loading="lazy" />
+        <img src="../assets/images/logonav.jpg" height="39" width="150" alt="Logo" loading="lazy" />
       </a>
-    </div>
-    <div class="d-flex justify-content-center" style="margin-right: 2%;">
-      <RouterLink to="/" class="btn btn-block text-body"><b style="color: red;">Home</b></RouterLink>
     </div>
   </nav>
       <div class="container-fluid h-custom">
         <div class="row d-flex justify-content-center align-items-center h-100">
           <div class="col-md-9 col-lg-6 col-xl-5">
-            <img src="../assets/images/pngegg.png" class="img-fluid" alt="Sample image">
+            <img src="../assets/images/rayflix.jpg" class="img-fluid rounded-circle ray mt-5" alt="Sample image">
           </div>
           <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
             <form @submit.prevent="login(dataLogin)" id="login-form">
-              <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
-                <p class="lead fw-normal mb-0 me-3" style="color: aliceblue;">Sign in with</p>
-              </div>
-              <div class="divider d-flex align-items-center my-4">
-                <p class="text-center fw-bold mx-3 mb-0" style="color: aliceblue;">Or</p>
-              </div>
 
 
               <div class="form-outline mb-4">

@@ -247,3 +247,9 @@ a{
          line-clamp: 2; 
  -webkit-box-orient: vertical;
 }
+
+.ray{
+  width: 100%;
+  height: 65vh;
+  object-fit: cover;
+}

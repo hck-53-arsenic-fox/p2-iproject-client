@@ -19,15 +19,15 @@ export default{
 </script>
 
 <template>
-    <section class="h-100 bg-image" id="register-section"
-     style="background-image: url('https://www.whats-on-netflix.com/wp-content/uploads/2022/07/netflix-library-made-up-of-50-percent-netflix-originals.webp');background-size: 100%;"
+    <section class="h-100 bg-image " id="register-section"
+     style="background-image: url('https://visit.gent.be/sites/default/files/styles/header_mobile/public/media/img/2022-01/VisitReeks133-DT012880.jpg?h=d5fb2885&itok=iNgdMmzJ');background-size: 100%;"
      >
      <div class="mask d-flex align-items-center h-100 gradient-custom-3">
        <div class="container h-100">
          <div class="row d-flex justify-content-center align-items-center h-100">
-           <div class="col-12 col-md-9 col-lg-7 col-xl-6">
-             <div class="card" style="border-radius: 15px;">
-               <div class="card-body p-5">
+           <div class="col-12 col-md-9 col-lg-7 col-xl-6 mt-5">
+             <div class="card mt-5" style="border-radius: 15px;">
+               <div class="card-body p-5 ">
                  <h2 class="text-uppercase text-center mb-5">Create an account</h2>
 
                  <form @submit.prevent="register(dataRegister)">

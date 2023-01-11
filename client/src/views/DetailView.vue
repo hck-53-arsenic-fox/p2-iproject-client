@@ -28,51 +28,60 @@ export default {
 </script>
 <template>
   <div class="container">
+    <div class="row bg-light pt-3 text-center">
+      <h2>{{ product.name }}</h2>
+    </div>
     <div class="row bg-light p-3">
-      <div class="col-6">
-        <h2>{{ product.name }}</h2>
+      <div class="col-7">
         <img
           :src="product.imageUrl"
-          class="img-fluid rounded-start p-1 mt-3"
+          class="img-fluid rounded-start p-1"
           alt="Rocky"
-          style="width: 35vw; object-fit: cover"
+          style="width: 45vw; object-fit: cover"
         />
       </div>
-      <div class="col-6">
+      <div class="col-5">
         <div class="mb-3">
           <label class="form-label">Provinsi</label>
-
-          <select
-            @change="getCity(provinceId)"
-            v-model="provinceId"
-            class="form-select"
-          >
-            <option value="" disabled>Select Province</option>
-            <option
-              v-for="prov in province"
-              :key="prov.province_id"
-              :value="prov.province_id"
-            >
-              {{ prov.province }}
-            </option>
-          </select>
+          <div class="row">
+            <div class="col-7">
+              <select
+                @change="getCity(provinceId)"
+                v-model="provinceId"
+                class="form-select"
+              >
+                <option value="" disabled>Select Province</option>
+                <option
+                  v-for="prov in province"
+                  :key="prov.province_id"
+                  :value="prov.province_id"
+                >
+                  {{ prov.province }}
+                </option>
+              </select>
+            </div>
+          </div>
         </div>
         <div class="mb-3">
           <label class="form-label">City</label>
-          <select
-            @change="getCost(cityId)"
-            v-model="cityId"
-            class="form-select"
-          >
-            <option value="" disabled>Select City</option>
-            <option
-              v-for="cities in city"
-              :key="cities.city_id"
-              :value="cities.city_id"
-            >
-              {{ cities.city_name }}
-            </option>
-          </select>
+          <div class="row">
+            <div class="col-7">
+              <select
+                @change="getCost(cityId)"
+                v-model="cityId"
+                class="form-select"
+              >
+                <option value="" disabled>Select City</option>
+                <option
+                  v-for="cities in city"
+                  :key="cities.city_id"
+                  :value="cities.city_id"
+                >
+                  {{ cities.city_name }}
+                </option>
+              </select>
+            </div>
+          </div>
         </div>
         <div class="mb-3" v-if="cost.rajaongkir">
           <h3>Dari</h3>

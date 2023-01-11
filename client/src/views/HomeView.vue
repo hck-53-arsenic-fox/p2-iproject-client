@@ -10,8 +10,11 @@ export default {
 
 <template>
 
-    <h1>
-        dari home view
-    </h1>
+    <div class="container">
+        <h1>afsfasd</h1>
+        <h1>afsfasd</h1>
+        <h1>afsfasd</h1>
+        <h1>afsfasd</h1>
+    </div>
 
 </template>

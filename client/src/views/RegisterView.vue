@@ -1,6 +1,7 @@
 <script>
 import { useAppStore } from "@/stores/app";
 import { mapState, mapActions } from "pinia";
+import Swal from "sweetalert2";
 
 export default {
   data() {
@@ -10,15 +11,54 @@ export default {
       password: "",
     };
   },
-  components: {},
   methods: {
-    ...mapActions(useAppStore, ["handleRegister"]),
+    ...mapActions(useAppStore, ["handleRegister", "handleFacebookLogin"]),
 
     handleFormSubmit() {
       this.handleRegister({ email: this.email, password: this.password });
     },
   },
   computed: {},
+  mounted() {
+    window.fbInit = function () {
+      FB.init({
+        appId: "2984034805226590",
+        cookie: true,
+        xfbml: true,
+        version: "v15.0",
+      });
+
+      FB.AppEvents.logPageView();
+
+      window.FB.Event.subscribe("auth.statusChange", (response) => {
+        if (response.status === "connected") {
+          const accessTokenFromFacebook = response.authResponse.accessToken;
+          fetch(`${import.meta.env.VITE_ORIGIN_URL}/users/facebooklogin`, {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${accessTokenFromFacebook}`,
+            },
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              Swal.fire(
+                "Success",
+                `Successfully logged-in using facebook account!`,
+                "success"
+              );
+              localStorage.setItem("access_token", data.accessToken);
+              setTimeout(() => {
+                window.location.href = "/home";
+              }, 3000);
+            })
+            .catch((error) => {
+              Swal.fire("Error", error.message, "error");
+            });
+        }
+      });
+    };
+    window.fbInit();
+  },
 };
 </script>
 
@@ -57,6 +97,15 @@ export default {
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
       <div class="row"><span class="text-center">or</span></div>
+      <div
+        class="fb-login-button"
+        data-width=""
+        data-size="large"
+        data-button-type="login_with"
+        data-layout="default"
+        data-auto-logout-link="false"
+        data-use-continue-as="false"
+      ></div>
     </form>
   </div>
 </template>

@@ -2,14 +2,6 @@ import { defineStore } from "pinia";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-const handleError = (error) => {
-  Swal.fire({
-    icon: "error",
-    title: "Backend server returned an error",
-    text: error?.response?.data?.message || error.message,
-  });
-};
-
 export const useAppStore = defineStore("app", {
   state: () => ({
     isLoggedIn: false,
@@ -24,6 +16,14 @@ export const useAppStore = defineStore("app", {
       if (this.isLoggedIn) {
         this.getAllTransactions();
       }
+    },
+
+    handlneError(error) {
+      Swal.fire({
+        icon: "error",
+        title: "Backend server returned an error",
+        text: error?.response?.data?.message || error.message,
+      });
     },
 
     handleSuccessfulLogin(responseFromBackend) {
@@ -60,7 +60,7 @@ export const useAppStore = defineStore("app", {
             "Successfully registered a new user!",
         });
       } catch (error) {
-        handleError(error);
+        this.handleError(error);
       }
     },
 
@@ -80,7 +80,7 @@ export const useAppStore = defineStore("app", {
 
         this.handleSuccessfulLogin(result.data);
       } catch (error) {
-        handleError(error);
+        this.handleError(error);
       }
     },
 
@@ -100,7 +100,7 @@ export const useAppStore = defineStore("app", {
           }
         });
       } catch (error) {
-        handleError(error);
+        this.handleError(error);
       }
     },
 
@@ -124,7 +124,7 @@ export const useAppStore = defineStore("app", {
 
         return result.data;
       } catch (error) {
-        handleError(error);
+        this.handleError(error);
       }
     },
 
@@ -148,13 +148,12 @@ export const useAppStore = defineStore("app", {
 
         return result.data;
       } catch (error) {
-        handleError(error);
+        this.handleError(error);
       }
     },
 
     async fixerioConvertCurrency(from, to, amount) {
       try {
-        console.log(from, to, amount);
         const result = await axios({
           method: "GET",
           url: `https://api.freecurrencyapi.com/v1/latest?apikey=${
@@ -177,7 +176,7 @@ export const useAppStore = defineStore("app", {
         // also save in pinia's global state
         return (this.conversionResult = result.data.data["USD"] * amount);
       } catch (error) {
-        handleError(error);
+        this.handleError(error);
       }
     },
   },

@@ -1,23 +1,92 @@
 <script>
 import { useAppStore } from "@/stores/app";
 import { mapState, mapActions } from "pinia";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 export default {
   data() {
     return {
+      isFBReady: false,
       email: "",
       password: "",
     };
   },
   components: {},
   methods: {
-    ...mapActions(useAppStore, ["handleLogin"]),
+    ...mapActions(useAppStore, [
+      "handleLogin",
+      "handleError",
+      "handleSuccessfulLogin",
+    ]),
+
+    async handleFacebookLogin(accessTokenFromFacebook) {
+      try {
+        const result = await axios({
+          method: "POST",
+          url: `${
+            import.meta.env.VITE_ORIGIN_URL
+          }/users/facebook/callback?access_token=${accessTokenFromFacebook}}`,
+          headers: {
+            Authorization: `Bearer ${accessTokenFromFacebook}}`,
+          },
+        });
+
+        if (!result?.data) {
+          throw new Error("Frontend error: somehow unable to get result.data");
+        }
+
+        this.handleSuccessfulLogin(result.data);
+      } catch (error) {
+        this.handleError(error);
+      }
+    },
 
     handleFormSubmit() {
       this.handleLogin({ email: this.email, password: this.password });
     },
   },
   computed: {},
+  mounted() {
+    window.fbInit = function () {
+      FB.init({
+        appId: "2984034805226590",
+        cookie: true,
+        xfbml: true,
+        version: "v15.0",
+      });
+
+      FB.AppEvents.logPageView();
+
+      window.FB.Event.subscribe("auth.statusChange", (response) => {
+        if (response.status === "connected") {
+          const accessTokenFromFacebook = response.authResponse.accessToken;
+          fetch(`${import.meta.env.VITE_ORIGIN_URL}/users/facebooklogin`, {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${accessTokenFromFacebook}`,
+            },
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              Swal.fire(
+                "Success",
+                `Successfully logged-in using facebook account!`,
+                "success"
+              );
+              localStorage.setItem("access_token", data.accessToken);
+              setTimeout(() => {
+                window.location.href = "/home";
+              }, 3000);
+            })
+            .catch((error) => {
+              Swal.fire("Error", error.message, "error");
+            });
+        }
+      });
+    };
+    window.fbInit();
+  },
 };
 </script>
 
@@ -46,6 +115,16 @@ export default {
         />
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
+      <div class="row py-4"><span class="text-center">or</span></div>
+      <div
+        class="fb-login-button"
+        data-width=""
+        data-size="large"
+        data-button-type="login_with"
+        data-layout="default"
+        data-auto-logout-link="false"
+        data-use-continue-as="false"
+      ></div>
     </form>
   </div>
 </template>

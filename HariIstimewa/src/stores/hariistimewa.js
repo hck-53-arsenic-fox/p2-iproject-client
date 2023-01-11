@@ -63,14 +63,16 @@ export const useHawaStore = defineStore("hawa", {
           this.access_token = result.data.access_token;
           this.login.email = result.data.email;
           this.login.password = "";
-          this.router.push('/')
+
+          this.router.push('/register')
         })
         .catch((err) => {
-          swal.fire({
-            title: `${err.response.data.message}`,
-            icon: "error",
-            confirmButtonColor: "#fa98d0",
-          });
+          console.log(err);
+          // swal.fire({
+          //   title: `${err.response.data.message}`,
+          //   icon: "error",
+          //   confirmButtonColor: "#fa98d0",
+          // });
         });
     },
 

@@ -17,9 +17,9 @@
             ...mapActions(useGenshinStore, ['getAcc']), 
         },
 
-        created(){
-            this.getAcc(this.$route.query)
-        },
+        // created(){
+        //     this.getAcc(this.$route.query)
+        // },
 
         watch: {
             '$route.query': {

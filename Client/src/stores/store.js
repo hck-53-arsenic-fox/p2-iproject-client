@@ -139,11 +139,17 @@ export const useGenshinStore = defineStore("Genshin Impact", {
         try {
             let {data} = await axios({
                 method: 'GET',
-                url: undeployed + '/account?uid=' + uid
+                url: undeployed + '/account?uid=' + uid,
+                headers: {access_token: localStorage.getItem('access_token')}
             })
             this.account = data
         } catch (err) {
-            console.log(err);
+          let showErr = err.response.data.message;
+          Swal.fire({
+            icon: "error",
+            title: "An Error has Occurred",
+            text: showErr,
+          });
         }
     }
 

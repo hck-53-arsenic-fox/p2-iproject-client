@@ -26,13 +26,13 @@ export default{
                     <li><RouterLink to="/">Home</RouterLink></li>
                     <li><RouterLink to="/doctors">Our Doctors</RouterLink></li>
                     <li><RouterLink to="/about">About Us</RouterLink></li>
-                    <li><RouterLink to="/medicine">Medicine</RouterLink></li>
                 </ul>
-        
+                
                 <div class="header-icons">
                     <a v-if="isAuth" @click.prevent="handleLogout"><i class='bx bxs-door-open' ></i></a>
                     <RouterLink v-if="!isAuth" to="/login"><i class='bx bxs-user'></i></RouterLink>
                     <RouterLink to="/transactions"><i class='bx bx-basket' ></i></RouterLink>
+                    <li><RouterLink to="/medicine"><i class='bx bxs-capsule'></i></RouterLink></li>
                 </div>
             </header>
             </div>

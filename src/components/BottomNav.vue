@@ -22,8 +22,10 @@
       </router-link>
     </div>
 
-    <div class="m-auto text-xl">
-      <i class="fa-solid fa-chart-simple"></i>
+    <div class="m-auto text-[1.3rem]">
+      <router-link :to="{ name: 'About' }">
+        <i class="fa-solid fa-circle-info"></i>
+      </router-link>
     </div>
   </div>
 </template>

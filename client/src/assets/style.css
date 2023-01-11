@@ -1,0 +1,234 @@
+.navbar {
+    height: 50px;
+    position: fixed;
+      top: 0;
+  }
+  
+  .navbar-brand {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  .row{
+    margin-left: 15%;
+  }
+      .box {
+        display: block;
+        width: 288px;
+        height: 288px;
+        transition: width 1s, height 1s, background-color 1s, transform 1s;
+      }
+      
+      .box:hover {
+        width: 288px;
+        height: 288px;
+      }
+    
+      .test {
+        width: 100px;
+        height: 100px;
+        background-color: white;
+        position: relative;
+        animation: myfirst 5s linear 0s infinite alternate;
+      }
+      
+      @keyframes myfirst {
+        0%   {background-color:white; left:0px; top:0px;}
+        25%  {background-color:white; left:450px; top:0px;}
+        50%  {background-color:white; left:450px; top:0px;}
+        75%  {background-color:white; left:0px; top:0px;}
+        100% {background-color:white; left:0px; top:0px;}
+      }
+  
+  
+  
+      .sidebar {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%), 0 2px 10px 0 rgb(0 0 0 / 5%);
+        width: 240px;
+        z-index: 600;
+      }
+      
+      @media (max-width: 991.98px) {
+        .sidebar {
+          width: 100%;
+        }
+      }
+      .sidebar .active {
+        border-radius: 5px;
+        box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+      }
+      
+      .sidebar-sticky {
+        position: relative;
+        top: 0;
+        height: calc(100vh - 48px);
+        padding-top: 0.5rem;
+        overflow-x: hidden;
+        overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+      }
+  
+  
+      /* paggiing*/
+  
+     
+  
+      :root {
+        --gradient: linear-gradient(to left top, #DD2476 10%, #FF512F 90%) !important;
+      }
+      
+      body {
+        background: #111 !important;
+      }
+      
+      .card {
+        background: #222;
+        border: 1px solid #dd2476;
+        color: rgba(250, 250, 250, 0.8);
+        margin-bottom: 2rem;
+      }
+      
+      .btns {
+        border: 5px solid;
+        border-image-slice: 1;
+        background: var(--gradient) !important;
+        -webkit-background-clip: text !important;
+        -webkit-text-fill-color: transparent !important;
+        border-image-source:  var(--gradient) !important; 
+        text-decoration: none;
+        transition: all .4s ease;
+      }
+      
+      .btns:hover, .btns:focus {
+            background: var(--gradient) !important;
+        -webkit-background-clip: none !important;
+        -webkit-text-fill-color: #fff !important;
+        border: 5px solid #fff !important; 
+        box-shadow: #222 1px 0 10px;
+        text-decoration: underline;
+      }
+ 
+        a:hover,
+  a:focus {
+    background-color: #333;
+    color: #fff;
+  }
+  .box {
+    display: block;
+    width: 150px;
+    height: 150px;
+    transition: width 1s, height 1s, background-color 1s, transform 1s;
+  }
+  
+  .box:hover {
+    width: 286px;
+    height: 250px;
+  }
+
+  .boxx {
+    display: block;
+    width: 50px;
+    height:   50px;
+    transition: width 1s, height 1s, background-color 1s, transform 1s;
+  }
+  
+  .boxx:hover {
+    width: 80px;
+    height: 80px;
+  }
+  .test {
+    width: 100px;
+    height: 100px;
+    background-color: white;
+    position: relative;
+    animation: myfirst 5s linear 0s infinite alternate;
+  }
+  
+  @keyframes myfirst {
+    0%   {background-color:white; left:0px; top:0px;}
+    25%  {background-color:white; left:450px; top:0px;}
+    50%  {background-color:white; left:450px; top:0px;}
+    75%  {background-color:white; left:0px; top:0px;}
+    100% {background-color:white; left:0px; top:0px;}
+  }
+
+  button {
+    border: 0;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    font: inherit;
+    margin: 0;
+    outline: 0;
+    padding: 12px 20px;
+    transition: all .1s linear;
+  }
+  button:active {
+    transform: translateY(3px);
+  }
+
+
+  @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Fira+Mono:wght@500&display=swap');
+.not{
+    height: 95vh;
+    background: #000000;
+    text-align: center;
+    color: #E0E0E0;
+    font-family: 'Fira Mono', monospace;
+}
+
+div{
+    transform-style: preserve-3d;
+}
+svg{
+    width: clamp(300px , 70% , 600px);
+    height: 500px;
+  
+}
+#rocket{
+    
+    transform: translateY(750px);
+   
+    animation: launch 2s ease-out forwards;
+}
+
+@keyframes launch {
+    from {
+        transform: translateY(750px);
+    }
+    to{
+        perspective: 500px;
+        transform: translateY(0px); 
+    }
+}
+#stars {
+    animation: twinkling 2s linear ;
+}
+@keyframes twinkling {
+
+    from{
+        transform: scale(0);
+    }
+    to{
+        transform: scale(1);
+    }
+}
+.text{
+    opacity: 0;
+    animation:appear 1s ease-in forwards;
+    animation-delay: 1.8s;
+}
+@keyframes appear {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+a{
+    color:#F66947;
+    text-decoration: none;
+}

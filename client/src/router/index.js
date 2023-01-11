@@ -17,7 +17,39 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
       component: () => import("../views/AboutView.vue"),
     },
+    {
+      path: "/login",
+      name: "login",
+      component: () => import("../views/Login.vue"),
+    },
+    {
+      path: "/register",
+      name: "register",
+      component: () => import("../views/Register.vue"),
+    },
   ],
+});
+
+router.beforeEach((to, from, next) => {
+  const access_token = localStorage.getItem("access_token");
+
+  if (to.name === "home") {
+    if (access_token) {
+      next();
+    } else {
+      next({ name: "login" });
+    }
+  } else {
+    next();
+  }
+
+  if (to.name === "login" && to.name === "register") {
+    if (!access_token) {
+      next();
+    } else {
+      next({ name: "home" });
+    }
+  }
 });
 
 export default router;

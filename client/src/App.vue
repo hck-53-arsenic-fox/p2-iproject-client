@@ -9,5 +9,7 @@ export default {
 
 <template>
   <!-- <Navbar /> -->
-  <RouterView />
+  <div class="container">
+    <RouterView />
+  </div>
 </template>

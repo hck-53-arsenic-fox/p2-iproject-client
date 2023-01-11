@@ -1,6 +1,18 @@
 <script>
+import { mapActions, mapState } from 'pinia';
+import { usePlayerStore } from '../stores/player';
+
 export default {
-    name: 'NavbarTwo'
+    name: 'NavbarTwo',
+    methods: {
+        ...mapActions(usePlayerStore, ['fetchUserProfile'])
+    },
+    computed: {
+        ...mapState(usePlayerStore, ['userProfile'])
+    },
+    created() {
+        this.fetchUserProfile()
+    }
 }
 </script>
 
@@ -15,10 +27,10 @@ export default {
                         <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
                             <li><RouterLink to="/" class="nav-link">Home</RouterLink></li>
                             <li><RouterLink to="/players" class="nav-link">Players</RouterLink></li>
-                            <li><RouterLink to="/players/following" class="nav-link">Following</RouterLink></li>
-                            <li><a href="#trainer-section" class="nav-link">Trainer</a></li>
+                            <li><a @click.prevent="$router.push('/users/' + userProfile.username + '/following')" class="nav-link" style="cursor: pointer;">Following</a></li>
+                            <li><a @click.prevent="$router.push('/users/' + userProfile.username)" class="nav-link" style="cursor: pointer;">My Profile</a></li>
                             <li><RouterLink to="/login" class="nav-link">Login</RouterLink></li>
-                            <li><a @click.prevent="logout" class="nav-link">Logout</a></li>
+                            <li><a @click.prevent="logout" class="nav-link" >Logout</a></li>
                         </ul>
                     </nav>
                     <a href="#" class="d-inline-block d-lg-none site-menu-toggle js-menu-toggle float-right"><span

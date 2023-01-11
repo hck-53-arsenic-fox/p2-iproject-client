@@ -36,6 +36,13 @@ export default {
             aria-current="page"
             >Categories</RouterLink
           >
+          <RouterLink
+            v-if="isLogin"
+            to="/order"
+            class="nav-link active"
+            aria-current="page"
+            >Order</RouterLink
+          >
         </div>
       </div>
       <div class="d-flex collapse" id="navbarNavAltMarkup">

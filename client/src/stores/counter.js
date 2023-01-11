@@ -12,6 +12,7 @@ export const useCounterStore = defineStore("counter", {
       province: [],
       city: [],
       cost: {},
+      order: [],
     };
   },
   actions: {
@@ -203,6 +204,21 @@ export const useCounterStore = defineStore("counter", {
             alert("you closed the popup without finishing the payment");
           },
         });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    async getOrder() {
+      try {
+        const { data } = await axios({
+          method: "get",
+          url: baseUrl + "/order",
+          headers: {
+            access_token: localStorage.access_token,
+          },
+        });
+        this.order = data;
       } catch (error) {
         console.log(error);
       }

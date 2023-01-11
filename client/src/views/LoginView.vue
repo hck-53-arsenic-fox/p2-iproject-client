@@ -1,15 +1,15 @@
 <script>
-    import { mapActions } from "pinia";
-    import { GoogleLogin } from "vue3-google-login";
+import { mapActions } from "pinia";
+import { GoogleLogin } from "vue3-google-login";
 import { useCounterStore } from "../stores/counter";
-    
-    export default {
-    name: "LoginView",
-    components: { GoogleLogin },
-    methods: {
-        ...mapActions(useCounterStore, ['handleGoogleLogin'])
-    }
-    };
+
+export default {
+  name: "LoginView",
+  components: { GoogleLogin },
+  methods: {
+    ...mapActions(useCounterStore, ["handleGoogleLogin"]),
+  },
+};
 </script>
 
 <template>
@@ -37,37 +37,15 @@ import { useCounterStore } from "../stores/counter";
                   class="text-uppercase text-center mb-5"
                   style="color: #c7110d"
                 >
-                  <img
-                    src="../assets/neko.svg"
-                    alt="logo"
-                    height=" 80"
-                  />
+                  <img src="../assets/neko.svg" alt="logo" height=" 80" />
                   <b>Uniqli Store</b>
                 </h1>
-
 
                 <div class="d-flex justify-content-center mt-3 mb-0">
                   <p>Sign in with Google Account</p>
                 </div>
                 <div class="d-flex justify-content-center">
-                    <GoogleLogin :callback="handleGoogleLogin" />
-                  </div>
-                <div class="text-center text-muted mt-3 mb-0">
-                  <p style="color: rgb(54, 49, 49)">
-                    <b> Create Account Here: </b>
-                    <a
-                      href=""
-                      class="fw-bold text-body"
-                      id="login-direct"
-                      @click.prevent="this.$router.push('/register')"
-                      ><u
-                        class="bi bi-person-plus-fill"
-                        style="color: rgb(54, 49, 49)"
-                      >
-                        Sign Up</u
-                      ></a
-                    >
-                  </p>
+                  <GoogleLogin :callback="handleGoogleLogin" />
                 </div>
               </div>
             </div>

@@ -19,7 +19,8 @@ export default {
 
 <template>
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg fixed-top bg-light navbar-light">
+  <section class="sticky-top" >
+    <nav class="navbar navbar-expand-lg fixed-top bg-light navbar-light">
     <div class="container">
       <RouterLink class="navbar-brand" :to="{ path: '/', query: {} }" @click.prevent="fetchHome"
         ><img
@@ -76,5 +77,7 @@ export default {
       </div>
     </div>
   </nav>
+  </section>
+
   <!-- Navbar -->
 </template>

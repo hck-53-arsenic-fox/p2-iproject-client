@@ -1,11 +1,11 @@
 <script>
 import { mapActions } from 'pinia';
 import { useCounterStore } from '../stores/counter';
-import facebookLogin from 'facebook-login-vuejs';
+import {GoogleLogin} from 'vue3-google-login'
 
     export default{
         components: {
-            facebookLogin
+            GoogleLogin
         },
         data(){
             return{
@@ -16,28 +16,13 @@ import facebookLogin from 'facebook-login-vuejs';
             }
         },
         methods: {
-            ...mapActions(useCounterStore, ['handleFormLogin']),
-            // getUserData(){
-            //     this.FB.api('/me', 'get', {fields: 'id, name, email'},
-            //     userInformation => {
-            //         console.log(userInformation);
-            //         this.personID = userInformation.id
-            //         this.email = userInformation.email
-            //         this.name = userInformation.name
-            //     })
-            // },
-            // sdkLoaded(payload){
-            //     this.isConnected = payload.isConnected
-            //     this.FB = payload.FB
-            //     if (this.isConnected) this.getUserData()
-            // },
-            // onLogin(){
-            //     this.isConnected = true
-            //     this.getUserData()
-            // },
-            // onLogout(){
-            //     this.isConnected = false
-            // }
+            ...mapActions(useCounterStore, ['handleFormLogin', 'handleGoogleLogin']),
+            callback(response){
+                this.googleLogin(response.credential)
+            },
+            googleLogin(token){
+                this.handleGoogleLogin( token )
+            }
         }
     }
 </script>
@@ -69,6 +54,9 @@ import facebookLogin from 'facebook-login-vuejs';
               </button>
               <div class="text-center">
                   <i class="text-[13px] font-semibold">OR</i>
+              </div>
+              <div class="mt-[10px] w-[80%] mx-auto relative h-[38px] rounded-lg text-white text-lg font-bold text-center w-full">
+                <GoogleLogin :callback="callback"/>
               </div>
               <div class="mt-[20px] w-full relative h-[50px] flex justify-center items-center rounded ">
                   <span class="text-[15px]">Don't have an account? <a class="text-blue-900 hover:underline hover:underline-offset-3 " href="" >Register Now</a></span>

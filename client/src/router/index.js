@@ -37,25 +37,11 @@ const router = createRouter({
       path: '/forgot',
       name: 'forgot',
       component: forgot,
-      beforeEnter: (to, from, next)=> {
-        if (localStorage.getItem('token')) {
-          next()
-        } else {
-          next('/login')
-        }
-      }
     },
     {
       path: '/resetpassword/:token',
       name: 'reset',
-      component: ResetPassword,
-      beforeEnter: (to, from, next)=> {
-        if (localStorage.getItem('token')) {
-          next()
-        } else {
-          next('/login')
-        }
-      }
+      component: ResetPassword
     },
     {
       path: '/histories',
@@ -81,14 +67,6 @@ const router = createRouter({
         }
       }
     },
-    // {
-    //   path: '/about',
-    //   name: 'about',
-    //   // route level code-splitting
-    //   // this generates a separate chunk (About.[hash].js) for this route
-    //   // which is lazy-loaded when the route is visited.
-    //   component: () => import('../views/AboutView.vue')
-    // }
   ]
 })
 

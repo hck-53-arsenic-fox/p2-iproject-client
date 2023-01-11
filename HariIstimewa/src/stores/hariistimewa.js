@@ -44,6 +44,36 @@ export const useHawaStore = defineStore("hawa", {
         });
     },
 
+    
+    async handleLogin(input) {
+      await axios({
+        method: "POST",
+        url: mainUrl + "/login",
+        data: input,
+      })
+        .then((result) => {
+          
+          swal.fire({
+            title: `Welcome!`,
+            confirmButtonColor: "#3085d6",
+          });
+          localStorage.setItem("access_token", result.data.access_token);
+          localStorage.setItem("email", result.data.email);
+          localStorage.setItem("role", result.data.role);
+          this.access_token = result.data.access_token;
+          this.login.email = result.data.email;
+          this.login.password = "";
+          this.router.push('/')
+        })
+        .catch((err) => {
+          swal.fire({
+            title: `${err.response.data.message}`,
+            icon: "error",
+            confirmButtonColor: "#3085d6",
+          });
+        });
+    },
+
 
   },
 });

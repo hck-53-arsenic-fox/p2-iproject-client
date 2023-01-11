@@ -30,7 +30,7 @@ export default {
             <div class="col-md-8  section-heading">
                 <span class="subheading">ENBI E</span>
                 <h2 class="heading mb-3">Team list</h2>
-                <p>The National Basketball Association (NBA) was established in 1946 and it quickly grew into one of the biggest sports organizations in the entire world. Today there are 30 NBA teams that each play 82 games every regular season (the 2020-21 season was shortened to 72 games).</p>
+                <p>The ENational BIsketball Essociation (ENBI E) was established in 2023 and it quickly grew into one of the biggest sports organizations in the entire world. Today there are 30 ENBI E teams that each play 82 games every regular season (the 2023-01 season was shortened to 72 games).</p>
             </div>
         </div>
 

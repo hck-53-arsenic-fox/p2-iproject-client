@@ -38,17 +38,17 @@ export default {
                             </div>
                         </div>
                     </div>
-
+                    
                     <!-- <div class="d-flex justify-content"> -->
-                        <h5 style="color: white;">{{ onePlayer.teamName }} | {{ onePlayer.teamShort }}</h5>
-                    <!-- </div> -->
-
+                        <!-- </div> -->
+                        
+                    </div>
                 </div>
-            </div>
-
-            <div class="row">
-                <div class="col">
-                    <h3 class="card-info-code ml-4 mt-1">Country: {{ onePlayer.country }}</h3>
+                
+                <div class="row">
+                    <div class="col">
+                        <h3 class="card-info-code ml-4 mt-1">Country: {{ onePlayer.country }}</h3>
+                        <h5 style="color: white;" class="ml-4 mt-3">{{ onePlayer.teamName }} | {{ onePlayer.teamShort }}</h5>
                     <div class="mt-5 ml-4">
                         <dl class="data-list">
                             <div class="data-list-row">
@@ -314,7 +314,7 @@ main {
 
 dt {
     line-height: 19px;
-    color: #787878;
+    color: #e6dada;
 }
 
 dd {

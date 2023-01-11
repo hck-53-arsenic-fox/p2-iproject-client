@@ -4,17 +4,24 @@ import Carousel from '../components/Carousel.vue';
 import { usePlayerStore } from '../stores/player';
 
 export default {
-    name: "HomePage",
-    components: { Carousel },
-    methods: {
-      ...mapActions(usePlayerStore, ['fetchPlayers'])
-    },
-    computed: {
-      ...mapState(usePlayerStore, ['players'])
-    },
-    created() {
-      this.fetchPlayers()
+  name: "HomePage",
+  components: { Carousel, Carousel },
+  methods: {
+    ...mapActions(usePlayerStore, ['fetchPlayers']),
+  },
+  computed: {
+    ...mapState(usePlayerStore, ['players'])
+  },
+  created() {
+    this.fetchPlayers()
+  },
+  data() {
+    return {
+      rawHtml: `<a id="bgndVideo" class="player"
+      data-property="{videoURL:'https://www.youtube.com/watch?v=EOQTo3GsJeY',showYTLogo:false, showAnnotations: false, showControls: false, cc_load_policy: false, containment:'#home-section',autoPlay:true, mute:true, startAt:22, stopAt: 40, opacity:1}">
+    </a>`
     }
+  }
 }
 </script>
 
@@ -30,11 +37,28 @@ export default {
       <div class="site-mobile-menu-body"></div>
     </div>
 
-    
-    
-    <a id="bgndVideo" class="player"
+
+    <!-- <div>
+      <span v-html="rawHtml"></span>
+    </div> -->
+
+    <!-- <div id="bgndVideo" class="player">
+      <video autoplay muted loop>
+        <source src="../assets/rain.mp4" type="video/mp4" >
+        Your browser does not support HTML5 video.
+      </video>
+    </div> -->
+
+
+    <!-- <a id="bgndVideo" class="player"
       data-property="{videoURL:'https://www.youtube.com/watch?v=EOQTo3GsJeY',showYTLogo:false, showAnnotations: false, showControls: false, cc_load_policy: false, containment:'#home-section',autoPlay:true, mute:true, startAt:22, stopAt: 40, opacity:1}">
-    </a>
+    </a> -->
+
+
+
+    <!-- <a class="player">
+      <img src="../../public/images/bg_4.jpg" alt="">
+    </a> -->
 
     <div class="intro-section" id="home-section" style="background-color: #ccc;">
       <div class="container">
@@ -85,83 +109,13 @@ export default {
 
         <!-- Slider -->
         <div class="owl-carousel nonloop-block-14 block-14" data-aos="fade">
-          <div class="slide">
-            <div class="ftco-feature-1">
-              <span class="icon flaticon-fit"></span>
-              <div class="ftco-feature-1-text">
-                <h2>Be Fit</h2>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live
-                  the blind texts.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="slide">
-            <div class="ftco-feature-1">
-              <span class="icon flaticon-gym-1"></span>
-              <div class="ftco-feature-1-text">
-                <h2>Join Club</h2>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live
-                  the blind
-                  texts.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="slide">
-            <div class="ftco-feature-1">
-              <span class="icon flaticon-gym"></span>
-              <div class="ftco-feature-1-text">
-                <h2>Gym Fitness</h2>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live
-                  the blind
-                  texts.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="slide">
-            <div class="ftco-feature-1">
-              <span class="icon flaticon-vegetables"></span>
-              <div class="ftco-feature-1-text">
-                <h2>Eat Vegie</h2>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live
-                  the blind
-                  texts.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="slide">
-            <div class="ftco-feature-1">
-              <span class="icon flaticon-fruit-juice"></span>
-              <div class="ftco-feature-1-text">
-                <h2>Fruit Juices</h2>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live
-                  the blind
-                  texts.</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="slide">
-            <div class="ftco-feature-1">
-              <span class="icon flaticon-stationary-bike"></span>
-              <div class="ftco-feature-1-text">
-                <h2>Body Warmup</h2>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live
-                  the blind
-                  texts.</p>
-              </div>
-            </div>
-          </div>
+          <!-- <Carousel /> -->
 
         </div>
-
       </div>
     </div>
 
-    <div class="bgimg" style="background-image: url('images/bg_2.jpg');" data-stellar-background-ratio="0.5">
+    <!-- <div class="bgimg" style="background-image: url('images/bg_2.jpg');" data-stellar-background-ratio="0.5">
 
       <div class="container">
         <div class="row align-items-center justify-content-center text-center">
@@ -199,9 +153,9 @@ export default {
                 <span>By Justin Daniel</span>,
                 <span>30 minutes</span>
               </div>
-            </div>
+            </div> -->
 
-            <!-- <div class="class-item d-flex align-items-center">
+    <!-- <div class="class-item d-flex align-items-center">
               <a href="single.html" class="class-item-thumbnail">
                 <img src="images/img_2.jpg" alt="Free website template by Free-Template.co">
               </a>
@@ -213,7 +167,7 @@ export default {
               </div>
             </div> -->
 
-            <!-- <div class="class-item d-flex align-items-center">
+    <!-- <div class="class-item d-flex align-items-center">
               <a href="single.html" class="class-item-thumbnail">
                 <img src="images/img_3.jpg" alt="Free website template by Free-Template.co">
               </a>
@@ -225,7 +179,7 @@ export default {
               </div>
             </div> -->
 
-            <!-- <div class="class-item d-flex align-items-center">
+    <!-- <div class="class-item d-flex align-items-center">
               <a href="single.html" class="class-item-thumbnail">
                 <img src="images/img_4.jpg" alt="Free website template by Free-Template.co">
               </a>
@@ -237,7 +191,7 @@ export default {
               </div>
             </div> -->
 
-            <!-- <div class="class-item d-flex align-items-center">
+    <!-- <div class="class-item d-flex align-items-center">
               <a href="single.html" class="class-item-thumbnail">
                 <img src="images/img_1.jpg" alt="Free website template by Free-Template.co">
               </a>
@@ -250,8 +204,8 @@ export default {
             </div> -->
 
 
-          </div>
-          <!-- <div class="col-lg-6">
+  </div>
+  <!-- <div class="col-lg-6">
             <div class="class-item d-flex align-items-center">
               <a href="single.html" class="class-item-thumbnail">
                 <img src="images/img_1.jpg" alt="Free website template by Free-Template.co">
@@ -264,7 +218,7 @@ export default {
               </div>
             </div> -->
 
-            <!-- <div class="class-item d-flex align-items-center">
+  <!-- <div class="class-item d-flex align-items-center">
               <a href="single.html" class="class-item-thumbnail">
                 <img src="images/img_2.jpg" alt="Free website template by Free-Template.co">
               </a>
@@ -276,7 +230,7 @@ export default {
               </div>
             </div> -->
 
-            <!-- <div class="class-item d-flex align-items-center">
+  <!-- <div class="class-item d-flex align-items-center">
               <a href="single.html" class="class-item-thumbnail">
                 <img src="images/img_3.jpg" alt="Free website template by Free-Template.co">
               </a>
@@ -288,7 +242,7 @@ export default {
               </div>
             </div> -->
 
-            <!-- <div class="class-item d-flex align-items-center">
+  <!-- <div class="class-item d-flex align-items-center">
               <a href="single.html" class="class-item-thumbnail">
                 <img src="images/img_4.jpg" alt="Free website template by Free-Template.co">
               </a>
@@ -300,7 +254,7 @@ export default {
               </div>
             </div> -->
 
-            <!-- <div class="class-item d-flex align-items-center">
+  <!-- <div class="class-item d-flex align-items-center">
               <a href="single.html" class="class-item-thumbnail">
                 <img src="images/img_1.jpg" alt="Free website template by Free-Template.co">
               </a>
@@ -311,12 +265,12 @@ export default {
                 <span>30 minutes</span>
               </div>
             </div> -->
-          </div>
+  <!-- </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
-    <div class="bgimg" style="background-image: url('images/bg_3.jpg');" data-stellar-background-ratio="0.5">
+  <!-- <div class="bgimg" style="background-image: url('images/bg_3.jpg');" data-stellar-background-ratio="0.5">
       <div class="container">
         <div class="row align-items-center justify-content-center text-center">
           <div class="col-md-7">
@@ -1306,12 +1260,12 @@ export default {
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
 
 
 
-    <!-- <div class="site-section" id="trainer-section">
+  <!-- <div class="site-section" id="trainer-section">
       <div class="container">
         <div class="row justify-content-center text-center mb-5" data-aos="fade-up">
           <div class="col-md-8  section-heading">
@@ -1370,7 +1324,7 @@ export default {
       </div>
     </div> -->
 
-    <!-- <div class="site-section" id="services-section">
+  <!-- <div class="site-section" id="services-section">
       <div class="container">
         <div class="row justify-content-center text-center mb-5" data-aos="fade-up">
           <div class="col-md-8  section-heading">
@@ -1458,7 +1412,7 @@ export default {
       </div>
     </div> -->
 
-    <!-- <div class="site-section bg-light contact-wrap" id="contact-section">
+  <!-- <div class="site-section bg-light contact-wrap" id="contact-section">
       <div class="container">
 
         <div class="row justify-content-center text-center mb-5">
@@ -1515,7 +1469,7 @@ export default {
       </div>
     </div> -->
 
-    <!-- <div class="schedule-wrap2 clearfix">
+  <!-- <div class="schedule-wrap2 clearfix">
       <div class="d-md-flex align-items-center">
         <div class="hours mr-md-4 mb-4 mb-lg-0">
           <strong class="d-block">Hours</strong>
@@ -1530,7 +1484,7 @@ export default {
       </div>
     </div> -->
 
-    <!-- <footer class="footer-section">
+  <!-- <footer class="footer-section">
       <div class="container">
         <div class="row">
           <div class="col-md-4">
@@ -1580,3 +1534,14 @@ export default {
 
   <!-- </div> -->
 </template>
+
+
+<style scoped>
+#myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
+</style>

@@ -1,7 +1,9 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
-const baseUrl = 'http://localhost:3000'
 import { useToast } from "vue-toastification";
+
+const baseUrl = 'http://localhost:3000'
+// const baseUrl = 'https://enbie-production.up.railway.app'
 
 const toast = useToast();
 
@@ -240,7 +242,7 @@ export const usePlayerStore = defineStore('player', {
         },
 
         async fetchUserProfile(username) {
-            console.log(username, '<----- usrname   ');
+            // console.log(username, '<----- usrname   ');
             try {
                 const { data } = await axios({
                     url: `${baseUrl}/users/${username}`,

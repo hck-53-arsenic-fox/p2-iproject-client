@@ -58,9 +58,9 @@ export default {
                                     for="file_input">Profile Picture</label>
                                 <input class="customfile" aria-describedby="file_input_help" id="file_input" ref="file"
                                     type="file" @change="changeFile" />
-                                <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">
+                                <!-- <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">
                                     SVG, PNG, JPG or GIF (MAX. 800x400px).
-                                </p>
+                                </p> -->
                             </div>
 
                             <div class="form-group">

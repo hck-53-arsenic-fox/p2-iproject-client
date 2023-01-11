@@ -36,13 +36,45 @@ export const useCounterStore = defineStore("counter", {
       try {
         const { data } = await axios({
           method: "POST",
-          url: baseUrl + "/games/" + slug,
+          url: baseUrl + "/midtrans-token",
+          headers: {
+            access_token: localStorage.getItem("access_token"),
+          },
+        });
+        window.snap.pay(data.token, {
+          onSuccess: async function (result) {
+            /* You may add your own implementation here */
+            const { data } = await axios({
+              method: "POST",
+              url: baseUrl + "/games/" + slug,
+              headers: {
+                access_token: localStorage.getItem("access_token"),
+              },
+            });
+            alert("payment success!");
+            console.log(result);
+            console.log(data.message);
+          },
+          onPending: function (result) {
+            /* You may add your own implementation here */
+            alert("wating your payment!");
+            console.log(result);
+          },
+          onError: function (result) {
+            /* You may add your own implementation here */
+            alert("payment failed!");
+            console.log(result);
+          },
+          onClose: function () {
+            /* You may add your own implementation here */
+            alert("you closed the popup without finishing the payment");
+          },
         });
       } catch (err) {
         Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: "Something went wrong!",
+          text: err.response.data.message,
         });
       }
     },

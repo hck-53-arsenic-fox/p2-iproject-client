@@ -1,21 +1,35 @@
 <script>
-import { mapActions, mapState } from "pinia";
+import { mapActions, mapState, mapStores } from "pinia";
 import { useAnimeStore } from "../stores/counter";
 import CardAnime from "../components/CardAnime.vue";
 export default {
   data() {
     return {
-        search:""
-    }
+      search: "",
+    };
   },
   components: {
     CardAnime,
   },
   computed: {
-    ...mapState(useAnimeStore, ["listsOfAnime"]),
+    ...mapState(useAnimeStore, ["listsOfAnime","user"]),
+    // ...mapStores(useAnimeStore),
+    // isSubscribed() {
+    //   return this.useAnimeStore.user.status
+    //     ? true
+    //     : false;
+    // },
   },
   methods: {
-    ...mapActions(useAnimeStore, ["fetchAnime"]),
+    ...mapActions(useAnimeStore, ["fetchAnime","subscribe"]),
+    subscribes() {
+      if (!this.user.status) {
+        this.subscribe();
+      }
+      else{
+        console.log('hmmm')
+      }
+    },
   },
   created() {
     this.fetchAnime();
@@ -37,9 +51,18 @@ export default {
       </form>
     </header>
     <main>
-      <div class="cards"><CardAnime v-for="anime in listsOfAnime" :key="anime.mal_id" :anime="anime" /></div>
+      <div class="cards1">
+        <CardAnime
+        v-if="listsOfAnime.length>0"
+          v-for="anime in listsOfAnime"
+          :key="anime.mal_id"
+          :anime="anime"
+        />
+        <h4 v-if="listsOfAnime.length===0">Sorry, there is no anime that matches your type</h4>
+      </div>
     </main>
   </div>
+  <button @click.prevent="subscribes">aku suka</button>
 </template>
 
 <style>
@@ -107,7 +130,7 @@ main {
   padding-left: 30px;
   padding-right: 30px;
 }
-.cards {
+.cards1 {
   display: flex;
   flex-wrap: wrap;
   margin: 0 -8px;

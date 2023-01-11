@@ -5,7 +5,7 @@ export default {
 </script>
 
 <template>
-  <div class="card">
+  <div class="card2">
     <a href="#" target="_blank">
       <img :src="anime.images.jpg.image_url" alt="anime poster image" />
       <h3>{{ anime.title }}</h3>
@@ -14,7 +14,7 @@ export default {
 </template>
 
 <style>
-.card {
+.card2 {
   flex: 1 1 33%;
   width: 33%;
   max-width: 100%;

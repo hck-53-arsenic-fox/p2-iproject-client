@@ -19,6 +19,10 @@ export const useAppStore = defineStore("app", {
   actions: {
     checkAuth() {
       this.isLoggedIn = !!localStorage.getItem("access_token");
+
+      if (this.isLoggedIn) {
+        this.getAllTransactions();
+      }
     },
 
     handleSuccessfulLogin(responseFromBackend) {
@@ -28,6 +32,8 @@ export const useAppStore = defineStore("app", {
         icon: "success",
         title: "Successfully logged in!",
       });
+
+      this.getAllTransactions();
 
       this.router.push("/home");
     },
@@ -92,6 +98,77 @@ export const useAppStore = defineStore("app", {
             this.router.push("/");
           }
         });
+      } catch (error) {
+        handleError(error);
+      }
+    },
+
+    async getAllTransactions() {
+      try {
+        const result = await axios({
+          method: "GET",
+          url: `${import.meta.env.VITE_ORIGIN_URL}/transactions`,
+          headers: {
+            access_token: localStorage.getItem("access_token"),
+            "ngrok-skip-browser-warning": true,
+          },
+        });
+
+        if (!result?.data) {
+          throw new Error("Frontend error: somehow unable to get result.data");
+        }
+
+        // also save in pinia's global state
+        this.transactions = result.data;
+
+        return result.data;
+      } catch (error) {
+        handleError(error);
+      }
+    },
+
+    async getAllWallets() {
+      try {
+        const result = await axios({
+          method: "GET",
+          url: `${import.meta.env.VITE_ORIGIN_URL}/wallets`,
+          headers: {
+            access_token: localStorage.getItem("access_token"),
+            "ngrok-skip-browser-warning": true,
+          },
+        });
+
+        if (!result?.data) {
+          throw new Error("Frontend error: somehow unable to get result.data");
+        }
+
+        // also save in pinia's global state
+        this.wallets = result.data;
+
+        return result.data;
+      } catch (error) {
+        handleError(error);
+      }
+    },
+
+    async fixerioConvertCurrency(from, to, amount) {
+      try {
+        const result = await axios({
+          method: "GET",
+          url: `https://api.apilayer.com/fixer/latest?base=IDR&symbols=USD`,
+          headers: {
+            apiKey: import.meta.env.VITE_FIXERIO_API_KEY,
+          },
+        });
+
+        if (!result?.data) {
+          throw new Error("Frontend error: somehow unable to get result.data");
+        }
+
+        // also save in pinia's global state
+        this.wallets = result.data;
+
+        return result.data;
       } catch (error) {
         handleError(error);
       }

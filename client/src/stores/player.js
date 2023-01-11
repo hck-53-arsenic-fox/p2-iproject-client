@@ -35,11 +35,24 @@ export const usePlayerStore = defineStore('player', {
         },
 
         async register(formRegister) {
+            console.log('masukkkk register');
             console.log(formRegister, '<---- formREGISTER');
             try {
-                
+                const multerData = new FormData();
+                multerData.append("imgProfile", formRegister.imgProfile);
+                multerData.append("username", formRegister.username);
+                multerData.append("email", formRegister.email);
+                multerData.append("password", formRegister.password);
+
+                const { data } = await axios({
+                    url: `${baseUrl}/users/register`,
+                    method: 'post',
+                    data: multerData
+                })
+
+                this.router.push('/login');
             } catch (error) {
-                console.log(error, '<----- error register');      
+                console.log(error, '<----- error register');
             }
         },
 
@@ -98,7 +111,7 @@ export const usePlayerStore = defineStore('player', {
                 const { data } = await axios({
                     url: `${baseUrl}/users/following`,
                     method: 'get',
-                    headers: {access_token: localStorage.access_token}
+                    headers: { access_token: localStorage.access_token }
                 })
 
                 console.log(data, '<----- data fetchFollowing');
@@ -114,7 +127,7 @@ export const usePlayerStore = defineStore('player', {
                 const { data } = await axios({
                     url: `${baseUrl}/users/${username}`,
                     method: 'get',
-                    headers: {access_token: localStorage.access_token}
+                    headers: { access_token: localStorage.access_token }
                 })
 
                 console.log(data, '<---- data fetchUserProfie');

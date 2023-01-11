@@ -37,9 +37,9 @@ export const usePlayerStore = defineStore('player', {
         async register(formRegister) {
             console.log(formRegister, '<---- formREGISTER');
             try {
-                
+
             } catch (error) {
-                console.log(error, '<----- error register');      
+                console.log(error, '<----- error register');
             }
         },
 
@@ -92,13 +92,31 @@ export const usePlayerStore = defineStore('player', {
             }
         },
 
+        async changeStatusPro() {
+            try {
+                const { data } = await axios({
+                    url: `${baseUrl}/users/status`,
+                    method: 'patch',
+                    data: { status: 'Pro' },
+                    headers: { access_token: localStorage.access_token }
+                })
+
+                console.log(data, '<----- data changeStausPro');
+                
+                this.fetchUserProfile()
+                this.router.push('/users/asd')
+            } catch (error) {
+                console.log(error, '<---- error di changeStatus');
+            }
+        },
+
         async fetchFollowing(username) {
             console.log(username, '<---- username');
             try {
                 const { data } = await axios({
                     url: `${baseUrl}/users/following`,
                     method: 'get',
-                    headers: {access_token: localStorage.access_token}
+                    headers: { access_token: localStorage.access_token }
                 })
 
                 console.log(data, '<----- data fetchFollowing');
@@ -114,7 +132,7 @@ export const usePlayerStore = defineStore('player', {
                 const { data } = await axios({
                     url: `${baseUrl}/users/${username}`,
                     method: 'get',
-                    headers: {access_token: localStorage.access_token}
+                    headers: { access_token: localStorage.access_token }
                 })
 
                 console.log(data, '<---- data fetchUserProfie');

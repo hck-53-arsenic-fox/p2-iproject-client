@@ -6,10 +6,11 @@ const baseUrl = 'http://localhost:3000'
 export const useUserStore = defineStore('user', {
     state: () => {
         return {
-            isSubs: false,
             oneProfile: {},
             allFighters: [],
-            allEvents: {}
+            allEvents: {},
+            allLogs: [],
+            totalPage: 0
         }
     },
     getters: {
@@ -47,22 +48,25 @@ export const useUserStore = defineStore('user', {
             localStorage.clear()
             this.router.push('/login')
         },
-        async changePaymentStatus() {
+        async changePaymentStatus(id) {
             try {
                 const { data } = await axios({
-                    method: 'PATCH',
+                    method: 'POST',
                     url: `${baseUrl}/subscription`,
                     headers: {
                         access_token: localStorage.getItem('access_token')
+                    },
+                    data: {
+                        competitionId: id
                     }
                 })
 
-                this.oneProfile.isSubscribed = true
+                this.fetchLogs()
             } catch (error) {
                 console.log(error)
             }
         },
-        async subscribe() {
+        async subscribe(id) {
             try {
                 const { data } = await axios({
                     method: 'POST',
@@ -76,7 +80,7 @@ export const useUserStore = defineStore('user', {
                     onSuccess: (result) => {
                         /* You may add your own implementation here */
                         console.log('Success')
-                        this.changePaymentStatus()
+                        this.changePaymentStatus(id)
                     }
                 })
             } catch (error) {
@@ -108,13 +112,31 @@ export const useUserStore = defineStore('user', {
                 console.log(error)
             }
         },
-        async fetchAllEvents() {
+        async fetchAllEvents(index) {
             try {
                 const { data } = await axios({
                     method: 'GET',
-                    url: `${baseUrl}/events`
+                    url: `${baseUrl}/events?page=6,${index}`,
+                    headers: {
+                        access_token: localStorage.getItem('access_token')
+                    }
                 })
-                this.allEvents = data
+                this.allEvents = data.items
+                this.totalPage = data.totalPage
+            } catch (error) {
+                console.log(error)
+            }
+        },
+        async fetchLogs() {
+            try {
+                const { data } = await axios({
+                    method: 'GET',
+                    url: `${baseUrl}/logs`,
+                    headers: {
+                        access_token: localStorage.getItem('access_token')
+                    }
+                })
+                this.allLogs = data
             } catch (error) {
                 console.log(error)
             }

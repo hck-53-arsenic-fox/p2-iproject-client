@@ -28,7 +28,7 @@ export default {
             </RouterLink>
             <div class="d-flex">
                 <div style="margin-right: 20px;">
-                    <RouterLink to="/event" style="color: white;text-decoration: none;">EVENTS</RouterLink>
+                    <RouterLink to="/event" style="color: white;text-decoration: none;" v-if="isLogin">EVENTS</RouterLink>
                 </div>
                 <div style="margin-right: 20px;">
                     <RouterLink to="/ranking" style="color: white;text-decoration: none;">RANKINGS</RouterLink>

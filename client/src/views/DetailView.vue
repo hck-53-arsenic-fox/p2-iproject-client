@@ -18,7 +18,12 @@ export default {
       "getProvince",
       "getCity",
       "getCost",
+      "payment",
     ]),
+    getOngkir(ongkir) {
+      let harga = ongkir + this.product.price;
+      this.payment(harga, this.product.id);
+    },
   },
   created() {
     this.fetchProductId(this.$route.params.id);
@@ -39,6 +44,7 @@ export default {
           alt="Rocky"
           style="width: 45vw; object-fit: cover"
         />
+        <p>Rp. {{ product.price }}</p>
       </div>
       <div class="col-5">
         <div class="mb-3">
@@ -101,15 +107,28 @@ export default {
             {{ cost.rajaongkir.results[0].costs[0].service }}
           </p>
           <p>
-            total ongkir =
-            {{ cost.rajaongkir.results[0].costs[0].cost[0].value }} :
+            total ongkir = Rp.
+            {{ cost.rajaongkir.results[0].costs[0].cost[0].value }}
+          </p>
+          <p>
+            total harga = Rp.
+            {{
+              cost.rajaongkir.results[0].costs[0].cost[0].value + product.price
+            }}
           </p>
           <p>
             estimasi waktu sampai =
             {{ cost.rajaongkir.results[0].costs[0].cost[0].etd }} hari
           </p>
           <div class="d-grid justify-content-end pr-5">
-            <button class="btn btn-success mr-5">Bayar</button>
+            <button
+              class="btn btn-success mr-5"
+              @click.prevent="
+                getOngkir(cost.rajaongkir.results[0].costs[0].cost[0].value)
+              "
+            >
+              Bayar
+            </button>
           </div>
         </div>
       </div>

@@ -57,9 +57,7 @@ export default {
           @click="$router.push(`/detail/${product.id}`)"
           class="btn btn-warning"
         >
-          Details</button
-        ><button class="btn btn-outline-primary btn-sm mt-2" type="button">
-          Add to wishlist
+          Details
         </button>
       </div>
     </div>

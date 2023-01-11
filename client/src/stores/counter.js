@@ -59,7 +59,7 @@ export const useCounterStore = defineStore("counter", {
           url: baseUrl,
         });
         this.products = data;
-        console.log(data);
+        // console.log(data);
       } catch (error) {
         Swal.fire(error.response.data.message);
       }
@@ -89,13 +89,13 @@ export const useCounterStore = defineStore("counter", {
           },
         });
         this.categories = data;
-        console.log(data);
+        // console.log(data);
       } catch (error) {
         Swal.fire(error.response.data.message);
       }
     },
     async fetchCategoriesById(id) {
-      console.log(id);
+      // console.log(id);
       try {
         const { data } = await axios({
           method: "get",
@@ -135,7 +135,6 @@ export const useCounterStore = defineStore("counter", {
             access_token: localStorage.access_token,
           },
         });
-        console.log(data.data);
         this.city = data.data;
       } catch (error) {
         console.log(error);
@@ -143,7 +142,6 @@ export const useCounterStore = defineStore("counter", {
     },
 
     async getCost(cityId) {
-      console.log(cityId);
       try {
         const { data } = await axios({
           method: "get",
@@ -152,8 +150,59 @@ export const useCounterStore = defineStore("counter", {
             access_token: localStorage.access_token,
           },
         });
-        console.log(data);
         this.cost = data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    async createOrders(id) {
+      try {
+        const { data } = await axios({
+          method: "post",
+          url: baseUrl + "/buy/" + id,
+          headers: {
+            access_token: localStorage.access_token,
+          },
+        });
+        this.router.push("/");
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    async payment(harga, id) {
+      try {
+        const { data } = await axios({
+          method: "post",
+          url: baseUrl + "/generate-midtrans-token?cost=" + harga,
+          headers: {
+            access_token: localStorage.access_token,
+          },
+        });
+        const cb = this.createOrders;
+        window.snap.pay(data.token, {
+          onSuccess: function (result) {
+            /* You may add your own implementation here */
+            cb(id);
+            alert("payment success!");
+            // console.log(result);
+          },
+          onPending: function (result) {
+            /* You may add your own implementation here */
+            alert("wating your payment!");
+            // console.log(result);
+          },
+          onError: function (result) {
+            /* You may add your own implementation here */
+            alert("payment failed!");
+            // console.log(result);
+          },
+          onClose: function () {
+            /* You may add your own implementation here */
+            alert("you closed the popup without finishing the payment");
+          },
+        });
       } catch (error) {
         console.log(error);
       }

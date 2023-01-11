@@ -1,5 +1,13 @@
 <script>
+    import { mapState, mapActions } from 'pinia';
+    import { useGenshinStore } from '../stores/store';
+    
+    import Cards from '../components/Cards.vue'
 
+    export default {
+
+    }
+    
 </script>
 
 <template>

@@ -1,6 +1,23 @@
 <script>
 import { mapState, mapActions } from "pinia";
 import { useGenshinStore } from "../stores/store";
+
+export default {
+    data(){
+        return{
+            email: '',
+            password: ''
+        }
+    },
+
+    methods: {
+        ...mapActions( useGenshinStore, ['register']),
+        
+        handleRegister(){
+            this.register(this.email, this.password)
+        }
+    }
+}
 </script>
 
 <template>

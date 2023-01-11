@@ -6,10 +6,13 @@ export const useCounterStore = defineStore("counter", {
   state: () => {
     return {
       count: 0,
-      isShop: true,
+      isShop: false,
       isLogin: false,
       exhibitions: [],
-      artworks: {},
+      artworks: {
+        data: [],
+      },
+      isTour: false,
     };
   },
   actions: {
@@ -18,15 +21,39 @@ export const useCounterStore = defineStore("counter", {
     },
     logout() {
       localStorage.clear();
+      this.isLogin = false;
       router.push("/login");
     },
-    // ExitTour() {
-    //   router;
+    // toShop() {
+    //   this.is;
     // },
+    async buyEvent(eventId) {
+      try {
+        const data = await Axios.post(
+          `http://localhost:4444/transaction/${eventId}`,
+          {},
+          {
+            headers: {
+              access_token: localStorage.getItem("access_token"),
+            },
+          }
+        );
+        console.log("berhasil membeli tiket event");
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    switchPage(path) {
+      window.location = path;
+    },
+    toTour() {
+      this.isTour = true;
+    },
     async login(user) {
       try {
         const { data } = await Axios.post("http://localhost:4444/login", user);
         localStorage.setItem("access_token", data.access_token);
+        this.isLogin = true;
         router.push({ path: "/" });
         this.isLogin = true;
       } catch (error) {
@@ -54,6 +81,7 @@ export const useCounterStore = defineStore("counter", {
       })
         .then((response) => {
           localStorage.setItem("access_token", response.data.access_token);
+          this.isLogin = true;
           router.push({ path: "/" });
         })
         .catch((err) => {
@@ -62,7 +90,11 @@ export const useCounterStore = defineStore("counter", {
     },
     async fetchExhibitions() {
       try {
-        const { data } = await Axios.get("http://localhost:4444/exhibitions");
+        const { data } = await Axios.get("http://localhost:4444/exhibitions", {
+          headers: {
+            access_token: localStorage.getItem("access_token"),
+          },
+        });
         this.exhibitions = data;
       } catch (error) {
         console.log(error);
@@ -70,17 +102,21 @@ export const useCounterStore = defineStore("counter", {
     },
     async fetchArtworks() {
       try {
-        const { data } = await Axios.get("http://localhost:4444/artworks");
+        const { data } = await Axios.get("http://localhost:4444/artworks", {
+          headers: {
+            access_token: localStorage.getItem("access_token"),
+          },
+        });
         this.artworks = data;
       } catch (error) {
         console.log(error);
       }
     },
-    async payTour() {
+    async payTour(id) {
       const access_token = localStorage.getItem("access_token");
       try {
         const { data } = await Axios.post(
-          "http://localhost:4444/generate-midtrans-token",
+          `http://localhost:4444/generate-midtrans-token/${id}`,
           {},
           {
             headers: {
@@ -88,14 +124,15 @@ export const useCounterStore = defineStore("counter", {
             },
           }
         );
+        const buyTicket = this.buyEvent;
         window.snap.pay(data.token, {
           onSuccess: function (result) {
-            /* You may add your own implementation here */
-            // alert("payment success!");
-            console.log(result);
+            buyTicket(id);
           },
         });
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 });

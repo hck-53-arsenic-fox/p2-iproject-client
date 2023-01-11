@@ -7,13 +7,14 @@
             return {
                 data : {
                     email : "",
-                    password : ""
+                    password : "",
                 },
                 dataRegister : {
                     username : "",
                     email : "",
                     password : ""
-                }
+                },
+                isRegister : false
             }
         },
         components : {
@@ -26,6 +27,9 @@
             },
             google(token) {
                 this.googleLogin(token);
+            },
+            toRegister(){
+                this.isRegister = !this.isRegister
             }
         }
     }
@@ -35,7 +39,7 @@
 <template>
       <section>
             <div class="h-screen flex justify-between border border-black bg-cover" id="banner">
-                <div class="w-5/12 pl-16 relative bg-[#252526] text-white">
+                <div v-if="!isRegister" class="w-5/12 pl-16 relative bg-[#252526] text-white" id="login">
                     <div class="flex items-center h-1/6 -translate-x-9">
                         <img src="../assets/letter_u_building_modern_business_logo-removebg-preview.png" alt="" width="30" class="">
                         <p class="text-2xl font-bold">SEUM.</p>
@@ -46,25 +50,25 @@
                             <label for="">Email</label>
                             <input type="text" class="border text-black border-black px-3 py-1 appearance-none outline-none" v-model="data.email">
                             <label for="" class="mt-4">Password</label>
-                            <input type="text" class="border border-black text-black px-3 py-1 appearance-none outline-none" v-model="data.password">
+                            <input type="password" class="border border-black text-black px-3 py-1 appearance-none outline-none" v-model="data.password">
                             <div class="bg-black border border-black text-white text-center mt-5 py-1 hover:bg-white hover:text-black">
                                 <button type="submit">Sign in</button>
                             </div>
-                            <div>
-                                <GoogleLogin :callback="callback"/>
+                            <div class="mt-7 flex justify-center">
+                                <GoogleLogin :callback="callback" />
                             </div>
                         </form>
                             <div class="text-center mt-4">
-                                <p class="font-light text-white">Don`t have a account? <button class="text-blue-600">Sign up</button></p>
+                                <p class="font-light text-white">Don`t have a account? <button class="text-blue-600" @click="toRegister">Sign up</button></p>
                             </div>
                         <div class="absolute bottom-12 -translate-x-16">
                             <p class="font-light">&#169; Useum 2022</p>
                         </div>
                     </div>
                 </div>
-                <div class="w-5/12 pl-16 bg-white h-full invisible">
+                <div v-if="isRegister" class="w-5/12 pl-16 bg-white h-full" id="register">
                     <div class="flex items-center h-1/6 -translate-x-9">
-                        <img src="./letter_u_building_modern_business_logo-removebg-preview.png" alt="" width="30" class="">
+                        <img src="../assets/letter_u_building_modern_business_logo-removebg-preview.png" alt="" width="30" class="">
                         <p class="text-2xl font-bold">SEUM.</p>
                     </div>
                     <div class="flex flex-col justify-center h-4/6 gap-y-4 px-7 pr-14">
@@ -75,14 +79,14 @@
                             <label for="" class="mt-4">Email</label>
                             <input type="text" class="border border-black px-3 py-1 appearance-none outline-none" v-model="dataRegister.email">
                             <label for="" class="mt-4">Password</label>
-                            <input type="text" class="border border-black px-3 py-1 appearance-none outline-none" v-model="dataRegister.password">
+                            <input type="password" class="border border-black px-3 py-1 appearance-none outline-none" v-model="dataRegister.password">
                             <div class="bg-black border border-black text-white text-center mt-5 py-1 hover:bg-white hover:text-black">
                                 <button type="submit">Sign in</button>
                             </div>
                         </form>
-                            <div class="text-center mt-4">
-                                <p class="font-light text-slate-800">Already have a account? <button class="text-blue-600">Sign in</button></p>
-                            </div>
+                        <div class="text-center mt-4">
+                            <p class="font-light text-slate-800">Already have a account? <button class="text-blue-600" @click="toRegister">Sign in</button></p>
+                        </div>
                     </div>
                 </div>
             </div>

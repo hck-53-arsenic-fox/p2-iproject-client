@@ -1,20 +1,22 @@
 <template>
-    <div>
-        <router-link >
-            <button class="text-3xl z-20">Exit</button>
-        </router-link>
-    </div>
+    <ExitTour v-if="isTour"/>
 </template>
 
 <script>
-    import { mapActions, mapState } from "pinia";
+    import { mapActions, mapState } from "pinia";   
     import "../helpers/virtual"
     import { useCounterStore } from "../stores/counter";
-    mapActions
+    import ExitTour from "./ExitTour.vue";
     export default {
         name : "TestPage",
+        components : {
+            ExitTour
+        },
         methods : {
             ...mapActions(useCounterStore, ["ExitTour"])
+        },
+        computed : {
+            ...mapState(useCounterStore, ["isTour"])
         }
     }
 </script>

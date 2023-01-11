@@ -13,7 +13,7 @@ import { useCounterStore } from '../stores/counter';
             
         },
         methods : {
-            ...mapActions(useCounterStore, ["fetchExhibitions"]),
+            ...mapActions(useCounterStore, ["fetchExhibitions", "payTour"]),
             formatDate(date){
                 return new Date(`${date}`).toLocaleDateString('en-EN', this.options)
             }
@@ -28,7 +28,7 @@ import { useCounterStore } from '../stores/counter';
 <template>    
     <div class="overflow-hidden overflow-y-auto" style="perspective: 10px; height: 100vh;"> 
         <div id="banner" class="w-full" style="height: 100%; width: 100%; transform-style: preserve-3d; z-index: -1;">
-            <img src="https://res.cloudinary.com/unit-london/image/upload/c_scale,w_1960,h_1400/f_webp,q_auto/v1663194294/Vanguards-077.jpg?_i=AA" alt="" class="absolute object-cover object-center" style="transform: translateZ(-10px) scale(2.2); height: 100%; width: 100%;">
+            <img src="https://res.cloudinary.com/unit-london/image/upload/c_scale,w_1960,h_1400/f_webp,q_auto/v1663194294/Vanguards-077.jpg?_i=AA" alt="" class="absolute object-cover object-center brightness-75" style="transform: translateZ(-10px) scale(2.2); height: 100%; width: 100%;">
         </div>
         <div class="relative px-32 pt-2 text-black z-10 bg-white">
             <h1 class="font-bold tracking-wider antialiased hover:text-white duration-300 mb-20" style="font-size: 8rem; line-height: 1.2; -webkit-text-stroke: 1px black;">EXHIBITIONS</h1>
@@ -53,7 +53,7 @@ import { useCounterStore } from '../stores/counter';
                             </div>
                             <div class="flex items-center justify-end">
                                 <div class="bg-black p-5 text-white inline-block px-7 border border-transparent hover:bg-white hover:text-black hover:border-black">
-                                    <button class="">Explore Now</button>
+                                    <button class="" @click="payTour(ex.id)">Explore Now</button>
                                         </div>
                                     </div>
                                 </div>

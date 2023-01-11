@@ -30,8 +30,42 @@ export const usePiniaStore = defineStore("piniaStore", {
                   })
                 this.router.push('/login')
             } catch (error) {
-                console.log(error);
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: error.response.data.message,
+                  });
+                  console.log(error);
             }
+        },
+        async login(dataLogin){
+            try {
+                let {data} = await axios({
+                    method: "POST",
+                    url: `${baseUrl}/login`,
+                    data: dataLogin
+                })
+                localStorage.setItem("acces_token", data.access_token)
+                localStorage.setItem("id", data.id);
+                this.isLogin = true
+                this.router.push('/')
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Login Success",
+                    showConfirmButton: false,
+                    timer: 1500,
+                  });
+            } catch (error) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: 'Wrong Email/Password'
+                  });
+                  console.log(error);
+                }
+            },
+
         }
     }
-})
+)

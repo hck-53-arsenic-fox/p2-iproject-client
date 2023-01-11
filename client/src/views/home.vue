@@ -51,7 +51,7 @@ export default {
 
 <template>
   <!-- The Home Below -->
-  <section class="flex justify-center flex-col bg-[#FCEFEF]">
+  <section class="flex justify-center flex-col bg-[#EAEBED]">
 
     <!-- hscreen apus -->
     <div class="flex flex-col space-y-2 md:flex-col space-y-5 z-0 items-center justify-center">

@@ -25,7 +25,7 @@ export default {
     mapboxgl.accessToken = this.mapToken;
     const map = new mapboxgl.Map({
       container: 'map', // container ID
-      style: 'mapbox://styles/mapbox/satellite-streets-v12', // style URL
+      style: 'mapbox://styles/mapbox/streets-v12', // style URL
       center: this.resort.geometry.coordinates,
       zoom: 15
     })
@@ -60,7 +60,7 @@ export default {
           <textarea class="rounded-lg border-gray-100 bg-[#EBF1FF] align-center ml-4" name="" id="" cols="40"
             rows="5"></textarea>
           <div class="flex items-center justify-center mt-2">
-            <button class="bg-[#F68247] hover:bg-[#F56D29] py-2 px-5 text-white rounded-xl mt-2">
+            <button class="bg-[#05B384] hover:bg-[#06D6A0] py-2 px-5 text-white rounded-xl mt-2">
               Add Review
             </button>
           </div>

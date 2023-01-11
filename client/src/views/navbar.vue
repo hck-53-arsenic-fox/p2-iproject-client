@@ -10,10 +10,13 @@ export default {
 
   },
   computed: {
-
+    ...mapState(useResortStore, ['isLogin'])
   },
   methods: {
-
+    ...mapActions(useResortStore, ['handleLogout']),
+    onClickLogout() {
+      this.handleLogout()
+    }
   },
   created() {
 
@@ -24,10 +27,11 @@ export default {
 
 <template>
   <section class="">
-    <nav class="relative px-4 py-1 flex items-center bg-[#06D6A0]">
+    <nav class="relative px-4 py-3 flex items-center bg-[#042A2B]">
 
-      <a class="hidden lg:inline-block py-1 px-6  text-sm text-white font-bold rounded-xl transition duration-200 hover:bg-gray-100 text-sm text-gray-900 font-bold  rounded-xl transition duration-200"
-        href="#">Home</a>
+      <RouterLink to="/resorts" class="flex" href="#">
+        <img src="../assets/resoria-logos_transparent-cropped.png" alt="" width="120">
+      </RouterLink>
       <a class="text-3xl font-bold leading-none" href="#">
         <img src="" alt="">
       </a>
@@ -37,10 +41,18 @@ export default {
         </button>
       </div>
 
-      <a class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-1 px-3 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold  rounded-xl transition duration-200"
-        href="#">Sign In</a>
-      <a class="hidden lg:inline-block py-2 px-6  text-sm text-white font-bold rounded-xl transition duration-200"
-        href="#">Sign up</a>
+      <RouterLink v-if="isLogin" to="/add"
+        class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-1 px-3 bg-[#05B384] hover:bg-[#06D6A0] text-sm text-[#CAE1DB] font-bold  rounded-xl transition duration-200"
+        href="#">Add Resort</RouterLink>
+      <a v-if="isLogin" @click.prevent="onClickLogout"
+        class="hidden lg:inline-block py-2 px-6  text-sm text-[#CAE1DB] font-bold rounded-xl transition duration-200"
+        href="#">Log Out</a>
+      <RouterLink to="/login" v-if="!isLogin"
+        class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-1 px-3 bg-[#05B384] hover:bg-[#06D6A0] text-sm text-[#CAE1DB] font-bold  rounded-xl transition duration-200"
+        href="#">Sign In</RouterLink>
+      <RouterLink to="/register" v-if="!isLogin"
+        class="hidden lg:inline-block py-2 px-6  text-sm text-[#CAE1DB] font-bold rounded-xl transition duration-200"
+        href="#">Sign up</RouterLink>
     </nav>
     <div class="navbar-menu relative z-50 hidden">
       <div class="navbar-backdrop fixed inset-0 bg-gray-800 opacity-25"></div>

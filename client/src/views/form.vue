@@ -13,7 +13,10 @@ export default {
 
   },
   methods: {
-
+    ...mapActions(useResortStore, ['createResort']),
+    onClickAdd() {
+      this.createResort(this.title, this.location, this.description, this.imageUrl, this.price)
+    }
   },
   created() {
 
@@ -30,7 +33,7 @@ export default {
       class="relative flex flex-col m-6 space-y-10 bg-white shadow-xl rounded-2xl md:flex-row md:space-y-0 md:m-0 md:h-4/5 md:w-4/5 bg-opacity-50">
 
       <!-- left side -->
-      <img src="../assets/4559992.jpg" alt="" class="w-[560px] rounded-2xl hidden md:block">
+      <img src="../assets/4139996.jpg" alt="" class="w-[560px] rounded-2xl hidden md:block">
 
       <!-- right side -->
       <div class="p-6 md:p-6">
@@ -39,28 +42,35 @@ export default {
         <p class="max-w-sm mb-12 font-light text-grey-600">
           Let's add new hotel!
         </p>
-        <form action="">
-          <input type="text" class="w-full p-3 mb-3 border border-gray-300 rounded-md placeholder:font-light"
-            placeholder="Name">
+        <form @submit.prevent="onClickAdd" action="" class="justify-center items-center">
+          <input v-model="title" type="text"
+            class="w-full p-3 mb-3 border border-gray-300 rounded-md placeholder:font-light" placeholder="Name">
 
-          <input type="number" class="w-full p-3 mb-3 border border-gray-300 rounded-md placeholder:font-light"
-            placeholder="Price per Night">
-
-          <input type="text" class="w-full p-3 mb-3 border border-gray-300 rounded-md placeholder:font-light"
+          <input v-model="location" type="text"
+            class="w-full p-3 mb-3 border border-gray-300 rounded-md placeholder:font-light"
             placeholder="Enter Location">
 
-          <input type="file" class="w-full p-3 mb-3 border border-gray-300 rounded-md placeholder:font-light"
-            placeholder="Upload the Photo">
 
-          <input type="text" class="w-full p-3 mb-3 border border-gray-300 rounded-md placeholder:font-light"
+          <input v-model="price" type="number"
+            class="w-full p-3 mb-3 border border-gray-300 rounded-md placeholder:font-light"
+            placeholder="Price per Night">
+
+          <input v-model="imageUrl" type="url"
+            class="w-full p-3 mb-3 border border-gray-300 rounded-md placeholder:font-light" placeholder="ImageUrl">
+
+          <!-- <input name="image" type="file"
+            class="w-full p-3 mb-3 border border-gray-300 rounded-md placeholder:font-light"
+            placeholder="Upload the Photo"> -->
+
+          <input v-model="description" type="text"
+            class="w-full p-3 mb-3 border border-gray-300 rounded-md placeholder:font-light"
             placeholder="Enter Description">
 
-          <div class="flex items-center justify-center mt-2">
-            <button class="bg-[#05B384] hover:bg-[#06D6A0] py-3 px-10 text-white rounded-xl mt-2">
-              Submit
+          <div class="flex items-center justify-center my-3">
+            <button type="submit" class="bg-[#05B384] hover:bg-[#06D6A0] py-3 px-10 text-white rounded-xl mt-2">
+              Add Resort
             </button>
           </div>
-
         </form>
 
 

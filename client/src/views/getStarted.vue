@@ -27,7 +27,7 @@ export default {
     <div class="relative w-full h-full flex flex-col bg-[#EBF1FF0] space-y-2 md:flex-row space-y-0 z-0 justify-center">
 
       <!-- left part -->
-      <div class="flex bg-white justify-center flex-col p-5 m-5">
+      <div class="flex bg-white justify-center flex-col p-5 basis-5/12">
 
 
         <!-- Welcoming text -->
@@ -48,12 +48,10 @@ export default {
 
 
       <!-- right part -->
-      <div class="flex bg-white justify-center align-center flex-col">
+      <div class="flex flex-col scale-[0.80] basis-7/12 ">
 
         <!-- image -->
-        <div class="align-center scale-75">
-          <img src="../assets/4139996.jpg" alt="" class="">
-        </div>
+        <img src="../assets/sunset.jpg" alt="" class="">
 
       </div>
 

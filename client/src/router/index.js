@@ -3,6 +3,8 @@ import home from '../views/home.vue'
 import getStarted from '../views/getStarted.vue'
 import detail from '../views/detail.vue'
 import form from '../views/form.vue'
+import login from '../views/login.vue'
+import register from '../views/register.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -26,10 +28,32 @@ const router = createRouter({
       path: '/add',
       name: 'form',
       component: form
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: login
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: register
     }
-
-    //! Add more routes here
   ]
 })
+
+//! Navigation Guard
+router.beforeEach((to, from, next) => {
+  if (to.name === 'form' || to.name === 'login' || to.name === 'register') {
+    if (localStorage.access_token) {
+      next({ name: 'home' })
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
+})
+
 
 export default router

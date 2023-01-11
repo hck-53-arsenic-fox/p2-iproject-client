@@ -186,6 +186,14 @@ export const useCounterStore = defineStore("counter", {
       })
     },
 
+    // HANDLE TRANSACTIONS
+    handleTransaction(id){
+      if (!localStorage.access_token){
+        this.router.push('/login')
+      } else {
+        this.handleAddTransactions(id)
+      }
+    },
     // HANDLE ADDTRANSACTIONS
     handleAddTransactions(id){
       axios({
@@ -214,6 +222,28 @@ export const useCounterStore = defineStore("counter", {
       })
       .then((res)=>{
         this.transaction = res.data
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
+    },
+
+    // HANDLE ADD IDENTITY
+    handleAddIdentity(id, value){
+      let multerData = new FormData()
+      multerData.append("image", value.image)
+      multerData.append("phoneNumber", +value.phoneNumber)
+      axios({
+        method: "post",
+          url: `${BASE_URL}/identityUsers/${id}`,
+          data: multerData,
+          headers: {
+            access_token: localStorage.access_token,
+          },
+      })
+      .then((res)=>{
+        this.handleFetchTransaction()
+        this.router.push('/cart')
       })
       .catch((err)=>{
         console.log(err);

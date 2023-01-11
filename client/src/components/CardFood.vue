@@ -5,7 +5,7 @@ export default{
 </script>
 
 <template>
-  <div class="col">
+  <div class="col mb-4">
     <div class="card h-100">
       <img :src="item.img" class="card-img-top" alt="...">
       <div class="card-body">
@@ -13,7 +13,7 @@ export default{
         <p class="card-text">{{ item.description }}</p>
       </div>
       <div class="card-footer">
-       <button class="btn btn-dark">Order Now</button>
+        <p class="card-text">Out Of Stock</p>
       </div>
     </div>
   </div>

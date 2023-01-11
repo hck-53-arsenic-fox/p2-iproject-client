@@ -6,6 +6,7 @@ import RoomView from '../views/RoomView.vue'
 import DetailView from '../views/DetailView.vue'
 import FoodView from '../views/FoodView.vue'
 import CartPage from '../views/CartPage.vue'
+import FormIdentity from '../views/FormIdentity.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -45,6 +46,11 @@ const router = createRouter({
       name: 'cart',
       component: CartPage
     },
+    {
+      path: '/verified-identity/:id',
+      name: 'formIdentity',
+      component: FormIdentity
+    },
   ]
 })
 
@@ -53,6 +59,8 @@ router.beforeEach(async (to, from)=>{
     return {name: "login"}
    } else if ((localStorage.access_token && to.name === "login") || (localStorage.access_token && to.name === "register") ){
     return {name: "home"}
+    } else if (!localStorage.access_token && to.name === "formIdentity"){
+      return {name: "login"}
     }
 })
 

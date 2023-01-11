@@ -1,7 +1,6 @@
 <script>
 import { useAppStore } from "@/stores/app";
 import { mapState, mapActions } from "pinia";
-import VFacebookLogin from "vue-facebook-login-component-next";
 
 export default {
   data() {
@@ -11,17 +10,29 @@ export default {
       password: "",
     };
   },
-  components: {
-    VFacebookLogin,
-  },
   methods: {
-    ...mapActions(useAppStore, ["handleRegister"]),
+    ...mapActions(useAppStore, ["handleRegister", "handleFacebookLogin"]),
 
     handleFormSubmit() {
       this.handleRegister({ email: this.email, password: this.password });
     },
+
+    listenToSuccessfulFBLogin() {
+      window.fbAsyncInit = function () {
+        FB.Event.subscribe("auth.statusChange", (response) => {
+          if (response.status === "connected") {
+            // console.log("Access token: ", response.authResponse.accessToken);
+            const accessTokenFromFacebook = response.authResponse.accessToken;
+            this.handleFacebookLogin(accessTokenFromFacebook);
+          }
+        });
+      };
+    },
   },
   computed: {},
+  mounted() {
+    this.listenToSuccessfulFBLogin();
+  },
 };
 </script>
 
@@ -60,9 +71,15 @@ export default {
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
       <div class="row"><span class="text-center">or</span></div>
-      <template>
-        <v-facebook-login app-id="966242223397117"></v-facebook-login>
-      </template>
+      <div
+        class="fb-login-button"
+        data-width=""
+        data-size="large"
+        data-button-type="login_with"
+        data-layout="default"
+        data-auto-logout-link="false"
+        data-use-continue-as="false"
+      ></div>
     </form>
   </div>
 </template>

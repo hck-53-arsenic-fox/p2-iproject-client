@@ -154,7 +154,6 @@ export const useAppStore = defineStore("app", {
 
     async fixerioConvertCurrency(from, to, amount) {
       try {
-        console.log(from, to, amount);
         const result = await axios({
           method: "GET",
           url: `https://api.freecurrencyapi.com/v1/latest?apikey=${
@@ -176,6 +175,26 @@ export const useAppStore = defineStore("app", {
 
         // also save in pinia's global state
         return (this.conversionResult = result.data.data["USD"] * amount);
+      } catch (error) {
+        handleError(error);
+      }
+    },
+
+    async handleFacebookLogin(accessTokenFromFacebook) {
+      try {
+        const result = await axios({
+          method: "POST",
+          url: `${import.meta.env.VITE_ORIGIN_URL}/users/facebooklogin`,
+          headers: {
+            Authorization: `Bearer ${accessTokenFromFacebook}}`,
+          },
+        });
+
+        if (!result?.data) {
+          throw new Error("Frontend error: somehow unable to get result.data");
+        }
+
+        this.handleSuccessfulLogin(result.data);
       } catch (error) {
         handleError(error);
       }

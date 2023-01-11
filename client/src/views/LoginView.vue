@@ -1,7 +1,6 @@
 <script>
 import { useAppStore } from "@/stores/app";
 import { mapState, mapActions } from "pinia";
-import VFacebookLogin from "vue-facebook-login-component-next";
 
 export default {
   data() {
@@ -10,17 +9,30 @@ export default {
       password: "",
     };
   },
-  components: {
-    VFacebookLogin,
-  },
+  components: {},
   methods: {
-    ...mapActions(useAppStore, ["handleLogin"]),
+    ...mapActions(useAppStore, ["handleLogin", "handleFacebookLogin"]),
 
     handleFormSubmit() {
       this.handleLogin({ email: this.email, password: this.password });
     },
+
+    listenToSuccessfulFBLogin() {
+      window.fbAsyncInit = function () {
+        FB.Event.subscribe("auth.statusChange", (response) => {
+          if (response.status === "connected") {
+            // console.log("Access token: ", response.authResponse.accessToken);
+            const accessTokenFromFacebook = response.authResponse.accessToken;
+            this.handleFacebookLogin(accessTokenFromFacebook);
+          }
+        });
+      };
+    },
   },
   computed: {},
+  mounted() {
+    this.listenToSuccessfulFBLogin();
+  },
 };
 </script>
 

@@ -22,7 +22,7 @@ const chartData = computed(() => {
     datasets: [
       {
         data: store.state.chartData,
-        backgroundColor: ["#FB923C"],
+        backgroundColor: store.state.backgroundColor,
       },
     ],
   };

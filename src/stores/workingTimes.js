@@ -5,10 +5,12 @@ const baseUrl = "http://localhost:3001";
 
 export const useWorkingTimesStore = defineStore("workingTimes", () => {
   const state = reactive({
+    countries: [],
     workingTimesByCountry: {},
     workingTimes: [],
     chartLabel: [],
     chartData: [],
+    backgroundColor: [],
   });
 
   async function fetchWorkingTimesByCountry(countryCode) {
@@ -17,6 +19,17 @@ export const useWorkingTimesStore = defineStore("workingTimes", () => {
         `${baseUrl}/working-times/${countryCode}`
       );
       state.workingTimesByCountry = data;
+      const index = state.chartLabel.findIndex((el) => el === data.countryName);
+
+      state.backgroundColor = [];
+
+      state.countries.forEach((el) => {
+        state.backgroundColor.push("#D3D3D3");
+      });
+
+      state.backgroundColor[index] = "#FB923C";
+
+      console.log(index);
     } catch (error) {
       console.log(error);
     }
@@ -26,6 +39,13 @@ export const useWorkingTimesStore = defineStore("workingTimes", () => {
       const { data } = await axios.get(`${baseUrl}/working-times`);
       state.workingTimes = data;
 
+      state.countries = data.map((el) => {
+        return {
+          countryCode: el.countryCode,
+          countryName: el.countryName,
+        };
+      });
+
       const chartLabelData = data
         .map((el) => {
           return {
@@ -34,8 +54,6 @@ export const useWorkingTimesStore = defineStore("workingTimes", () => {
           };
         })
         .sort((a, b) => b.minutesToBuyBigMac - a.minutesToBuyBigMac);
-
-      console.log(chartLabelData);
 
       state.chartLabel = chartLabelData.map((el) => el.countryName);
       state.chartData = chartLabelData.map((el) => el.minutesToBuyBigMac);

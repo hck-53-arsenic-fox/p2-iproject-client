@@ -22,7 +22,7 @@ const chartData = computed(() => {
     datasets: [
       {
         data: [store.state.bigMacExchangeRate, store.state.actualExchangeRate],
-        backgroundColor: ["#FB923C", "#808080"],
+        backgroundColor: ["#FB923C", "#D3D3D3"],
       },
     ],
   };

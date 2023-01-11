@@ -27,7 +27,7 @@ export const useHawaStore = defineStore("hawa", {
           swal.fire({
             title: `Akun Berhasil dibuat`,
             icon: "success",
-            confirmButtonColor: "#3085d6",
+            confirmButtonColor: "#fa98d0",
           });
           this.register = {
             email: '',
@@ -39,7 +39,7 @@ export const useHawaStore = defineStore("hawa", {
           swal.fire({
             title: `${err.response.data.message}`,
             icon: "error",
-            confirmButtonColor: "#3085d6",
+            confirmButtonColor: "#fa98d0",
           });
         });
     },
@@ -55,7 +55,7 @@ export const useHawaStore = defineStore("hawa", {
           
           swal.fire({
             title: `Welcome!`,
-            confirmButtonColor: "#3085d6",
+            confirmButtonColor: "#fa98d0",
           });
           localStorage.setItem("access_token", result.data.access_token);
           localStorage.setItem("email", result.data.email);
@@ -69,11 +69,38 @@ export const useHawaStore = defineStore("hawa", {
           swal.fire({
             title: `${err.response.data.message}`,
             icon: "error",
-            confirmButtonColor: "#3085d6",
+            confirmButtonColor: "#fa98d0",
           });
         });
     },
 
+    async googleLogin(credential) {
+      await axios({
+        method: "POST",
+        url: mainUrl + "/google-sign-in",
+        headers: {
+          google_auth_token: credential
+        }
+      }).then((result) => {
+        swal.fire({
+          title: `Welcome!`,
+          confirmButtonColor: "#fa98d0",
+        });
+        localStorage.setItem("access_token", result.data.access_token);
+        localStorage.setItem("email", result.data.email);
+        localStorage.setItem("role", result.data.role);
+        this.access_token = result.data.access_token;
+        this.login.email = result.data.email;
+        this.router.push('/')
+      })
+      .catch((err) => {
+        swal.fire({
+          title: `${err.response.data.message}`,
+          icon: "error",
+          confirmButtonColor: "#fa98d0",
+        });
+      });
+    },
 
   },
 });

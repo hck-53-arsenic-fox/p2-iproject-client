@@ -19,8 +19,11 @@ export default {
     },
 
     methods: {
-        ...mapActions(useHawaStore, ['navigatePage', 'handleLogin']),
+        ...mapActions(useHawaStore, ['navigatePage', 'handleLogin', 'googleLogin']),
 
+        callback(response) {
+            this.googleLogin(response.credential)
+        }
     }
 };
 </script>
@@ -42,6 +45,14 @@ export default {
                     <div>
                         <p class="font-bold text-2xl">Login</p>
                         <p>please login to continue</p>
+                    </div>
+                    <div class="my-6 flex justify-center w-full">
+                        <GoogleLogin :callback="callback"/>
+                    </div>
+                    <div>
+                        <fieldset class="border-t border-solid lg:border-white-600 border-zinc-600">
+                            <legend class="mx-auto px-2 text-center text-sm">Or login via our secure system</legend>
+                        </fieldset>
                     </div>
                     <div class="mt-10">
                         <form @submit.prevent="handleLogin(login)">

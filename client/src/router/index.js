@@ -8,6 +8,7 @@ import TransactionsView from "../views/TransactionsView.vue";
 import ProfileView from "../views/ProfileView.vue";
 import SettingsView from "../views/SettingsView.vue";
 import CurrencyConverterView from "../views/CurrencyConverterView.vue";
+import TransactionsFormPageView from "../views/TransactionFormPageView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -83,6 +84,15 @@ const router = createRouter({
       path: "/settings",
       name: "settings",
       component: SettingsView,
+      meta: {
+        requiresAuth: true,
+      },
+      // component: () => import("../views/RegisterView.vue"),
+    },
+    {
+      path: "/transactions-create",
+      name: "transactions-create",
+      component: TransactionsFormPageView,
       meta: {
         requiresAuth: true,
       },

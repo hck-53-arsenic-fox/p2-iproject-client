@@ -5,7 +5,12 @@ import axios from 'axios'
 export const useCounterStore = defineStore('counter',  {
     state() {
         return {
-            access_token: localStorage.access_token || ''
+            access_token: localStorage.access_token || '',
+            query: {
+                filter: "",
+                page: 0,
+                search: "",
+              },
         }
     },
     actions: {
@@ -26,6 +31,11 @@ export const useCounterStore = defineStore('counter',  {
             } catch (err) {
                 console.log(err);
             }  
-          }
+          },
+          handleLogout() {
+              localStorage.clear()
+              this.access_token = ''
+              this.router.push('/login')
+                  }
     }
 })

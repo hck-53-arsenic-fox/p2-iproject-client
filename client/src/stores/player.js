@@ -9,6 +9,7 @@ export const usePlayerStore = defineStore('player', {
         following: [],
         onePlayer: {},
         userProfile: {},
+        isPro: false,
     }),
     actions: {
         logout() {
@@ -121,6 +122,50 @@ export const usePlayerStore = defineStore('player', {
                 this.router.push('/users/asd')
             } catch (error) {
                 console.log(error, '<---- error di changeStatus');
+            }
+        },
+
+        async upgradeMemberPro() {
+            try {
+                // window.snap.pay('TRANSACTION_TOKEN_HERE', {
+                //     onSuccess: function (result) {
+                //         /* You may add your own implementation here */
+                //         alert("payment success!"); console.log(result);
+                //     },
+                //     onPending: function (result) {
+                //         /* You may add your own implementation here */
+                //         alert("wating your payment!"); console.log(result);
+                //     },
+                //     onError: function (result) {
+                //         /* You may add your own implementation here */
+                //         alert("payment failed!"); console.log(result);
+                //     },
+                //     onClose: function () {
+                //         /* You may add your own implementation here */
+                //         alert('you closed the popup without finishing the payment');
+                //     }
+                // })
+
+                const { data } = await axios({
+                    method: "post",
+                    url: baseUrl + "/users/MidtransToken",
+                    headers: {
+                        access_token: localStorage.access_token
+                    },
+                })
+
+                console.log(data, '<---- data midtrans');
+                const cb = this.changeStatusPro;
+                
+                window.snap.pay(data.token, {
+                    onSuccess: function (result) {
+                        // toast.success("Payment Success");
+                        console.log('SUKSESSS BAYAR!!!');
+                        cb();
+                    },
+                });
+            } catch (error) {
+                console.log(error, '<---- error upgrade Member');
             }
         },
 

@@ -26,7 +26,7 @@ export const useGenshinStore = defineStore("Genshin Impact", {
         Swal.fire({
           icon: "success",
           title: "Register Successful",
-          text: "Your account is now Active!",
+          text: "Please verify your email to gain full access to this website",
         });
         this.router.push({ path: "/login" });
       } catch (error) {
@@ -35,6 +35,27 @@ export const useGenshinStore = defineStore("Genshin Impact", {
           icon: "error",
           title: "An Error has Occurred",
           text: showErr,
+        });
+      }
+    },
+
+    async verify(id){
+      try {   
+        let { data } = await axios({
+          method: 'PATCH',
+          url: undeployed + '/verify?id=' + id
+        })
+        Swal.fire({
+          icon: "success",
+          title: "Thank You",
+          text: 'You are now able to gain full access to the website',
+          footer: `<a href="http://localhost:5173">Take me back Home</a>`
+        });
+      } catch (err) {
+        Swal.fire({
+          icon: "error",
+          title: "Are you lost?",
+          footer: `<a href="http://localhost:5173">Take me back Home</a>`
         });
       }
     },
@@ -51,7 +72,7 @@ export const useGenshinStore = defineStore("Genshin Impact", {
         // SUCCESS >> REDIRECT TO HOME
         Swal.fire({
           icon: "success",
-          title: "Loggin In",
+          title: "Logging In",
           text: "You are now logged in",
         });
         this.showButton = "logout";
@@ -114,9 +135,7 @@ export const useGenshinStore = defineStore("Genshin Impact", {
     },
 
     async getAcc(query){
-        console.log(query, '@Store');
         const {uid} = query
-        console.log(uid, 'uid@store');
         try {
             let {data} = await axios({
                 method: 'GET',

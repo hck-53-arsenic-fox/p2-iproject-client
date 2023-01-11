@@ -6,8 +6,6 @@ import LandingPageView from "../views/LandingPageView.vue";
 import RegisterView from "../views/RegisterView.vue";
 import WalletsView from "../views/WalletsView.vue";
 import TransactionsView from "../views/TransactionsView.vue";
-import ProfileView from "../views/ProfileView.vue";
-import SettingsView from "../views/SettingsView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -56,24 +54,6 @@ const router = createRouter({
       path: "/transactions",
       name: "transactions",
       component: TransactionsView,
-      meta: {
-        requiresAuth: true,
-      },
-      // component: () => import("../views/RegisterView.vue"),
-    },
-    {
-      path: "/profile",
-      name: "profile",
-      component: ProfileView,
-      meta: {
-        requiresAuth: true,
-      },
-      // component: () => import("../views/RegisterView.vue"),
-    },
-    {
-      path: "/settings",
-      name: "settings",
-      component: SettingsView,
       meta: {
         requiresAuth: true,
       },

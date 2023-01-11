@@ -5,6 +5,7 @@ export const useCounterStore = defineStore("counter", {
   state() {
     return {
       products: [],
+      categories: [],
       product: {},
       isLogin: false,
       name: "",
@@ -74,6 +75,21 @@ export const useCounterStore = defineStore("counter", {
         });
         this.product = data;
         // console.log(this.oneNews);
+      } catch (error) {
+        Swal.fire(error.response.data.message);
+      }
+    },
+    async fetchCategories() {
+      try {
+        const { data } = await axios({
+          method: "get",
+          url: baseUrl + "/categories",
+          headers: {
+            access_token: localStorage.access_token,
+          },
+        });
+        this.categories = data;
+        console.log(data);
       } catch (error) {
         Swal.fire(error.response.data.message);
       }

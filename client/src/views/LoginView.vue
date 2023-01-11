@@ -1,6 +1,7 @@
 <script>
 import { useAppStore } from "@/stores/app";
 import { mapState, mapActions } from "pinia";
+import VFacebookLogin from "vue-facebook-login-component-next";
 
 export default {
   data() {
@@ -9,7 +10,9 @@ export default {
       password: "",
     };
   },
-  components: {},
+  components: {
+    VFacebookLogin,
+  },
   methods: {
     ...mapActions(useAppStore, ["handleLogin"]),
 
@@ -46,6 +49,16 @@ export default {
         />
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
+      <div class="row py-4"><span class="text-center">or</span></div>
+      <div
+        class="fb-login-button"
+        data-width=""
+        data-size="large"
+        data-button-type="login_with"
+        data-layout="default"
+        data-auto-logout-link="false"
+        data-use-continue-as="false"
+      ></div>
     </form>
   </div>
 </template>

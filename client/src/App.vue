@@ -9,5 +9,6 @@ import TopNavbar from "./components/TopNavbar.vue";
     <div class="container">
       <RouterView />
     </div>
+    <Footer />
   </div>
 </template>

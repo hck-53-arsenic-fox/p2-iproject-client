@@ -6,6 +6,9 @@ import RegisterPage from '../views/RegisterPage.vue'
 import PlayerProfile from '../views/PlayerProfile.vue'
 import FollowingPage from '../views/FollowingPage.vue'
 import UserProfile from '../views/UserProfile.vue'
+import TeamsPages from '../views/TeamsPage.vue'
+import NotFound from '../views/NotFound.vue'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -31,6 +34,11 @@ const router = createRouter({
       component: PlayersPage
     },
     {
+      path: '/teams',
+      name: 'teams',
+      component: TeamsPages
+    },
+    {
       path: '/players/:id',
       name: 'playerprofile',
       component: PlayerProfile
@@ -45,6 +53,11 @@ const router = createRouter({
       name: 'following',
       component: FollowingPage
     },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'notFound',
+      component: NotFound
+    }
   ]
 })
 

@@ -21,9 +21,9 @@
 <template>
     <nav class="navbar navbar-expand-lg bg-light">
   <div class="container">
-    <a class="navbar-brand" href="#">
+    <RouterLink to="/" class="navbar-brand" href="#">
       <img class="rounded-circle" width="50" height="50" src="https://i.pinimg.com/originals/48/5d/85/485d855aed063b71ff31ba6998fd55d2.jpg"/>
-    </a>
+    </RouterLink>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -33,7 +33,7 @@
           <RouterLink to="/" class="nav-link active" aria-current="page" href="#">Home</RouterLink>
         </li>
         <li class="nav-item">
-          <RouterLink to="/login" class="nav-link" href="#">Login</RouterLink>
+          <RouterLink to="/login" v-if="!isLogin" class="nav-link" href="#">Login</RouterLink>
         </li>
         <li class="nav-item">
           <a @click.prevent="logout" v-if="isLogin" class="nav-link" href="#">Logout</a>
@@ -53,7 +53,7 @@
           </ul>
         </li> -->
         <li class="nav-item">
-          <Modal class="nav-link"/>
+          <Modal v-if="isLogin" class="nav-link"/>
         </li>
       </ul>
       <!-- <form class="d-flex" role="search">

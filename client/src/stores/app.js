@@ -15,6 +15,7 @@ export const useAppStore = defineStore("app", {
     isLoggedIn: false,
     transactions: [],
     wallets: [],
+    conversionResult: 0,
   }),
   actions: {
     checkAuth() {
@@ -46,8 +47,10 @@ export const useAppStore = defineStore("app", {
           data: dataRegister,
         });
 
-        if (!result?.data) {
-          throw new Error("Frontend error: somehow unable to get result.data");
+        if (!result?.data?.access_token) {
+          throw new Error(
+            "Frontend error: somehow unable to get result.data.access_token"
+          );
         }
 
         Swal.fire({
@@ -144,6 +147,35 @@ export const useAppStore = defineStore("app", {
         this.wallets = result.data;
 
         return result.data;
+      } catch (error) {
+        handleError(error);
+      }
+    },
+
+    async fixerioConvertCurrency(from, to, amount) {
+      try {
+        console.log(from, to, amount);
+        const result = await axios({
+          method: "GET",
+          url: `https://api.freecurrencyapi.com/v1/latest?apikey=${
+            import.meta.env.VITE_FIXERIO_API_KEY
+          }&currencies=${to}&base_currency=${from}`,
+          // url: `https://api.apilayer.com/fixer/latest?base=${from}&symbols=${to}`,
+        });
+
+        if (!result?.data) {
+          throw new Error("Frontend error: somehow unable to get result.data");
+        }
+
+        Swal.fire({
+          icon: "success",
+          title: `Successfully converted ${amount} ${from} to ${
+            result.data.data["USD"] * amount
+          } ${to}`,
+        });
+
+        // also save in pinia's global state
+        return (this.conversionResult = result.data.data["USD"] * amount);
       } catch (error) {
         handleError(error);
       }

@@ -7,25 +7,31 @@ export default {
     return {
       from: "IDR",
       to: "USD",
-      amount: 0,
+      amount: 20000,
     };
   },
   components: {},
   methods: {
     ...mapActions(useAppStore, ["fixerioConvertCurrency"]),
+
+    handleSubmitButton() {
+      return this.fixerioConvertCurrency(this.from, this.to, this.amount);
+    },
   },
-  computed: {},
+  computed: {
+    ...mapState(useAppStore, ["conversionResult"]),
+  },
 };
 </script>
 
 <template>
   <div class="mb-4">
     <h1>Currency Converter</h1>
-    <span>https://apilayer.com/marketplace/fixer-api#documentation-tab</span>
+    <span>https://freecurrencyapi.com/docs</span>
   </div>
   <div>
     <form
-      @submit.prevent="fixerioConvertCurrency"
+      @submit.prevent="handleSubmitButton"
       class="bg-white p-4 w-50 rounded"
     >
       <div class="form-group">
@@ -42,6 +48,9 @@ export default {
       </div>
 
       <button type="submit" class="btn btn-primary mt-4">Convert</button>
+      <div class="mt-4 text-dark">
+        Result {{ this.conversionResult }} {{ this.to }}
+      </div>
     </form>
   </div>
 </template>

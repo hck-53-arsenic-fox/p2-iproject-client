@@ -38,8 +38,9 @@ export default {
                   style="color: #c7110d"
                 >
                   <img src="../assets/neko.svg" alt="logo" height=" 80" />
-                  <b>Uniqli Store</b>
+
                 </h1>
+
 
                 <div class="d-flex justify-content-center mt-3 mb-0">
                   <p>Sign in with Google Account</p>

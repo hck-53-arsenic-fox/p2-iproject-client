@@ -11,10 +11,11 @@ export const useCounterStore = defineStore("counter", {
         page: 0,
         search: "",
       },
-      allPage: 0,
+      allPage: '',
       products: [],
       categories: [],
-      detailProduct: {}
+      detailProduct: {},
+      carts: []
     };
   },
   actions: {
@@ -31,6 +32,9 @@ export const useCounterStore = defineStore("counter", {
                     amount
                 }
             })
+
+            this.router.push('/')
+
         } catch (err) {
             console.log(err);
         }
@@ -46,6 +50,27 @@ export const useCounterStore = defineStore("counter", {
             console.log(err);
         }
     },
+    async midtrans(id) {
+      try {
+        const {data} = await axios ({
+            method: 'GET',
+            url: `${baseUrl}/cart/payment/${id}`,
+            headers:{
+              access_token: localStorage.getItem("access_token")
+          }
+        })
+        snap.pay(data.token, {
+          onSuccess: function(result){
+            /* You may add your own implementation here */
+            alert("payment success!"); 
+            console.log(result);
+          }
+        })
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    ,
     async handleGoogleLogin(val) {
       try {
         const { data } = await axios({
@@ -58,6 +83,15 @@ export const useCounterStore = defineStore("counter", {
         localStorage.setItem("access_token", data.access_token);
         this.access_token = data.access_token;
         this.router.push("/");
+ 
+        Swal.fire({
+          title: 'Sweet!',
+          text: 'Modal with a custom image.',
+          imageUrl: 'https://unsplash.it/400/200',
+          imageWidth: 400,
+          imageHeight: 200,
+          imageAlt: 'Custom image',
+        })
       } catch (err) {
         console.log(err);
       }
@@ -92,6 +126,22 @@ export const useCounterStore = defineStore("counter", {
         console.log(err);
       }
     },
+    async deleteCart(id) {
+      try {
+        await axios ({
+          method: 'DELETE',
+          url: `${baseUrl}/cart/${id}`,
+          headers: {
+            access_token: localStorage.getItem('access_token')
+          }
+        })
+        this.fetchCart()
+        this.router.push('/cart')
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    ,
     async fetchCategory() {
         try {
             const {data} = await axios ({
@@ -102,6 +152,20 @@ export const useCounterStore = defineStore("counter", {
         } catch (err) {
             console.log(err);
         }
-    }
+    },
+    async fetchCart() {
+      try {
+          const {data} = await axios ({
+              method: 'GET',
+              url: `${baseUrl}/cart`,
+              headers: {
+                access_token: localStorage.getItem('access_token')
+              }
+          })
+          this.carts = data
+      } catch (err) {
+          console.log(err);
+      }
+  }
   },
 });

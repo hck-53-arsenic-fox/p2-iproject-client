@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import ProfileView from '../views/ProfileView.vue'
 import LoginView from '../views/LoginView.vue'
 import DetailView from '../views/DetailView.vue'
+import CartView from '../views/CartView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -26,8 +27,21 @@ const router = createRouter({
       path: '/products/:id',
       name: 'detail',
       component: DetailView
+    },
+    {
+      path: '/cart',
+      name: 'cart',
+      component: CartView
     }
   ]
+})
+
+router.beforeEach(async (to, from) => {
+  if (!localStorage.access_token && to.name === 'cart' || !localStorage.access_token && to.name === 'wishlist') {
+    return { name: 'login' }
+  } else if( localStorage.access_token && to.name === 'login' ) {
+    return { name: 'home' }
+  }
 })
 
 export default router

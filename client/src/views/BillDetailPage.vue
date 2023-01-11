@@ -25,7 +25,7 @@ export default {
           <div class="row align-items-center">
             <div class="col-3">
               <img
-                src="https://mustopa28121992.github.io/projectt/img/fox--md5--a9e377ae39495073d0e66db163fc8d9b.png"
+                src="../../public/image/bailey-anselme-Bkp3gLygyeA-unsplash.jpg"
                 alt="logo"
                 class="mx-auto d-block"
                 style="width: 70px"

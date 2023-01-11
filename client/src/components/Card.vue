@@ -53,7 +53,11 @@ export default {
       </div>
       <h6 class="text-success">Sprei Tempahan Qu</h6>
       <div class="d-flex flex-column mt-4">
-        <button class="btn btn-primary btn-sm" type="button">Details</button
+        <button
+          @click="$router.push(`/detail/${product.id}`)"
+          class="btn btn-warning"
+        >
+          Details</button
         ><button class="btn btn-outline-primary btn-sm mt-2" type="button">
           Add to wishlist
         </button>

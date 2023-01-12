@@ -17,7 +17,7 @@ export default {
     <div class="container-fluid">
       <div class="container px-4">
         <div class="row">
-          <div class="ps-0 text-light">
+          <div class="ps-0">
             <h2>Create Transaction</h2>
           </div>
           <div class="card w-100 m-auto p-3 m-4">

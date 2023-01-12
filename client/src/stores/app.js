@@ -163,7 +163,7 @@ export const useAppStore = defineStore("app", {
         }
 
         // also save in pinia's global state
-        this.wallets = result.data;
+        this.categories = result.data;
 
         return result.data;
       } catch (error) {
@@ -206,16 +206,18 @@ export const useAppStore = defineStore("app", {
           data: newTransactionObject,
           headers: {
             access_token: localStorage.getItem("access_token"),
-          }
+          },
         });
 
-        if (!result?.data?.access_token) {
-          throw new Error(
-            "Frontend error: somehow unable to get result.data.access_token"
-          );
+        if (!result?.data) {
+          throw new Error("Frontend error: somehow unable to get result.data");
         }
 
-        this.handleSuccessfulLogin(result.data);
+        Swal.fire({
+          icon: "success",
+          title: "Successfully recorded a new transaction!",
+        });
+        this.router.push("/transactions");
       } catch (error) {
         this.handleError(error);
       }

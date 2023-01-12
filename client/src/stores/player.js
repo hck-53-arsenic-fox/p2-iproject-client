@@ -2,8 +2,8 @@ import { defineStore } from 'pinia'
 import axios from 'axios'
 import { useToast } from "vue-toastification";
 
-// const baseUrl = 'http://localhost:3000'
-const baseUrl = 'https://enbie-production.up.railway.app'
+const baseUrl = 'http://localhost:3000'
+// const baseUrl = 'https://enbie-production.up.railway.app'
 
 const toast = useToast();
 

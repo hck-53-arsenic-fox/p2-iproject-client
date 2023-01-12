@@ -15,7 +15,7 @@ export default {}
       <!-- <div class=""> -->
       <div class="row col-12 text-center">
         <div class="col-6">
-          <img src="../assets/clean my sneakers logo.png" alt="" class="w-50" />
+          <img src="https://res.cloudinary.com/dnh89xvo5/image/upload/v1673522617/clean_my_sneakers_logo_hs9cyd.png" alt="" class="w-50" />
         </div>
         <div class="col-6">
           <p>

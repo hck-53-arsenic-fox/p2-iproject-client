@@ -17,6 +17,10 @@ export default {
   methods: {
     ...mapActions(useFetchStore,['fetchOrderDetail']),
     ...mapActions(useOrderStore,['updateStatusOrder']),
+    async upload(){
+            console.log(this.$refs.file.files[0],'<<<<<<<<<< ini di vue')
+            this.updateData.photoAfter=this.$refs.file.files[0]
+        },
     async update(){
       this.updateStatusOrder(this.updateData,this.$route.params.id)
     }
@@ -46,7 +50,7 @@ export default {
           <div class="row g-2 align-items-start ms-5">
             <div class="col-auto ms-3 text-end">
               <label for="address" class="col-form-label">status:</label><br />
-              <label for="address" class="col-form-label"
+              <label v-if="updateData.status === 'Completed'"  for="address" class="col-form-label"
                 >Completed Photo:</label
               ><br /><br />
             </div>
@@ -61,11 +65,7 @@ export default {
                 <option value="Cleaning On Process">Cleaning On Process</option>
                 <option value="Completed">Completed</option>
               </select>
-              <textarea
-                v-model="updateData.photoAfter"
-                class="form-control form-control-sm mb-2"
-                rows="2"
-              ></textarea>
+              <input v-if="updateData.status === 'Completed'" type="file" ref="file" placeholder="photo will be updated only for completed status" class="form-control form-control-sm mb-2" @change="upload"/>
             </div>
           </div>
         </div>

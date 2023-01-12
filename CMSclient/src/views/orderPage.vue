@@ -23,6 +23,9 @@ export default {
     methods: {
         ...mapActions(useFetchStore,['fetchServices']),
         ...mapActions(useOrderStore,['createOrder']),
+        async upload(){
+                this.dataOrder.photo=this.$refs.file.files[0]
+        },
         async order(){
             this.createOrder(this.dataOrder)
         }
@@ -59,7 +62,7 @@ export default {
               <label for="phoneNumberPIC" class="col-form-label">Active Contact:</label
               ><br />
               <label for="photo" class="col-form-label">Photo:</label
-              ><br /><br /><br />
+              ><br />
               <label for="service" class="col-form-label">Service:</label><br />
               <label for="address" class="col-form-label">Pick up Address:</label><br />
             </div>
@@ -79,11 +82,7 @@ export default {
                 <option value="rubber">Rubber</option>
             </select>
             <input type="text" class="form-control form-control-sm mb-2" v-model="dataOrder.phoneNumberPIC"/>
-              <textarea
-                class="form-control form-control-sm mb-2"
-                rows="3"
-                v-model="dataOrder.photo"
-              ></textarea>
+            <input type="file" ref="file" class="form-control form-control-sm mb-2" @change="upload"/>
               
               <select class="form-select form-select-sm mb-2" v-model="dataOrder.ServiceId">
                 <option value="" selected disabled>--- Select One ---</option>

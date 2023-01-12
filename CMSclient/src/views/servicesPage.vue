@@ -15,7 +15,6 @@ export default {
     },
     created(){
         this.fetchServices()
-        console.log(this.services)
     }
 };
 </script>

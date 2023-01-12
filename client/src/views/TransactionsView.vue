@@ -57,7 +57,16 @@ export default {
       <div class="col-12 pb-4">
         <pie-chart :data="categoriesFromTransactions"></pie-chart>
       </div>
-      <div class="col-12">
+      <!-- bootstrap button  -->
+      <div class="col-12 card">
+        <div class="col-4 p-4">
+          <button
+            @click="this.$router.push('/transactions-create')"
+            class="btn btn-primary"
+          >
+            Create new Transaction
+          </button>
+        </div>
         <table class="table table-light">
           <thead>
             <tr>

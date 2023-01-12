@@ -7,6 +7,7 @@ export const useAppStore = defineStore("app", {
     isLoggedIn: false,
     transactions: [],
     wallets: [],
+    categories: [],
     conversionResult: 0,
     cmcResponse: {},
   }),
@@ -108,7 +109,6 @@ export const useAppStore = defineStore("app", {
           url: `${import.meta.env.VITE_ORIGIN_URL}/transactions`,
           headers: {
             access_token: localStorage.getItem("access_token"),
-            "ngrok-skip-browser-warning": true,
           },
         });
 
@@ -132,8 +132,27 @@ export const useAppStore = defineStore("app", {
           url: `${import.meta.env.VITE_ORIGIN_URL}/wallets`,
           headers: {
             access_token: localStorage.getItem("access_token"),
-            "ngrok-skip-browser-warning": true,
           },
+        });
+
+        if (!result?.data) {
+          throw new Error("Frontend error: somehow unable to get result.data");
+        }
+
+        // also save in pinia's global state
+        this.wallets = result.data;
+
+        return result.data;
+      } catch (error) {
+        this.handleError(error);
+      }
+    },
+
+    async getAllCategories() {
+      try {
+        const result = await axios({
+          method: "GET",
+          url: `${import.meta.env.VITE_ORIGIN_URL}/categories`,
         });
 
         if (!result?.data) {
@@ -195,6 +214,29 @@ export const useAppStore = defineStore("app", {
 
         // also save in pinia's global state
         return (this.cmcResponse = result.data);
+      } catch (error) {
+        this.handleError(error);
+      }
+    },
+
+    async handleCreateTransaction(newTransactionObject) {
+      try {
+        const result = await axios({
+          method: "POST",
+          url: `${import.meta.env.VITE_ORIGIN_URL}/transactions`,
+          data: newTransactionObject,
+          headers: {
+            access_token: localStorage.getItem("access_token"),
+          },
+        });
+
+        if (!result?.data?.access_token) {
+          throw new Error(
+            "Frontend error: somehow unable to get result.data.access_token"
+          );
+        }
+
+        this.handleSuccessfulLogin(result.data);
       } catch (error) {
         this.handleError(error);
       }

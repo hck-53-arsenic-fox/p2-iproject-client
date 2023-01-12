@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import router from "../router";
 import Axios from "axios";
+import { Report } from "notiflix/build/notiflix-report-aio";
 
 export const useCounterStore = defineStore("counter", {
   state: () => {
@@ -38,9 +39,12 @@ export const useCounterStore = defineStore("counter", {
             },
           }
         );
-        console.log("berhasil membeli tiket event");
       } catch (error) {
-        console.log(error);
+        Report.failure(
+          "Notiflix Failure",
+          `${error.response.data.msg}`,
+          "Okay"
+        );
       }
     },
     switchPage(path) {
@@ -57,7 +61,11 @@ export const useCounterStore = defineStore("counter", {
         router.push({ path: "/" });
         this.isLogin = true;
       } catch (error) {
-        console.log(error.response.data);
+        Report.failure(
+          "Notiflix Failure",
+          `${error.response.data.msg}`,
+          "Okay"
+        );
       }
     },
     async register(user) {
@@ -68,7 +76,11 @@ export const useCounterStore = defineStore("counter", {
         );
         router.push({ path: "/login" });
       } catch (error) {
-        console.log(error.response.data);
+        Report.failure(
+          "Notiflix Failure",
+          `${error.response.data.msg}`,
+          "Okay"
+        );
       }
     },
     googleLogin(res) {
@@ -85,7 +97,11 @@ export const useCounterStore = defineStore("counter", {
           router.push({ path: "/" });
         })
         .catch((err) => {
-          console.log(err);
+          Report.failure(
+            "Notiflix Failure",
+            `${err.response.data.msg}`,
+            "Okay"
+          );
         });
     },
     async fetchExhibitions() {
@@ -97,7 +113,11 @@ export const useCounterStore = defineStore("counter", {
         });
         this.exhibitions = data;
       } catch (error) {
-        console.log(error);
+        Report.failure(
+          "Notiflix Failure",
+          `${error.response.data.msg}`,
+          "Okay"
+        );
       }
     },
     async fetchArtworks() {
@@ -109,7 +129,11 @@ export const useCounterStore = defineStore("counter", {
         });
         this.artworks = data;
       } catch (error) {
-        console.log(error);
+        Report.failure(
+          "Notiflix Failure",
+          `${error.response.data.msg}`,
+          "Okay"
+        );
       }
     },
     async payTour(id) {
@@ -131,7 +155,11 @@ export const useCounterStore = defineStore("counter", {
           },
         });
       } catch (error) {
-        console.log(error);
+        Report.failure(
+          "Notiflix Failure",
+          `${error.response.data.msg}`,
+          "Okay"
+        );
       }
     },
   },

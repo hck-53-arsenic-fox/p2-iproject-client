@@ -68,9 +68,13 @@ export const useMovieStore = defineStore('movie',{
                     method:'POST',
                     url:'http://localhost:3000/genqr/'+id
                 }) 
-                
-                this.qrtype=response.headers['content-type']
-                this.qr=response.data
+                let blob = new Blob(
+                    [response.data],
+                    {type: "image/png"}
+                );
+          
+                let imgUrl = URL.createObjectURL(blob);
+                this.qr=imgUrl
             } catch (error) {
                 console.log(error);
             }

@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import axios from "axios";
-const baseUrl = "https://flimsy-bedroom-production.up.railway.app";
+const baseUrl = "https://flimsy-bedroom-production.up.railway.app/customer";
 export const useCounterStore = defineStore("counter", {
   state() {
     return {

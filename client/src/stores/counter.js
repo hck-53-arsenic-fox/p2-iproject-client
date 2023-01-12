@@ -16,6 +16,7 @@ export const useCounterStore = defineStore("counter", {
       categories: [],
       detailProduct: {},
       carts: [],
+      bengal: []
     };
   },
   created() {
@@ -52,8 +53,22 @@ export const useCounterStore = defineStore("counter", {
             console.log(err);
         }
     },
+    async theCatApi() {
+      try {
+          const {data} = await axios ({
+              method: 'GET',
+              url: `${baseUrl}/products/bengal`
+          })
+          this.bengal = data
+      } catch (err) {
+          console.log(err);
+      }
+  }
+    ,
+    
     async midtrans(id) {
       try {
+        const tr = {}
         const {data} = await axios ({
             method: 'GET',
             url: `${baseUrl}/cart/payment/${id}`,
@@ -61,16 +76,23 @@ export const useCounterStore = defineStore("counter", {
               access_token: localStorage.getItem("access_token")
           }
         })
+        this.router.push('/')
         snap.pay(data.token, {
           onSuccess: function(result){
             /* You may add your own implementation here */
-            alert("payment success!"); 
-            console.log(result);
+            console.log(result,'<< ini result');
+            Swal.fire({
+              title: 'Sweet!',
+              text: `${result.status_message}`,
+              imageUrl: 'https://cataas.com/cat/cute/says/Aww...',
+              imageHeight: 200,
+              imageAlt: 'Custom image',
+            })
+            
           }
         })
-
-        this.fetchCart()
-        this.router.push('/cart')
+        this.deleteCart(id)
+        
       } catch (err) {
         console.log(err)
       }
@@ -140,7 +162,7 @@ export const useCounterStore = defineStore("counter", {
           }
         })
         this.fetchCart()
-        this.router.push('/cart')
+        this.routes.push('/cart')
       } catch (err) {
         console.log(err);
       }

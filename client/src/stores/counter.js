@@ -4,7 +4,7 @@ import axios from "axios";
 import Toastify from "toastify-js";
 
 
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = "https://blackdoorz-production-c909.up.railway.app";
 export const useCounterStore = defineStore("counter", {
   state: () => ({
     isLogin: false,

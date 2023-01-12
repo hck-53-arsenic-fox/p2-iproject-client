@@ -144,7 +144,7 @@ export const useCounterStore = defineStore("counter", {
       axios({
         method: "GET",
           url: "https://codzz-qr-cods.p.rapidapi.com/getQrcode",
-          params: { type: "url", value: `${BASE_URL}/room/${id}`},
+          params: { type: "url", value: `https://blackdoorz-c0f24.web.app//room/${id}`},
           headers: {
             "X-RapidAPI-Key":
               "9601e56a7emsh069af09cf95f7d9p1a8750jsn9341f472c2e9",

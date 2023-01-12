@@ -4,19 +4,38 @@ import { mapActions, mapState } from "pinia";
 import { useUserStore } from "../stores/user";
 import { useGameStore } from "../stores/game";
 export default {
+  data() {
+    return {
+      punchline: false,
+      more:true
+    }
+  },
   components: { CartPage },
   computed: {
-    ...mapState(useUserStore, ['isLogin' ])
+    ...mapState(useUserStore, ['isLogin', 'jokes'])
   },
   methods: {
     ...mapActions(useGameStore, ['rentGames']),
+    ...mapActions(useUserStore, ['dadJokes']),
     goToPage() {
         if(this.isLogin) {
             this.$router.push({name: 'consolePage'}) 
         } else {
             this.$router.push({name: 'loginPage'})
         }
+    },
+    showPunchilne() {
+      this.punchline = true
+      this.more = false
+    },
+    moreJokes() {
+      this.dadJokes()
+      this.more = true
+      this.punchline = false
     }
+  },
+  created() {
+    this.dadJokes()
   }
 };
 </script>
@@ -36,6 +55,18 @@ export default {
       >
         <a @click.prevent="goToPage" href="">Pesan Sekarang</a>
       </button>
+      <div class="text-xl mt-8 italic max-w-[400px]">
+        {{jokes.setup}}
+        <div>
+          <button v-if="jokes.setup" @click.prevent="showPunchilne" class="text-red-500 hover:text-red-600">What ?</button>
+        </div>
+        <div v-if="punchline">
+          {{ jokes.punchline }}
+        </div>
+        <div>
+          <button v-if="!more" @click.prevent="moreJokes" class="text-red-500 hover:text-red-600">Need More ?</button>
+        </div>
+      </div>
     </div>
     <div class="mt-8">
       <img src="../assets/img/ps4.webp" alt="" width="500" />

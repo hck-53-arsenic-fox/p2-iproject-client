@@ -1,6 +1,5 @@
 <script>
 import { mapActions, mapState, mapWritableState } from "pinia";
-import { RouterLink } from "vue-router";
 import { toast } from "../main";
 import { useGameStore } from "../stores/game";
 export default {
@@ -8,7 +7,7 @@ export default {
     return {
       start_date: "",
       user_email: "",
-      token :'',
+      token: "",
       address: "",
       sendData: {
         transaction_token: "",
@@ -21,18 +20,21 @@ export default {
     };
   },
   computed: {
-    ...mapState(useGameStore, ["total_price"]),
-    ...mapWritableState(useGameStore, ["rentData", "cartData"]),
+    ...mapWritableState(useGameStore, ["rentData", "cartData", "isPaid", "total_price"]),
   },
   methods: {
     ...mapActions(useGameStore, ["calculatePrice", "rentGames"]),
+    
     generateTransactionToken() {
       this.token =
         `ORDER` +
         Math.floor(1000000000000000 + Math.random() * 9000000000000000)
           .toString(36)
           .substr(0, 10);
-      this.$router.replace({name: this.$route.name, query: {transactionId: this.token}})
+      this.$router.replace({
+        name: this.$route.name,
+        query: { transactionId: this.token },
+      });
     },
     async checkout() {
       this.sendData.user = this.rentData.user;
@@ -41,32 +43,37 @@ export default {
       this.sendData.day = this.rentData.day;
       this.sendData.total_price = this.total_price;
       this.sendData.address = this.address;
-      this.sendData.transaction_token = this.$route.query.transactionId
+      this.sendData.transaction_token = this.$route.query.transactionId;
       if (!this.sendData.ConsoleId) {
         toast.error("Console cannot be empty");
       } else if (!this.sendData.address) {
         toast.error("Address cannot be empty");
       } else {
         this.cartData = this.sendData;
-        this.rentGames();
+        await this.rentGames()
+        this.generateTransactionToken()
       }
     },
-    toPdf(){
-      const data = document.getElementById('toPdf')
-      console.log(data);
-    }
+    async toPdf() {
+      try {
+        const data = document.getElementById("toPdf");
+        console.log(data);
+      } catch (err) {
+        console.log(err);
+      }
+    },
   },
   created() {
-    this.generateTransactionToken()
-    
-    this.user_email = localStorage.getItem("email")
+    this.generateTransactionToken();
+
+    this.user_email = localStorage.getItem("email");
   },
 };
 </script>
 <template>
-  <button @click.prevent="toPdf">PRINT</button>
+  <!-- <button @click.prevent="toPdf">PRINT</button> -->
   <div
-  id="toPdf"
+    id="toPdf"
     class="mx-auto mt-24 border-2 border-black w-[400px] rounded-xl p-2 shadow-lg"
   >
     <div class="text-center font-bold text-xl">
@@ -153,11 +160,12 @@ export default {
 
     <div class="mt-4">
       <button
-        @click.prevent="checkout"
+        @click="checkout"
         type="submit"
         class="rounded-xl w-full px-3 py-2 bg-green-700 tracking-wider text-white hover:-translate-y-1 hover:bg-green-600"
       >
-        <strong>Checkout</strong>
+        <strong v-if="!isPaid">Checkout</strong>
+        <strong v-if="isPaid">Success</strong>
       </button>
     </div>
   </div>

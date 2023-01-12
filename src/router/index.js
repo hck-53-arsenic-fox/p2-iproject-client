@@ -4,6 +4,7 @@ import LoginPage from '../views/LoginPage.vue'
 import ConsolePage from '../views/ConsolePage.vue'
 import GamePage from '../views/GamePage.vue'
 import CartPage from '../views/CartPage.vue'
+import ForumPage from '../views/ForumPage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -37,6 +38,11 @@ const router = createRouter({
       path: '/cart',
       name: 'cartPage',
       component: CartPage
+    },
+    {
+      path: '/forum',
+      name: 'forumPage',
+      component: ForumPage
     },
     
   ]

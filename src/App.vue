@@ -20,7 +20,7 @@ export default {
 <template>
   <Navbar
     v-if="
-      this.$route.name !== 'loginPage' && this.$route.name !== 'registerPage'
+      this.$route.name !== 'loginPage' && this.$route.name !== 'registerPage' && this.$route.name !== 'forumPage' 
     "
   />
   <div class="container flex flex-col min-h-[89vh] justify-between">

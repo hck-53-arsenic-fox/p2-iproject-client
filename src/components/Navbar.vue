@@ -36,6 +36,9 @@ export default {
         <li v-if="isLogin">
           <RouterLink to="/cart" href="">Cart</RouterLink>
         </li>
+        <li v-if="isLogin">
+          <RouterLink to="/forum" href="">Forum</RouterLink>
+        </li>
         <li v-if="!isLogin">
           <RouterLink to="/login" href="">Login</RouterLink>
         </li>

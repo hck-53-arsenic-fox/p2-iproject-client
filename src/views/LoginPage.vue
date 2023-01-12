@@ -13,7 +13,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(useUserStore, ["firebaseLogin", "firebaseRegister", ]),
+    ...mapActions(useUserStore, ["firebaseLogin", "firebaseRegister","googleLogin" ]),
     goToRegister() {
       if (this.$route.name == "loginPage") {
         this.$router.push({ name: "registerPage" });
@@ -43,9 +43,9 @@ export default {
     </div>
     <div class="w-fit mx-auto mt-24">
       <form @submit.prevent="submitData(userData)">
-        <div
+        <div  @click.prevent="googleLogin"
           v-if="this.$route.name == 'loginPage'"
-          class="rounded-xl w-[280px] px-3 py-2 border-[3px] border-neutral-900 tracking-wider text-center hover:-translate-y-1 flex items-center justify-center"
+          class="cursor-pointer rounded-xl w-[280px] px-3 py-2 border-[3px] border-neutral-900 tracking-wider text-center hover:-translate-y-1 flex items-center justify-center"
         >
           <div>
             <img

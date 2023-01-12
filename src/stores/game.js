@@ -95,6 +95,7 @@ export const useGameStore = defineStore("game", {
         this.rentData.ConsolePrice = rent_price;
         toast.success("Console aded to cart");
         this.calculatePrice();
+        this.isPaid = false
       } else {
         toast.info("Console already in cart");
       }
@@ -110,21 +111,24 @@ export const useGameStore = defineStore("game", {
           data: this.cartData,
         });
 
-        // await this.checkout(data.token)
 
-        window.snap.pay(data.token, {
+
+         window.snap.pay(data.token, {
           onSuccess: function (result) {
             /* You may add your own implementation here */
             toast.success("payment success!");
-            console.log(result);
-            
           },
         });
-
-        console.log(data);
+        this.router.push({name: 'homePage'})
+        this.resetData()
       } catch (err) {
-        console.log(err);
+        toast.error(err.response.data.message);
       }
     },
+    resetData() {
+      this.rentData.user = localStorage.getItem("access_token")
+    
+    }
+    
   },
 });

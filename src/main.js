@@ -29,6 +29,7 @@ app.use(Toast, options);
 app.mount("#app");
 
 const toast = useToast();
-const BASE_URL = "http://localhost:3000";
+// const BASE_URL = "http://localhost:3000";
+const BASE_URL = "https://bored-game.onrender.com";
 
 export { BASE_URL, toast };

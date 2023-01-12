@@ -1,6 +1,21 @@
 <script>
+import { mapActions, mapState } from "pinia";
+import { useCounterStore } from "../stores/counter";
+import { GoogleLogin } from "vue3-google-login";
+
 export default {
   name: "Navbar",
+  components: { GoogleLogin },
+  methods: {
+    ...mapActions(useCounterStore, [
+      "logout",
+      "handleGoogleLogin",
+      "tokenMidTrans",
+    ]),
+  },
+  computed: {
+    ...mapState(useCounterStore, ["isLogin", "status"]),
+  },
 };
 </script>
 
@@ -10,16 +25,7 @@ export default {
     <!-- Container wrapper -->
     <div class="container">
       <!-- Navbar brand -->
-      <a class="navbar-brand me-2" href="https://mdbgo.com/">
-        <img
-          src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
-          height="16"
-          alt="MDB Logo"
-          loading="lazy"
-          style="margin-top: -1px"
-        />
-      </a>
-
+      <img src="../../images/LaNews_Logo.png" width="70" alt="">
       <!-- Toggle button -->
       <button
         class="navbar-toggler"
@@ -51,16 +57,36 @@ export default {
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <li>
-                <a class="dropdown-item" href="#">Politics</a>
+                <a
+                  class="dropdown-item"
+                  href="#"
+                  @click.prevent="this.$router.push('/')"
+                  >Politics</a
+                >
               </li>
               <li>
-                <a class="dropdown-item" href="#">Business</a>
+                <a
+                  class="dropdown-item"
+                  href="#"
+                  @click.prevent="this.$router.push('/business')"
+                  >Business</a
+                >
               </li>
               <li>
-                <a class="dropdown-item" href="#">Technology</a>
+                <a
+                  class="dropdown-item"
+                  href="#"
+                  @click.prevent="this.$router.push('/technology')"
+                  >Technology</a
+                >
               </li>
               <li>
-                <a class="dropdown-item" href="#">Sports</a>
+                <a
+                  class="dropdown-item"
+                  href="#"
+                  @click.prevent="this.$router.push('/sports')"
+                  >Sports</a
+                >
               </li>
             </ul>
           </li>
@@ -68,14 +94,35 @@ export default {
         <!-- Left links -->
 
         <div class="d-flex align-items-center">
-          <button type="button" class="btn btn-primary me-3">Upgrade</button>
-          <a
-            class="btn btn-success px-3 me-3"
-            href="https://google.com/mdbootstrap/mdb-ui-kit"
-            role="button"
-            ><i class="fab fa-google"></i
-          ></a>
-          <button type="button" class="btn btn-primary me-3">Login</button>
+          <button
+            type="button"
+            class="btn btn-primary me-3"
+            @click.prevent="tokenMidTrans"
+            v-if="isLogin && status !== 'VIP'"
+          >
+            Upgrade
+          </button>
+          <GoogleLogin
+            :callback="handleGoogleLogin"
+            v-if="!isLogin"
+            style="margin-right: 20px"
+          />
+          <button
+            type="button"
+            class="btn btn-primary me-3"
+            @click.prevent="this.$router.push('/login')"
+            v-if="!isLogin"
+          >
+            Login
+          </button>
+          <button
+            type="button"
+            class="btn btn-danger me-3"
+            @click.prevent="logout"
+            v-if="isLogin"
+          >
+            Logout
+          </button>
         </div>
       </div>
       <!-- Collapsible wrapper -->

@@ -27,7 +27,19 @@ export const useResortStore = defineStore('resort', {
           }
         })
         this.router.push('/login')
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Welcome aboard! 🎉',
+          showConfirmButton: false,
+          timer: 1500
+        })
       } catch (error) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: `${error.response.data.message}`
+        })
         console.log(error);
       }
     },
@@ -47,7 +59,14 @@ export const useResortStore = defineStore('resort', {
         localStorage.setItem('access_token', data.access_token)
         this.router.push('/resorts')
         this.isLogin = true
+        Swal.fire('Welcome! 😄')
+
       } catch (error) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: `${error.response.data.message}`
+        })
         console.log(error);
       }
     },
@@ -57,6 +76,8 @@ export const useResortStore = defineStore('resort', {
       this.isLogin = false
       localStorage.clear()
       this.router.push('/')
+      Swal.fire('Bye bye! 👋🏼')
+
     },
 
     //? Read all resorts
@@ -104,7 +125,13 @@ export const useResortStore = defineStore('resort', {
           }
         })
         this.router.push(`/resorts/${data.id}`)
-
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Success create resort! 🎉',
+          showConfirmButton: false,
+          timer: 1500
+        })
       } catch (error) {
         console.log(error);
       }
@@ -127,14 +154,17 @@ export const useResortStore = defineStore('resort', {
         })
         this.fetchOneResort(id)
         this.router.push(`/resorts/${id}`)
+        Swal.fire({
+          position: 'top-center',
+          icon: 'success',
+          title: 'Your review has been saved',
+          showConfirmButton: false,
+          timer: 1500
+        })
       } catch (error) {
         console.log(error);
       }
-    }
-
-
-
-    ,
+    },
 
     //? Google Login
     async googleLogin(credential) {

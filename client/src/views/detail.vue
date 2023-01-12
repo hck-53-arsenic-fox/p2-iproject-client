@@ -19,7 +19,7 @@ export default {
 
   },
   computed: {
-    ...mapState(useResortStore, ['resort', 'mapToken']),
+    ...mapState(useResortStore, ['resort', 'mapToken', 'isLogin']),
 
   },
   methods: {
@@ -64,10 +64,13 @@ export default {
       class="relative flex flex-col m-6 space-y-10 bg-white shadow-xl md:flex-row md:space-y-0 md:m-0 w-auto divide-x-2">
 
       <!-- left side -->
-      <div class="flex basis-1/3 p-4 md:p-5 bg-white w-full h-full flex-col justify-center">
+      <div class="flex basis-1/3 p-4 md:p-5 bg-white w-full h-screen flex-col justify-center">
 
         <!-- Top -->
         <div class="p-2 m-2 rounded-xl justify-center self-center items-center">
+          <p class="my-3 self-center items-center text-center">
+            Location
+          </p>
           <div id='map' style="width: 350px; height: 350px;" class="rounded-2xl"></div>
 
         </div>
@@ -75,7 +78,7 @@ export default {
         <!-- bottom -->
         <div class="w-full rounded-xl p-2 justify-center items-center self-center">
 
-          <form action="">
+          <form class="w-full h-full" v-if="isLogin === true">
             <div class="p-5 w-full items-center self-center">
               <fieldset class="starability-slot" style="margin-auto">
                 <legend class="text-center">Rating</legend>

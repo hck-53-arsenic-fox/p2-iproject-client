@@ -8,17 +8,14 @@ export const useAppStore = defineStore("app", {
     transactions: [],
     wallets: [],
     conversionResult: 0,
+    cmcResponse: {},
   }),
   actions: {
     checkAuth() {
       this.isLoggedIn = !!localStorage.getItem("access_token");
-
-      if (this.isLoggedIn) {
-        this.getAllTransactions();
-      }
     },
 
-    handlneError(error) {
+    handleError(error) {
       Swal.fire({
         icon: "error",
         title: "Backend server returned an error",
@@ -175,6 +172,29 @@ export const useAppStore = defineStore("app", {
 
         // also save in pinia's global state
         return (this.conversionResult = result.data.data["USD"] * amount);
+      } catch (error) {
+        this.handleError(error);
+      }
+    },
+
+    async getCMCWraperAPI() {
+      try {
+        const result = await axios({
+          method: "GET",
+          url: `${import.meta.env.VITE_ORIGIN_URL}/information/crypto`,
+        });
+
+        if (!result?.data) {
+          throw new Error("Frontend error: somehow unable to get result.data");
+        }
+
+        Swal.fire({
+          icon: "success",
+          title: `Successfully retrieved crypto prices`,
+        });
+
+        // also save in pinia's global state
+        return (this.cmcResponse = result.data);
       } catch (error) {
         this.handleError(error);
       }

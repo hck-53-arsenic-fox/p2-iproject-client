@@ -75,6 +75,14 @@ export default {
         </li>
         <li class="nav-item">
           <RouterLink
+            to="/crypto"
+            class="nav-link"
+            active-class="router-link-exact-active"
+            >Top 10 Crypto</RouterLink
+          >
+        </li>
+        <li class="nav-item">
+          <RouterLink
             to="/converter"
             class="nav-link"
             active-class="router-link-exact-active"

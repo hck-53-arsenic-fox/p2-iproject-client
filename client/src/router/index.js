@@ -11,6 +11,7 @@ import CurrencyConverterView from "../views/CurrencyConverterView.vue";
 import TransactionsFormPageView from "../views/TransactionFormPageView.vue";
 import PrivacyView from "../views/PrivacyView.vue";
 import DataDeletionView from "../views/DataDeletionView.vue";
+import CryptoPricesView from "../views/CryptoPricesView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -77,6 +78,15 @@ const router = createRouter({
       path: "/converter",
       name: "converter",
       component: CurrencyConverterView,
+      meta: {
+        requiresAuth: true,
+      },
+      // component: () => import("../views/RegisterView.vue"),
+    },
+    {
+      path: "/crypto",
+      name: "crypto",
+      component: CryptoPricesView,
       meta: {
         requiresAuth: true,
       },

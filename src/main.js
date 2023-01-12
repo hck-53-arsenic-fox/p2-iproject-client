@@ -12,7 +12,7 @@ app.use(pinia);
 app.use(router);
 app.use(vue3GoogleLogin, {
   clientId:
-    "774674133889-nrp72aef107gei08mkial8ttl7tmld5g.apps.googleusercontent.com",
+    "490795217386-iv133ous7mbev5okt3hplql5hs2u602f.apps.googleusercontent.com",
 });
 
 pinia.use(({ store }) => {

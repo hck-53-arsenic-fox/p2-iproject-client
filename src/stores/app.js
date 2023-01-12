@@ -11,6 +11,8 @@ export const useAppStore = defineStore("app", {
 	state() {
 		return {
 			userInfo: "",
+			openModal: false,
+			display: "none",
 		};
 	},
 	getters: {},
@@ -65,6 +67,20 @@ export const useAppStore = defineStore("app", {
 			} catch (error) {
 				this.errorHandler(error);
 			}
+		},
+
+		toggleModal() {
+			this.openModal = !this.openModal;
+			if (this.display === "none") {
+				this.display = "block";
+			} else {
+				this.display = "none";
+			}
+		},
+
+		logout() {
+			localStorage.clear();
+			this.router.push("/login");
 		},
 	},
 });

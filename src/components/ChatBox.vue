@@ -12,7 +12,8 @@ export default {
 
 <style scoped>
 section {
-    background-color: antiquewhite;
+    background-color: rgb(220, 229, 239);
+    margin-top: 5rem;
     height: 80%;
     width: 67%;
 }

@@ -5,12 +5,14 @@ import { useAppStore } from '../stores/app'
 import Navbar from '../components/Navbar.vue';
 import ChatList from '../components/ChatList.vue'
 import ChatBox from '../components/ChatBox.vue';
+import ProfileModal from '../components/ProfileModal.vue';
 
 export default {
     components: {
         Navbar,
         ChatList,
-        ChatBox
+        ChatBox,
+        ProfileModal
     },
     computed: {
         ...mapState(useAppStore, ['userInfo'])
@@ -28,6 +30,7 @@ export default {
 <template>
     <div class="page-container">
         <Navbar />
+        <ProfileModal class="position-absolute top-50 start-50 translate-middle" />
 
         <ChatList />
 

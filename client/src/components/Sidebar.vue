@@ -36,6 +36,10 @@ export default{
                             <i class="mx-auto text-gray-400 text-[25px] group-hover:text-[27px] fa-solid fa-chart-column"></i>
                             <span class="text-gray-400 text-[12px] mx-auto">Grafik </span>
                         </RouterLink>
+                        <RouterLink to="/pizza" href="" class="text-base group hover:font-medium flex flex-col my-6">
+                            <i class="mx-auto text-gray-400 text-[25px] group-hover:text-[27px] fa-solid fa-dumpster-fire"></i>
+                            <span class="text-gray-400 text-[12px] mx-auto">Out Of Stock </span>
+                        </RouterLink>
                     </li>
                 </ul>
                 <ul>

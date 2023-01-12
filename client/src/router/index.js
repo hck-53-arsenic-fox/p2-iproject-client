@@ -7,6 +7,8 @@ import History from '../views/History.vue'
 import Chart from '../views/Chart.vue'
 import Register from '../views/Register.vue'
 import DownloadHistory from '../views/DownloadHistory.vue'
+import Pizza from '../views/Pizza.vue'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -71,6 +73,18 @@ const router = createRouter({
       path: '/charts',
       name: 'chart',
       component: Chart,
+      beforeEnter: (to, from, next)=> {
+        if (localStorage.getItem('token')) {
+          next()
+        } else {
+          next('/login')
+        }
+      }
+    },
+    {
+      path: '/pizza',
+      name: 'pizza',
+      component: Pizza,
       beforeEnter: (to, from, next)=> {
         if (localStorage.getItem('token')) {
           next()

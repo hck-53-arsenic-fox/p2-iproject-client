@@ -1,7 +1,7 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import axios from 'axios'
-const url = 'http://localhost:3000/'
+const url = 'https://ngacir-app.up.railway.app/'
 import Notiflix from 'notiflix';
 
 export const useCounterStore = defineStore('counter', {
@@ -17,7 +17,8 @@ export const useCounterStore = defineStore('counter', {
     dataTotalSalesTable: 0,
     dataHistoryDate: [],
     qrCode : '',
-    imgWA : ''
+    imgWA : '',
+    dataPizza: []
   }
   },
 
@@ -55,23 +56,23 @@ export const useCounterStore = defineStore('counter', {
       }
     },
 
-    // async imgWA(phone){
-    //   try {
-    //     let res = await axios({
-    //       method: 'GET',
-    //       url: 'https://whatsapp-profile-pic.p.rapidapi.com/wspic/url',
-    //       params: {phone: phone},
-    //       headers: {
-    //         'X-RapidAPI-Key': 'aa9f45c161msh8b76244fe7f5a3dp1ee4ecjsn4c91517029fc',
-    //         'X-RapidAPI-Host': 'whatsapp-profile-pic.p.rapidapi.com'
-    //       }
-    //     })
-    //     this.imgWA = res.data 
-    //     console.log(this.imgWA);
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // },
+    async imgWA(phone){
+      try {
+        let res = await axios({
+          method: 'GET',
+          url: 'https://whatsapp-profile-pic.p.rapidapi.com/wspic/url',
+          params: {phone: phone},
+          headers: {
+            'X-RapidAPI-Key': 'aa9f45c161msh8b76244fe7f5a3dp1ee4ecjsn4c91517029fc',
+            'X-RapidAPI-Host': 'whatsapp-profile-pic.p.rapidapi.com'
+          }
+        })
+        this.imgWA = res.data 
+        console.log(this.imgWA);
+      } catch (error) {
+        console.log(error);
+      }
+    },
 
     async fetchProduct(type){
       try {
@@ -276,6 +277,9 @@ export const useCounterStore = defineStore('counter', {
           localStorage.setItem('token', res.data.access_token)
           localStorage.setItem('email', res.data.email)
           this.router.push({name: 'home'})
+          Notiflix.Notify.success('Welcome! :)', {
+            timeout: 1000
+          });
       } catch (error) {
         console.log(error);
       }
@@ -334,6 +338,22 @@ export const useCounterStore = defineStore('counter', {
         console.log(error);
       }
     },
+
+    async fetchPizza(){
+      try {
+        let res = await axios({
+          method: 'GET',
+          url: 'https://pizza-and-desserts.p.rapidapi.com/pizzas',
+          headers: {
+            'X-RapidAPI-Key': 'aa9f45c161msh8b76244fe7f5a3dp1ee4ecjsn4c91517029fc',
+            'X-RapidAPI-Host': 'pizza-and-desserts.p.rapidapi.com'
+          }
+        })
+        this.dataPizza = res.data
+      } catch (error) {
+        console.log(error);
+      }
+    }
 
     // async formatDate(date){
     //   try {

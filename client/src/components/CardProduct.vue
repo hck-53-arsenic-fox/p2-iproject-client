@@ -4,17 +4,16 @@ import { useCounterStore } from '../stores/counter'
 
 export default {
   name: "CardProduct",
+  methods: {
+    ...mapActions(useCounterStore, ['postWishlist'])
+  },
   data() {
     return {
-      da: 0
     }
   },
   props: ['item', 'page', ],
   computed:{
     ...mapState(useCounterStore,['access_token'])
-  },
-  data() {
-    return {};
   },
 };
 </script>
@@ -22,8 +21,8 @@ export default {
 <template>
   <div class="col m-auto pt-5">
     <div class="card" style="width: 18rem">
-      <div class="card-link d-flex justify-content-end mx-3" v-if="access_token" >
-        <a v-if="page === 'home'" href=""  >Favorite <i class="fas fa-heart"></i></a>
+      <div class="card-link d-flex justify-content-end mx-3" v-if="access_token"  >
+        <a  @click.prevent="postWishlist(item?.id)" v-if="page === 'home'" href=""  >Wishlist <i class="fas fa-heart"></i></a>
       </div>
       <div class="card-img-top  hover-zoom ripple ripple-surface ripple-surface-light ">
         <img 

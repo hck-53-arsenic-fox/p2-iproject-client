@@ -11,93 +11,109 @@ export const useCounterStore = defineStore("counter", {
         page: 0,
         search: "",
       },
-      allPage: '',
+      allPage: "",
       products: [],
       categories: [],
       detailProduct: {},
       carts: [],
-      bengal: []
+      wishlist: [],
+      bengal: [],
     };
   },
-  created() {
-  },
+  created() {},
   actions: {
-    async postCart(amount, id){
-        try {
-            console.log(amount,'<<<  ini amount');
-            await axios({
-                method: "POST",
-                url: `${baseUrl}/cart/${id}`,
-                headers:{
-                    access_token: localStorage.getItem("access_token")
-                },
-                data: {
-                    amount
-                }
-            })
+    async postCart(amount, id) {
+      try {
+        await axios({
+          method: "POST",
+          url: `${baseUrl}/cart/${id}`,
+          headers: {
+            access_token: localStorage.getItem("access_token"),
+          },
+          data: {
+            amount,
+          },
+        });
 
-            this.router.push('/')
-
-        } catch (err) {
-            console.log(err);
-        }
+        this.router.push("/");
+      } catch (err) {
+                Swal.fire({
+          title: "Error",
+          text: " Something went wrong",
+          imageUrl: "https://cataas.com/cat/cute/says/Aww...",
+          imageHeight: 200,
+          imageAlt: "Custom image",
+        });
+      }
     },
     async handleDetailbyId(id) {
-        try {
-            const {data} = await axios ({
-                method: 'GET',
-                url: `${baseUrl}/products/${id}` 
-            })  
-            this.detailProduct = data 
-        } catch (err) {
-            console.log(err);
-        }
+      try {
+        const { data } = await axios({
+          method: "GET",
+          url: `${baseUrl}/products/${id}`,
+        });
+        this.detailProduct = data;
+      } catch (err) {
+                Swal.fire({
+          title: "Error",
+          text: " Something went wrong",
+          imageUrl: "https://cataas.com/cat/cute/says/Aww...",
+          imageHeight: 200,
+          imageAlt: "Custom image",
+        });
+      }
     },
     async theCatApi() {
       try {
-          const {data} = await axios ({
-              method: 'GET',
-              url: `${baseUrl}/products/bengal`
-          })
-          this.bengal = data
+        const { data } = await axios({
+          method: "GET",
+          url: `${baseUrl}/products/bengal`,
+        });
+        this.bengal = data;
       } catch (err) {
-          console.log(err);
+                Swal.fire({
+          title: "Error",
+          text: " Something went wrong",
+          imageUrl: "https://cataas.com/cat/cute/says/Aww...",
+          imageHeight: 200,
+          imageAlt: "Custom image",
+        });
       }
-  }
-    ,
-    
+    },
     async midtrans(id) {
       try {
-        const tr = {}
-        const {data} = await axios ({
-            method: 'GET',
-            url: `${baseUrl}/cart/payment/${id}`,
-            headers:{
-              access_token: localStorage.getItem("access_token")
-          }
-        })
-        this.router.push('/')
+        const tr = {};
+        const { data } = await axios({
+          method: "GET",
+          url: `${baseUrl}/cart/payment/${id}`,
+          headers: {
+            access_token: localStorage.getItem("access_token"),
+          },
+        });
+        this.router.push("/");
         snap.pay(data.token, {
-          onSuccess: function(result){
+          onSuccess: function (result) {
             /* You may add your own implementation here */
-            console.log(result,'<< ini result');
             Swal.fire({
-              title: 'Sweet!',
+              title: "Sweet!",
               text: `${result.status_message}`,
-              imageUrl: 'https://cataas.com/cat/cute/says/Aww...',
+              imageUrl: "https://cataas.com/cat/cute/says/Aww...",
               imageHeight: 200,
-              imageAlt: 'Custom image',
-            })
-            
-          }
-        })
-        this.deleteCart(id)
-        
+              imageAlt: "Custom image",
+            });
+          },
+        });
+        this.deleteCart(id);
       } catch (err) {
-        console.log(err)
+                Swal.fire({
+          title: "Error",
+          text: " Something went wrong",
+          imageUrl: "https://cataas.com/cat/cute/says/Aww...",
+          imageHeight: 200,
+          imageAlt: "Custom image",
+        });
       }
-    }
-    ,
+    },
     async handleGoogleLogin(val) {
       try {
         const { data } = await axios({
@@ -110,16 +126,22 @@ export const useCounterStore = defineStore("counter", {
         localStorage.setItem("access_token", data.access_token);
         this.access_token = data.access_token;
         this.router.push("/");
- 
+
         Swal.fire({
-          title: 'Sweet!',
-          text: 'Modal with a custom image.',
-          imageUrl: 'https://cataas.com/cat/cute/says/Aww...',
+          title: "Welcome to Neko Store",
+          text: " new cat food upcoming next wednesday",
+          imageUrl: "https://cataas.com/cat/cute/says/Aww...",
           imageHeight: 200,
-          imageAlt: 'Custom image',
-        })
+          imageAlt: "Custom image",
+        });
       } catch (err) {
-        console.log(err);
+        Swal.fire({
+          title: "Error",
+          text: " Something went wrong",
+          imageUrl: "https://cataas.com/cat/cute/says/Aww...",
+          imageHeight: 200,
+          imageAlt: "Custom image",
+        });
       }
     },
     handleLogout() {
@@ -149,49 +171,134 @@ export const useCounterStore = defineStore("counter", {
         this.products = data.rows;
         this.allPage = Math.ceil(data.count / 6);
       } catch (err) {
-        console.log(err);
+                Swal.fire({
+          title: "Error",
+          text: " Something went wrong",
+          imageUrl: "https://cataas.com/cat/cute/says/Aww...",
+          imageHeight: 200,
+          imageAlt: "Custom image",
+        });
       }
     },
     async deleteCart(id) {
       try {
-        await axios ({
-          method: 'DELETE',
+        await axios({
+          method: "DELETE",
           url: `${baseUrl}/cart/${id}`,
           headers: {
-            access_token: localStorage.getItem('access_token')
-          }
-        })
-        this.fetchCart()
-        this.routes.push('/cart')
+            access_token: localStorage.getItem("access_token"),
+          },
+        });
+        this.fetchCart();
+        this.routes.push("/cart");
       } catch (err) {
-        console.log(err);
+                Swal.fire({
+          title: "Error",
+          text: " Something went wrong",
+          imageUrl: "https://cataas.com/cat/cute/says/Aww...",
+          imageHeight: 200,
+          imageAlt: "Custom image",
+        });
       }
-    }
-    ,
+    },
     async fetchCategory() {
-        try {
-            const {data} = await axios ({
-                method: 'GET',
-                url: `${baseUrl}/categories`
-            })
-            this.categories = data
-        } catch (err) {
-            console.log(err);
-        }
+      try {
+        const { data } = await axios({
+          method: "GET",
+          url: `${baseUrl}/categories`,
+        });
+        this.categories = data;
+      } catch (err) {
+                Swal.fire({
+          title: "Error",
+          text: " Something went wrong",
+          imageUrl: "https://cataas.com/cat/cute/says/Aww...",
+          imageHeight: 200,
+          imageAlt: "Custom image",
+        });
+      }
     },
     async fetchCart() {
       try {
-          const {data} = await axios ({
-              method: 'GET',
-              url: `${baseUrl}/cart`,
-              headers: {
-                access_token: localStorage.getItem('access_token')
-              }
-          })
-          this.carts = data
+        const { data } = await axios({
+          method: "GET",
+          url: `${baseUrl}/cart`,
+          headers: {
+            access_token: localStorage.getItem("access_token"),
+          },
+        });
+        this.carts = data;
       } catch (err) {
-          console.log(err);
+                Swal.fire({
+          title: "Error",
+          text: " Something went wrong",
+          imageUrl: "https://cataas.com/cat/cute/says/Aww...",
+          imageHeight: 200,
+          imageAlt: "Custom image",
+        });
       }
-  }
+    },
+    async fetchwishlist() {
+      try {
+        const { data } = await axios({
+          method: "GET",
+          url: `${baseUrl}/wishlist`,
+          headers: {
+            access_token: localStorage.getItem("access_token"),
+          },
+        });
+        this.wishlist = data;
+      } catch (err) {
+                Swal.fire({
+          title: "Error",
+          text: " Something went wrong",
+          imageUrl: "https://cataas.com/cat/cute/says/Aww...",
+          imageHeight: 200,
+          imageAlt: "Custom image",
+        });
+      }
+    },
+    async postWishlist(id) {
+      try {
+        await axios({
+          method: "POST",
+          url: `${baseUrl}/wishlist/${id}`,
+          headers: {
+            access_token: localStorage.getItem("access_token"),
+          }
+        });
+
+        this.router.push("/");
+      } catch (err) {
+                Swal.fire({
+          title: "Sorry..",
+          text: " You already add this to your wishlist",
+          imageUrl: "https://cataas.com/cat/cute/says/Aww...",
+          imageHeight: 200,
+          imageAlt: "Custom image",
+        });
+      }
+    },
+    async deleteWishlist(id) {
+      try {
+        await axios({
+          method: "DELETE",
+          url: `${baseUrl}/wishlist/${id}`,
+          headers: {
+            access_token: localStorage.getItem("access_token"),
+          },
+        });
+        this.fetchwishlist();
+        this.routes.push("/wishlist");
+      } catch (err) {
+                Swal.fire({
+          title: "Error",
+          text: " Something went wrong",
+          imageUrl: "https://cataas.com/cat/cute/says/Aww...",
+          imageHeight: 200,
+          imageAlt: "Custom image",
+        });
+      }
+    }
   },
 });

@@ -6,16 +6,25 @@ export default {
   name: "DetailPage",
   data() {
     return {
-        amount: {
-            first: 0
-        }
-    }
+      amount: {
+        first: 0,
+      },
+    };
   },
   computed: {
     ...mapState(useCounterStore, ["detailProduct"]),
   },
   methods: {
-    ...mapActions(useCounterStore, ["handleDetailbyId", 'postCart']),
+    ...mapActions(useCounterStore, ["handleDetailbyId", "postCart"]),
+    plus() {
+      this.amount.first+=1
+    },
+    min() {
+      this.amount.first-=1
+      if (this.amount.first < 0 ) {
+        this.amount.first = 0
+      }
+    }
   },
   created() {
     this.handleDetailbyId(this.$route.params.id);
@@ -30,7 +39,6 @@ export default {
       <div v-for="item in detailProduct" :key="item.id">
         <!-- Portfolio Item Heading -->
         <h1 class="my-4">{{ item.name }}</h1>
-
         <!-- Portfolio Item Row -->
         <div class="row">
           <div class="col-md-8">
@@ -62,18 +70,24 @@ export default {
                 </p>
               </div>
               <div class="mx-3">
-                <form  @submit.prevent="postCart(amount.first, item.id)" >
-                    <input type="number" v-model="amount.first" class="my-2">
-                    <button
-                      type="submit"
-                      class="btn btn-success btn-block btn-lg gradient-custom-4 text-body bi"
-                    >
-                      <b
-                        style="color: rgb(44, 43, 38)"
-                      >
-                        Amount</b
-                      >
-                    </button>
+                <form @submit.prevent="postCart(amount.first, item.id)">
+
+                  <div class="d-flex my-4">
+                    <div>
+                      <button class="btn" @click.prevent="min" >-</button>
+                    </div>
+                    <div>
+                      <button class="btn" @click.prevent="plus" >+</button>
+                    </div>
+
+                  </div>
+
+                  <button
+                    type= "submit"
+                    class="btn btn-success btn-block btn-lg gradient-custom-4 text-body bi"
+                  >
+                    <b style="color: rgb(44, 43, 38)"> Total : {{ amount.first }}</b>
+                  </button>
                 </form>
               </div>
             </div>

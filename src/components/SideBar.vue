@@ -2,18 +2,27 @@
 import { mapActions, mapState } from 'pinia';
 import { useAppStore } from '../stores/app';
 
+import UserListBox from './UserListBox.vue';
 export default {
+    components: {
+        UserListBox
+    },
     data() {
         return {
             dimmer: true,
-            right: false
+            right: false,
+            search: '',
         };
     },
     computed: {
-        ...mapState(useAppStore, ['openSideBar'])
+        ...mapState(useAppStore, ['openSideBar', 'userList'])
     },
     methods: {
-        ...mapActions(useAppStore, ['toggleSidebar'])
+        ...mapActions(useAppStore, ['toggleSidebar', 'searchUsers']),
+
+        searchComponent() {
+            this.searchUsers(this.search)
+        }
     }
 };
 </script>
@@ -27,10 +36,15 @@ export default {
                 <!-- Sidebar Content -->
                 <div ref="content" class="sidebar-content" :class="[openSideBar ? 'opened' : 'closed']">
                     <div class="search-container">
-                        <form class="m-0 p-0">
-                            <input type="text" placeholder="Search.." name="search">
-                            <button type="submit"><i class="mdi mdi-magnify"></i></button>
+                        <form class="mt-4 p-0">
+                            <input type="text" placeholder="Search.." name="search" v-model="search">
+                            <button type="submit" @click.prevent="searchComponent"><i
+                                    class="mdi mdi-magnify"></i></button>
                         </form>
+
+                        <div class="user-container">
+                            <UserListBox v-for="user in userList" :key="user._id" :user="user" />
+                        </div>
                     </div>
 
 
@@ -135,8 +149,13 @@ input[type=text] {
 form {
     border: 1px solid grey;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    padding: 0;
+}
+
+form input {
+    padding-left: 0.5rem;
 }
 
 .search-container button {

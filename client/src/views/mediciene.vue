@@ -24,7 +24,6 @@ export default{
             <h2>Medicine</h2>
             <h5>The Most Frequently Searched The Medicines Categories</h5>
         </div>
-
         <div class="doctors-content">
             <div class="row" v-for="medicine in medicines" :key="medicine.id">
                 <div class="courses-text">

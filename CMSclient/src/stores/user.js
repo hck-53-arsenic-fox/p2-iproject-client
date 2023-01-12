@@ -13,7 +13,7 @@ export const useUserStore = defineStore("user", {
       phoneNumber: "",
       address: "",
       role: "",
-      isLogin: false,
+      isLogin: false
     };
   },
   actions: {

@@ -29,7 +29,7 @@ body {
   position: relative;
 }
 
-body::-webkit-scrollbar {
+::-webkit-scrollbar {
   display: none;
 }
 

@@ -28,7 +28,7 @@ export default {
                 </span></button>
         </header>
 
-        <div v-if="chatList.length">
+        <div v-if="chatList.length" class="chatContainer">
             <ChatListBox v-for="chat in chatList" :key="chat._id" :item="chat" />
         </div>
     </section>
@@ -67,5 +67,9 @@ header button {
 header button:hover {
     background-color: var(--primaryBlue);
     color: rgb(157, 167, 245);
+}
+
+.chatContainer {
+    overflow: scroll;
 }
 </style>

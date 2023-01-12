@@ -178,6 +178,11 @@ form input {
     background: #ccc;
 }
 
+
+.user-container {
+    overflow: scroll;
+}
+
 /* Search Container END*/
 
 

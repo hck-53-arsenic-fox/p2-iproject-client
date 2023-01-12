@@ -1,6 +1,7 @@
 <script>
 import { mapActions } from 'pinia';
 import { useCounterStore } from '../stores/counter';
+import {GoogleLogin} from 'vue3-google-login'
 
 export default {
   name: "LoginPage",
@@ -13,7 +14,10 @@ export default {
     }
   },
   methods:{
-    ...mapActions(useCounterStore, ['handleLogin'])
+    ...mapActions(useCounterStore, ['handleLogin','handleGoogleLogin'])
+  },
+  components:{
+    GoogleLogin
   }
 };
 </script>
@@ -75,7 +79,7 @@ export default {
                     </div>
                     <p>- OR -</p>
                     <div>
-                      <button>INI GOOGLE MAU FACEBOOK GA NGERTI</button>
+                      <GoogleLogin :callback="handleGoogleLogin"/>
                     </div>
                   </center>
                 </form>

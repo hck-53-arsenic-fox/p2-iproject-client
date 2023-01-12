@@ -5,15 +5,15 @@ import { useCounterStore } from '../stores/counter';
 export default {
     name: "HomePage",
     computed:{
-      ...mapState(useCounterStore, ['articles','twoTeam', 'live'])
+      ...mapState(useCounterStore, ['twoTeam', 'live', 'fourArticle','role','articles', 'access_token'])
     },
     methods:{
-      ...mapActions(useCounterStore, ['getArticles', 'getTeams', 'handleLive'])
+      ...mapActions(useCounterStore, [ 'getTeams', 'handleLive','articleBasket'])
     },
     created(){
-      this.getArticles()
       this.getTeams()
       this.handleLive()
+      this.articleBasket()
 
     }
 }
@@ -21,7 +21,6 @@ export default {
 </script>
 
 <template>
-   
      <section style="padding-top: 10px;">     
       <div class="container">
           <div class="row">
@@ -87,14 +86,8 @@ export default {
               <div class="col-lg-4">
                   <!-- Side widget-->
                   <div class="card mb-4">
-                      <div class="card-header">Headline</div>
-                      <div class="card-body">You can put anything you want inside of these side widgets. They are easy to use, and feature the Bootstrap 5 card component!</div>
-                      <div class="card-header">Headline</div>
-                      <div class="card-body">You can put anything you want inside of these side widgets. They are easy to use, and feature the Bootstrap 5 card component!</div>
-                      <div class="card-header">Headline</div>
-                      <div class="card-body">You can put anything you want inside of these side widgets. They are easy to use, and feature the Bootstrap 5 card component!</div>
-                      <div class="card-header">Headline</div>
-                      <div class="card-body">You can put anything you want inside of these side widgets. They are easy to use, and feature the Bootstrap 5 card component!</div>
+                      <div class="card-header" v-for="el in articles" :key="el.id"><a :href="el.url">{{ el.title }}</a></div>
+                      
 
                   </div>
               </div>
@@ -103,6 +96,7 @@ export default {
   </section>
 
   <!-- content Page -->
+  <div v-if="role !== 'Unsubscribe' && access_token">
   <center>
     <h3>STATISTIC LIVE MATCH</h3>
   </center>
@@ -142,5 +136,6 @@ export default {
         </div>
       </div>
     </div>
+  </div>
 
 </template>

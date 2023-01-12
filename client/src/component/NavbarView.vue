@@ -5,10 +5,10 @@ import { useCounterStore } from '../stores/counter';
 export default {
     name: "NavbarView",
     computed: {
-      ...mapState(useCounterStore, ['access_token'])
+      ...mapState(useCounterStore, ['access_token','role'])
     },
     methods:{
-      ...mapActions(useCounterStore, ['handleLogut']),
+      ...mapActions(useCounterStore, ['handleLogut','midTrans']),
       changePage(value){
         this.$router.push(value)
       }
@@ -39,17 +39,16 @@ export default {
               </a>
               <ul class="dropdown-menu">
                 <li><RouterLink class="dropdown-item" to="/teams">Teams</RouterLink></li>
-                <li><a class="dropdown-item" href="#"> Articles</a></li>
               </ul>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">About Subscribe</a>
+              <RouterLink class="nav-link" to="/about-subscribe">About Subscribe</RouterLink>
             </li>
           </ul>
           <div>
-            <button class="btn btn-outline-success" type="submit" style="margin-right: 10px;">Subscribes</button>
-            <button class="btn btn-outline-success" type="submit" @click.prevent="changePage('/login')" v-if="!access_token">Login </button>
-            <button class="btn btn-outline-success" type="button" @click.prevent="handleLogut" v-if="access_token">Logout</button>
+            <button class="btn btn-outline-light" type="submit" style="margin-right: 10px;" v-if="role === 'Unsubscribe'" @click="midTrans">Subscribes</button>
+            <button class="btn btn-outline-light" type="submit" @click.prevent="changePage('/login')" v-if="!access_token">Login </button>
+            <button class="btn btn-outline-light" type="button" @click.prevent="handleLogut" v-if="access_token">Logout</button>
           </div>
         </div>
       </div>

@@ -2,8 +2,11 @@
 import { reactive, ref, computed } from "vue";
 import TableRow from "../components/TableRow.vue";
 import axios from "axios";
+import { useUserStore } from "../stores/user";
 const baseUrl = "http://localhost:3001";
 
+
+const store = useUserStore()
 const state = reactive({
   selectedCountryCode: 'IDN',
   selectedCountry: "",
@@ -74,6 +77,15 @@ async function init(countryCode = 'idn') {
 }
 
 init();
+// FB.getLoginStatus(function (response) {
+//       statusChangeCallback(response);
+//     });
+
+// FB.login()
+
+// function statusChangeCallback(response) {
+//   console.log(response)
+// }
 
 const totalBigMacPrice = computed(() => {
   return state.bigMacAmount * state.selectedCountry.local_price

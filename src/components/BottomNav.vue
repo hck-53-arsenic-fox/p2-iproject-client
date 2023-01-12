@@ -1,4 +1,22 @@
-<script setup></script>
+<script setup>
+import { ref, computed, reactive, watch } from "vue";
+import { useRouter, useRoute } from "vue-router";
+import { useUserStore } from "../stores/user";
+const store = useUserStore();
+
+const state = reactive({
+  isAuthenticated: "",
+});
+function checkToken() {
+  state.isAuthenticated = localStorage.access_token ? true : false;
+}
+checkToken();
+const route = useRoute();
+
+watch(route, (current, previous) => {
+  checkToken();
+});
+</script>
 
 <template>
   <div
@@ -26,6 +44,14 @@
       <router-link :to="{ name: 'About' }">
         <i class="fa-solid fa-circle-info"></i>
       </router-link>
+    </div>
+
+    <div
+      v-if="state.isAuthenticated"
+      @click="store.logout"
+      class="m-auto text-[1.3rem]"
+    >
+      <i class="fa-solid fa-door-open cursor-pointer"></i>
     </div>
   </div>
 </template>

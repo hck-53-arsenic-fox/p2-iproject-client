@@ -39,7 +39,7 @@
           <a @click.prevent="logout" v-if="isLogin" class="nav-link" href="#">Logout</a>
         </li>
         <li class="nav-item">
-          <RouterLink to="/register" class="nav-link" href="#">Register</RouterLink>
+          <RouterLink to="/register" v-if="!isLogin" class="nav-link" href="#">Register</RouterLink>
         </li>
         <!-- <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

@@ -5,7 +5,8 @@ export const useCounterStore = defineStore('counter', {
   state: () => {
     return {
       dataAnime: [],
-      isLogin: false
+      isLogin: false,
+      detailAnime: {}
     }
   },
   actions: {

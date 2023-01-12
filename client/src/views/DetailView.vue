@@ -83,7 +83,7 @@ export default {
                   </div>
 
                   <button
-                    type="submit"
+                    type= "submit"
                     class="btn btn-success btn-block btn-lg gradient-custom-4 text-body bi"
                   >
                     <b style="color: rgb(44, 43, 38)"> Total : {{ amount.first }}</b>

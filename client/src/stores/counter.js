@@ -139,8 +139,8 @@ export const useCounterStore = defineStore("counter", {
         this.province = data.data;
         // console.log(data.data);
       } catch (error) {
-        console.log(error);
-        // Swal.fire(error.response.data.message);
+        // console.log(error);
+        Swal.fire(error.response.data.message);
       }
     },
     async getCity(provinceId) {
@@ -154,7 +154,8 @@ export const useCounterStore = defineStore("counter", {
         });
         this.city = data.data;
       } catch (error) {
-        console.log(error);
+        // console.log(error);
+        Swal.fire(error.response.data.message);
       }
     },
 
@@ -169,7 +170,8 @@ export const useCounterStore = defineStore("counter", {
         });
         this.cost = data;
       } catch (error) {
-        console.log(error);
+        // console.log(error);
+        Swal.fire(error.response.data.message);
       }
     },
 
@@ -184,7 +186,8 @@ export const useCounterStore = defineStore("counter", {
         });
         this.router.push("/");
       } catch (error) {
-        console.log(error);
+        // console.log(error);
+        Swal.fire(error.response.data.message);
       }
     },
 
@@ -236,7 +239,8 @@ export const useCounterStore = defineStore("counter", {
         });
         this.order = data;
       } catch (error) {
-        console.log(error);
+        // console.log(error);
+        Swal.fire(error.response.data.message);
       }
     },
   },

@@ -205,22 +205,26 @@ export const useCounterStore = defineStore("counter", {
           onSuccess: function (result) {
             /* You may add your own implementation here */
             cb(id);
-            alert("payment success!");
+            // alert("payment success!");
+            swall.fire("payment success!");
             // console.log(result);
           },
           onPending: function (result) {
             /* You may add your own implementation here */
-            alert("wating your payment!");
+            // alert("wating your payment!");
+            swall.fire("wating your payment!");
             // console.log(result);
           },
           onError: function (result) {
             /* You may add your own implementation here */
-            alert("payment failed!");
+            // alert("payment failed!");
+            swall.fire("payment failed!");
             // console.log(result);
           },
           onClose: function () {
             /* You may add your own implementation here */
-            alert("you closed the popup without finishing the payment");
+            Swal.fire("you closed the popup without finishing the payment");
+            // alert("you closed the popup without finishing the payment");
           },
         });
       } catch (error) {

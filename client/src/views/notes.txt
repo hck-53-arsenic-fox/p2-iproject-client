@@ -1,0 +1,3 @@
+Belum kelar: 
+Detail page,
+Pagination pas modular aja

@@ -56,15 +56,13 @@ export const useCounterStore = defineStore("counter", {
       }
     },
     async fetchProducts(pageNow = 1) {
-      this.page = pageNow;
       try {
         const { data } = await axios({
           method: "get",
-          url: baseUrl + "/?page[size]=5&page[number]=" + this.page,
+          url: baseUrl + "/?page[size]=5&page[number]=" + pageNow,
         });
         this.products = data.data;
         this.totalPage = data.totalPage;
-        // console.log(data);
       } catch (error) {
         Swal.fire(error.response.data.message);
       }

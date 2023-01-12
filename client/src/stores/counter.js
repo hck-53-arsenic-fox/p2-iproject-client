@@ -40,7 +40,6 @@ export const useCounterStore = defineStore("counter", {
           url: baseUrl + "/login",
           data: user,
         });
-        console.log(data);
         localStorage.setItem("access_token", data.access_token);
         localStorage.setItem("email", data.email);
         localStorage.setItem("name", data.name);
@@ -50,6 +49,18 @@ export const useCounterStore = defineStore("counter", {
         // console.log("berhasil login");
         Swal.fire({
           title: "Login Berhasil",
+        });
+      } catch (error) {
+        Swal.fire(error.response.data.message);
+      }
+    },
+    async logout() {
+      try {
+        localStorage.clear();
+        this.isLogin = false;
+        this.router.push("/login");
+        Swal.fire({
+          title: "Log Out Berhasil",
         });
       } catch (error) {
         Swal.fire(error.response.data.message);

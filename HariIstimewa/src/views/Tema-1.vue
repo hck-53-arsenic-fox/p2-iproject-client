@@ -271,8 +271,6 @@ export default {
                         </a>
                     </div>
                     <div class="pt-8 px-[20%]">
-                        <img class="mx-auto pb-4 w-80 aos-init aos-animate" src="/health-protocol1.png" alt=""
-                            data-aos="zoom-in-up" data-aos-duration="1000">
                         <p class="text-center white-space font-light text-sm sm:text-base text-gray-700 tracking-wide aos-init aos-animate"
                             data-aos="zoom-in-up" data-aos-duration="1000">Tanpa
                             mengurangi rasa hormat, untuk setiap tamu undangan yang akan hadir wajib mematuhi

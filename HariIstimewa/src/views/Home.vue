@@ -2,12 +2,19 @@
 import Navbar from '../components/Navbar.vue'
 import Footer from '../components/Footer.vue'
 
+import { mapActions } from 'pinia';
+import { useHawaStore } from '../stores/hariistimewa';
+
 export default {
   name: "App",
   components: {
     Navbar,
     Footer
-  }
+  },
+  methods: {
+        ...mapActions(useHawaStore, ['navigatePage']),
+
+    }
 }
 </script>
 
@@ -195,19 +202,19 @@ export default {
         Tidak perlu bingung untuk membuat desainnya. Pilih tema yang sesuai dengan kamu.
     </p>
     <div class="min-w-screen grid grid-cols-3 gap-5  items-center p-5 lg:p-10 overflow-hidden relative">
-        <div class="rounded-xl bg-white shadow-lg text-gray-800 md:text-left">
+        <div  @click.prevent="navigatePage('/t1/3')" class="rounded-xl bg-white shadow-lg text-gray-800 md:text-left">
             <div class="flex items-center">
                 <img class="rounded-md" src="../assets/img/theme1.png" alt="" srcset="">
             </div>
             <p class="text-center">Tema 1</p>
         </div>
-        <div class="rounded-xl bg-white shadow-lg text-gray-800 md:text-left">
+        <div  @click.prevent="navigatePage('/t1/6')" class="rounded-xl bg-white shadow-lg text-gray-800 md:text-left">
             <div class="flex items-center">
                 <img class="rounded-md" src="../assets/img/theme2.png" alt="" srcset="">
             </div>
             <p class="text-center">Tema 2</p>
         </div>
-        <div class="rounded-xl bg-white shadow-lg text-gray-800 md:text-left">
+        <div  @click.prevent="navigatePage('/t1/7')" class="rounded-xl bg-white shadow-lg text-gray-800 md:text-left">
             <div class="flex items-center">
                 <img class="rounded-md" src="../assets/img/theme1.png" alt="" srcset="">
             </div>

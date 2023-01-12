@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import axios from 'axios';
 import swal from "sweetalert2";
 
-const mainUrl = "http://localhost:3000"
+const mainUrl = "hariistimewa-new-production.up.railway.app"
 
 export const useHawaStore = defineStore("hawa", {
   state: () => ({

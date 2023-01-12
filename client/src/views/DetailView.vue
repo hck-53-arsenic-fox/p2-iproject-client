@@ -21,7 +21,7 @@ export default {
     },
     min() {
       this.amount.first-=1
-      if (this.amount.first < 0 ) {
+      if (this.amount.first < 1 ) {
         this.amount.first = 0
       }
     }

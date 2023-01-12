@@ -2,12 +2,16 @@
 import { mapActions, mapState } from 'pinia';
 import NavbarTwo from '../components/NavbarTwo.vue';
 import { usePlayerStore } from '../stores/player';
+import moment from 'moment'
 
 export default {
     name: "UserProfile",
     components: { NavbarTwo },
     methods: {
-        ...mapActions(usePlayerStore, ['fetchUserProfile', 'changeStatusPro', 'upgradeMemberPro'])
+        ...mapActions(usePlayerStore, ['fetchUserProfile', 'changeStatusPro', 'upgradeMemberPro']),
+        moment: function () {
+            return moment();
+        }
     },
     computed: {
         ...mapState(usePlayerStore, ['userProfile', 'isPro'])
@@ -29,24 +33,30 @@ export default {
             <div class="col-md-10">
                 <div class="card p-3 py-4 shadow-lg" style="background-color: black;">
                     <div class="d-flex justify-content-end">
-                        <button class="btn btn-danger" @click="upgradeMemberPro" v-if="userProfile.status === 'Regular'">Become pro member</button>
+                        <button class="btn btn-danger" @click="upgradeMemberPro"
+                            v-if="userProfile.status === 'Regular'">Become pro member</button>
                     </div>
                     <div class="text-center">
                         <img :src="userProfile.imgProfile" width="100" class="rounded-circle">
                     </div>
 
                     <div class="text-center mt-3">
-                        <span class="bg-danger p-1 px-4 rounded text-white" v-if="userProfile.status === 'Pro'">{{ userProfile.status }}</span>
-                        <span class="bg-light p-1 px-4 rounded text-black" v-if="userProfile.status === 'Regular'">{{ userProfile.status }}</span>
+                        <span class="bg-danger p-1 px-4 rounded text-white" v-if="userProfile.status === 'Pro'">{{
+                            userProfile.status
+                        }}</span>
+                        <span class="bg-light p-1 px-4 rounded text-black" v-if="userProfile.status === 'Regular'">{{
+                            userProfile.status
+                        }}</span>
                         <h3 class="mt-2 mb-0" style="text-transform: uppercase; font-style: italic; color: white;">
-                            <strong>{{ userProfile.username }}</strong></h3>
+                            <strong>{{ userProfile.username }}</strong>
+                        </h3>
                         <span></span>
 
                         <div class="px-4 mt-1">
                             <!-- <p class="fonts">Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
                                 dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
                                 nisi ut aliquip ex ea commodo consequat. </p> -->
-                            <strong>Member since: {{ userProfile.createdAt }}</strong>
+                            <strong>Member since: {{moment(userProfile.createdAt).format('YYYY-MM-DD')}}</strong>
 
                         </div>
 

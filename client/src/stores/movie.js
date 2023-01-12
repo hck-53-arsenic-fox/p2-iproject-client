@@ -2,7 +2,7 @@ import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import axios from 'axios'
 
-let BASE_URL = `http://localhost:3000/users`
+let BASE_URL = `https://real-linen-production.up.railway.app`
 
 export const useMovieStore = defineStore('counter', {
     state: () => ({

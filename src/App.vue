@@ -1,6 +1,6 @@
 <script>
 import { RouterView } from "vue-router";
-import { mapWritableState } from "pinia";
+import { mapWritableState, mapActions } from "pinia";
 import { useTravelokalStore } from "./stores/travelokal";
 
 export default {
@@ -8,8 +8,13 @@ export default {
   computed: {
     ...mapWritableState(useTravelokalStore, ["currentPosition", 'gmap']),
   },
+  methods: {
+    ...mapActions(useTravelokalStore, ["getWeatherData", "getPlacesData"]),
+  },
   components: {},
   created() {
+    this.getPlacesData()
+    // this.getWeatherData()
     // set coordinates to user current location dynamically
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -28,7 +33,6 @@ export default {
     }
   },
   mounted() {
-    console.log(this.gmap);
   },
 };
 </script>

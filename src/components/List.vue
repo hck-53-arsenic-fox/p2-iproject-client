@@ -5,12 +5,12 @@ import { useTravelokalStore } from "../stores/travelokal";
 export default {
   computed: {
     ...mapState(useTravelokalStore, ["places"]),
-    ...mapWritableState(useTravelokalStore, ["type"]),
+    ...mapWritableState(useTravelokalStore, ["type", 'rating']),
   },
   data() {
     return {
       typeFilter: "restaurants",
-      rating: 0,
+      ratingFilter: 4.5,
       // placesComponent: []
     };
   },
@@ -21,15 +21,26 @@ export default {
     setRating(event) {
       this.rating = event.target.value;
     },
-    ...mapActions(useTravelokalStore, ["getPlacesData"]),
+    ...mapActions(useTravelokalStore, ["getPlacesData", 'filteredPlaces', 'addBookmark']),
+    bookmarkPlace(location_id) {
+      this.addBookmark(location_id)
+    }
   },
   created() {},
   watch: {
     type(newType, oldType) {
       if (newType !== undefined) {
-        console.log(newType, "newType");
+        // console.log(newType, "newType");
+        
         this.type = newType;
         this.getPlacesData();
+      }
+    },
+    rating(newRating, oldRating) {
+      if (newRating !== undefined) {
+        // console.log(newRating, "newRating");
+        this.rating = newRating;
+        // this.filteredPlaces();
       }
     },
   },
@@ -37,37 +48,42 @@ export default {
 </script>
 
 <template>
-  <div>
-    <div>
-      <h1>Restaurants, Hotels & Attractions arround you</h1>
+  <div class="">
+    <div class="h-[60px] pt-4">
+      <h1 class="text-center text-lg">Restaurants, Hotels & Attractions arround you</h1>
     </div>
     <!-- options -->
-    <div class="flex">
+    <div class="flex justify-between pb-3">
       <div>
         <form action="">
-          <label for="">Type</label>
-          <select name="" id="" :value="typeFilter" @change="setType($event)">
-            <option value="restaurants">Restaurants</option>
-            <option value="hotels">Hotels</option>
-            <option value="attractions">Attractions</option>
+          <label for="" class="ml-2">Type</label>
+          <select name="" id="" :value="type" @change="setType($event)" class="w-[150px] ml-2">
+            <option value="restaurants" :selected="type === 'restaurants'">Restaurants</option>
+            <option value="hotels" :selected="type === 'hotels'">Hotels</option>
+            <option value="attractions" :selected="type === 'attractions'">Attractions</option>
           </select>
         </form>
       </div>
       <div>
         <form action="">
-          <label for="">Rating</label>
-          <select name="" id="" :value="rating" @change="setRating($event)">
-            <option value="0">All</option>
-            <option value="3">Above 3.0</option>
-            <option value="4">Above 4.0</option>
-            <option value="4.5">Above 4.5</option>
+          <label for="" class="mr-2">Rating</label>
+          <select name="" id="" :value="rating" @change="setRating($event)" class="w-[150px] mr-2">
+            <option value="0" :selected="rating == 0">All</option>
+            <option value="3" :selected="rating == 3">Above 3.0</option>
+            <option value="4" :selected="rating == 4">Above 4.0</option>
+            <option value="4.5" :selected="rating == 4.5">Above 4.5</option>
           </select>
         </form>
       </div>
     </div>
     <!-- card -->
-    <div class="h-screen overflow-scroll bg-teal-300">
-      <div v-for="place in places" :key="place.id" class="my-3">
+    <div class="h-screen overflow-scroll bg-slate-200">
+      <div
+        v-for="place in places"
+        :key="place.id"
+        class="my-3"
+        :id="`card-${place.id}`"
+      >
         <div class="max-w-2xl mx-auto">
           <div
             class="bg-white shadow-md rounded-lg max-w-sm dark:bg-gray-800 dark:border-gray-700 w-full justify-center mx-auto"
@@ -140,6 +156,7 @@ export default {
               </div>
               <div>
                 <button
+                @click="bookmarkPlace(place.location_id)"
                   href=""
                   class="text-slate-800 bg-[#feca57] hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 w-full mt-3"
                 >

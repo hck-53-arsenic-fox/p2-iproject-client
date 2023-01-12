@@ -15,9 +15,10 @@
         },
       }"
       :key="coordinate.i"
+      class="test-hover"
     >
       <div
-        class="placemarker h-[180px] w-[120px] group hover:cursor-pointer hover:z-50 z-0 hover:scale-125 duration-150"
+        class="placemarker h-[180px] w-[120px] group hover:cursor-pointer hover:z-100 hover:scale-125 duration-150"
       >
         <div
           class="placemarker h-[150px] w-[120px] flex flex-col items-center bg-gradient-to-r from-[#b8e994] to-[#bdc3c7] rounded-md shadow-lg p-3 duration-150"
@@ -101,11 +102,11 @@ export default {
     // console.log(placeMarkers, "placeMarker");
 
     watchEffect(() => {
-      console.log(store.places, "storeplaces");
+      // console.log(store.places, "storeplaces");
       //     // console.log(store.places);
       if (!store.places.length) return;
       store.places.forEach((place) => {
-        console.log(place, "places");
+        // console.log(place, "places");
         coordinates.push({
           name: place.name,
           image: place.photo?.images?.small.url,
@@ -115,6 +116,7 @@ export default {
           },
         });
       });
+      store.getWeatherData()
       // console.log(coordinates, "coordinates");
     });
     // console.log(map.center);
@@ -184,6 +186,10 @@ export default {
 </script>
 
 <style>
+.test-hover:hover {
+  z-index: 200;
+}
+
 html,
 body,
 #app,

@@ -1,5 +1,15 @@
 <script>
-export default {};
+import { RouterLink } from "vue-router";
+import { mapActions, mapState } from "pinia";
+import { useTravelokalStore } from "../stores/travelokal";
+export default {
+  computed: {
+    ...mapState(useTravelokalStore, ['isLogin'])
+  },
+  methods: {
+    ...mapActions(useTravelokalStore, ['logout'])
+  },
+};
 </script>
 
 <template>
@@ -8,22 +18,50 @@ export default {};
       <div class="px-2 sm:px-4 lg:px-8">
         <div class="relative flex items-center justify-between h-16">
           <div class="flex items-center px-2 lg:px-0">
-            <a class="flex-shrink-0" href="#">
-                <span><h1>Travelokal</h1></span>
-            </a>
+            <router-link to="/">
+              <span><h1 class="text-2xl font-medium">Travelokal</h1></span>
+            </router-link>
             <div class="hidden lg:block lg:ml-2">
               <div class="flex">
-                <a
-                  href="#"
-                  class="ml-4 px-3 py-2 rounded-md text-sm leading-5 font-medium text-gray-800 font-semibold hover:bg-[#2980b9] hover:text-white transition duration-150 ease-in-out cursor-pointer focus:outline-none focus:text-white focus:bg-gray-700"
+                <router-link
+                  to="/login"
+                  class="text-lg ml-4 px-3 py-2 rounded-md leading-5 font-medium text-gray-800 hover:bg-[#2980b9] hover:text-white transition duration-150 ease-in-out cursor-pointer focus:outline-none focus:text-white focus:bg-gray-700"
+                  v-if="!isLogin"
                 >
-                  Location
-                </a>
+                  Login/Register
+                </router-link>
+              </div>
+            </div>
+            <div class="hidden lg:block lg:ml-2">
+              <div class="flex">
+                <router-link
+                  to="/"
+                  class="text-lg ml-4 px-3 py-2 rounded-md leading-5 font-medium text-gray-800 hover:bg-[#2980b9] hover:text-white transition duration-150 ease-in-out cursor-pointer focus:outline-none focus:text-white focus:bg-gray-700"
+                  @click="logout"
+                  v-if="isLogin"
+                >
+                  Logout
+                </router-link>
+              </div>
+            </div>
+            <div class="hidden lg:block lg:ml-2">
+              <div class="flex">
+                <router-link to="/bookmark"
+                  href="#"
+                  class="text-lg ml-4 px-3 py-2 rounded-md leading-5 font-medium text-gray-800 hover:bg-[#2980b9] hover:text-white transition duration-150 ease-in-out cursor-pointer focus:outline-none focus:text-white focus:bg-gray-700"
+                >
+                  Bookmark
+                </router-link>
               </div>
             </div>
           </div>
-          <div class="flex-1 flex justify-center px-2 lg:ml-6 lg:justify-end right-0">
-            <span class="ml-4 px-3 py-2 rounded-md text-lg leading-5 font-medium text-slate-800 focus:outline-none focus:text-white focus:bg-gray-700"><h1 class="align-middle">Explore new places</h1></span>
+          <div
+            class="flex-1 flex justify-center px-2 lg:ml-6 lg:justify-end right-0"
+          >
+            <span
+              class="ml-4 px-3 py-2 rounded-md text-lg leading-5 font-medium text-slate-800 focus:outline-none focus:text-white focus:bg-gray-700"
+              ><h1 class="align-middle">Explore new places</h1></span
+            >
             <div class="max-w-lg w-full lg:max-w-xs">
               <label for="search" class="sr-only">Search </label>
               <form method="get" action="#" class="relative z-50">

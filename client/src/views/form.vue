@@ -39,13 +39,13 @@ export default {
 
   },
   mounted() {
-    mapboxgl.accessToken = this.mapToken;
-    const geocoder = new MapboxGeocoder({
-      accessToken: mapboxgl.accessToken,
-    });
-    geocoder.addTo('#geocoder-container');
+    // mapboxgl.accessToken = this.mapToken;
+    // const geocoder = new MapboxGeocoder({
+    //   accessToken: mapboxgl.accessToken,
+    // });
+    // geocoder.addTo('#geocoder-container');
 
-    // document.getElementById('geocoder').appendChild(geocoder.onAdd());
+    // // document.getElementById('geocoder').appendChild(geocoder.onAdd());
 
   }
 }

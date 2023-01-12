@@ -126,7 +126,7 @@ export default {
 
 
         <!-- bottom -->
-        <div class="flex flex-col justify-start items-start p-4">
+        <div class="flex flex-col justify-start items-start p-4 w-full">
           <p class="max-w-sm mb-3 font-light text-grey-600 text-left p-2">
             Description: {{ resort.description }}
           </p>
@@ -143,8 +143,8 @@ export default {
           <div v-for="rev in resort.Reviews">
 
 
-            <div class="px-1 mt-1 w-auto">
-              <div class="bg-white rounded-md max-w-4xl mx-auto p-4 space-y-4 shadow-lg">
+            <div class="px-5 mt-2">
+              <div class="bg-white rounded-md p-4 space-y-4 shadow-lg w-96">
                 <h3 class="border-b mb-2 pt-3 font-semibold">Name: <span class="font-thin">{{ commenter }}</span></h3>
 
                 <div class="">

@@ -44,10 +44,9 @@ export default {
             <button v-if="acces_token" type="button" class="btn btn-warning">
               <i class="fa-solid fa-heart" style="font-size: x-small;"> Favorite</i>
             </button> <i v-if="acces_token" style="font-size: x-small;"> Add This Movie to Your Favorite </i>
-          </div>
-          <button v-if="acces_token " @click="status(10000)" type="button" class="btn btn-warning">
-            <i class="fa-solid fa-dollar-sign" style="font-size: x-small;"> Payment</i>
-          </button> <i v-if="acces_token" style="font-size: x-small;"> Subscribe for see detail </i>
+          </div><br>
+          <button v-if="acces_token " @click="status(10000)" type="button" class="btn btn-warning but"><span style="margin-top: 100px;">Subscribe</span> 
+          </button>
           </div>
         </div>
       </div>

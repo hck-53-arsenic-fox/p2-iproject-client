@@ -10,6 +10,7 @@ export const useHawaStore = defineStore("hawa", {
       email: '',
       password: '',
     },
+    dataInvitation: []
   }),
 
   actions: {
@@ -63,8 +64,8 @@ export const useHawaStore = defineStore("hawa", {
           this.access_token = result.data.access_token;
           this.email = result.data.email;
           this.password = "";
-
-          this.router.push('/register')
+console.log('berhasil');
+          this.router.push('/')
         })
         .catch((err) => {
           swal.fire({
@@ -101,6 +102,25 @@ export const useHawaStore = defineStore("hawa", {
           confirmButtonColor: "#fa98d0",
         });
       });
+    },
+
+    
+    async fenchInvitaion(id) {
+      await axios({
+        method: "GET",
+        url: mainUrl + `/invitations/${id}`,
+      })
+        .then(({data}) => {
+          this.dataInvitation = data;
+
+        })
+        .catch((err) => {
+          swal.fire({
+            title: `${err.response.data.message}`,
+            icon: "error",
+            confirmButtonColor: "#fa98d0",
+          });
+        });
     },
 
   },

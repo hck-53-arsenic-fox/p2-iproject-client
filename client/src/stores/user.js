@@ -168,7 +168,7 @@ export const useUserStore = defineStore('user', {
                 })
                 this.allVideo = data.items
             } catch (error) {
-
+                console.log(error)
             }
         },
         async googleLogin(response) {

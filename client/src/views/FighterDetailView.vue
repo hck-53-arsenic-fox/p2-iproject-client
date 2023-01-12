@@ -28,7 +28,7 @@ export default {
     <div class="container" style="margin-top: 50px;">
         <div class="row">
             <div class="col-4">
-                <p style="font-size: 20px;">Country</p>
+                <p style="font-size: 20px;">Country :</p>
             </div>
             <div class="col-8">
                 <p style="font-size: 20px;">{{ oneFighter.birthCountry }}</p>
@@ -36,7 +36,7 @@ export default {
         </div>
         <div class="row">
             <div class="col-4">
-                <p style="font-size: 20px;">Birth Date</p>
+                <p style="font-size: 20px;">Birth Date :</p>
             </div>
             <div class="col-8">
                 <p style="font-size: 20px;">{{ oneFighter.birthDate }}</p>
@@ -44,7 +44,7 @@ export default {
         </div>
         <div class="row">
             <div class="col-4">
-                <p style="font-size: 20px;">Win Rate</p>
+                <p style="font-size: 20px;">Win Rate :</p>
             </div>
             <div class="col-6">
                 <div class="progress" role="progressbar" aria-label="Default striped example" aria-valuenow="10"
@@ -102,7 +102,7 @@ export default {
                     style="height:300px">
             </div>
             <div class="col-md-auto">
-                <div class="row">
+                <div class="row" style="margin-top: 100px;">
                     <p style="font-size: 20px;">Height: {{ oneFighter.height }}</p>
                     <p style="font-size: 20px;">Weight: {{ oneFighter.weight }}</p>
                     <p style="font-size: 20px;">Reach: {{ oneFighter.reach }}</p>

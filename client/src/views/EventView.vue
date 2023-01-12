@@ -8,11 +8,22 @@ export default {
         ...mapActions(useUserStore, ['subscribe', 'profile', 'fetchAllEvents', 'fetchLogs']),
         searchEvents(index, search) {
             this.fetchAllEvents(index, search)
-            this.search = ''
+        },
+        changePage(index, search) {
+            this.currentPage = index
+            this.fetchAllEvents(index, search)
         }
     },
     computed: {
-        ...mapState(useUserStore, ['oneProfile', 'allEvents', 'allLogs', 'totalPage'])
+        ...mapState(useUserStore, ['oneProfile', 'allEvents', 'allLogs', 'totalPage']),
+        pageShown() {
+            const { currentPage } = this
+            if (currentPage < 6) {
+                return [1, 2, 3, 4, 5, 6]
+            } else {
+                return [currentPage - 4, currentPage - 3, currentPage - 2, currentPage - 1, currentPage, currentPage + 1]
+            }
+        }
     },
     created() {
         this.profile()
@@ -21,27 +32,18 @@ export default {
     },
     data() {
         return {
-            search: ''
+            search: '',
+            currentPage: 1
         }
     }
 }
 </script>
 
 <template>
-    <div class="col container1">
-        <img src="https://dmxg5wxfqgb4u.cloudfront.net/styles/background_image_sm/s3/2022-12/011423-ufc-fight-night-imavov-vs-gastelum-SG-hero.jpg?h=d1cb525d&itok=Gw8bAKs2"
-            style="width: 100%;height:688px;filter:brightness(40%);" class="img-fluid" alt="...">
-        <div class="centered">
-            <h3 style="margin-bottom:20px;text-align: center;font-family: Georgia, serif;font-weight: bold;">UFC FIGHT
-                NIGHT</h3>
-            <h1 style="font-family:Georgia, serif;font-weight: bolder;font-size: 50px;">IMAMOV VS GASTELUM</h1>
-            <p style="margin-bottom:20px;text-align: center;font-family: Georgia, serif;font-weight: bold;">Elite
-                Middleweight Meet at The UFC APEX to Kick Off 2023</p>
-        </div>
-    </div>
-    
+
+    <h1 style="text-align: center;margin-top: 20px;">Events</h1>
     <!-- -Search Option--->
-    <div class="input-group mb-3" style="width:50%;margin-top: 20px;">
+    <div class="input-group mb-3" style="width:50%;margin: auto;margin-top: 50px;">
         <button class="btn btn-outline-secondary" type="button" id="button-addon1"
             @click.prevent="searchEvents(1, search)">Search</button>
         <input type="text" v-model="search" class="form-control" placeholder=""
@@ -64,7 +66,8 @@ export default {
                 <p>Already Booked</p>
             </div>
             <div class="p-2" v-else>
-                <button v-if="event.capacity > 0" type="button" class="btn btn-primary" @click.prevent="subscribe(event.id)">Buy to
+                <button v-if="event.capacity > 0" type="button" class="btn btn-primary"
+                    @click.prevent="subscribe(event.id)">Buy to
                     watch</button>
                 <p v-else>Sold Out</p>
             </div>
@@ -74,11 +77,13 @@ export default {
     <!---End All Event--->
 
     <!---Pagiantion--->
-    <nav aria-label="Page navigation example" style="position: absolute;margin-top: 20px;">
-        <ul class="pagination">
-            <li class="page-item" v-for="index in totalPage"><a class="page-link" href="#"
-                    @click.prevent="fetchAllEvents(index)">{{ index }}</a></li>
-        </ul>
-    </nav>
+    <div style="width: 100%;display:flex;justify-content: center;">
+        <nav aria-label="Page navigation example" style="position: absolute;margin-top: 20px;">
+            <ul class="pagination">
+                <li class="page-item" v-for="index in pageShown"><a class="page-link" href="#"
+                        @click.prevent="changePage(index, search)">{{ index }}</a></li>
+            </ul>
+        </nav>
+    </div>
     <!---End Pagiantion--->
 </template>

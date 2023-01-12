@@ -17,12 +17,15 @@ export default {
 </script>
 
 <template>
-    <div>
-        <h1 style="text-align: center;">RANKINGS</h1>
-        <div class="d-flex align-content-stretch flex-wrap">
-            <div class="p-2">
-                <h1>Pound For Pound</h1>
-                <table class="table table-striped">
+    <div style="margin-top: 50px;">
+        <h1 style="text-align: center;margin-bottom: 50px;">RANKINGS</h1>
+        <div class="row m-4">
+            <div class="col-4" style="text-align: center;">
+                <div>
+                    <img src="https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_profile_listing_medium_1x/s3/2022-04/98fc7c50-3d1d-4d2e-805f-9b7045edb917%252FVOLKANOVSKI_ALEXANDER_BELT_04-09.png?itok=YV2-kWJL">
+                </div>
+                <h3 style="text-align: center;">Pound For Pound</h3>
+                <table class="table table-striped" style="text-align: center;">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -37,9 +40,12 @@ export default {
                     </tbody>
                 </table>
             </div>
-            <div class="p-2">
-                <h1>Heavyweight</h1>
-                <table class="table table-striped">
+            <div class="col-4" style="text-align: center;">
+                <div style="text-align: center;">
+                    <img src="https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_profile_listing_medium_1x/s3/2022-01/c3e2e69e-c6cc-4fdf-be51-67baf84e6bb6%252FNGANNOU_FRANCIS_BELT_01-22.png?itok=cBvn7aNh">
+                </div>
+                <h3 style="text-align: center;">Heavyweight</h3>
+                <table class="table table-striped" style="text-align: center;">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -54,9 +60,11 @@ export default {
                     </tbody>
                 </table>
             </div>
-            <div class="p-2">
-                <h1>Light Heavyweight</h1>
-                <table class="table table-striped">
+            <div class="col-4" style="text-align: center;">
+                <div style="height:125px">
+                </div>
+                <h3 style="text-align: center;">Light Heavyweight</h3>
+                <table class="table table-striped" style="text-align: center;">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -71,9 +79,12 @@ export default {
                     </tbody>
                 </table>
             </div>
-            <div class="p-2">
-                <h1>Middleweight</h1>
-                <table class="table table-striped">
+            <div class="col-4" style="text-align: center;">
+                <div style="text-align: center;">
+                    <img src="https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_profile_listing_medium_1x/s3/2022-11/PEREIRA_ALEX_BELTMOCK.png?itok=Y8jCmTiY">
+                </div>
+                <h3 style="text-align: center;">Middleweight</h3>
+                <table class="table table-striped" style="text-align: center;">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -88,9 +99,12 @@ export default {
                     </tbody>
                 </table>
             </div>
-            <div class="p-2">
-                <h1>Welterweight</h1>
-                <table class="table table-striped">
+            <div class="col-4" style="text-align: center;">
+                <div style="text-align: center;">
+                    <img src="https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_profile_listing_medium_1x/s3/2022-08/EDWARDS_LEON_BELTMOCK.png?itok=QveSPdxi">
+                </div>
+                <h3 style="text-align: center;">Welterweight</h3>
+                <table class="table table-striped" style="text-align: center;">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -105,9 +119,12 @@ export default {
                     </tbody>
                 </table>
             </div>
-            <div class="p-2">
-                <h1>Lightweight</h1>
-                <table class="table table-striped">
+            <div class="col-4" style="text-align: center;">
+                <div style="text-align: center;">
+                    <img src="https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_profile_listing_medium_1x/s3/2022-10/MAKHACHEV_ISLAM_BELTMOCK.png?itok=2C8J7eta">
+                </div>
+                <h3 style="text-align: center;">Lightweight</h3>
+                <table class="table table-striped" style="text-align: center;">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -122,9 +139,12 @@ export default {
                     </tbody>
                 </table>
             </div>
-            <div class="p-2">
-                <h1>Featherweight</h1>
-                <table class="table table-striped">
+            <div class="col-4" style="text-align: center;">
+                <div style="text-align: center;">
+                    <img src="https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_profile_listing_medium_1x/s3/2022-04/98fc7c50-3d1d-4d2e-805f-9b7045edb917%252FVOLKANOVSKI_ALEXANDER_BELT_04-09.png?itok=YV2-kWJL">
+                </div>
+                <h3 style="text-align: center;">Featherweight</h3>
+                <table class="table table-striped" style="text-align: center;">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -139,9 +159,12 @@ export default {
                     </tbody>
                 </table>
             </div>
-            <div class="p-2">
-                <h1>Bantamweight</h1>
-                <table class="table table-striped">
+            <div class="col-4" style="text-align: center;">
+                <div style="text-align: center;">
+                    <img src="https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_profile_listing_medium_1x/s3/2022-10/STERLING_ALJAMAIN_BELT_10-22.png?itok=TnJ1WPJu">
+                </div>
+                <h3 style="text-align: center;">Bantamweight</h3>
+                <table class="table table-striped" style="text-align: center;">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -156,8 +179,11 @@ export default {
                     </tbody>
                 </table>
             </div>
-            <div class="p-2">
-                <h1>Flyweight</h1>
+            <div class="col-4" style="text-align: center;">
+                <div>
+                    <img src="https://dmxg5wxfqgb4u.cloudfront.net/styles/athlete_profile_listing_medium_1x/s3/2022-11/fcbdb9c5-266b-4216-acad-7e5006f15772%252FFIGUEIREDO_DEIVESON_06-12.png?itok=eMyA140o">
+                </div>
+                <h3>Flyweight</h3>
                 <table class="table table-striped">
                     <thead>
                         <tr>

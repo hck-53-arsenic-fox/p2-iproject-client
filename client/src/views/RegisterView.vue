@@ -53,7 +53,6 @@ export default {
                     <div style="margin-bottom: 20px;">
                         <button type="submit" class="btn btn-primary">Sign Up</button>
                     </div>
-                    <p>Or Sign In With</p>
                 </center>
                 <RouterLink to="/login" style="text-decoration:none">
                     <div id="accountHelp3" class="form-text">Already have an account?</div>

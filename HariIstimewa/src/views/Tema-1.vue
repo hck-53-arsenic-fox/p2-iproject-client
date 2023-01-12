@@ -126,7 +126,7 @@ export default {
                     <div class="absolute w-full h-full z-10 bg-gradient-to-t from-white to-transparent">
                     </div>
                     <img class="w-full h-full object-cover object-top z-10"
-                        src="https://images.unsplash.com/photo-1621621667797-e06afc217fb0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+                        :src="dataInvitation.photo"
                         alt="">
                     <div class="absolute w-full bottom-16">
                         <p

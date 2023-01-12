@@ -43,15 +43,16 @@ export default {
   },
   
   computed: {
-        ...mapState(useHawaStore, ['listLagu']),
+        ...mapState(useHawaStore, ['listLagu', 'dataInvitation']),
 
     },
     methods: {
-        ...mapActions(useHawaStore, ['listMusic', 'addInvitation', 'handleLogout', 'navigatePage']),
+        ...mapActions(useHawaStore, ['listMusic', 'addInvitation', 'handleLogout', 'navigatePage', 'fenchInvitaion']),
 
     },
     created() {
-      this.listMusic()
+      this.listMusic(),
+        this.fenchInvitaion(9)
     }
 }
 </script>
@@ -104,7 +105,7 @@ export default {
                   </a>
                 </li>
                 <li>
-                  <a href="#"
+                  <a @click.prevent="navigatePage('/dashboard')"
                     class="text-base text-gray-900 font-normal rounded-lg hover:bg-gray-100 flex items-center p-2 group ">
                     <svg class="w-6 h-6 text-gray-500 flex-shrink-0 group-hover:text-gray-900 transition duration-75"
                       fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -165,7 +166,7 @@ export default {
           <div class="pt-6 px-4">
             <div class="w-full ">
               <div class="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8 ">
-                <p class="font-extrabold text-2xl">Buat Undangan</p>
+                <p class="font-extrabold text-2xl">Edit Undangan</p>
 
                 <div class="mt-10">
                   <form class="" @submit.prevent="addInvitation({
@@ -184,47 +185,49 @@ export default {
                       <label class="mb-2.5 block font-extrabold">Quote / kalimat Pembuka</label>
                       <input type="text"
                         class="inline-block w-full rounded-xl bg-white p-2.5 leading-none text-black placeholder-stone-500 shadow focus:outline-none focus:ring focus:ring-pink-300"
-                        v-model="quote" placeholder="Kutipan" />
+                        v-model="quote" :placeholder="dataInvitation.quote"/>
                       <input type="text"
                         class="inline-block w-full rounded-xl mt-4 bg-white p-2.5 leading-none text-black placeholder-stone-500 shadow focus:outline-none focus:ring focus:ring-pink-300"
-                        v-model="quote_src" placeholder="Sumber Kutipan" />
+                        v-model="quote_src" :placeholder="dataInvitation.quote_src" />
                     </div>
                     <div class="flex justify-center">
                     <div class="mt-4 mr-5">
                       <label class="mb-2.5 block font-extrabold">Mempelai Wanita</label>
                       <input type="text"
                         class="inline-block w-full rounded-xl bg-white p-2.5 leading-none text-black placeholder-stone-500 shadow focus:outline-none focus:ring focus:ring-pink-300"
-                        v-model="bride" placeholder="Nama Lengkap" />
+                        v-model="bride" :placeholder="dataInvitation.bride" />
                         <input type="text"
                         class="inline-block w-full rounded-xl bg-white p-2.5 leading-none text-black placeholder-stone-500 shadow focus:outline-none focus:ring focus:ring-pink-300"
-                        v-model="bride_nick" placeholder="Nama Panggilan" />
+                        v-model="bride_nick" :placeholder="dataInvitation.bride_nick" />
+                        <img :src="dataInvitation.bride_img" alt="" srcset="">
                         <input type="text"
                         class="inline-block w-full rounded-xl mt-4 bg-white p-2.5 leading-none text-black placeholder-stone-500 shadow focus:outline-none focus:ring focus:ring-pink-300"
                         v-model="bride_img" placeholder="Url Image" />
                       <input type="text"
                         class="inline-block w-full rounded-xl mt-4 bg-white p-2.5 leading-none text-black placeholder-stone-500 shadow focus:outline-none focus:ring focus:ring-pink-300"
-                        v-model="bride_mother" placeholder="Nama Ibu" />
+                        v-model="bride_mother" :placeholder="dataInvitation.bride_mother" />
                       <input type="text"
                         class="inline-block w-full rounded-xl mt-4 bg-white p-2.5 leading-none text-black placeholder-stone-500 shadow focus:outline-none focus:ring focus:ring-pink-300"
-                        v-model="bride_father" placeholder="Nama Ayah" />
+                        v-model="bride_father" :placeholder="dataInvitation.bride_father" />
                     </div>
                     <div class="mt-4">
                       <label class="mb-2.5 block font-extrabold">Mempelai Pria</label>
                       <input type="text"
                         class="inline-block w-full rounded-xl bg-white p-2.5 leading-none text-black placeholder-stone-500 shadow focus:outline-none focus:ring focus:ring-pink-300"
-                        v-model="groom" placeholder="Nama Lengkap" />
+                        v-model="groom" :placeholder="dataInvitation.groom" />
                         <input type="text"
                         class="inline-block w-full rounded-xl bg-white p-2.5 leading-none text-black placeholder-stone-500 shadow focus:outline-none focus:ring focus:ring-pink-300"
-                        v-model="groom_nick" placeholder="Nama Panggilan" />
+                        v-model="groom_nick" :placeholder="dataInvitation.groom_nick" />
+                        <img :src="dataInvitation.groom_img" alt="" srcset="">
                       <input type="text"
                         class="inline-block w-full rounded-xl mt-4 bg-white p-2.5 leading-none text-black placeholder-stone-500 shadow focus:outline-none focus:ring focus:ring-pink-300"
                         v-model="groom_img" placeholder="Url Image" />
                       <input type="text"
                         class="inline-block w-full rounded-xl mt-4 bg-white p-2.5 leading-none text-black placeholder-stone-500 shadow focus:outline-none focus:ring focus:ring-pink-300"
-                        v-model="groom_mother" placeholder="Nama Ibu" />
+                        v-model="groom_mother" :placeholder="dataInvitation.groom_mother" />
                       <input type="text"
                         class="inline-block w-full rounded-xl mt-4 bg-white p-2.5 leading-none text-black placeholder-stone-500 shadow focus:outline-none focus:ring focus:ring-pink-300"
-                        v-model="groom_father" placeholder="Nama Ayah" />
+                        v-model="groom_father" :placeholder="dataInvitation.groom_father" />
                     </div>
                   </div>
 
@@ -233,31 +236,31 @@ export default {
                       <label class="mb-2.5 block font-extrabold">Acara Akat/Pemberkatan</label>
                       <input type="text"
                         class="inline-block w-full rounded-xl bg-white p-2.5 leading-none text-black placeholder-stone-500 shadow focus:outline-none focus:ring focus:ring-pink-300"
-                        v-model="matrimony_name" placeholder="Nama Acara (default: Akad)" />
+                        v-model="matrimony_name" :placeholder="dataInvitation.matrimony_name" />
                       <input type="date"
                         class="inline-block w-full rounded-xl mt-4 bg-white p-2.5 leading-none text-black placeholder-stone-500 shadow focus:outline-none focus:ring focus:ring-pink-300"
-                        v-model="matrimony_date" placeholder="Tangal Acara" />
+                        v-model="matrimony_date" :placeholder="dataInvitation.matrimony_date" />
                       <input type="number"
                         class="inline-block w-full rounded-xl mt-4 bg-white p-2.5 leading-none text-black placeholder-stone-500 shadow focus:outline-none focus:ring focus:ring-pink-300"
-                        v-model="matrimony_time_start" placeholder="Waktu Mulai" />
+                        v-model="matrimony_time_start" :placeholder="dataInvitation.matrimony_time_start" />
                       <input type="number"
                         class="inline-block w-full rounded-xl mt-4 bg-white p-2.5 leading-none text-black placeholder-stone-500 shadow focus:outline-none focus:ring focus:ring-pink-300"
-                        v-model="matrimony_time_end" placeholder="Waktu Selesai" />
+                        v-model="matrimony_time_end" :placeholder="dataInvitation.matrimony_time_end" />
                     </div>
                     <div class="mt-4">
                       <label class="mb-2.5 block font-extrabold">Acara Resepsi</label>
                       <input type="text"
                         class="inline-block w-full rounded-xl bg-white p-2.5 leading-none text-black placeholder-stone-500 shadow focus:outline-none focus:ring focus:ring-pink-300"
-                        v-model="ceremonial_name" placeholder="Nama Acara (default: Resepsi)" />
+                        v-model="ceremonial_name" :placeholder="dataInvitation.ceremonial_name" />
                       <input type="date"
                         class="inline-block w-full rounded-xl mt-4 bg-white p-2.5 leading-none text-black placeholder-stone-500 shadow focus:outline-none focus:ring focus:ring-pink-300"
-                        v-model="ceremonial_date" placeholder="Tangal Acara" />
+                        v-model="ceremonial_date" :placeholder="dataInvitation.ceremonial_date" />
                       <input type="number"
                         class="inline-block w-full rounded-xl mt-4 bg-white p-2.5 leading-none text-black placeholder-stone-500 shadow focus:outline-none focus:ring focus:ring-pink-300"
-                        v-model="ceremonial_time_start" placeholder="Waktu Mulai" />
+                        v-model="ceremonial_time_start" :placeholder="dataInvitation.ceremonial_time_start"  />
                       <input type="number"
                         class="inline-block w-full rounded-xl mt-4 bg-white p-2.5 leading-none text-black placeholder-stone-500 shadow focus:outline-none focus:ring focus:ring-pink-300"
-                        v-model="ceremonial_time_end" placeholder="Waktu Selesai" />
+                        v-model="ceremonial_time_end" :placeholder="dataInvitation.ceremonial_time_end"  />
                     </div>
                   </div>
                     <div class="mt-4">
@@ -268,6 +271,7 @@ export default {
                     </div>
                     <div class="mt-4">
                       <label class="mb-2.5 block font-extrabold">Galeri Foto</label>
+                      <img :src="dataInvitation.photo" alt="" srcset="">
                       <input type="text"
                         class="inline-block w-full rounded-xl bg-white p-2.5 leading-none text-black placeholder-stone-500 shadow focus:outline-none focus:ring focus:ring-pink-300"
                         v-model="photo" placeholder="Tambah Foto" />
@@ -276,10 +280,11 @@ export default {
                       <label class="mb-2.5 block font-extrabold">Kisah Cinta</label>
                       <input type="text"
                         class="inline-block w-full rounded-xl bg-white p-2.5 leading-none text-black placeholder-stone-500 shadow focus:outline-none focus:ring focus:ring-pink-300"
-                        v-model="story" placeholder="Kisah Cinta" />
+                        v-model="story" :placeholder="dataInvitation.story"  />
                     </div>
                     <div class="mt-4">
                       <label class="mb-2.5 block font-extrabold">Foto Story</label>
+                      <img :src="dataInvitation.story_img" alt="" srcset="">
                       <input type="text"
                         class="inline-block w-full rounded-xl bg-white p-2.5 leading-none text-black placeholder-stone-500 shadow focus:outline-none focus:ring focus:ring-pink-300"
                         v-model="story_img" placeholder="Foto Story" />
@@ -288,13 +293,13 @@ export default {
                       <label class="mb-2.5 block font-extrabold">Dompet Digital</label>
                       <input type="text"
                         class="inline-block w-full rounded-xl bg-white p-2.5 leading-none text-black placeholder-stone-500 shadow focus:outline-none focus:ring focus:ring-pink-300"
-                        v-model="wallet_bank" placeholder="Nama Bank/Dompet Digital" />
+                        v-model="wallet_bank" :placeholder="dataInvitation.wallet_bank"  />
                       <input type="number"
                         class="inline-block w-full mt-4 rounded-xl bg-white p-2.5 leading-none text-black placeholder-stone-500 shadow focus:outline-none focus:ring focus:ring-pink-300"
-                        v-model="wallet_no" placeholder="Nomor Rekening" />
+                        v-model="wallet_no" :placeholder="dataInvitation.wallet_no"  />
                       <input type="text"
                         class="inline-block w-full mt-4 rounded-xl bg-white p-2.5 leading-none text-black placeholder-stone-500 shadow focus:outline-none focus:ring focus:ring-pink-300"
-                        v-model="wallet_owner" placeholder="Pemilik Rekening" />
+                        v-model="wallet_owner" :placeholder="dataInvitation.wallet_owner"  />
                     </div>
                     <div class="mt-4">
                       <label class="mb-2.5 block font-extrabold">Musik</label>

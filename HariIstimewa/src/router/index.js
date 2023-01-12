@@ -4,6 +4,7 @@ import Login from "../views/Login.vue";
 import Home from "../views/Home.vue";
 import Tema1 from "../views/Tema-1.vue";
 import Dashboard from "../views/Dashboard.vue";
+import EditPage from "../views/EditPage.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -28,6 +29,11 @@ const router = createRouter({
       path: "/dashboard",
       name: "dashboard",
       component: Dashboard,
+    },
+    {
+      path: "/dashboard/edit",
+      name: "edit",
+      component: EditPage,
     },
     {
       path: "/t1/:id",

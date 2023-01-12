@@ -66,7 +66,7 @@ export const useHawaStore = defineStore("hawa", {
           this.email = result.data.email;
           this.password = "";
 console.log('berhasil');
-          this.router.push('/')
+          this.router.push('/dashboard')
         })
         .catch((err) => {
           swal.fire({
@@ -94,7 +94,7 @@ console.log('berhasil');
         localStorage.setItem("role", result.data.role);
         this.access_token = result.data.access_token;
         this.email = result.data.email;
-        this.router.push('/')
+        this.router.push('/dashboard')
       })
       .catch((err) => {
         swal.fire({
@@ -168,6 +168,11 @@ console.log('berhasil');
         });
     },
 
+    
+    handleLogout() {
+      localStorage.clear();
+      this.router.push('/')
+    },
 
   },
 });

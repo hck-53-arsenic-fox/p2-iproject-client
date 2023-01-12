@@ -59,7 +59,7 @@ import {GoogleLogin} from 'vue3-google-login'
                 <GoogleLogin :callback="callback"/>
               </div>
               <div class="mt-[20px] w-full relative h-[50px] flex justify-center items-center rounded ">
-                  <span class="text-[15px]">Don't have an account? <a class="text-blue-900 hover:underline hover:underline-offset-3 " href="" >Register Now</a></span>
+                  <span class="text-[15px]">Don't have an account? <RouterLink to="/register" class="text-blue-900 hover:underline hover:underline-offset-3 " href="" >Register Now</RouterLink></span>
               </div>
           </form>
       </div>

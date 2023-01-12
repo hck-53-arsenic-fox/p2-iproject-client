@@ -58,7 +58,12 @@ import Sidebar from '../components/Sidebar.vue';
                     return el
                 })
                 this.handleFormPay(data, this.customerName)
-            }
+            },
+            formatRupiah(money) {
+            return new Intl.NumberFormat('id-ID',
+                { style: 'currency', currency: 'IDR' }
+            ).format(money);
+        }
         },
         async created(){
             await this.fetchProduct()
@@ -136,7 +141,7 @@ import Sidebar from '../components/Sidebar.vue';
                     <div class="ml-4 my-[5px] w-full flex flex-col justify-between">
                         <p class="font-semibold mr-4">{{trx.name}}</p>
                         <div class="flex justify-between mr-4">
-                            <p class="font-semibold">Rp.{{ trx.price }}</p>
+                            <p class="font-semibold">{{ formatRupiah(trx.price) }}</p>
                             <p class="font-semibold">{{ trx.amount }}</p>
                         </div>
                     </div>

@@ -1,9 +1,13 @@
 <script>
-import { mapActions } from 'pinia';
+import { mapActions, mapState } from 'pinia';
 import { useCounterStore } from '../stores/counter';
 export default{
+
     methods: {
         ...mapActions(useCounterStore, ['handleLogout'])
+    },
+    computed: {
+        ...mapState(useCounterStore, ['imgWA'])
     }
 }
 </script>
@@ -36,8 +40,8 @@ export default{
                 </ul>
                 <ul>
                     <li class="my-5">
-                        <a href="" class="text-base hover:font-medium flex flex-col my-6 group">
-                            <i class="mx-auto text-gray-400 text-[20px] fa-solid fa-gear group-hover:text-[22px]"></i>
+                        <a href="" class="text-base text-center hover:font-medium flex flex-col align-center justify-center my-6 group">
+                            <img :src="imgWA" class="rounded-full text-center text-[40px] mx-auto" width="40" alt="">
                         </a>
                         <a href="" class="text-base hover:font-medium flex flex-col my-6 group" @click="handleLogout">
                             <i class="mx-auto text-gray-400 text-[20px] fa-solid fa-right-from-bracket group-hover:text-[22px]"></i>

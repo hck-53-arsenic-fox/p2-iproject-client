@@ -2,14 +2,19 @@ import { defineStore } from 'pinia'
 import axios from 'axios'
 import Swal from "sweetalert2";
 
-const baseUrl = "http://localhost:3000/users"
-const urlAPI_1 = "https://api.api-ninjas.com/v1/planets="
+const baseUrl = "http://localhost:4000/users"
+const urlAPI_1 = "https://api.api-ninjas.com/v1/planets"
+const urlAPI_2 = "https://images-api.nasa.gov/search?q=apollo%2022&description=moon%20landing&media_type=image"
 
 export const usePiniaStore = defineStore("piniaStore", {
     state: () => ({
         isLogin: false,
         dataPlanets: [],
-        dataAstros: []
+        dataAstros: [],
+        queryPlanets: {
+            search: ""
+        },
+        dataUser: ""
     }),
     actions: {
         async register(dataRegister){
@@ -45,7 +50,7 @@ export const usePiniaStore = defineStore("piniaStore", {
                     url: `${baseUrl}/login`,
                     data: dataLogin
                 })
-                localStorage.setItem("acces_token", data.access_token)
+                localStorage.setItem("access_token", data.access_token)
                 localStorage.setItem("id", data.id);
                 this.isLogin = true
                 this.router.push('/')
@@ -66,6 +71,95 @@ export const usePiniaStore = defineStore("piniaStore", {
                 }
             },
 
+            async planetaryInfo(){
+                try {
+                    let name = this.queryPlanets
+                    if(!name.search){
+                        delete name.search
+                    }
+                    let {data} = await axios({
+                        method: "GET",
+                        url: 'http://localhost:4000/users/planetsInfo' + `?name=${name.search}`,
+                        headers: {
+                            access_token: localStorage.getItem("access_token")
+                        }
+                    })
+                    this.dataPlanets = data
+                    console.log(data, "<< data planet");
+                } catch (error) {
+                    console.log(error);
+                }
+            },
+            async getProfile(){
+                try {
+                    let {data} = await axios({
+                        method: "GET",
+                        url: `${baseUrl}/profile`,
+                        headers: {access_token: localStorage.getItem("access_token")}
+                    })
+                    this.dataUser = data
+                } catch (error) {
+                    console.log(error);
+                }
+            },
+            async updateStatus(){
+                try {
+                    let {data} =  await axios({
+                        method: "PATCH",
+                        url: `${baseUrl}/subscription`,
+                        data: {isSubscribed: true},
+                        headers: {
+                            access_token: localStorage.getItem("access_token")
+                        }
+                    })
+                } catch (error) {
+                    console.log(error);
+                }
+            },
+            async subscribe(){
+                try {
+                    let {data} = await axios({
+                        method: "POST",
+                        url: `http://localhost:4000/users/paymentToken`,
+                        headers: {
+                            access_token: localStorage.getItem("access_token")
+                        }
+                    })
+                    const cb = this.updateStatus
+                    window.snap.pay(data.token, {
+                        onSuccess: function(result){
+                          /* You may add your own implementation here */
+                          alert("payment success!"); console.log(result);
+                          cb()
+                        },
+                        onPending: function(result){
+                            /* You may add your own implementation here */
+                            alert("wating your payment!"); console.log(result);
+                          },
+                          onError: function(result){
+                            /* You may add your own implementation here */
+                            alert("payment failed!"); console.log(result);
+                          },
+                          onClose: function(){
+                            /* You may add your own implementation here */
+                            alert('you closed the popup without finishing the payment');
+                          }
+                      })
+                } catch (error) {
+                    console.log(error);
+                }
+            },
+            async astroGallery(){
+                try {
+                    let {data} = await axios({
+                        method: "GET",
+                        url: urlAPI_2
+                    })
+                    this.dataAstros = data
+                } catch (error) {
+                    console.log(error);
+                }
+            },
         }
     }
 )

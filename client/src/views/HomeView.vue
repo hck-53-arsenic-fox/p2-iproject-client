@@ -43,9 +43,6 @@ export default {
 </script>
 
 <template>
-    <!-- <pre>{{ categories }}</pre> -->
-    <h1>afsfasd</h1>
-    <!-- <pre>{{ products }}</pre> -->
   <div class="d-flex">
     <div class="flex-shrink-0 sticky-top">
       <div class="sticky-top">

@@ -14,7 +14,6 @@ export default {
 
 <template>
   <!-- Start Login -->
-  <h1>dari login</h1>
   <section
     id="login-section"
     class="vh-100 bg-image"

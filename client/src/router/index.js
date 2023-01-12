@@ -4,6 +4,7 @@ import ProfileView from '../views/ProfileView.vue'
 import LoginView from '../views/LoginView.vue'
 import DetailView from '../views/DetailView.vue'
 import CartView from '../views/CartView.vue'
+import WishlistView from '../views/WishlistView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -32,6 +33,11 @@ const router = createRouter({
       path: '/cart',
       name: 'cart',
       component: CartView
+    },
+    {
+      path: '/wishlist',
+      name: 'wishlist',
+      component: WishlistView
     }
   ]
 })

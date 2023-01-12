@@ -20,7 +20,7 @@ export default {
 <template>
   <!-- Navbar -->
   <section class="sticky-top" >
-    <nav class="navbar navbar-expand-lg fixed-top bg-light navbar-light">
+    <nav class="navbar navbar-expand-lg bg-light navbar-light">
     <div class="container">
       <RouterLink class="navbar-brand" :to="{ path: '/', query: {} }" @click.prevent="fetchHome"
         ><img

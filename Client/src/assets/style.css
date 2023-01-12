@@ -1,5 +1,5 @@
 html, body{
-    height: 100%
+  height: 100%;
 }
 
 body {
@@ -43,7 +43,7 @@ body {
 
   #Chara-Cards{
     display: grid;
-    grid-template-columns: auto auto auto auto auto;
+    grid-template-columns: auto auto auto auto auto auto;
     gap: 50px;
     margin: 2.5% 2.5%;
     justify-content: space-between;
@@ -54,3 +54,6 @@ body {
     justify-content: center;
     gap: 10px;
   }
+
+  /* #player-card{
+  } */

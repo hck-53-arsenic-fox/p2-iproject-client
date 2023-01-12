@@ -2,6 +2,10 @@
 
 Individual Project - Client
 
+### Deployed API-Test
+
+-   https://kuncung-bot.vercel.app
+
 &nbsp;
 
 ## Project Setup

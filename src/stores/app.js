@@ -73,6 +73,7 @@ export const useAppStore = defineStore("app", {
 
 		async fetchChatList() {
 			try {
+				Loading.circle();
 				const { data } = await axios({
 					method: "GET",
 					url: origin + `/api/chat`,
@@ -84,6 +85,7 @@ export const useAppStore = defineStore("app", {
 				});
 				this.chatList = data;
 				console.log(this.chatList);
+				Loading.remove();
 			} catch (error) {
 				console.log(error);
 			}

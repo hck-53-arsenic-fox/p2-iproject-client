@@ -1,7 +1,7 @@
 <script>
 import { mapActions, mapState } from "pinia";
-import ServiceCard from "../components/serviceCard.vue";
 import {useFetchStore} from "../stores/fetchData"
+import ServiceCard from "../components/serviceCard.vue";
 
 export default {
     components: {

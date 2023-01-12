@@ -41,7 +41,7 @@ const routes = [
     component: MyOrderHistory,
   },
   {
-    path: "/detail",
+    path: "/detail/:id",
     name: "OrderDetail",
     component: OrderDetail,
   },

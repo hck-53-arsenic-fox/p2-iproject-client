@@ -1,5 +1,22 @@
 <script>
-export default {};
+import { mapActions, mapState } from "pinia";
+import {useFetchStore} from "../stores/fetchData"
+import myOrderHistoryRow from "../components/myOrderHistoryRow.vue";
+
+export default {
+  components: {
+    myOrderHistoryRow,
+  },
+  computed: {
+    ...mapState(useFetchStore, ["myOrders"]),
+  },
+  methods: {
+    ...mapActions(useFetchStore, ['fetchMyOrders']),
+  },
+  created() {
+    this.fetchMyOrders();
+  },
+};
 </script>
 
 <template>
@@ -26,17 +43,7 @@ export default {};
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>81728376</td>
-          <td>Nike</td>
-          <td>Premium Cleaning</td>
-          <td>now</td>
-          <td>3 Days ETC</td>
-          <td>on process</td>
-          <td>next week</td>
-          <td><RouterLink to="/detail" class="btn btn-outline-secondary btn-block btn-sm col-10 border border-secondary text-dark">Check Detail</RouterLink></td>
-        </tr>
+        <myOrderHistoryRow v-for="el,i in myOrders" :key="el.id" :el="el" :i="i"/>
       </tbody>
     </table>
   </div>

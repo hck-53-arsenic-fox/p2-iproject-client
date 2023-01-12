@@ -1,12 +1,26 @@
 <script>
-export default {};
+import { useFetchStore } from "../stores/fetchData";
+import { mapActions, mapState } from "pinia";
+export default {
+
+  computed: {
+    ...mapState(useFetchStore,['myOrderDetail'])
+  },
+  methods: {
+    ...mapActions(useFetchStore,['fetchOrderDetail'])
+  },
+  created(){
+    this.fetchOrderDetail(this.$route.params.id)
+    console.log(this.myOrderDetail)
+  }
+};
 </script>
 
 <template>
   <div class="container pt-3">
     <div class="row">
       <div class="col-12 text-center">
-        <h1 class="fontstyle">Your Order Detail</h1>
+        <h1 class="fontstyle">Your Order Detail {{ myOrderDetail.orderIdNumber }}</h1>
       </div>
     </div>
   </div>
@@ -21,21 +35,23 @@ export default {};
           <h6>Shoes Color:</h6>
           <h6>Shoes Material:</h6>
           <h6>Service Name:</h6>
-          <h6>Order Date:</h6>
-          <h6>Complete Date:</h6>
           <h6>Order Status:</h6>
+          <h6>Order Date:</h6>
+          <h6>Estimated Complete Date:</h6>
+          <h6>Complete Date:</h6>
         </div>
         <div class="col-auto text-start">
-          <h6>Ibnu</h6>
-          <h6>87186273612</h6>
-          <h6>Nike</h6>
-          <h6>43 EUR</h6>
-          <h6>Black</h6>
-          <h6>Leather</h6>
-          <h6>Premium Cleaning</h6>
-          <h6>Now</h6>
-          <h6>3 days ETC</h6>
-          <h6>complete on complete date</h6>
+          <h6>{{ myOrderDetail.User.username }}</h6>
+          <h6>{{ myOrderDetail.User.phoneNumber }} <span v-if="myOrderDetail.phoneNumberPIC"> or {{ myOrderDetail.phoneNumberPIC }}</span></h6>
+          <h6>{{ myOrderDetail.shoesBrand }}</h6>
+          <h6>{{ myOrderDetail.shoesSize }}</h6>
+          <h6>{{ myOrderDetail.shoesColor }}</h6>
+          <h6>{{ myOrderDetail.shoesMaterial }}</h6>
+          <h6>{{ myOrderDetail.Service.name }}</h6>
+          <h6>{{ myOrderDetail.status }}</h6>
+          <h6>{{ myOrderDetail.createdAt }}</h6>
+          <h6>{{ myOrderDetail.estimatedDate }}</h6>
+          <h6>{{ myOrderDetail.completedDate }}</h6>
         </div>
       </div>
       <div class="row g-3 align-items-start pt-3 px-3">

@@ -18,7 +18,8 @@
 <template>
     <div>
         <table>
-            <tr>{{ weaponList }}</tr>
+            <th style="color: white;">Weapon Names</th>
+            <tr v-for="weapon in weaponList" :key="weapon.id" style="color: white;">{{ weapon }}</tr>
         </table>
     </div>
 </template>

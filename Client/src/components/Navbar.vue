@@ -19,8 +19,9 @@ export default {
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
       <a class="nav-item nav-link" href="#" style="margin-left: 5%;" @click.prevent="this.$router.push('/')">Characters <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="#" style="margin-left: 5%;" @click.prevent="this.$router.push('/weapons')">Weapons <span class="sr-only">(current)</span></a>
       <a class="nav-item nav-link" href="#" style="margin-left: 5%;" @click.prevent="this.$router.push('/account')">Account</a>
-      <a class="nav-item nav-link" href="#" style="margin-left: 380%; color: green;" @click.prevent="this.$router.push('/login')">Login</a>
+      <a class="nav-item nav-link" href="#" style="margin-left: 360%; color: green;" @click.prevent="this.$router.push('/login')">Login</a>
       <a class="nav-item nav-link" href="#" style="margin-left: 1%; color: red;" @click.prevent="logout">Logout</a>
     </div>
   </div>

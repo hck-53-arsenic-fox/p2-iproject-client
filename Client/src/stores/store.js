@@ -162,6 +162,18 @@ export const useGenshinStore = defineStore("Genshin Impact", {
       }
     },
 
+    async weaponDetail(name){
+      try {
+        let {data} = await axios({
+          method: 'GET',
+          url: undeployed + '/weapons/:name'
+        })
+        this.weapon = data
+      } catch (err) {
+        console.log(err);
+      }
+    },
+
     async getAcc(query){
         const {uid} = query
         try {

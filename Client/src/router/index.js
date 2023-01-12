@@ -6,6 +6,7 @@ import Register from "../views/Register.vue";
 import CharDetail from "../views/CharDetail.vue";
 import SearchAccount from "../views/SearchAccount.vue";
 import Verify from "../views/Verify.vue";
+import Weapons from "../views/WeaponList.vue"
 
 const router = createRouter({
   history: createWebHistory(),
@@ -40,6 +41,11 @@ const router = createRouter({
       name: "verify",
       component: Verify,
     },
+    {
+      path: "/weapons",
+      name: "/weapons",
+      component: Weapons
+    }
   ],
 });
 

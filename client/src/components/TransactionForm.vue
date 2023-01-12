@@ -1,6 +1,30 @@
 <script>
+import { useAppStore } from "@/stores/app";
+import { mapState, mapActions } from "pinia";
+
 export default {
   name: "TransactionForm",
+  methods: {
+    ...mapActions(useAppStore, [
+      "handleCreateTransaction",
+      "getAllTransactions",
+      "getAllCategories",
+    ]),
+
+    handleFormSubmit() {
+      return this.handleCreateTransaction({
+        name: this.name,
+        amount: this.amount,
+        type: this.type,
+        transactionDateAndTime: this.transactionDateAndTime,
+        CategoryId: this.CategoryId,
+        WalletId: this.WalletId,
+      });
+    },
+  },
+  computed: {
+    ...mapState(useAppStore, ["categories", "wallets"]),
+  },
   data() {
     return {
       name: "",
@@ -13,55 +37,19 @@ export default {
       wallets: [],
     };
   },
-  /*  created() {
-    if (this.page === "create") {
-      // if it is a create form, clear all the fields first
-      this.name = "";
-      this.amount = 0;
-      this.type = "";
-      this.transactionDateAndTime = "";
-      this.CategoryId = 0;
-      this.WalletId = 0;
-    } else {
-      console.table(this.postObject);
-      // if it is an update form, initialize the fields with the values of the postObject prop
-      this.name = this.postObject.name;
-      this.amount = this.postObject.amount;
-      this.type = this.postObject.type;
-      this.transactionDateAndTime = this.postObject.transactionDateAndTime;
-      this.CategoryId = this.postObject.CategoryId;
-      this.WalletId = this.postObject.WalletId;
-    }
-  }, */
+  mounted() {
+    this.getAllTransactions();
+    this.getAllCategories();
+  },
 };
 </script>
 
 <template>
-  <form
-    @submit.prevent="
-      $emit('submitTransactionForm', postObject.id, {
-        name,
-        amount,
-        type,
-        transactionDateAndTime,
-        CategoryId,
-        WalletId,
-      })
-    "
-    class="form text-dark"
-  >
+  <form @submit.prevent="handleFormSubmit" class="form text-dark">
     <div class="form-group">
-      <label for="title">Transaction Title</label>
-      <input class="form-control" id="title" v-model="title" />
-    </div>
-    <div class="form-group">
-      <label for="name">Name</label>
-      <textarea
-        rows="10"
-        class="form-control"
-        id="content"
-        v-model="name"
-      ></textarea>
+      <label for="name">Transaction Name</label>
+      <input class="form-control" id="name" v-model="name" />
+      <ejs-datetimepicker :placeholder="waterMark" ></ejs-datetimepicker>
     </div>
     <div class="form-group">
       <label for="amount">Amount</label>
@@ -69,7 +57,11 @@ export default {
     </div>
     <div class="form-group">
       <label for="type">Type</label>
-      <input class="form-control" id="type" v-model="type" />
+      <select v-model="type" class="form-select">
+        <option disabled value="">Choose transaction type</option>
+        <option value="income">Income</option>
+        <option value="expense">Expense</option>
+      </select>
     </div>
     <div class="form-group">
       <label for="transactionDateAndTime">Transaction Date And Time</label>

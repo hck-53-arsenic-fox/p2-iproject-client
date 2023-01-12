@@ -13,6 +13,24 @@ export default {
   computed: {
     ...mapState(useAppStore, ["transactions"]),
 
+    categoriesFromTransactions() {
+      const arrayOfCategories =
+        this.transactions.length > 0
+          ? this.transactions.map((transaction) => {
+              return transaction.Category?.name;
+            })
+          : [];
+      const finalResult = arrayOfCategories.reduce((acc, curr) => {
+        if (typeof acc[curr] == "undefined") {
+          acc[curr] = 1;
+        } else {
+          acc[curr] += 1;
+        }
+        return acc;
+      }, {});
+      return finalResult;
+    },
+
     formattedAmount() {
       return this.transactions.amount.length > 0
         ? this.transactions.amount.map((amount) => {
@@ -31,10 +49,13 @@ export default {
 </script>
 
 <template>
-  <div>
-    <div class="row">
-      <div class="col-12 mb-4">
-        <h1>Your Transactions</h1>
+  <div class="card text-dark p-4 mb-4">
+    <div class="col-12 mb-4">
+      <h1>Your Transactions</h1>
+    </div>
+    <div v-if="transactions.length > 0" class="row">
+      <div class="col-12 pb-4">
+        <pie-chart :data="categoriesFromTransactions"></pie-chart>
       </div>
       <div class="col-12">
         <table class="table table-light">
@@ -44,22 +65,23 @@ export default {
               <th>Transaction Name</th>
               <th>Transaction Amount</th>
               <th>Date Time</th>
+              <th>Category</th>
             </tr>
           </thead>
           <tbody>
-            <tr
-              v-for="(transaction, index) of transactions"
-              v-bind:key="transaction.id"
-            >
+            <tr v-for="transaction of transactions" v-bind:key="transaction.id">
               <td>{{ transaction.id }}</td>
               <td>{{ transaction.name }}</td>
               <td>Rp.{{ transaction.amount }}</td>
-              <!-- <td>{{ this.formattedAmount?.[index] || "-" }}</td> -->
               <td>{{ transaction.transactionDateTime }}</td>
+              <td>{{ transaction.Category?.name }}</td>
             </tr>
           </tbody>
         </table>
       </div>
+    </div>
+    <div v-else>
+      <h3 class="text-center">No Transactions found</h3>
     </div>
   </div>
 </template>

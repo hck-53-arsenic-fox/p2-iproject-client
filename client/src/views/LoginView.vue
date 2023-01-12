@@ -48,7 +48,7 @@ export default {
   },
   computed: {},
   mounted() {
-    window.fbInit = function () {
+    window.fbAsyncInit = function () {
       FB.init({
         appId: "2984034805226590",
         cookie: true,
@@ -85,7 +85,7 @@ export default {
         }
       });
     };
-    window.fbInit();
+    window.fbAsyncInit();
   },
 };
 </script>

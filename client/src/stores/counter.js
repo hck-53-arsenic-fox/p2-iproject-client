@@ -13,6 +13,8 @@ export const useCounterStore = defineStore("counter", {
       city: [],
       cost: {},
       order: [],
+      page: "",
+      totalPage: "",
     };
   },
   actions: {
@@ -53,13 +55,15 @@ export const useCounterStore = defineStore("counter", {
         Swal.fire(error.response.data.message);
       }
     },
-    async fetchProducts() {
+    async fetchProducts(pageNow = 1) {
+      this.page = pageNow;
       try {
         const { data } = await axios({
           method: "get",
-          url: baseUrl,
+          url: baseUrl + "/?page[size]=5&page[number]=" + this.page,
         });
-        this.products = data;
+        this.products = data.data;
+        this.totalPage = data.totalPage;
         // console.log(data);
       } catch (error) {
         Swal.fire(error.response.data.message);

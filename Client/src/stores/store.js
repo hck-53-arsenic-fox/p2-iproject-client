@@ -10,6 +10,8 @@ export const useGenshinStore = defineStore("Genshin Impact", {
       token: "",
       charaList: [],
       chara: {},
+      weaponList: [],
+      weapon: {},
       account: {}
     };
   },
@@ -75,7 +77,6 @@ export const useGenshinStore = defineStore("Genshin Impact", {
           title: "Logging In",
           text: "You are now logged in",
         });
-        this.showButton = "logout";
         this.router.push({ path: "/" });
       } catch (error) {
         let showErr = error.response.data.message;
@@ -86,6 +87,22 @@ export const useGenshinStore = defineStore("Genshin Impact", {
         });
       }
     },
+    
+    async googleLogin(response){
+      await axios({
+          method: 'POST',
+          url: undeployed + '/google-login',
+          headers: {google_token: response.credential}
+        })
+        .then((res) => {
+          // console.log(res)
+          localStorage.setItem("access_token", res.data.access_token)
+          this.router.push({path: '/'}) 
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+      },
 
     logout() {
       Swal.fire({
@@ -99,7 +116,6 @@ export const useGenshinStore = defineStore("Genshin Impact", {
         if (result.isConfirmed) {
           Swal.fire("Successfully Logged out");
           localStorage.clear();
-          this.showButton = "login";
           this.router.push("/");
         }
       });
@@ -132,6 +148,18 @@ export const useGenshinStore = defineStore("Genshin Impact", {
         } catch (err) {
             console.log(err);
         }
+    },
+
+    async getWeapons() {
+      try {
+        let {data} = await axios({
+          method: 'GET',
+          url: undeployed + '/weapons'
+        })
+        this.weaponList = data
+      } catch (err) {
+        console.log(err);
+      }
     },
 
     async getAcc(query){

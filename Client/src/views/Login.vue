@@ -12,9 +12,14 @@
 
         methods: {
             ...mapActions(useGenshinStore, ["login"]),
+            ...mapActions(useGenshinStore, ['googleLogin']),
 
             handleLogin(){
                 this.login(this.email, this.password)
+            },
+
+            GoogleLogin(response){
+                this.googleLogin(response)
             }
         }
     }
@@ -32,5 +37,6 @@
         Don't have an Account? <br />
         <router-link to="register">Click here to Register</router-link>
         <br><br />
+        <GoogleLogin :callback="GoogleLogin"/>
     </form>
 </template>

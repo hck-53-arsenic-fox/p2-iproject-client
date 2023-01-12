@@ -19,15 +19,23 @@ export default {
       "getCity",
       "getCost",
       "payment",
+      "clearCost",
     ]),
     getOngkir(ongkir) {
       let harga = ongkir + this.product.price;
       this.payment(harga, this.product.id);
     },
+    rupiah(number) {
+      return new Intl.NumberFormat("id-ID", {
+        style: "currency",
+        currency: "IDR",
+      }).format(number);
+    },
   },
   created() {
     this.fetchProductId(this.$route.params.id);
     this.getProvince();
+    this.clearCost();
   },
 };
 </script>
@@ -107,13 +115,16 @@ export default {
             {{ cost.rajaongkir.results[0].costs[0].service }}
           </p>
           <p>
-            total ongkir = Rp.
-            {{ cost.rajaongkir.results[0].costs[0].cost[0].value }}
+            total ongkir =
+            {{ rupiah(cost.rajaongkir.results[0].costs[0].cost[0].value) }}
           </p>
           <p>
-            total harga = Rp.
+            total harga =
             {{
-              cost.rajaongkir.results[0].costs[0].cost[0].value + product.price
+              rupiah(
+                cost.rajaongkir.results[0].costs[0].cost[0].value +
+                  product.price
+              )
             }}
           </p>
           <p>

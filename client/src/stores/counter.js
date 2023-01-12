@@ -18,6 +18,9 @@ export const useCounterStore = defineStore("counter", {
     };
   },
   actions: {
+    clearCost() {
+      this.cost = {};
+    },
     async register(user) {
       try {
         await axios({

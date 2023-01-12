@@ -9,6 +9,12 @@ export default {
   },
   methods: {
     // ...mapActions(useCounterStore, []),
+    rupiah(number) {
+      return new Intl.NumberFormat("id-ID", {
+        style: "currency",
+        currency: "IDR",
+      }).format(number);
+    },
   },
   // created() {
   // },
@@ -48,7 +54,7 @@ export default {
       class="align-items-center align-content-center col-md-3 border-left mt-1"
     >
       <div class="d-flex flex-row align-items-center">
-        <h4 class="mr-1">Rp. {{ product.price }}</h4>
+        <h4 class="mr-1">{{ rupiah(product.price) }}</h4>
         <span class="strike-text"></span>
       </div>
       <h6 class="text-success">Sprei Tempahan Qu</h6>

@@ -8,6 +8,7 @@ export default {
     ...mapActions(useFetchStore,['fetchOrderDetail']),
       async seeDetail(id) {
         this.fetchOrderDetail(id)
+        this.$router.push(`/detail/${id}`)
       }
   }
 };

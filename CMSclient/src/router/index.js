@@ -51,7 +51,7 @@ const routes = [
     component: OrderLog,
   },
   {
-    path: "/update",
+    path: "/update/:id",
     name: "Update",
     component: Update,
   },

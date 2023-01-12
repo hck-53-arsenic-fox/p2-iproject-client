@@ -7,6 +7,7 @@ export const useFetchStore = defineStore("fetch", {
     return {
       services: [],
       myOrders: [],
+      allOrders:[],
       myOrderDetail: {}
     };
   },
@@ -38,6 +39,21 @@ export const useFetchStore = defineStore("fetch", {
       }
     },
 
+    async fetchAllOrders() {
+      try {
+        const { data } = await axios({
+          method: "GET",
+          url: server + "orders/",
+          headers: {
+            access_token: localStorage.getItem("access_token"),
+          },
+        });
+        this.allOrders = data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
     async fetchOrderDetail(id) {
       try {
         const { data } = await axios({
@@ -48,7 +64,6 @@ export const useFetchStore = defineStore("fetch", {
           },
         });
         this.myOrderDetail = data;
-        this.router.push(`/detail/${id}`)
       } catch (error) {
         console.log(error);
       }

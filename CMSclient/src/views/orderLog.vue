@@ -1,5 +1,21 @@
 <script>
-export default {};
+import { mapActions, mapState } from "pinia";
+import { useFetchStore } from "../stores/fetchData";
+import OrderLogRow from "../components/orderLogRow.vue";
+export default {
+  components: {
+    OrderLogRow,
+  },
+  computed: {
+    ...mapState(useFetchStore, ['allOrders']),
+  },
+  methods: {
+    ...mapActions(useFetchStore, ["fetchAllOrders"]),
+  },
+  created() {
+    this.fetchAllOrders();
+  },
+};
 </script>
 
 <template>
@@ -28,7 +44,13 @@ export default {};
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <OrderLogRow
+          v-for="(el, i) in allOrders"
+          :key="el.id"
+          :el="el"
+          :i="i"
+        />
+        <!-- <tr>
           <th scope="row">1</th>
           <td>81728376</td>
           <td>Ibnu</td>
@@ -53,7 +75,7 @@ export default {};
               >Check Detail</RouterLink
             >
           </td>
-        </tr>
+        </tr> -->
       </tbody>
     </table>
   </div>

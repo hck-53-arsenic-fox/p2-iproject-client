@@ -13,6 +13,8 @@ export const useOrderStore = defineStore("order", {
       photo: "",
       pickUpAddress: "",
       ServiceId: "",
+      status: "",
+      photoAfter: "",
     };
   },
   actions: {
@@ -44,6 +46,26 @@ export const useOrderStore = defineStore("order", {
           (this.pickUpAddress = ""),
           (this.ServiceId = "");
         this.router.push("/services");
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async updateStatusOrder(updateData, id) {
+      try {
+        const { data } = await axios({
+          method: "PATCH",
+          url: server + `orders/${id}`,
+          headers: {
+            access_token: localStorage.getItem("access_token"),
+          },
+          data: {
+            status: updateData.status,
+            photoAfter: updateData.photoAfter,
+          },
+        });
+        this.status =''
+        this.photoAfter=''
+        this.router.push("/log");
       } catch (error) {
         console.log(error);
       }

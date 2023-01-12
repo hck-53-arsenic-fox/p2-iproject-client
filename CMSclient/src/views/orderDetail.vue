@@ -11,7 +11,6 @@ export default {
   },
   created(){
     this.fetchOrderDetail(this.$route.params.id)
-    console.log(this.myOrderDetail)
   }
 };
 </script>

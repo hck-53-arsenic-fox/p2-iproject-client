@@ -1,10 +1,30 @@
 <script>
-export default {}
+import { mapActions, mapState } from 'pinia';
+import ChatListBox from './ChatListBox.vue';
+
+import { useAppStore } from '../stores/app'
+export default {
+    components: {
+        ChatListBox
+    },
+    computed: {
+        ...mapState(useAppStore, ['chatList'])
+    },
+    methods: {
+        ...mapActions(useAppStore, ['fetchChatList'])
+    },
+    created() {
+        this.fetchChatList()
+    }
+}
 </script>
 
 <template>
     <section>
-        <p>ChatList</p>
+        <h3>My Chat</h3>
+        <div>
+            <ChatListBox v-for="chat in chatList" :key="chat._id" :chat="chat" />
+        </div>
     </section>
 </template>
 

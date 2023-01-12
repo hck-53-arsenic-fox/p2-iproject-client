@@ -13,6 +13,8 @@ export const useAppStore = defineStore("app", {
 			userInfo: "",
 			openModal: false,
 			display: "none",
+			openSideBar: false,
+			chatList: "",
 		};
 	},
 	getters: {},
@@ -67,6 +69,28 @@ export const useAppStore = defineStore("app", {
 			} catch (error) {
 				this.errorHandler(error);
 			}
+		},
+
+		async fetchChatList() {
+			try {
+				const { data } = await axios({
+					method: "GET",
+					url: origin + `/api/chat`,
+					headers: {
+						authorization:
+							"Bearer " +
+							JSON.parse(localStorage.getItem("userInfo")).token,
+					},
+				});
+				this.chatList = data;
+				console.log(this.chatList);
+			} catch (error) {
+				console.log(error);
+			}
+		},
+
+		toggleSidebar() {
+			this.openSideBar = !this.openSideBar;
 		},
 
 		toggleModal() {

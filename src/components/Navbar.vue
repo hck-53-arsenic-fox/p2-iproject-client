@@ -17,14 +17,14 @@ export default {
             this.isOpen = !this.isOpen
         },
 
-        ...mapActions(useAppStore, ['logout', 'toggleModal'])
+        ...mapActions(useAppStore, ['logout', 'toggleModal', 'toggleSidebar'])
     }
 }
 </script>
 
 <template>
     <nav class="navbar navbar-light bg-light">
-        <button class="btn" type="button">
+        <button class="btn" type="button" @click="toggleSidebar">
             <i class="mdi mdi-magnify"></i>
             Search User
         </button>

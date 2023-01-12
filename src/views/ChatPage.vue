@@ -6,13 +6,15 @@ import Navbar from '../components/Navbar.vue';
 import ChatList from '../components/ChatList.vue'
 import ChatBox from '../components/ChatBox.vue';
 import ProfileModal from '../components/ProfileModal.vue';
+import SideBar from '../components/SideBar.vue';
 
 export default {
     components: {
         Navbar,
         ChatList,
         ChatBox,
-        ProfileModal
+        ProfileModal,
+        SideBar
     },
     computed: {
         ...mapState(useAppStore, ['userInfo'])
@@ -32,6 +34,7 @@ export default {
         <Navbar />
         <ProfileModal class="position-absolute top-50 start-50 translate-middle" />
 
+        <SideBar />
         <ChatList />
 
         <ChatBox />

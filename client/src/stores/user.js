@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
-const localhost = 'http://localhost:3000'
+// const localhost = 'http://localhost:3000'
+const localhost = 'https://righteous-voice-production.up.railway.app'
 
 export const useUserStore = defineStore('user', {
   state() {

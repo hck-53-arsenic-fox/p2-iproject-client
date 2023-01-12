@@ -10,6 +10,7 @@ export const useAppStore = defineStore("app", {
     categories: [],
     conversionResult: 0,
     cmcResponse: {},
+    user: {},
   }),
   actions: {
     checkAuth() {
@@ -136,6 +137,29 @@ export const useAppStore = defineStore("app", {
 
         // also save in pinia's global state
         this.transactions = result.data;
+
+        return result.data;
+      } catch (error) {
+        this.handleError(error);
+      }
+    },
+
+    async getUser() {
+      try {
+        const result = await axios({
+          method: "GET",
+          url: `${import.meta.env.VITE_ORIGIN_URL}/users`,
+          headers: {
+            access_token: localStorage.getItem("access_token"),
+          },
+        });
+
+        if (!result?.data) {
+          throw new Error("Frontend error: somehow unable to get result.data");
+        }
+
+        // also save in pinia's global state
+        this.user = result.data;
 
         return result.data;
       } catch (error) {

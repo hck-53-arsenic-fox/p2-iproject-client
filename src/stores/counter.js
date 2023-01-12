@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import axios from "axios";
 
 let baseUrl = "http://localhost:3000";
+baseUrl = "https://game-store-app.up.railway.app";
 
 export const useCounterStore = defineStore("counter", {
   state: () => ({

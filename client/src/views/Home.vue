@@ -28,7 +28,7 @@ export default {
   .swiper-slide {
   text-align: center;
   font-size: 18px;
-
+  transition-duration: 1000ms !important;
   /* Center slide text vertically */
   display: -webkit-box;
   display: -ms-flexbox;

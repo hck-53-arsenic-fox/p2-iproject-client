@@ -1,4 +1,6 @@
 "use strict";
+import wall from "../res/wall.jpg";
+import floor from "../res/floor.jpg";
 
 const loadTexture = async (texture, url) => {
   const result = await fetch(url);
@@ -10,8 +12,8 @@ const loadTexture = async (texture, url) => {
 export const mesh = (regl, data, useReflexion) => {
   const wallTexture = regl.texture();
   const floorTexture = regl.texture();
-  loadTexture(wallTexture, "res/wall.jpg");
-  loadTexture(floorTexture, "res/floor.jpg");
+  loadTexture(wallTexture, wall);
+  loadTexture(floorTexture, floor);
   return regl({
     frag: `
         precision lowp float;

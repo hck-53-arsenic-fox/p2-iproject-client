@@ -31,7 +31,7 @@ export const useCounterStore = defineStore("counter", {
     async buyEvent(eventId) {
       try {
         const data = await Axios.post(
-          `http://localhost:4444/transaction/${eventId}`,
+          `https://useum.up.railway.app/transaction/${eventId}`,
           {},
           {
             headers: {
@@ -55,7 +55,10 @@ export const useCounterStore = defineStore("counter", {
     },
     async login(user) {
       try {
-        const { data } = await Axios.post("http://localhost:4444/login", user);
+        const { data } = await Axios.post(
+          "https://useum.up.railway.app/login",
+          user
+        );
         localStorage.setItem("access_token", data.access_token);
         this.isLogin = true;
         router.push({ path: "/" });
@@ -71,7 +74,7 @@ export const useCounterStore = defineStore("counter", {
     async register(user) {
       try {
         const { data } = await Axios.post(
-          "http://localhost:4444/register",
+          "https://useum.up.railway.app/register",
           user
         );
         router.push({ path: "/login" });
@@ -86,7 +89,7 @@ export const useCounterStore = defineStore("counter", {
     googleLogin(res) {
       Axios({
         method: "POST",
-        url: "http://localhost:4444/google",
+        url: "https://useum.up.railway.app/google",
         headers: {
           google_token: res,
         },
@@ -106,11 +109,14 @@ export const useCounterStore = defineStore("counter", {
     },
     async fetchExhibitions() {
       try {
-        const { data } = await Axios.get("http://localhost:4444/exhibitions", {
-          headers: {
-            access_token: localStorage.getItem("access_token"),
-          },
-        });
+        const { data } = await Axios.get(
+          "https://useum.up.railway.app/exhibitions",
+          {
+            headers: {
+              access_token: localStorage.getItem("access_token"),
+            },
+          }
+        );
         this.exhibitions = data;
       } catch (error) {
         Report.failure(
@@ -122,11 +128,14 @@ export const useCounterStore = defineStore("counter", {
     },
     async fetchArtworks() {
       try {
-        const { data } = await Axios.get("http://localhost:4444/artworks", {
-          headers: {
-            access_token: localStorage.getItem("access_token"),
-          },
-        });
+        const { data } = await Axios.get(
+          "https://useum.up.railway.app/artworks",
+          {
+            headers: {
+              access_token: localStorage.getItem("access_token"),
+            },
+          }
+        );
         this.artworks = data;
       } catch (error) {
         Report.failure(
@@ -140,7 +149,7 @@ export const useCounterStore = defineStore("counter", {
       const access_token = localStorage.getItem("access_token");
       try {
         const { data } = await Axios.post(
-          `http://localhost:4444/generate-midtrans-token/${id}`,
+          `https://useum.up.railway.app/generate-midtrans-token/${id}`,
           {},
           {
             headers: {

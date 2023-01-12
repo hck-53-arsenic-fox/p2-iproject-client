@@ -9,7 +9,6 @@ export default {
       email: "",
       password: "",
       homeNumber: "",
-      image: "",
     };
   },
   methods: {
@@ -19,10 +18,13 @@ export default {
         username: this.username,
         email: this.email,
         password: this.password,
-        homeNumber: this.phoneNumber,
-        image: this.address,
+        homeNumber: this.homeNumber,
+        image: this.changeFile(),
       };
       this.registerUser(user);
+    },
+    changeFile() {
+      return (this.image = this.$refs.file.files[0]);
     },
   },
 };
@@ -32,10 +34,13 @@ export default {
   <!-- Register Page -->
   <div
     class="container vh-100 d-flex justify-content-center align-items-center"
+    style="
+      background-image: url('../../public/image/alan-j-hendry-zVf-R-r3szw-unsplash.jpg');
+    "
   >
     <div
       id="registerSection"
-      class="mt-2 w-100 border border-dark p-5 rounded-3"
+      class="mt-2 w-100 border bg-white p-5 rounded-3 shadow"
       style="max-width: 500px"
     >
       <h1 class="fw-bold text-center">Register to NeighborHud</h1>
@@ -85,10 +90,11 @@ export default {
         <div class="mb-3">
           <label for="register-address" class="form-label">Photo</label>
           <input
-            v-model="image"
-            type="text"
+            @change="changeFile"
+            type="file"
+            ref="file"
             class="form-control"
-            id="register-address"
+            id="file_input"
             placeholder="Enter your photo ..."
           />
         </div>

@@ -29,7 +29,7 @@ const router = createRouter({
       component: ChatPage
     },
     {
-      path: '/billUser',
+      path: '/bill',
       name: 'BillDetailPage',
       component: BillDetailPage
     },

@@ -5,11 +5,12 @@ import { useUserStore } from "../stores/user";
 export default {
   name: "NavbarComponent",
   computed: {
-    ...mapState(useUserStore, ["isLogin", "username"]),
+    ...mapState(useUserStore, ["isLogin", "username", "userBill"]),
   },
   methods: {
-    ...mapActions(useUserStore, ["logoutUser"]),
+    ...mapActions(useUserStore, ["logoutUser", "fetchEachUserBill"]),
   },
+  created() {},
 };
 </script>
 
@@ -31,7 +32,8 @@ export default {
       </div>
       <div class="navbar-brand">
         <a v-if="isLogin" class="nav-link disabled" aria-current="page" href="#"
-          >Hello, <span style="color: tomato">username</span>!</a
+          >Hello, <span style="color: tomato">{{ username }}</span
+          >!</a
         >
       </div>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -48,7 +50,7 @@ export default {
             <RouterLink to="/login" class="nav-link">Login</RouterLink>
           </li>
           <li class="nav-item" v-if="isLogin === true">
-            <RouterLink to="/" class="nav-link">MyBills</RouterLink>
+            <RouterLink to="/bill" class="nav-link">MyBills</RouterLink>
           </li>
           <li class="nav-item" v-if="isLogin === true">
             <a class="nav-link" @click="logoutUser" style="cursor: pointer"

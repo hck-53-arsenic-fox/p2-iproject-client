@@ -10,11 +10,12 @@ export default {
     LoginPage,
   },
   computed: {
-    ...mapWritableState(useUserStore, ["isLogin"]),
+    ...mapWritableState(useUserStore, ["isLogin", "username"]),
   },
   created() {
     if (localStorage.getItem("access_token")) {
       this.isLogin = true;
+      this.username = localStorage.getItem("username");
     }
   },
 };
@@ -22,6 +23,4 @@ export default {
 
 <template>
   <RouterView />
-  <!-- <RegisterPage v-if="isLogin === false" />
-  <LoginPage v-if="isLogin === false" /> -->
 </template>

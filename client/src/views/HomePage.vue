@@ -1,49 +1,44 @@
 <script>
 import NavbarComponent from "../components/NavbarComponent.vue";
+import NeighborCardComponent from "../components/NeighborCardComponent.vue";
 import { mapActions, mapState } from "pinia";
 import { useUserStore } from "../stores/user";
+import SearchComponent from "../components/SearchComponent.vue";
 
 export default {
   name: "HomePage",
   components: {
     NavbarComponent,
+    SearchComponent,
+    NeighborCardComponent,
+  },
+  computed: {
+    ...mapState(useUserStore, ["neighbors", "isLogin"]),
+  },
+  methods: {
+    ...mapActions(useUserStore, ["fetchNeighbor"]),
+    metot(a) {
+      console.log(a);
+    },
+  },
+  created() {
+    this.fetchNeighbor();
   },
 };
 </script>
 
 <template>
   <NavbarComponent />
+  <SearchComponent />
   <!-- Neighbor -->
   <div class="container my-4">
     <h3 class="text-center my-4">List Neighbor</h3>
     <div class="row">
-      <!-- NeighborCard -->
-      <div class="col-4 mb-3">
-        <div class="card p-3 rounded-3">
-          <div class="row align-items-center">
-            <div class="col-5">
-              <img
-                src="../../public/image/bailey-anselme-Bkp3gLygyeA-unsplash.jpg"
-                alt="logo"
-                class="mx-auto d-block"
-                style="width: 100px"
-              />
-            </div>
-            <div class="col-7">
-              <h5 class="mb-0">Name</h5>
-              <p class="mb-0">Instructor : <strong>Home Number</strong></p>
-              <p class="mb-0">Schedule :</p>
-              <p class="mb-0">
-                <span class="badge rounded-pill bg-warning text-dark"
-                  >Other Information</span
-                >
-                <!-- <span class="badge rounded-pill bg-warning text-dark">Tuesday</span> -->
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- End of NeighborCard -->
+      <NeighborCardComponent
+        v-for="neighbor in neighbors"
+        :key="neighbor.id"
+        :neighbor="neighbor"
+      />
     </div>
   </div>
   <!-- End of Neighbor -->

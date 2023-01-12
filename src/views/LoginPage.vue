@@ -62,7 +62,7 @@ async function initFacebook() {
       <div class="mx-auto">
         <div
           @click="logInWithFacebook"
-          class="flex items-center justify-center w-full px-4 py-2 mt-2 space-x-3 text-sm text-center bg-blue-600 text-white transition-colors duration-200 transform border rounded-lg hover:bg-blue-700"
+          class="flex items-center justify-center w-full px-4 py-2 mt-2 space-x-3 text-sm text-center bg-blue-600 text-white transition-colors duration-200 transform border rounded-lg hover:bg-blue-700 cursor-pointer"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

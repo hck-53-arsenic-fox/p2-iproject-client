@@ -3,7 +3,8 @@ import { reactive, ref, computed } from "vue";
 import TableRow from "../components/TableRow.vue";
 import axios from "axios";
 import { useUserStore } from "../stores/user";
-const baseUrl = "http://localhost:3001";
+// const baseUrl = "http://localhost:3001";
+const baseUrl = 'https://burgernomics-production.up.railway.app'
 
 
 const store = useUserStore()

@@ -60,7 +60,7 @@ const relativeBigMacAmount = computed(() => {
     </th>
     <td
       class="py-4 px-6 text-right"
-      v-text="country[`${this.selectedCountry.currency_code}_price`]"
+      v-text="country[`${props.selectedCountry.currency_code}_price`]"
     ></td>
     <td class="py-4 px-6 text-center">
       {{ relativePricePercentage }}

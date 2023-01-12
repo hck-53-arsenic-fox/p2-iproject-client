@@ -1,7 +1,8 @@
 import { ref, computed, reactive } from "vue";
 import { defineStore } from "pinia";
 import axios from "axios";
-const baseUrl = "http://localhost:3001";
+// const baseUrl = "http://localhost:3001";
+const baseUrl = "https://burgernomics-production.up.railway.app";
 
 export const useCountryBMI = defineStore("countryBMI", () => {
   const state = reactive({

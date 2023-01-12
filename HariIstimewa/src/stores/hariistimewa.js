@@ -10,7 +10,8 @@ export const useHawaStore = defineStore("hawa", {
       email: '',
       password: '',
     },
-    dataInvitation: []
+    dataInvitation: [],
+    listLagu: []
   }),
 
   actions: {
@@ -122,6 +123,51 @@ console.log('berhasil');
           });
         });
     },
+
+    
+    async listMusic() {
+      try {
+        let { data } = await axios({
+          method: "GET",
+          url: mainUrl + `/musics`,
+        })
+
+        this.listLagu = data;
+      } catch (error) {
+        swal.fire({
+            title: `${error.response.data.message}`,
+            icon: "error",
+            confirmButtonColor: "#3085d6",
+          });
+      }
+    },
+
+    async addInvitation(input) {
+      await axios({
+        method: "POST",
+        url: mainUrl + "/invitations",
+        headers: {
+          access_token: localStorage.access_token
+        },
+        data: input,
+      })
+        .then((result) => {          
+          swal.fire({
+            title: `Undangan Berhasil dibuat`,
+            icon: "success",
+            confirmButtonColor: "#fa98d0",
+          });
+          this.router.push('/dashboard')
+        })
+        .catch((err) => {
+          swal.fire({
+            title: `${err.response.data.message}`,
+            icon: "error",
+            confirmButtonColor: "#fa98d0",
+          });
+        });
+    },
+
 
   },
 });

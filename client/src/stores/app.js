@@ -45,10 +45,8 @@ export const useAppStore = defineStore("app", {
           data: dataRegister,
         });
 
-        if (!result?.data?.access_token) {
-          throw new Error(
-            "Frontend error: somehow unable to get result.data.access_token"
-          );
+        if (!result?.data) {
+          throw new Error("Frontend error: somehow unable to get result.data");
         }
 
         Swal.fire({
@@ -57,8 +55,28 @@ export const useAppStore = defineStore("app", {
             result?.data?.messages?.[0] ||
             "Successfully registered a new user!",
         });
+
+        // use nodemailer in the backend, to send successful registration email
+        this.handleSendSuccessfulEmail(dataRegister.email)
+
+        this.router.push("/login");
       } catch (error) {
         this.handleError(error);
+      }
+    },
+
+    async handleSendSuccessfulEmail(email) {
+      try {
+        const result = await axios({
+          method: "GET",
+          url: `${import.meta.env.VITE_ORIGIN_URL}/nodemailer/${email}`,
+        });
+
+        if (!result?.data) {
+          throw new Error("Frontend error: somehow unable to get result.data");
+        }
+      } catch (error) {
+        // this.handleError(error);
       }
     },
 
@@ -94,7 +112,7 @@ export const useAppStore = defineStore("app", {
             Swal.fire("Successfully logged out!", "", "success");
             localStorage.clear();
             this.checkAuth();
-            this.router.push("/");
+            window.location.href = "/";
           }
         });
       } catch (error) {

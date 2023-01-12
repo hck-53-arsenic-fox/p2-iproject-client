@@ -8,7 +8,7 @@ export default {
   },
   components: {},
   methods: {
-    ...mapActions(useAppStore, ["getAllTransactions"]),
+    ...mapActions(useAppStore, ["getAllTransactions", "checkAuth"]),
   },
   computed: {
     ...mapState(useAppStore, ["transactions"]),
@@ -44,6 +44,7 @@ export default {
   },
   mounted() {
     this.getAllTransactions();
+    this.checkAuth();
   },
 };
 </script>
@@ -53,20 +54,19 @@ export default {
     <div class="col-12 mb-4">
       <h1>Your Transactions</h1>
     </div>
+    <div class="col-4 p-4">
+      <button
+        @click="this.$router.push('/transactions-create')"
+        class="btn btn-primary"
+      >
+        Create new Transaction
+      </button>
+    </div>
     <div v-if="transactions.length > 0" class="row">
       <div class="col-12 pb-4">
         <pie-chart :data="categoriesFromTransactions"></pie-chart>
       </div>
-      <!-- bootstrap button  -->
       <div class="col-12 card">
-        <div class="col-4 p-4">
-          <button
-            @click="this.$router.push('/transactions-create')"
-            class="btn btn-primary"
-          >
-            Create new Transaction
-          </button>
-        </div>
         <table class="table table-light">
           <thead>
             <tr>

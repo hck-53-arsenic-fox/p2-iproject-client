@@ -2,6 +2,7 @@
 import { useAppStore } from "@/stores/app";
 import { mapState, mapActions } from "pinia";
 import Swal from "sweetalert2";
+import router from "@/router";
 
 export default {
   data() {
@@ -47,9 +48,7 @@ export default {
                 "success"
               );
               localStorage.setItem("access_token", data.accessToken);
-              setTimeout(() => {
-                window.location.href = "/home";
-              }, 3000);
+              router.push("/transactions");
             })
             .catch((error) => {
               Swal.fire("Error", error.message, "error");

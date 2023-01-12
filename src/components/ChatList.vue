@@ -1,6 +1,6 @@
 <script>
 import { mapActions, mapState } from 'pinia';
-import ChatListBox from './ChatListBox.vue';
+import ChatListBox from './ListBox/ChatListBox.vue';
 
 import { useAppStore } from '../stores/app'
 export default {

@@ -2,7 +2,7 @@
 import { mapActions, mapState } from 'pinia';
 import { useAppStore } from '../stores/app';
 
-import UserListBox from './UserListBox.vue';
+import UserListBox from './ListBox/UserListBox.vue';
 export default {
     components: {
         UserListBox

@@ -1,6 +1,6 @@
 <script>
 import { mapActions, mapState, mapWritableState } from 'pinia'
-import { useAppStore } from '../stores/app'
+import { useAppStore } from '../../stores/app'
 
 export default {
     props: ['item'],

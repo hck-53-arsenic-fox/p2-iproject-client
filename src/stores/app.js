@@ -5,7 +5,6 @@ const origin = "http://localhost:5000";
 // const origin = "https://chat-app-pg8h.onrender.com";
 
 import { Loading, Notify, Report } from "notiflix";
-import { handleError } from "vue";
 
 Notify.init({ clickToClose: true });
 

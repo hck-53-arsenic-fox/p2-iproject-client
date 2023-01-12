@@ -1,7 +1,8 @@
 import axios from "axios";
 import { defineStore } from "pinia";
 
-const origin = "http://localhost:5000";
+// const origin = "http://localhost:5000";
+const origin = "https://chat-app-v1-df2f8.web.app/";
 
 import { Loading, Notify, Report } from "notiflix";
 

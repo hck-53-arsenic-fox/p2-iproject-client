@@ -6,6 +6,10 @@ Individual Project - Client
 
 -   https://kuncung-bot.vercel.app
 
+### Deployed Client
+
+-   https://chat-app-v1-df2f8.web.app
+
 &nbsp;
 
 ## Project Setup

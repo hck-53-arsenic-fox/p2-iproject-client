@@ -8,6 +8,7 @@ export default {
     ...mapActions(useAppStore, [
       "handleCreateTransaction",
       "getAllTransactions",
+      "getAllWallets",
       "getAllCategories",
     ]),
 
@@ -16,7 +17,7 @@ export default {
         name: this.name,
         amount: this.amount,
         type: this.type,
-        transactionDateAndTime: this.transactionDateAndTime,
+        transactionDateTime: this.transactionDateTime,
         CategoryId: this.CategoryId,
         WalletId: this.WalletId,
       });
@@ -30,15 +31,14 @@ export default {
       name: "",
       amount: 0,
       type: "",
-      transactionDateAndTime: "",
+      transactionDateTime: "",
       CategoryId: 0,
       WalletId: 0,
-      categories: [],
-      wallets: [],
     };
   },
   mounted() {
     this.getAllTransactions();
+    this.getAllWallets();
     this.getAllCategories();
   },
 };
@@ -49,7 +49,6 @@ export default {
     <div class="form-group">
       <label for="name">Transaction Name</label>
       <input class="form-control" id="name" v-model="name" />
-      <ejs-datetimepicker :placeholder="waterMark" ></ejs-datetimepicker>
     </div>
     <div class="form-group">
       <label for="amount">Amount</label>
@@ -64,11 +63,11 @@ export default {
       </select>
     </div>
     <div class="form-group">
-      <label for="transactionDateAndTime">Transaction Date And Time</label>
+      <label for="transactionDateTime">Transaction Date And Time</label>
       <input
         class="form-control"
-        id="transactionDateAndTime"
-        v-model="transactionDateAndTime"
+        id="transactionDateTime"
+        v-model="transactionDateTime"
       />
     </div>
     <div class="form-group">

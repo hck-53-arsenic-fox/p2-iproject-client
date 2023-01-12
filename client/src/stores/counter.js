@@ -5,7 +5,9 @@ export const useAnimeStore = defineStore("post", {
         return {
             isLogin: false,
             listsOfAnime: [],
-            user: {}
+            user: {},
+            videos: [],
+            subscribes:false
         };
     },
     actions: {
@@ -13,10 +15,10 @@ export const useAnimeStore = defineStore("post", {
             try {
                 let urls
                 if (!search) {
-                    urls = `http://localhost:3000/anime/popular`
+                    urls = `vestal-tent-production.up.railway.app/anime/popular`
                 }
                 else {
-                    urls = `http://localhost:3000/anime?q=${search}`
+                    urls = `vestal-tent-production.up.railway.app/anime?q=${search}`
                 }
                 const { data } = await axios({
                     method: "GET",
@@ -31,7 +33,7 @@ export const useAnimeStore = defineStore("post", {
             try {
                 const { data } = await axios({
                     method: "PATCH",
-                    url: `http://localhost:3000/users/status`,
+                    url: `vestal-tent-production.up.railway.app/users/status`,
                     headers: {
                         accesstoken: localStorage.getItem("acess_Token")
                     }
@@ -44,17 +46,18 @@ export const useAnimeStore = defineStore("post", {
             try {
                 const { data } = await axios({
                     method: "POST",
-                    url: `http://localhost:3000/users/generate-mid-trans-token`,
+                    url: `vestal-tent-production.up.railway.app/users/generate-mid-trans-token`,
                     headers: {
                         accesstoken: localStorage.getItem("acess_Token")
                     }
                 })
-                const cb = this.changeStatus
                 window.snap.pay(data.token, {
-                    onSuccess: function (result) {
+                    onSuccess: async (result)=> {
                         /* You may add your own implementation here */
-                        cb()
+
                         alert("payment success!"); console.log(result);
+                        await this.changeStatus()
+                        this.subscribes=true
                     },
                 })
             }
@@ -66,7 +69,7 @@ export const useAnimeStore = defineStore("post", {
             try {
                 const { data } = await axios({
                     method: "POST",
-                    url: "http://localhost:3000/users/login",
+                    url: "vestal-tent-production.up.railway.app/users/login",
                     data: dataLogin
                 })
                 localStorage.setItem("acess_Token", data.acessToken)
@@ -83,22 +86,11 @@ export const useAnimeStore = defineStore("post", {
             this.sweetAlertSuccess("Success Log Out")
             this.router.push("/")
         },
-        async postById(postId) {
-            try {
-                const { data } = await axios({
-                    method: "GET",
-                    url: `https://open-cup-production.up.railway.app/pub/posts/${postId}`
-                })
-                this.post = data
-            } catch (error) {
-                console.log(error)
-            }
-        },
         async register(dataSignUp) {
             try {
                 const { data } = await axios({
                     method: "POST",
-                    url: `http://localhost:3000/users/register`,
+                    url: `vestal-tent-production.up.railway.app/users/register`,
                     data: dataSignUp
                 })
                 this.router.push('/')
@@ -106,5 +98,16 @@ export const useAnimeStore = defineStore("post", {
                 console.log(error)
             }
         },
+        async showVideo() {
+            try {
+                const { data } = await axios({
+                    method: "GET",
+                    url: `vestal-tent-production.up.railway.app/anime/videos`
+                })
+                this.videos = data
+            } catch (error) {
+                console.log(error)
+            }
+        }
     }
 })

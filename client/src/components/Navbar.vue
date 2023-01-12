@@ -1,5 +1,5 @@
 <script>
-import { mapActions, mapState } from "pinia";
+import { mapActions, mapState, mapWritableState } from "pinia";
 import { useAnimeStore } from "../stores/counter";
 
 export default {
@@ -10,13 +10,15 @@ export default {
       link: "",
       link2: "",
       userName: "",
+      subscriber: "Subscribe here!",
     };
   },
   computed: {
     ...mapState(useAnimeStore, ["isLogin"]),
+    ...mapWritableState(useAnimeStore, ["user"]),
   },
   methods: {
-    ...mapActions(useAnimeStore, ["handleLogOut"]),
+    ...mapActions(useAnimeStore, ["handleLogOut", "subscribe"]),
     clickLink() {
       if (this.isLogin) {
         this.favoritePost_signIn = "Sign In";
@@ -27,14 +29,28 @@ export default {
         return this.$router.push("/register");
       }
     },
+    subscribes() {
+      if (!this.user.status) {
+        this.subscribe();
+      } else {
+        console.log("hmmm");
+      }
+    },
   },
   created() {
     if (this.isLogin) {
-      this.favoritePost_signIn = "Favorite Posts";
-      this.link = "/favoritePosts";
+      this.favoritePost_signIn = "List Video";
+      this.link = "/video";
       this.link2 = "Log Out";
       this.userName = localStorage.getItem("userName");
-    } else {
+      if(this.user.status===false){
+        this.subscriber="Subscribe Here!"
+      }
+      else{
+        this.subscriber="Thanks for the sub!"
+      }
+    }
+     else {
       this.favoritePost_signIn = "Sign In";
       this.link = "/login";
       this.link2 = "Sign Up";
@@ -73,16 +89,19 @@ export default {
           </li>
           <li class="nav-item">
             <a
-              class="nav-link mx-2 text-uppercase text-white fw-bold "
+              class="nav-link mx-2 text-uppercase text-white fw-bold"
               href="#"
               @click.prevent="$router.push(link)"
               ><i class="bi bi-postcard-heart"></i>
               {{ this.favoritePost_signIn }}</a
             >
           </li>
-          <li class="nav-item" v-if="this.isLogin">
+          <li
+            class="nav-item"
+            @click.prevent="subscribes"
+          >
             <a class="nav-link mx-2 text-uppercase text-white fw-bold" href="#"
-              ><i class="bi bi-person"></i> Hey,{{ userName }}!</a
+              ><i class="bi bi-person"></i>{{ this.subscriber }} </a
             >
           </li>
           <li class="nav-item">

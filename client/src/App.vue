@@ -5,7 +5,7 @@ import { useAnimeStore } from "./stores/counter";
 export default {
   name: "App",
   computed: {
-    ...mapWritableState(useAnimeStore, ["isLogin"]),
+    ...mapWritableState(useAnimeStore, ["isLogin","subscribes"]),
   },
   components: {
     NavbarComponentVue,

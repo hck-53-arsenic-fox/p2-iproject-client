@@ -2,6 +2,7 @@
 import { mapActions, mapState, mapStores } from "pinia";
 import { useAnimeStore } from "../stores/counter";
 import CardAnime from "../components/CardAnime.vue";
+
 export default {
   data() {
     return {
@@ -9,7 +10,7 @@ export default {
     };
   },
   components: {
-    CardAnime,
+    CardAnime
   },
   computed: {
     ...mapState(useAnimeStore, ["listsOfAnime","user"]),
@@ -22,14 +23,7 @@ export default {
   },
   methods: {
     ...mapActions(useAnimeStore, ["fetchAnime","subscribe"]),
-    subscribes() {
-      if (!this.user.status) {
-        this.subscribe();
-      }
-      else{
-        console.log('hmmm')
-      }
-    },
+
   },
   created() {
     this.fetchAnime();
@@ -62,7 +56,6 @@ export default {
       </div>
     </main>
   </div>
-  <button @click.prevent="subscribes">aku suka</button>
 </template>
 
 <style>

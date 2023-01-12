@@ -1,0 +1,112 @@
+body {
+	background-color: #e9ebee;
+}
+
+h5, .btn, p {
+	font-size: 12px;
+}
+
+h1 {
+	font-size: 25px;
+}
+
+h4 {
+	font-size: 14px;
+	line-height: 1.8;
+}
+
+h3 {
+	font-size: 16px;
+	margin-bottom: 1rem;
+}
+
+h2 {
+	font-size: 18px;
+}
+
+hr {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 1px solid #000;
+}
+
+.content {
+	max-width: 850px;
+}
+
+.content-login {
+	max-width: 500px;
+}
+
+.btn-success {
+	background-color: #005350;
+	border-color: #005350;
+}
+
+nav {
+	background-color: #005350;
+}
+
+nav img {
+	height: 2.5rem;
+}
+
+#movie .card-body {
+	margin: 10px 5px;
+	padding: 0;
+}
+
+#movie .card-body .card-title, #movie .card-body .button {
+	min-height: 50px;
+}
+
+#detail h5, #detail p {
+	font-size: 100%;
+	margin-bottom: 0;
+}
+
+#detail .btn-success {
+	width: 140px;
+}
+
+#detail .list {
+	margin-top: 1rem;
+}
+
+#theater .list-group-item:hover {
+	background-color: rgba(0,0,0,.2);
+}
+
+#login img {
+	width: 70%;
+}
+
+#login a {
+	color: #000;
+	font-size: 12px;
+}
+
+#login .btn-success {
+	color: #fff;
+}
+
+#kursi .atas p, #kursi .desc p {
+	margin-bottom: 0;
+}
+
+#kursi .atas img {
+	height: 12px;
+	padding-bottom: 2px;
+	margin-left: 10px;
+}
+
+#kursi hr {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.container {
+	perspective: 1000px;
+	margin-bottom: 30px;
+  }

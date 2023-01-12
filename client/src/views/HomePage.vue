@@ -14,14 +14,8 @@ export default {
   },
   created() {
     this.fetchPlayers()
+
   },
-  data() {
-    return {
-      rawHtml: `<a id="bgndVideo" class="player"
-      data-property="{videoURL:'https://www.youtube.com/watch?v=EOQTo3GsJeY',showYTLogo:false, showAnnotations: false, showControls: false, cc_load_policy: false, containment:'#home-section',autoPlay:true, mute:true, startAt:22, stopAt: 40, opacity:1}">
-    </a>`
-    }
-  }
 }
 </script>
 
@@ -38,35 +32,40 @@ export default {
     </div>
 
 
-    <!-- <div>
-      <span v-html="rawHtml"></span>
-    </div> -->
 
-    <!-- <div id="bgndVideo" class="player">
-      <video autoplay muted loop>
-        <source src="../assets/rain.mp4" type="video/mp4" >
-        Your browser does not support HTML5 video.
-      </video>
-    </div> -->
+    <!-- <div  id="bgndVideo" class="player"> -->
+
+
+    <!-- </div> -->
 
 
     <!-- <a id="bgndVideo" class="player"
-      data-property="{videoURL:'https://www.youtube.com/watch?v=EOQTo3GsJeY',showYTLogo:false, showAnnotations: false, showControls: false, cc_load_policy: false, containment:'#home-section',autoPlay:true, mute:true, startAt:22, stopAt: 40, opacity:1}">
-    </a> -->
+        data-property="{videoURL:'https://www.youtube.com/watch?v=EOQTo3GsJeY',showYTLogo:false, showAnnotations: false, showControls: false, cc_load_policy: false, containment:'#home-section',autoPlay:true, mute:true, startAt:22, stopAt: 40, opacity:1}">
+      </a> -->
 
 
 
     <!-- <a class="player">
-      <img src="../../public/images/bg_4.jpg" alt="">
-    </a> -->
+        <img src="../../public/images/bg_4.jpg" alt="">
+      </a> -->
+    <section class="showcase">
+      
+    </section>
 
-    <div class="intro-section" id="home-section" style="background-color: #ccc;">
+
+    <div class="intro-section" id="home-section" style="background-color: #ccc; position: relative; overflow: hidden;">
+      <div class="video-container">
+        <video autoplay muted loop style="position: absolute; width: 100%;">
+          <source src="../assets/intro-video.mp4" type="video/mp4">
+          Your browser does not support HTML5 video.
+        </video>
+      </div>
       <div class="container">
 
         <div class="row align-items-center">
           <div class="col-lg-12 mx-auto text-center" data-aos="fade-up">
             <h1 class="mb-3">Find the best player around the world</h1>
-            <p class="lead mx-auto desc mb-5">See best of the best NBA players from various parts of the state</p>
+            <p class="lead mx-auto desc mb-5">See best of the best ENBI E players from various parts of the state</p>
             <p class="text-center">
               <RouterLink to="/players" class="btn btn-outline-white py-3 px-5">Get Started</RouterLink>
             </p>
@@ -99,11 +98,15 @@ export default {
 
         <div class="row justify-content-center text-center mb-5">
           <div class="col-md-8 section-heading">
-            <span class="subheading">Stay Healthy</span>
-            <h2 class="heading mb-3">Get A Perfect Body</h2>
-            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the
-              blind texts.
-              Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+            <span class="subheading">ENBI E</span>
+            <h2 class="heading mb-3">THIS IS US!</h2>
+            <p>The official site of the National Basketball Association. Follow the action on ENBI E scores, schedules,
+              stats, news, Team and Player news.
+              The ENational BIsketball Essociation (ENBI E) is a professional basketball league in North America. The
+              league is composed of 30 teams (29 in the United States and 1 in Canada) and is one of the major
+              professional sports leagues in the United States and Canada. It is the premier men's professional
+              basketball league in the world.
+            </p>
           </div>
         </div>
 

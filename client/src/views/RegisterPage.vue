@@ -25,7 +25,7 @@ export default {
 
 <template>
     <div class="container-fluid d-flex justify-content-center align-items-center"
-        style="background-image: url(../../public/images/bg_4.jpg); height: 100vh">
+        style="background-image: url(./images/bg_4.jpg); height: 100vh">
 
         <a id="bgndVideo" class="player"
             data-property="{videoURL:'https://www.youtube.com/watch?v=EOQTo3GsJeY',showYTLogo:false, showAnnotations: false, showControls: false, cc_load_policy: false, containment:'#home-section',autoPlay:true, mute:true, startAt:22, stopAt: 40, opacity:1}">
@@ -76,6 +76,7 @@ export default {
                         </p>
 
                     </div>
+                    <p  class="d-flex justify-content-center" style="margin-top: 20px;">by kujo#0333</p>
                 </div>
             </div>
         </div>

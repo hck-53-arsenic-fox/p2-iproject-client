@@ -32,7 +32,7 @@ export default {
         <!-- <a id="bgndVideo" class="player"
             data-property="{videoURL:'https://www.youtube.com/watch?v=EOQTo3GsJeY',showYTLogo:false, showAnnotations: false, showControls: false, cc_load_policy: false, containment:'#home-section',autoPlay:true, mute:true, startAt:22, stopAt: 40, opacity:1}">
         </a> -->
-        <div class="container" >
+        <div class="container">
             <div class="row d-flex justify-content-center">
                 <div class="col-md-7">
                     <h1 style="color: white; font-family: fantasy;">WELCOME BACK BRUH!</h1>
@@ -56,9 +56,16 @@ export default {
 
                         </form>
 
-                        <p>Wannna join the gang? <RouterLink to="/register">Come here</RouterLink></p>
-
+                        <div class="d-flex justify-content-center">
+                            <p>Wannna join the gang? <RouterLink to="/register">Come here</RouterLink>
+                            </p>
+                        </div>
+                        <p class="d-flex justify-content-center" style="margin: 2 !important;">Or Login with</p>
+                        <div class="text-center mb-3">
+                            <GoogleLogin :callback="callback" />
+                        </div>
                     </div>
+                    <p  class="d-flex justify-content-center" style="margin-top: 20px;">by kujo#0333</p>
                 </div>
             </div>
         </div>

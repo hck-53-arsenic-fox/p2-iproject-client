@@ -671,6 +671,9 @@ h1, h2, h3, h4, h5,
     content: "";
     position: absolute;
     background-color: rgba(0, 0, 0, 0.5);
+    /* background-image: url('https://i.pinimg.com/originals/c6/47/08/c64708f22c3639ba6f4993e8a6808aeb.jpg'); */
+    /* background-size: cover; */
+    /* background-attachment: fixed; */
     top: 0;
     left: 0;
     right: 0;

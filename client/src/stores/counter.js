@@ -152,7 +152,6 @@ export const useCounterStore = defineStore("counter", {
           },
       })
         .then((res) => {
-          console.log(res.data);
           this.qrCode = res.data;
         })
         .catch((err) => {
@@ -217,11 +216,11 @@ export const useCounterStore = defineStore("counter", {
             access_token: localStorage.access_token,
           },
       })
-      .then((res)=>{
+      .then ((res)=>{
         const status = this.handleStatus;
         window.snap.pay(res.data.token, {
-          onSuccess: function (result) {
-            status(id);
+          onSuccess: (result)=> {
+             status(id);
             location.reload();
           },
         });

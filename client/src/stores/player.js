@@ -113,8 +113,10 @@ export const usePlayerStore = defineStore('player', {
                 this.players = data
             } catch (error) {
                 // console.log(error, '<---- error fetchPlayers');
-                
-                toast.error(error.response.data.message);
+                if(error.response.data.message !== 'Invalid token') {
+                    toast.error(error.response.data.message);
+
+                }
             }
         },
 
@@ -134,7 +136,11 @@ export const usePlayerStore = defineStore('player', {
             } catch (error) {
                 // console.log(error, '<---- error fetchOnePlayer');
                 
-                toast.error(error.response.data.message);
+                // toast.error(error.response.data.message);
+                if(error.response.data.message !== 'Invalid token') {
+                    toast.error(error.response.data.message);
+
+                }
             }
         },
 
@@ -153,7 +159,11 @@ export const usePlayerStore = defineStore('player', {
             } catch (error) {
                 // console.log(error, '<---- error addFavorite');
                 
-                toast.error(error.response.data.message);
+                // toast.error(error.response.data.message);
+                if(error.response.data.message !== 'Invalid token') {
+                    toast.error(error.response.data.message);
+
+                }
             }
         },
 
@@ -219,7 +229,8 @@ export const usePlayerStore = defineStore('player', {
                     },
                 });
             } catch (error) {
-                console.log(error, '<---- error upgrade Member');
+                // console.log(error, '<---- error upgrade Member');
+                toast.error(error.response.data.message);
             }
         },
 
@@ -237,7 +248,11 @@ export const usePlayerStore = defineStore('player', {
             } catch (error) {
                 // console.log(error, '<---- error fetch following');
                 
-                toast.error(error.response.data.message);
+                // toast.error(error.response.data.message);
+                if(error.response.data.message !== 'Invalid token') {
+                    toast.error(error.response.data.message);
+
+                }
             }
         },
 
@@ -255,7 +270,11 @@ export const usePlayerStore = defineStore('player', {
             } catch (error) {
                 // console.log(error, '<---- error fetchUserProfile');
                 
-                toast.error(error.response.data.message);
+                // toast.error(error.response.data.message);
+                if(error.response.data.message !== 'Invalid token') {
+                    toast.error(error.response.data.message);
+
+                }
             }
         },
 
@@ -270,7 +289,11 @@ export const usePlayerStore = defineStore('player', {
                 this.teams = data
             } catch (error) {
                 // console.log(error, '<---- error fetchTeams');
-                toast.error(error.response.data.message);
+                // toast.error(error.response.data.message);
+                if(error.response.data.message !== 'Invalid token') {
+                    toast.error(error.response.data.message);
+
+                }
             }
         }
     },

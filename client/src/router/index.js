@@ -65,6 +65,7 @@ router.beforeEach((to, from, next) => {
   let isAuthenticated = localStorage.getItem('access_token')
   if (to.name == 'login' && isAuthenticated) next({ name: 'home' })
   if (to.name == 'following' && !isAuthenticated) next({ name: 'login' })
+  if (to.name == 'userprofile' && !isAuthenticated) next({ name: 'login' })
   else if (to.name == 'register' && isAuthenticated) next({ name: 'login' })
   // else if (to.name == 'followingPage' && !isAuthenticated) next({ name: 'home' })
   else next()

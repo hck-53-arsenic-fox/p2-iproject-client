@@ -4,6 +4,11 @@ import Sidebar from '../components/Sidebar.vue';
 import { mapActions, mapState } from 'pinia';
 
 export default{
+    data(){
+        return{
+            date: ''
+        }
+    },
     components: {
         Sidebar
     },
@@ -14,7 +19,12 @@ export default{
         this.fetchHistory()
     },
     methods: {
-        ...mapActions(useCounterStore, ['fetchHistory'])
+        ...mapActions(useCounterStore, ['fetchHistory', 'formatDate']),
+        formatRupiah(money) {
+            return new Intl.NumberFormat('id-ID',
+                { style: 'currency', currency: 'IDR' }
+            ).format(money);
+        }
     }
 
 }
@@ -22,9 +32,15 @@ export default{
 
 <template>
    <Sidebar/>
-   <div class="w-full pl-[150px] h-full bg-gray-100 flex flex-col w-[100%]">
+   <div class="w-full pl-[150px] min-h-[100vh] bg-gray-100 flex flex-col w-[100%]">
         <div class="pt-[20px] pl-[20px]"><span class="text-[30px] font-bold">History</span></div>
-        <div class="mt-6">
+        <div class="mt-2">
+            <form action="" >
+                <a class="bg-red-700 text-white py-1 px-4 mr-4 rounded-lg hover:bg-red-800" @click="this.$router.push(`/history/${date}`)">Download</a>
+                <input class="px-2" type="date" v-model="date">
+            </form>
+        </div>
+        <div class="mt-4">
             <table class="bg-white shadow-lg rounded-lg">
                 <thead>
                     <tr>
@@ -36,12 +52,12 @@ export default{
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="data,index in dataHistory" :key="data.id">
+                    <tr class="ba" v-for="data,index in dataHistory" :key="data.id">
                         <td class="py-2 text-center">{{ index+ 1 }}</td>
                         <td class="py-2">{{ data.customerName }}</td>
                         <td class="py-2">{{ data.cashierName }}</td>
                         <td class="py-2">{{ data.createdAt.slice(0,10) }}</td>
-                        <td class="py-2">{{ data.price }}</td>
+                        <td class="py-2">{{ formatRupiah (data.price) }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -53,7 +69,7 @@ export default{
     table th td {
         text-align: center;
     }
-    tr:nth-child(even) {
+    ba:nth-child(even) {
      background-color: #d6eeee8d;
     }
 </style>

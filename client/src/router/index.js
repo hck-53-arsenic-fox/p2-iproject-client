@@ -6,6 +6,7 @@ import ResetPassword from '../views/ResetPassword.vue'
 import History from '../views/History.vue'
 import Chart from '../views/Chart.vue'
 import Register from '../views/Register.vue'
+import DownloadHistory from '../views/DownloadHistory.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -48,6 +49,11 @@ const router = createRouter({
       path: '/resetpassword/:token',
       name: 'reset',
       component: ResetPassword
+    },
+    {
+      path: '/history/:date',
+      name: 'download',
+      component: DownloadHistory
     },
     {
       path: '/histories',

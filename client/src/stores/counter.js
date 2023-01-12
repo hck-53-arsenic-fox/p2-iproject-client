@@ -2,6 +2,7 @@ import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import axios from 'axios'
 const url = 'http://localhost:3000/'
+import Notiflix from 'notiflix';
 
 export const useCounterStore = defineStore('counter', {
   state: () => {
@@ -9,12 +10,14 @@ export const useCounterStore = defineStore('counter', {
     dataProduct: [],
     dataTrx: [],
     dataHistory: [],
-    isLogin :false,
     imgTable: '',
     totalPrice: 0,
     dataDayTable: [],
     dataPriceTable: [],
-    dataTotalSalesTable: 0
+    dataTotalSalesTable: 0,
+    dataHistoryDate: [],
+    qrCode : '',
+    imgWA : ''
   }
   },
 
@@ -36,16 +39,43 @@ export const useCounterStore = defineStore('counter', {
           data: data
         })
         localStorage.setItem('token', res.data.access_token)
+        Notiflix.Notify.success('Welcome! :)', {
+          timeout: 1000
+        });
         this.fetchProduct()
         this.router.push('/')
-        this.isLogin = true
+        this.imgWA(res.data.noHp)
       } catch (error) {
+        Notiflix.Report.failure(
+          `${error.response.data.message}`,
+          'Please try again!',
+          'Okay',
+        );
         console.log(error);
       }
     },
 
+    // async imgWA(phone){
+    //   try {
+    //     let res = await axios({
+    //       method: 'GET',
+    //       url: 'https://whatsapp-profile-pic.p.rapidapi.com/wspic/url',
+    //       params: {phone: phone},
+    //       headers: {
+    //         'X-RapidAPI-Key': 'aa9f45c161msh8b76244fe7f5a3dp1ee4ecjsn4c91517029fc',
+    //         'X-RapidAPI-Host': 'whatsapp-profile-pic.p.rapidapi.com'
+    //       }
+    //     })
+    //     this.imgWA = res.data 
+    //     console.log(this.imgWA);
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // },
+
     async fetchProduct(type){
       try {
+        Notiflix.Loading.dots()
         let res = await axios({
           method: 'get',
           url: url + 'products',
@@ -56,6 +86,7 @@ export const useCounterStore = defineStore('counter', {
             access_token: localStorage.getItem('token')
           }
         })
+        Notiflix.Loading.remove()
         this.dataProduct = res.data
         // console.log(res.data);
       } catch (error) {
@@ -80,17 +111,7 @@ export const useCounterStore = defineStore('counter', {
       }
     },
 
-    async table(){
-      try {
-        let res = await axios({
-          method: 'get',
-          url: `https://quickchart.io/chart?c={type:'bar',data:{labels:[2012,2013,2014,2015, 2016],datasets:[{label:'Users',data:[120,60,50,180,120]}]}}`,
-        })
-        this.imgTable = res.data
-      } catch (error) {
-        console.log(error);
-      }
-    },
+
 
     async handleFormEmail(email){
       console.log(email);
@@ -102,8 +123,15 @@ export const useCounterStore = defineStore('counter', {
             email
           }
         })
-        console.log(res);
+        Notiflix.Notify.success('Check Your Email', {
+          timeout: 3000
+        });
       } catch (error) {
+        Notiflix.Report.failure(
+          `${error.response.data.message}`,
+          'Please try again!',
+          'Okay',
+        );
         console.log(error);
       }
     },
@@ -118,8 +146,16 @@ export const useCounterStore = defineStore('counter', {
             password
           }
         })
+        Notiflix.Notify.success('Success Change Password', {
+          timeout: 2000
+        });
         this.router.push('/login')
       } catch (error) {
+        Notiflix.Report.failure(
+          `${error.response.data.message}`,
+          'Please try again!',
+          'Okay',
+        );
         console.log(error);
       }
     },
@@ -135,7 +171,7 @@ export const useCounterStore = defineStore('counter', {
           }
         })
         this.fetchTransaction(customerName)
-        this.table()
+        // this.table()
         let res = await axios({
           method: 'post',
           url: url + 'histories',
@@ -148,13 +184,22 @@ export const useCounterStore = defineStore('counter', {
         })
         this.router.push('/histories')
         this.fetchHistory()
+        Notiflix.Notify.success('Success Create Transactions!', {
+          timeout: 1000
+        });
       } catch (error) {
+        Notiflix.Report.failure(
+          `${error.response.data.message}`,
+          'Please try again!',
+          'Okay',
+        );
         console.log(error);
       }
     },
 
     async fetchHistory(){
       try {
+        Notiflix.Loading.dots()
         let res = await axios({
           method: 'get',
           url: url + 'histories',
@@ -162,6 +207,7 @@ export const useCounterStore = defineStore('counter', {
             access_token: localStorage.getItem('token'),
           }
         })
+        Notiflix.Loading.remove()
         this.dataHistory = res.data
         // this.fetchHistoryWeek()
       } catch (error) {
@@ -195,8 +241,6 @@ export const useCounterStore = defineStore('counter', {
     },
 
     async handleSendEmail(dataTrx, customerName, totalPrice, email){
-      console.log('yu');
-      console.log(dataTrx);
       try {
         let res = await axios({
           method: 'post',
@@ -208,9 +252,15 @@ export const useCounterStore = defineStore('counter', {
             access_token: localStorage.getItem('token'),
           }
         })
-        console.log(res);
+        Notiflix.Notify.success('Success Send Email', {
+          timeout: 2000
+        });
       } catch (error) {
-        console.log(error);
+        Notiflix.Report.failure(
+          `${error.response.data.message}`,
+          'Please try again!',
+          'Okay',
+        );
       }
     },
 
@@ -231,20 +281,102 @@ export const useCounterStore = defineStore('counter', {
       }
     },
 
-    async handleFormRegister(email, password){
+    
+
+    async handleFormRegister(email, password, noHp){
       try {
         let res = await axios({
           method: 'post',
           url: url + 'users/register',
           data: {
-            email, password
+            email, password, noHp
           }
         })
         this.router.push('/login')
       } catch (error) {
         console.log(error);
       }
-    }
+    },
+
+    async FetchHistoryDate(date){
+      try {
+        let res = await axios({
+          method: 'get',
+          url : url + 'histories/' + date,
+          data: {
+            date
+          },
+          headers: {
+            access_token: localStorage.getItem('token'),
+          }
+        })
+        this.dataHistoryDate = res.data,
+        this.handleQrCode(date)
+        // console.log(res);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    async handleQrCode(date){
+      try {
+        let data  = await axios({
+          method: 'get',
+          url: 'https://api.happi.dev/v1/qrcode',
+          params: {
+            apikey: '4aa80dOotGFMJXUPzMlW4GGfOYwbyY7sFugs9Z3ePT2WuEVWiSFIPbBf',
+            data: 'https://ngacir-app.web.app/history/' + date,
+            width: 80, 
+          }
+        })
+        this.qrCode = data.data.qrcode
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    // async formatDate(date){
+    //   try {
+    //     const encodedParams = new URLSearchParams();
+    //     encodedParams.append("date", date);
+    //     encodedParams.append("type", "TYPE_26");
+    //     let res = await axios({
+    //       method: 'POST',
+    //       url: 'https://date-time-format-conversion1.p.rapidapi.com/date',
+    //       headers: {
+    //         'content-type': 'application/x-www-form-urlencoded',
+    //         'X-RapidAPI-Key': 'aa9f45c161msh8b76244fe7f5a3dp1ee4ecjsn4c91517029fc',
+    //         'X-RapidAPI-Host': 'date-time-format-conversion1.p.rapidapi.com'
+    //       },
+    //       data: encodedParams
+    //     }) 
+    //     console.log(res.data.data);
+
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // }
+
+    // async handleDownload(date){
+    //   console.log('masuk');
+    //   try {
+    //     let key = '925bcb845a6eb9fa124605463b4222a3'
+    //     let halaman = `https://ngacir-app.web.app/history/` + date
+    //     let res = await axios({
+    //       method: 'POST',
+    //       url: 'https://url-html-to-pdf.p.rapidapi.com/api/v1/pdf/url-to-pdf',
+    //       headers: {
+    //         'content-type': 'application/json',
+    //         'X-RapidAPI-Key': 'aa9f45c161msh8b76244fe7f5a3dp1ee4ecjsn4c91517029fc',
+    //         'X-RapidAPI-Host': 'url-html-to-pdf.p.rapidapi.com'
+    //       },
+    //       data: '{"url":"https://ngacir-app.web.app/history/2023-01-09","pdf":{"width":1000,"height":1400}}'
+    //     })
+    //     console.log(res);
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // }
 
 
 

@@ -98,13 +98,12 @@ export const useAnimeStore = defineStore("post", {
             try {
                 const { data } = await axios({
                     method: "POST",
-                    url: `https://open-cup-production.up.railway.app/pub/register`,
+                    url: `http://localhost:3000/users/register`,
                     data: dataSignUp
                 })
-                this.sweetAlertSuccess("Register Success")
                 this.router.push('/')
             } catch (error) {
-                this.sweetAlertFailed(error.response.data.message)
+                console.log(error)
             }
         },
     }

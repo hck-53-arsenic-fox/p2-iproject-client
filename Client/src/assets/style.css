@@ -1,0 +1,59 @@
+html, body{
+  height: 100%;
+}
+
+body {
+    background-color: #001133;
+}
+
+#registerForm-user {
+    text-align: center;
+    border-style: solid;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    margin-top: 5%;
+    margin-bottom: 25%;
+    margin-left: 25%;
+    margin-right: 25%;
+  }
+  
+  #loginForm-user {
+    text-align: center;
+    border-style: solid;
+    border-width: 5px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    margin-top: 5%;
+    margin-bottom: 25%;
+    margin-left: 25%;
+    margin-right: 25%;
+  }
+
+  #Container-Home{
+    border-style: solid;
+    border-radius: 25px;
+    border-color: whitesmoke;
+    width: 98%;
+    margin-top: 2.5%;
+    margin-left: 1%;
+    margin-right: 1%;
+    margin-bottom: 2.5%;
+    padding-bottom: 3%;
+  }
+
+  #Chara-Cards{
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto;
+    gap: 50px;
+    margin: 2.5% 2.5%;
+    justify-content: space-between;
+  }
+
+  #acc-search{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  /* #player-card{
+  } */

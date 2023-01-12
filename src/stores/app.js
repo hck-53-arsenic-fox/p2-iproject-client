@@ -17,8 +17,9 @@ export const useAppStore = defineStore("app", {
 			display: "none",
 			openSideBar: false,
 			chatList: [],
-			userList: [],
+			userList: null,
 			selectedChat: {},
+			selectedChatId: 0,
 		};
 	},
 	getters: {},
@@ -144,6 +145,18 @@ export const useAppStore = defineStore("app", {
 			} catch (error) {
 				Loading.remove();
 				this.errorHandler(error);
+			}
+		},
+
+		getSenderName(chat) {
+			if (chat.chatName !== "sender") {
+				return chat.chatName;
+			}
+			let users = chat.users;
+			for (let user of users) {
+				if (user.name !== this.userInfo.name) {
+					return user.name;
+				}
 			}
 		},
 

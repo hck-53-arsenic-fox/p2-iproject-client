@@ -43,6 +43,7 @@ export default {
                         </form>
 
                         <div class="user-container">
+                            <h4 v-if="userList && !userList.length">No Result Found</h4>
                             <UserListBox v-for="user in userList" :key="user._id" :user="user" />
                         </div>
                     </div>
@@ -141,6 +142,11 @@ export default {
 }
 
 /* Search Container */
+h4 {
+    margin-top: 2rem;
+    text-align: center;
+}
+
 input[type=text] {
     font-size: 17px;
     border: none;

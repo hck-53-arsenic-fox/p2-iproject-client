@@ -1,31 +1,26 @@
 <script>
-import { mapState } from 'pinia'
+import { mapActions, mapState, mapWritableState } from 'pinia'
 import { useAppStore } from '../stores/app'
 
 export default {
     props: ['item'],
     computed: {
+        ...mapWritableState(useAppStore, ['selectedChatId']),
         ...mapState(useAppStore, ['userInfo']),
+    },
+    methods: {
+        ...mapActions(useAppStore, ['getSenderName']),
 
-        properName() {
-            if (this.item.chatName !== 'sender') {
-                return this.item.chatName
-            }
-            let users = this.item.users
-            console.log(users);
-            for (let user of users) {
-                if (user.name !== this.userInfo.name) {
-                    return user.name
-                }
-            }
+        select() {
+            this.selectedChatId = this.item._id
         }
     }
 }
 </script>
 
 <template>
-    <div class="myContainer">
-        <p class="chatName">{{ properName }}</p>
+    <div @click="select()" tabindex="0" class="myContainer" :class="selectedChatId === item._id ? 'activated' : ''">
+        <p class="chatName">{{ getSenderName(item) }}</p>
         <p v-if="!item.latestMessage">No Chat yet</p>
         <p v-if="item.latestMessage"><b>{{ item.latestMessage.sender.name }}:</b> {{ item.latestMessage.content }}</p>
     </div>
@@ -47,6 +42,11 @@ export default {
 
 .myContainer:hover {
     background-color: rgb(198, 198, 198);
+}
+
+.myContainer:focus,
+.activated {
+    background-color: rgb(170, 177, 208);
 }
 
 p {

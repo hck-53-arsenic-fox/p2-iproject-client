@@ -11,7 +11,7 @@ export const useGenshinStore = defineStore("Genshin Impact", {
       charaList: [],
       chara: {},
       weaponList: [],
-      weapon: {},
+      singleWeapon: {},
       account: {}
     };
   },
@@ -164,11 +164,12 @@ export const useGenshinStore = defineStore("Genshin Impact", {
 
     async weaponDetail(name){
       try {
+        console.log(name);
         let {data} = await axios({
           method: 'GET',
-          url: undeployed + '/weapons/:name'
+          url: undeployed + '/weapons/' + name
         })
-        this.weapon = data
+        this.singleWeapon = data
       } catch (err) {
         console.log(err);
       }

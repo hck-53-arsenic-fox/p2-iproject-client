@@ -3,7 +3,7 @@ import { useFetchStore } from "../stores/fetchData";
 import { mapActions } from "pinia";
 
 export default {
-  props: ["el", "i"],
+  props: ["el"],
   methods: {
     ...mapActions(useFetchStore, ["fetchOrderDetail"]),
     async seeDetail(id) {
@@ -18,11 +18,10 @@ export default {
 </script>
 
 <template>
-  <tr>
-    <th scope="row">{{ i + 1 }}</th>
+  <tr class="container text-center">
     <td>{{ el.orderIdNumber }}</td>
     <td>{{ el.User.username }}</td>
-    <td>{{ shoesBrand }}</td>
+    <!-- <td>{{ el.shoesBrand }}</td> -->
     <td>{{ el.Service.name }}</td>
     <td>
       {{ el.status }}

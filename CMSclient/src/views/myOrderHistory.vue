@@ -9,8 +9,8 @@ export default {
   },
   computed: {
     ...mapState(useFetchStore, ["myOrders"]),
-  },
-  methods: {
+},
+methods: {
     ...mapActions(useFetchStore, ['fetchMyOrders']),
   },
   created() {
@@ -31,15 +31,13 @@ export default {
     <table class="table table-secondary table-hover overflow-auto">
       <thead>
         <tr>
-          <th class="col">#</th>
-          <th scope="col">Order ID Number</th>
-          <th scope="col">Brand</th>
-          <th scope="col">Service Name</th>
-          <th scope="col">Order Date</th>
-          <th scope="col">Estimated Complete Date</th>
-          <th scope="col">Order status</th>
-          <th scope="col">Order Complete Date</th>
-          <th scope="col">Order Detail</th>
+          <th>ID Number</th>
+          <th>Service Name</th>
+          <th>Order Date</th>
+          <th>Complete Date</th>
+          <th>Order status</th>
+          <th>Complete Date</th>
+          <th>Order Detail</th>
         </tr>
       </thead>
       <tbody>

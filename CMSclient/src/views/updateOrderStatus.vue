@@ -18,7 +18,6 @@ export default {
     ...mapActions(useFetchStore,['fetchOrderDetail']),
     ...mapActions(useOrderStore,['updateStatusOrder']),
     async upload(){
-            console.log(this.$refs.file.files[0],'<<<<<<<<<< ini di vue')
             this.updateData.photoAfter=this.$refs.file.files[0]
         },
     async update(){
@@ -61,6 +60,7 @@ export default {
                 v-model="updateData.status"
               >
                 <option value="On Request">On Request</option>
+                <option value="Waiting for Payment">Waiting for Payment</option>
                 <option value="Pick Up Process">Pick Up Process</option>
                 <option value="Cleaning On Process">Cleaning On Process</option>
                 <option value="Completed">Completed</option>

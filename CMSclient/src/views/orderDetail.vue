@@ -4,7 +4,7 @@ import { mapActions, mapState } from "pinia";
 export default {
 
   computed: {
-    ...mapState(useFetchStore,['myOrderDetail'])
+    ...mapState(useFetchStore,['myOrderDetail']),
   },
   methods: {
     ...mapActions(useFetchStore,['fetchOrderDetail'])
@@ -19,7 +19,7 @@ export default {
   <div class="container pt-3">
     <div class="row">
       <div class="col-12 text-center">
-        <h1 class="fontstyle">Your Order Detail {{ myOrderDetail.orderIdNumber }}</h1>
+        <h1 class="fontstyle">Order Detail ID {{ myOrderDetail.orderIdNumber }}</h1>
       </div>
     </div>
   </div>
@@ -36,7 +36,7 @@ export default {
           <h6>Service Name:</h6>
           <h6>Order Status:</h6>
           <h6>Order Date:</h6>
-          <h6>Estimated Complete Date:</h6>
+          <h6>Estimated Date:</h6>
           <h6>Complete Date:</h6>
         </div>
         <div class="col-auto text-start">

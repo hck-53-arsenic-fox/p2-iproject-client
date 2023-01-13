@@ -8,6 +8,7 @@ import MyOrderHistory from "../views/myOrderHistory.vue"
 import OrderDetail from "../views/orderDetail.vue"
 import OrderLog from "../views/orderLog.vue"
 import Update from "../views/updateOrderStatus.vue"
+import NotFound from "../views/404notFound.vue";
 
 const routes = [
   {
@@ -55,6 +56,11 @@ const routes = [
     name: "Update",
     component: Update,
   },
+  {
+    path: "/:patchMatch(.*)*",
+    name: "NotFound",
+    component: NotFound,
+  }
 ];
 
 const router = createRouter({
@@ -62,5 +68,63 @@ const router = createRouter({
   routes,
 });
 
+router.beforeEach((to, from, next) => {
+  const token = localStorage.getItem('access_token')
+  const role = localStorage.getItem('role')
+
+  if(to.name === 'Login') {
+    if (token) {
+      next ({ path: '/'})
+    } else {
+      next()
+    }
+  } else if (to.name === 'Register') {
+    if(token) {
+      next({path: '/'})
+    } else {
+      next()
+    }
+  } else if (to.name === 'Order') {
+    if(!token) {
+      next({path: '/'})
+    } else {
+      next()
+    }
+  } else if (to.name === 'MyOrderHistory') {
+    if(!token) {
+      next({path: '/'})
+    } else {
+      next()
+    }
+  } else if (to.name === 'OrderDetail') {
+    if(!token) {
+      next({path: '/'})
+    } else {
+      next()
+    }
+  } else if (to.name === 'OrderLog') {
+    if(!token) {
+      next({path: '/'})
+    }else {
+      if (role !== 'admin'){
+        next({path: '/'})
+      } else {
+        next()
+      }
+    }
+  } else if (to.name === 'Update') {
+    if(!token) {
+      next({path: '/'})
+    }else {
+      if (role !== 'admin'){
+        next({path: '/'})
+      } else {
+        next()
+      }
+    }
+  } else {
+    next()
+  }
+})
 
 export default router;

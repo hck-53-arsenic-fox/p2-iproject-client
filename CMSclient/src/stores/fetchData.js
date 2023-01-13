@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import axios from "axios";
-const server = "http://localhost:3000/";
-// const server = "https://cleanmyshoes-production.up.railway.app/";
+// const server = "http://localhost:3000/";
+const server = "https://cleanmyshoes-production.up.railway.app/";
 
 export const useFetchStore = defineStore("fetch", {
   state() {

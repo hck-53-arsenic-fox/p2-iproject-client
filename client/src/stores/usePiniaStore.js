@@ -8,15 +8,26 @@ const urlAPI_2 = "https://images-api.nasa.gov/search?q=apollo%2022&description=m
 
 export const usePiniaStore = defineStore("piniaStore", {
     state: () => ({
+        dateAndTime: {},
         isLogin: false,
         dataPlanets: [],
         dataAstros: [],
         queryPlanets: {
             search: ""
         },
-        dataUser: ""
+        dataUser: "",
+        dataStatus: []
     }),
     actions: {
+        timeStamper() {
+            const hour = new Date().getHours();
+            const welcomeTypes = ["Good morning", "Good afternoon", "Good evening"];
+            let welcomeText = "";
+            if (hour < 12) welcomeText = welcomeTypes[0];
+            else if (hour < 18) welcomeText = welcomeTypes[1];
+            else welcomeText = welcomeTypes[2];
+            this.dateAndTime = welcomeText;
+          },
         async register(dataRegister){
             try {
                 await axios({
@@ -55,7 +66,6 @@ export const usePiniaStore = defineStore("piniaStore", {
                 this.isLogin = true
                 this.router.push('/')
                 Swal.fire({
-                    position: "top-end",
                     icon: "success",
                     title: "Login Success",
                     showConfirmButton: false,
@@ -98,6 +108,7 @@ export const usePiniaStore = defineStore("piniaStore", {
                         headers: {access_token: localStorage.getItem("access_token")}
                     })
                     this.dataUser = data
+                    console.log(data, "<<< data profile");
                 } catch (error) {
                     console.log(error);
                 }
@@ -112,6 +123,7 @@ export const usePiniaStore = defineStore("piniaStore", {
                             access_token: localStorage.getItem("access_token")
                         }
                     })
+                    this.dataStatus = data
                 } catch (error) {
                     console.log(error);
                 }

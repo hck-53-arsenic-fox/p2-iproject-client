@@ -37,14 +37,14 @@ const router = createRouter({
     // }
   ]
 })
-router.beforeEach((to,from)=>{
-  if(!localStorage.getItem("access-token") && to.name === 'Home'){
-    return {name: 'Login'}
-  }else if(localStorage.getItem("access_token") && to.name === 'Login'){
-    return {name: 'Home'}
-  }else if(!localStorage.getItem("access_token") && to.name === 'AstroPage'){
-    return{name: 'Login'}
-  }
-})
+// router.beforeEach((to,from)=>{
+//   if(!localStorage.getItem("access-token") && to.name === 'Home'){
+//     return {name: 'Login'}
+//   }else if(localStorage.getItem("access_token") && to.name === 'Login'){
+//     return {name: 'Home'}
+//   }else if(!localStorage.getItem("access_token") && to.name === 'AstroPage'){
+//     return{name: 'Login'}
+//   }
+// })
 
 export default router

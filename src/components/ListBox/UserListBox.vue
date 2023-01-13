@@ -5,13 +5,13 @@ import { useAppStore } from '../../stores/app';
 export default {
     props: ['user', 'addToGroup'],
     methods: {
-        ...mapActions(useAppStore, ['accessChat']),
+        ...mapActions(useAppStore, ['accessChat', 'chooseUserToAdd']),
 
         choose() {
             if (!this.addToGroup) {
                 this.accessChat(user._id)
             } else {
-
+                this.chooseUserToAdd(this.user._id)
             }
         }
     }

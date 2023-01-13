@@ -173,8 +173,13 @@ export const useAppStore = defineStore("app", {
 			}
 		},
 
-		chooseUserToAdd(id) {
-			this.selectedUserToAdd.push(id);
+		async chooseUserToAdd(id) {
+			const { data } = await axios({
+				method: "GET",
+				url: origin + `/api/user/${id}`,
+			});
+
+			this.selectedUserToAdd.push(data);
 		},
 
 		getSenderName(chat) {

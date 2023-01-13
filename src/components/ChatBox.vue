@@ -50,7 +50,7 @@ export default {
         function chatStripe(isAi, value, uniqueId) {
             return `
       <div class="wrapper ${isAi && "ai"}">
-        <div class="chat">
+        <div class="chat" style="display:flex; flex-direction:row; gap:1rem;">
           <div class="profile">
             <img
               src="${isAi ? bot : user}"
@@ -158,6 +158,8 @@ section {
     margin-top: 5rem;
     height: 80%;
     width: 67%;
+    border-radius: 1rem;
+    overflow: hidden;
 }
 
 
@@ -186,6 +188,7 @@ section {
     -ms-overflow-style: none;
     scrollbar-width: none;
 
+    padding: 1rem;
     padding-bottom: 20px;
     scroll-behavior: smooth;
 }

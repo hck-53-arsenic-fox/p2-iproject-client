@@ -6,6 +6,7 @@ import Navbar from '../components/Navbar.vue';
 import ChatList from '../components/ChatList.vue'
 import ChatBox from '../components/ChatBox.vue';
 import ProfileModal from '../components/ProfileModal.vue';
+import AddGroupModal from '../components/AddGroupModal.vue';
 import SideBar from '../components/SideBar.vue';
 
 export default {
@@ -14,6 +15,7 @@ export default {
         ChatList,
         ChatBox,
         ProfileModal,
+        AddGroupModal,
         SideBar
     },
     computed: {
@@ -33,6 +35,7 @@ export default {
     <div class="page-container">
         <Navbar />
         <ProfileModal class="position-absolute top-50 start-50 translate-middle" />
+        <AddGroupModal class="position-absolute top-50 start-50 translate-middle" />
 
         <SideBar />
         <ChatList />

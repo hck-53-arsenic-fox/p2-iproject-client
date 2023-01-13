@@ -1,4 +1,5 @@
 <script>
+import axios from 'axios'
 import { Notify } from 'notiflix'
 import { mapActions } from 'pinia'
 import { useAppStore } from '../stores/app'
@@ -33,9 +34,28 @@ export default {
         showPassword() {
             this.show = !this.show
         },
-        uploadpic(event) {
-            console.log(event.target.files[0]);
-            // this.registerData.pic = ''
+        async uploadpic(event) {
+            try {
+                console.log(event.target.files[0]);
+                const form = new FormData()
+                form.append('image', event.target.files[0])
+                form.append('directories', 'Kuncung')
+
+                const { data } = await axios({
+                    method: 'POST',
+                    url: 'https://cdn.khanz1.dev/images',
+                    data: form
+                })
+
+                console.log(data);
+            } catch (error) {
+                console.log(error);
+            }
+
+
+
+
+            this.registerData.pic = ''
         },
 
         ...mapActions(useAppStore, ['handleLogin', 'handleRegister']),

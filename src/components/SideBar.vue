@@ -37,7 +37,7 @@ export default {
                 <div ref="content" class="sidebar-content" :class="[openSideBar ? 'opened' : 'closed']">
                     <div class="search-container">
                         <form class="mt-4 p-0">
-                            <input type="text" placeholder="Search.." name="search" v-model="search">
+                            <input type="text" placeholder="Search.." name="search" autocomplete="off" v-model="search">
                             <button type="submit" @click.prevent="searchComponent"><i
                                     class="mdi mdi-magnify"></i></button>
                         </form>

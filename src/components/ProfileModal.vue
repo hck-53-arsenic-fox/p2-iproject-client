@@ -4,11 +4,11 @@ import { useAppStore } from '../stores/app'
 
 export default {
     computed: {
-        ...mapWritableState(useAppStore, ['openModal', 'display']),
+        ...mapWritableState(useAppStore, ['profileModal']),
         ...mapState(useAppStore, ['userInfo'])
     },
     methods: {
-        ...mapActions(useAppStore, ['toggleModal'])
+        ...mapActions(useAppStore, ['toggleProfileModal'])
     }
 }
 
@@ -18,10 +18,10 @@ export default {
 <template>
     <section>
 
-        <div v-if="openModal" class="custom-modal">
+        <div v-if="profileModal.openModal" class="custom-modal">
             <div class="title">
                 <p class="text-center">{{ userInfo.name }}</p>
-                <a @click.prevent="toggleModal"><span class="material-symbols-outlined">
+                <a @click.prevent="toggleProfileModal()"><span class="material-symbols-outlined">
                         close
                     </span></a>
             </div>
@@ -78,7 +78,7 @@ img {
 }
 
 section::before {
-    display: v-bind('display');
+    display: v-bind('profileModal.display');
     position: fixed;
     z-index: 99;
     content: '';

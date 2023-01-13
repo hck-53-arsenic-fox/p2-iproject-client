@@ -12,13 +12,20 @@ export const useAppStore = defineStore("app", {
 	state() {
 		return {
 			userInfo: "",
-			openModal: false,
-			display: "none",
+			profileModal: {
+				openModal: false,
+				display: "none",
+			},
+			groupModal: {
+				openModal: false,
+				display: "none",
+			},
 			openSideBar: false,
 			chatList: [],
 			userList: null,
 			selectedChat: {},
 			selectedChatId: 0,
+			selectedUserToAdd: [],
 		};
 	},
 	getters: {},
@@ -147,6 +154,10 @@ export const useAppStore = defineStore("app", {
 			}
 		},
 
+		chooseUserToAdd(id) {
+			this.selectedUserToAdd.push(id);
+		},
+
 		getSenderName(chat) {
 			if (chat.chatName !== "sender") {
 				return chat.chatName;
@@ -163,12 +174,23 @@ export const useAppStore = defineStore("app", {
 			this.openSideBar = !this.openSideBar;
 		},
 
-		toggleModal() {
-			this.openModal = !this.openModal;
-			if (this.display === "none") {
-				this.display = "block";
+		toggleProfileModal() {
+			this.profileModal.openModal = !this.profileModal.openModal;
+			if (this.profileModal.display === "none") {
+				this.profileModal.display = "block";
 			} else {
-				this.display = "none";
+				this.profileModal.display = "none";
+				this.userList = null;
+			}
+		},
+
+		toggleGroupModal() {
+			this.groupModal.openModal = !this.groupModal.openModal;
+			if (this.groupModal.display === "none") {
+				this.groupModal.display = "block";
+			} else {
+				this.groupModal.display = "none";
+				this.userList = null;
 			}
 		},
 

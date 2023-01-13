@@ -3,15 +3,23 @@ import { mapActions } from 'pinia';
 import { useAppStore } from '../../stores/app';
 
 export default {
-    props: ['user'],
+    props: ['user', 'addToGroup'],
     methods: {
-        ...mapActions(useAppStore, ['accessChat'])
+        ...mapActions(useAppStore, ['accessChat']),
+
+        choose() {
+            if (!this.addToGroup) {
+                this.accessChat(user._id)
+            } else {
+
+            }
+        }
     }
 }
 </script>
 
 <template>
-    <div class="myContainer" @click="accessChat(user._id)">
+    <div class="myContainer" @click="choose">
         <div class="img-container">
             <img :src="user.pic" />
         </div>

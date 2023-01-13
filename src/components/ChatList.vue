@@ -11,7 +11,7 @@ export default {
         ...mapState(useAppStore, ['chatList'])
     },
     methods: {
-        ...mapActions(useAppStore, ['fetchChatList'])
+        ...mapActions(useAppStore, ['fetchChatList', 'toggleGroupModal'])
     },
     created() {
         this.fetchChatList()
@@ -23,7 +23,7 @@ export default {
     <section>
         <header>
             <h3>My Chat</h3>
-            <button>New Group Chat<span class="material-symbols-outlined">
+            <button @click="toggleGroupModal">New Group Chat<span class="material-symbols-outlined">
                     add
                 </span></button>
         </header>

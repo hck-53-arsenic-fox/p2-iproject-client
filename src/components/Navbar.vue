@@ -17,7 +17,7 @@ export default {
             this.isOpen = !this.isOpen
         },
 
-        ...mapActions(useAppStore, ['logout', 'toggleModal', 'toggleSidebar'])
+        ...mapActions(useAppStore, ['logout', 'toggleProfileModal', 'toggleSidebar'])
     }
 }
 </script>
@@ -45,7 +45,7 @@ export default {
                     </span>
                 </button>
                 <div :class="['dropdown', 'rounded-2', 'shadow-lg', isOpen ? 'active' : '']">
-                    <a class="dropdown-item" href="#" @click.prevent="toggleModal">My Profile</a>
+                    <a class="dropdown-item" href="#" @click.prevent="toggleProfileModal">My Profile</a>
                     <a class="dropdown-item" href="#" @click.prevent="logout">Log Out</a>
                 </div>
             </div>

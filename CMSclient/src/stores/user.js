@@ -14,7 +14,7 @@ export const useUserStore = defineStore("user", {
       phoneNumber: "",
       address: "",
       role: "",
-      isLogin: false
+      isLogin: false,
     };
   },
   actions: {
@@ -41,7 +41,7 @@ export const useUserStore = defineStore("user", {
         Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: `${error.response.data.message}`
+          text: `${error.response.data.message}`,
         });
       }
     },
@@ -53,6 +53,63 @@ export const useUserStore = defineStore("user", {
           data: {
             email: dataLogin.email,
             password: dataLogin.password,
+          },
+        });
+        this.username = data.username;
+        this.isLogin = true;
+        this.role = data.role;
+        localStorage.setItem("access_token", data.access_token);
+        localStorage.setItem("username", data.username);
+        localStorage.setItem("role", data.role);
+        this.password = "";
+        this.email = "";
+        Swal.fire({
+          title: `Welcome on board ${data.username}`,
+          showClass: {
+            popup: "animate__animated animate__fadeInDown",
+          },
+          hideClass: {
+            popup: "animate__animated animate__fadeOutUp",
+          },
+        });
+        this.router.push("/");
+      } catch (error) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: `${error.response.data.message}`,
+        });
+      }
+    },
+    async logout() {
+      try {
+        Swal.fire({
+          title: `Bey bye~ ${this.username}`,
+          showClass: {
+            popup: "animate__animated animate__fadeInDown",
+          },
+          hideClass: {
+            popup: "animate__animated animate__fadeOutUp",
+          },
+        });
+        localStorage.clear();
+        this.username = "";
+        this.role = "";
+        this.email = "";
+        this.password = "";
+        this.isLogin = false;
+        this.router.push("/");
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async googleLogin(token) {
+      try {
+        const { data } = await axios({
+          url: server + "users/login/google",
+          method: "POST",
+          headers: {
+            googleToken: token.credential,
           },
         });
         this.username = data.username;
@@ -77,31 +134,9 @@ export const useUserStore = defineStore("user", {
         Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: `${error.response.data.message}`
+          text: `${error.response.data.message}`,
         });
       }
-    },
-    async logout() {
-      try {
-        Swal.fire({
-          title: `Bey bye~ ${this.username}`,
-          showClass: {
-            popup: "animate__animated animate__fadeInDown",
-          },
-          hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
-          }
-        })
-        localStorage.clear();
-        this.username = ""
-        this.role = ""
-        this.email = "";
-        this.password = "";
-        this.isLogin = false;
-        this.router.push("/");
-      } catch (error) {
-        console.log(error);
-      }
-    },
-  },
+    }
+  }
 });

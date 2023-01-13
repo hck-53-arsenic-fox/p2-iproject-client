@@ -60,12 +60,12 @@ export default {
 
             <button
               @click.prevent="userLogin"
-              class="btn btn-outline-primary btn-sm btn-block border text-white"
+              class="btn btn-outline-primary btn-sm btn-block border text-white mb-2"
               type="submit"
             >
               Login
             </button>
-            <hr />
+            <!-- <hr />
             <p>Or sign in with:</p>
             <div class="d-flex justify-content-center text-center mb-4 pt-1">
               <a href="#!" class="text-white me-4"
@@ -74,7 +74,7 @@ export default {
               <a href="#!" class="text-white"
                 ><i class="fab fa-google fa-lg"></i
               ></a>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>

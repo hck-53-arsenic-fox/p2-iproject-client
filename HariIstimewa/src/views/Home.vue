@@ -6,7 +6,7 @@ import { mapActions } from 'pinia';
 import { useHawaStore } from '../stores/hariistimewa';
 
 export default {
-  name: "App",
+  name: "home",
   components: {
     Navbar,
     Footer
@@ -14,14 +14,23 @@ export default {
   methods: {
         ...mapActions(useHawaStore, ['navigatePage']),
 
-    }
-}
-</script>
 
+
+    },
+}
+
+
+</script>
+<style>
+body { margin: 0; padding: 0; }
+#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+
+
+</style>
 <template>
     <Navbar />
 
-<section class="px-[10%]">
+    <section class="px-[10%]">
     <div class="container py-5">
         <div class="mt-8 lg:-mx-6 lg:flex lg:items-center">
             <img class="w-full lg:mx-6 lg:w-1/2 rounded-xl h-72 lg:h-96" src="https://hariistimewa.com/_exclusive/themes/elegantgold/thumbnail.jpg" alt="">
@@ -202,13 +211,13 @@ export default {
         Tidak perlu bingung untuk membuat desainnya. Pilih tema yang sesuai dengan kamu.
     </p>
     <div class="min-w-screen grid grid-cols-3 gap-5  items-center p-5 lg:p-10 overflow-hidden relative">
-        <div  @click.prevent="navigatePage('/t1/3')" class="rounded-xl bg-white shadow-lg text-gray-800 md:text-left">
+        <div  @click.prevent="navigatePage('/t1/1')" class="rounded-xl bg-white shadow-lg text-gray-800 md:text-left">
             <div class="flex items-center">
                 <img class="rounded-md" src="../assets/img/theme1.png" alt="" srcset="">
             </div>
             <p class="text-center">Tema 1</p>
         </div>
-        <div  @click.prevent="navigatePage('/t1/6')" class="rounded-xl bg-white shadow-lg text-gray-800 md:text-left">
+        <div  @click.prevent="navigatePage('/t2/6')" class="rounded-xl bg-white shadow-lg text-gray-800 md:text-left">
             <div class="flex items-center">
                 <img class="rounded-md" src="../assets/img/theme2.png" alt="" srcset="">
             </div>

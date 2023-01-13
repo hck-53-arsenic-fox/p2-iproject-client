@@ -18,7 +18,12 @@ export default {
     },
     data() {
         return {
-            isOpen: true
+            isOpen: true,
+            greet: {
+                guest: '',
+                presence: '',
+                greeting: ''
+            }
         };
     },
 
@@ -31,16 +36,27 @@ export default {
     },
 
     methods: {
-        ...mapActions(useHawaStore, ['fenchInvitaion']),
+        ...mapActions(useHawaStore, ['fenchInvitaion', 'addGreet', 'formatDate']),
 
-
-        // formatDate(date) {
-        //     return date.toLocaleDateString('id-ID')
-        // },
-
+        formatYear(date) {
+            return new Date(date).toLocaleDateString('id-ID', { year: 'numeric'})
+        },
+        formatMonth(date) {
+            return new Date(date).toLocaleDateString('id-ID', { month: 'long'})
+        },
         
-         async formatDate(date) {
-            return date.toLocaleDateString('id-ID')
+        formatDay(date) {
+            return new Date(date).toLocaleDateString('id-ID', { weekday: 'long'})
+        },
+        
+        formatDayn(date) {
+            return new Date(date).toLocaleDateString('id-ID', { day: 'numeric'})
+        },
+
+        generateBarCode() {
+            let data = $('#text').val();
+            let url = 'https://api.qrserver.com/v1/create-qr-code/?data=' + data + '&amp;size=50x50';
+            $('#barcode').attr('src', url);
         },
 
         onToggle() {
@@ -49,13 +65,16 @@ export default {
     },
     created() {
         this.fenchInvitaion(this.$route.params.id)
+        // this.addGreet(this.$route.params.id, this.greet)
+// console.log(this.addGreet(this.$route.params.id, this.greet));
     }
 }
 </script>
 
 <template>
+
     <transition name="fade">
-        <div v-if="isModalVisible" id="modal"
+        <div v-if="isModalVisible" id="modal" style="`background-image: url('{{ dataInvitation.story_img }}')`"
             class="overflow-x-hidden bg-[url('https://images.unsplash.com/photo-1621621667797-e06afc217fb0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80')] bg-cover  bg-center flex overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none items-end">
 
             <div class="absolute w-full h-full z-10 bg-gradient-to-t from-white to-transparent">
@@ -77,13 +96,13 @@ export default {
                         <p class="my-4 text-lg">
                             Kepada Yth. Bapak/Ibu/Saudara/i
                         </p>
-                        <p class="font-bold text-xl" v-if="this.$route.query.name ? this.$route.query.name : ''">
-                            {{ this.$route.query.name }}</p>
+                        <p class="font-bold text-xl" v-if="this.$route.query.to ? this.$route.query.to : ''">
+                            {{ this.$route.query.to }}</p>
                         <p class="my-4 text-md">
                             ditempat
                         </p>
                         <p class="text-sm mt-5 mx-auto  w-[60%]"
-                            v-if="this.$route.query.name ? this.$route.query.name : ''">
+                            v-if="this.$route.query.to ? this.$route.query.to : ''">
                             *Mohon maaf apabila ada kesalahan pada
                             penulisan nama dan gelar
                         </p>
@@ -111,23 +130,13 @@ export default {
         <div class="fixed bottom-0 right-0 left-0 z-40">
             <audio id="music" :src="dataInvitation.Music.song_src" autoplay>
             </audio>
-            <div
-                class="absolute bottom-16 md:bottom-4 right-2 h-12 w-12 p-2 bg-white overflow-y-scroll flex justify-center items-center rounded-full border">
-                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512"
-                    class="text-black -mr-1" height="20" width="20" xmlns="http://www.w3.org/2000/svg">
-                    <path fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"
-                        d="M176 96h16v320h-16zm144 0h16v320h-16z"></path>
-                </svg>
-            </div>
         </div>
         <div>
             <div class="shadow-lg h-screen">
                 <div class="flex-wrap relative h-full">
                     <div class="absolute w-full h-full z-10 bg-gradient-to-t from-white to-transparent">
                     </div>
-                    <img class="w-full h-full object-cover object-top z-10"
-                        :src="dataInvitation.photo"
-                        alt="">
+                    <img class="w-full h-full object-cover object-top z-10" :src="dataInvitation.photo" alt="">
                     <div class="absolute w-full bottom-16">
                         <p
                             class="relative w-full text-center font-bold tracking-wider text-sm uppercase py-4 z-10 text-black">
@@ -138,7 +147,7 @@ export default {
                             <span class="mx-4">&amp;</span>{{ dataInvitation.bride_nick }}
                         </p>
                         <p
-                            class="relative w-full text-center font-bold tracking-wider text-sm uppercase py-4 z-10 #949494">
+                            class="relative w-full text-center font-bold tracking-wider text-lg uppercase py-4 z-10 #949494">
                             {{ formatDate(dataInvitation.ceremonial_date) }} </p>
                     </div>
                 </div>
@@ -200,20 +209,24 @@ export default {
                                     <div class="top-6 right-16 w-max absolute">
                                         <p class="text-xs w-28 font-light text-center uppercase border-t border-b border-gray-900 py-2 px-2 tracking-widest"
                                             style="border-color:#122851;color:#000000">{{
-                                                dataInvitation.matrimony_date
+                                                formatDay(dataInvitation.matrimony_date)
                                             }}</p>
                                     </div>
-                                    <p class="text-xs text-center uppercase text-gray-700 tracking-wide"
-                                        style="font-size:0.6rem;color:#000000">Maret</p>
-                                    <p class="text-3xl font-semibold text-center text-gray-700 tracking-wide">12</p>
-                                    <p class="text-sm sm:text-base text-center text-gray-700 tracking-wide">2022</p>
+                                    <p class="text-md text-center uppercase text-gray-700 tracking-wide"
+                                        style="font-size:0.6rem;color:#000000">{{
+                                                formatMonth(dataInvitation.matrimony_date)
+                                            }}</p>
+                                    <p class="text-3xl font-semibold text-center text-gray-700 tracking-wide">{{
+                                                formatDayn(dataInvitation.matrimony_date)
+                                            }}</p>
+                                    <p class="text-2xl sm:text-base text-center text-gray-700 tracking-wide">{{
+                                                formatYear(dataInvitation.matrimony_date)
+                                            }}</p>
                                     <div class="top-6 left-16 w-max absolute">
                                         <p class="text-xs w-28 font-light text-center uppercase border-t border-b border-gray-900 py-2 px-2 text-gray-700 tracking-wide"
                                             style="border-color:#122851;color:#000000">{{
                                                 dataInvitation.matrimony_time_start
-                                            }} - {{
-    dataInvitation.matrimony_time_end
-}}</p>
+                                            }}:00 - {{ dataInvitation.matrimony_time_end }}:00</p>
                                     </div>
                                 </div>
                             </div>
@@ -232,19 +245,25 @@ export default {
                                 <div class="relative w-min">
                                     <div class="top-6 right-16 w-max absolute">
                                         <p class="text-xs w-28 font-light text-center uppercase border-t border-b border-gray-900 py-2 px-2 tracking-widest"
-                                            style="border-color:#122851;color:#000000">Minggu</p>
+                                            style="border-color:#122851;color:#000000">{{
+                                                formatDay(dataInvitation.ceremonial_date)
+                                            }}</p>
                                     </div>
-                                    <p class="text-xs text-center uppercase text-gray-700 tracking-wide"
-                                        style="font-size:0.6rem;color:#000000">{{ dataInvitation.ceremonial_date }}</p>
-                                    <p class="text-3xl font-semibold text-center text-gray-700 tracking-wide">13</p>
-                                    <p class="text-sm sm:text-base text-center text-gray-700 tracking-wide">2022</p>
+                                    <p class="text-md text-center uppercase text-gray-700 tracking-wide"
+                                        style="font-size:0.6rem;color:#000000">{{
+                                                formatMonth(dataInvitation.ceremonial_date)
+                                            }}</p>
+                                    <p class="text-3xl font-semibold text-center text-gray-700 tracking-wide">{{
+                                                formatDayn(dataInvitation.ceremonial_date)
+                                            }}</p>
+                                    <p class="text-2xl sm:text-base text-center text-gray-700 tracking-wide">{{
+                                                formatYear(dataInvitation.ceremonial_date)
+                                            }}</p>
                                     <div class="top-6 left-16 w-max absolute">
                                         <p class="text-xs w-28 font-light text-center uppercase border-t border-b border-gray-900 py-2 px-2 text-gray-700 tracking-wide"
                                             style="border-color:#122851;color:#000000">{{
-                                                dataInvitation.matrimony_time_start
-                                            }} - {{
-    dataInvitation.matrimony_time_end
-}}</p>
+                                                dataInvitation.ceremonial_time_start
+                                            }}:00 - {{ dataInvitation.ceremonial_time_end }}:00 </p>
                                     </div>
                                 </div>
                             </div>
@@ -259,14 +278,14 @@ export default {
                     <div class="mx-auto w-[80%] h-80 md:h-96  bg-gray-400 aos-init aos-animate" data-aos="zoom-in-up"
                         data-aos-duration="1000">
                         <div class="h-full w-full"><iframe
-                                src="https://maps.google.com/maps?q=2.80492722218241,98.8424173370004&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=&amp;output=embed"
+                                :src="`https://maps.google.com/maps?q=${dataInvitation.map_location}&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=&amp;output=embed`"
                                 width="100%" height="100%" frameborder="0" class="border-0"></iframe>
                         </div>
                     </div>
                     <div class="flex pt-8">
                         <a target="_blank"
-                            class="mx-auto rounded-lg  bg-[#122851] border-[#122851] inline-flex items-center justify-center px-2 py-2 border border-transparent text-sm sm:text-base font-medium text-white bg-gray-700 aos-init aos-animate"
-                            href="https://www.google.com/maps/search/?api=1&amp;query=2.80492722218241, 98.8424173370004"
+                            class="mx-auto rounded-lg border-[#122851] inline-flex items-center justify-center px-2 py-2 border border-transparent text-sm sm:text-base font-medium text-white bg-gray-700 aos-init aos-animate"
+                            href="https://www.google.com/maps/search/?api=1&amp;query=-6.184808397180689,106.83125086725539"
                             rel="noreferrer" data-aos="zoom-in-up" data-aos-duration="1000">Buka di Google Map
                         </a>
                     </div>
@@ -343,9 +362,9 @@ export default {
                                         <img :src="dataInvitation.photo" class="w-100 rounded-xl mb-2">
                                         <h4 class="text-lg font-semibold mb-2 text-gray-700 tracking-wide">Perkenalan
                                         </h4>
-                                        <div class="">
+                                        <div class="text-center">
 
-                                            <p class="font-light text-sm sm:text-base-wide mb-6 text-justify">
+                                            <p class="font-light text-center text-sm sm:text-base-wide mb-6">
                                                 {{ dataInvitation.story }}
                                             </p>
                                         </div>
@@ -386,16 +405,45 @@ export default {
                                 </div>
                             </div>
                         </div>
+
+
+                        <img class="mx-auto w-40 h-40" id='barcode'
+                            :src="`https://api.qrserver.com/v1/create-qr-code/?data=${this.$route.query.to}`" alt="" />
+                        <p class="text-center mt-5">Tunjukan QR CODE ini <br> untuk isi buku tamu online</p>
+
                         <div name="guestContainer" class="py-8 px-8 lg:px-4 mx-auto max-w-lg pt-16">
                             <h2 class="text-center text-[#122851] text-3xl sm:text-4xl aos-init aos-animate"
-                                data-aos="zoom-in-up" data-aos-duration="1000">Buku Tamu</h2><br>
-                            <div class="flex "><button type="button"
-                                    class="mx-auto rounded-lg bg-[#122851] inline-flex items-center justify-center px-2 py-2 border border-transparent text-sm sm:text-base font-medium text-white bg-gray-700 aos-init aos-animate"
-                                    data-aos="zoom-in-up" data-aos-duration="1000">Berikan Ucapan</button>
+                                data-aos="zoom-in-up" data-aos-duration="1000">Kirim Ucapan dan Do'a</h2><br>
+                            <div class="flex justify-center">
+
+                                <form @submit.prevent="addGreet(this.$route.params.id, greet)" class="w-full">
+                                    <div class="mt-2">
+                                        <input type="text" v-model="greet.guest"
+                                            class="inline-block w-full rounded-xl bg-white p-2.5 leading-none text-black placeholder-stone-500 shadow focus:outline-none focus:ring focus:ring-blue-300"
+                                            placeholder="Nama" />
+                                    </div>
+                                    <div class="mt-2">
+                                        <select  v-model="greet.presence"
+                                            class="rounded-lg  shadow focus:outline-none focus:ring focus:ring-blue-300 block w-full p-2.5">
+                                            <option selected disabled>Kehadiran</option>
+                                            <option value="Hadir">Hadir</option>
+                                            <option value="Tidak Hadir">Tidak Hadir</option>
+                                        </select>
+                                    </div>
+                                    <div class="mt-2">
+                                        <textarea v-model="greet.greeting" placeholder="Kirim ucapan dan doa" id="message" class="inline-block w-full rounded-xl bg-white p-2.5 leading-none text-black placeholder-stone-500 shadow focus:outline-none focus:ring focus:ring-blue-300" rows="3"></textarea>
+                                    </div>
+                                    <div class="my-4">
+                                        <button type="submit"
+                                            class="rounded-lg  bg-blue-900 shadow  text-white focus:outline-none focus:ring focus:ring-blue-300 block w-full p-2.5 aos-init aos-animate"
+                                            data-aos="zoom-in-up" data-aos-duration="1000">kirim Ucapan</button>
+                                    </div>
+                                </form>
+
                             </div><br>
-                            <div class=" max-h-60 overflow-hidden overflow-y-scroll  space-y-3 aos-init aos-animate"
+                            <div class="  overflow-hidden overflow-y-scroll  space-y-3 aos-init aos-animate"
                                 data-aos="zoom-in-up" data-aos-duration="1000"
-                                v-for="greet in dataInvitation.User.Greets">
+                                v-for="greet in dataInvitation.Greets">
 
                                 <div class="relative flex items-start space-x-3">
                                     <div class="relative">
@@ -407,15 +455,18 @@ export default {
                                     </div>
                                     <div class="min-w-0 flex-1">
                                         <div>
-                                            <div class="text-xs flex justify-start">
+                                            <div class="text-md flex justify-start">
                                                 <p class="font-bold text-gray-900 tracking-wide mr-2">
                                                     {{ greet.guest }}
                                                 </p> <span class="bg-blue-200 rounded-sm p-[2px]">{{
                                                     greet.presence
                                                 }}</span>
                                             </div>
+                                            <p class="font-sm text-gray-900 tracking-wide mr-2">
+                                                {{ formatDate(greet.date) }}
+                                            </p>
                                         </div>
-                                        <div class="mt-2 font-light text-xs text-gray-700 tracking-wide">
+                                        <div class="mt-2 font-light text-md text-gray-700 tracking-wide">
                                             <p>
                                                 {{ greet.greeting }}
                                             </p>

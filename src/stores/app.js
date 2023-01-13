@@ -83,6 +83,25 @@ export const useAppStore = defineStore("app", {
 			}
 		},
 
+		async UpdateProfilePic(pic) {
+			try {
+				await axios({
+					method: "PUT",
+					url: origin + "/api/user",
+					data: { pic },
+					headers: {
+						authorization:
+							"Bearer " +
+							JSON.parse(localStorage.getItem("userInfo")).token,
+					},
+				});
+
+				this.userInfo.pic = pic;
+			} catch (error) {
+				this.errorHandler(error);
+			}
+		},
+
 		async fetchChatList() {
 			try {
 				Loading.circle();

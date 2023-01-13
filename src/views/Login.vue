@@ -39,26 +39,21 @@ export default {
                 console.log(event.target.files[0]);
                 const form = new FormData()
                 form.append('image', event.target.files[0])
-                form.append('directories', 'Kuncung')
+                form.append('directories', "[\"Kuncung\"]")
 
                 const { data } = await axios({
                     method: 'POST',
                     url: 'https://cdn.khanz1.dev/images',
                     data: form
                 })
-
-                console.log(data);
+                this.registerData.pic = data.data.path
             } catch (error) {
                 console.log(error);
+                this.errorHandler(error);
             }
-
-
-
-
-            this.registerData.pic = ''
         },
 
-        ...mapActions(useAppStore, ['handleLogin', 'handleRegister']),
+        ...mapActions(useAppStore, ['handleLogin', 'handleRegister', 'errorHandler']),
 
         handleLoginComponent() {
             this.handleLogin(this.loginData)

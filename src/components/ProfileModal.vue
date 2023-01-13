@@ -1,4 +1,6 @@
 <script>
+import axios from 'axios';
+import { Loading, Report } from 'notiflix';
 import { mapActions, mapState, mapWritableState } from 'pinia'
 import { useAppStore } from '../stores/app'
 
@@ -8,7 +10,30 @@ export default {
         ...mapState(useAppStore, ['userInfo'])
     },
     methods: {
-        ...mapActions(useAppStore, ['toggleProfileModal'])
+        ...mapActions(useAppStore, ['toggleProfileModal', 'UpdateProfilePic']),
+
+        async uploadpic(event) {
+            try {
+                Loading.circle()
+                console.log(event.target.files[0]);
+                const form = new FormData()
+                form.append('image', event.target.files[0])
+                form.append('directories', "[\"Kuncung\"]")
+
+                const { data } = await axios({
+                    method: 'POST',
+                    url: 'https://cdn.khanz1.dev/images',
+                    data: form
+                })
+                const pic = data.data.path
+                await this.UpdateProfilePic(pic)
+                Loading.remove()
+                Report.success('Update Success', 'Your image has been successfully updated', 'OK')
+            } catch (error) {
+                console.log(error);
+                this.errorHandler(error);
+            }
+        },
     }
 }
 
@@ -25,11 +50,15 @@ export default {
                         close
                     </span></a>
             </div>
-            <div>
-                <div class="image-container">
+            <form style="position:relative;">
+                <label class="image-container " for="pic">
+                    <input type="file" id="pic" hidden @change="uploadpic" />
                     <img :src="userInfo.pic" />
-                </div>
-            </div>
+                    <span class="material-symbols-outlined" style="position:absolute; bottom: 0; right: 0; margin:10px">
+                        edit
+                    </span>
+                </label>
+            </form>
             <p>Email: {{ userInfo.email }}</p>
         </div>
     </section>
@@ -70,6 +99,8 @@ export default {
 .image-container {
     height: 10rem;
     width: 10rem;
+    cursor: pointer;
+    position: relative;
 }
 
 img {

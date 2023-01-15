@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
-const baseUrl = "http://localhost:3000";
+const baseUrl = "https://nikopetstore-production.up.railway.app";
+// const baseUrl = "http://localhost:3000";
 import axios from "axios";
 
 export const useCounterStore = defineStore("counter", {
@@ -92,8 +93,9 @@ export const useCounterStore = defineStore("counter", {
         });
         this.router.push("/");
         snap.pay(data.token, {
-          onSuccess: function (result) {
+          onSuccess: (result) => {
             /* You may add your own implementation here */
+            
             Swal.fire({
               title: "Sweet!",
               text: `${result.status_message}`,
@@ -101,9 +103,9 @@ export const useCounterStore = defineStore("counter", {
               imageHeight: 200,
               imageAlt: "Custom image",
             });
+            this.deleteCart(id);
           },
         });
-        this.deleteCart(id);
       } catch (err) {
                 Swal.fire({
           title: "Error",
@@ -190,7 +192,7 @@ export const useCounterStore = defineStore("counter", {
           },
         });
         this.fetchCart();
-        this.routes.push("/cart");
+        this.router.push("/cart");
       } catch (err) {
                 Swal.fire({
           title: "Error",
@@ -267,7 +269,13 @@ export const useCounterStore = defineStore("counter", {
             access_token: localStorage.getItem("access_token"),
           }
         });
-
+        Swal.fire({
+          title: "Sweet!",
+          text: `Successfully added to your Wishlist`,
+          imageUrl: "https://cataas.com/cat/cute/says/Aww...",
+          imageHeight: 200,
+          imageAlt: "Custom image",
+        });
         this.router.push("/");
       } catch (err) {
                 Swal.fire({
@@ -289,7 +297,7 @@ export const useCounterStore = defineStore("counter", {
           },
         });
         this.fetchwishlist();
-        this.routes.push("/wishlist");
+        this.router.push("/wishlist");
       } catch (err) {
                 Swal.fire({
           title: "Error",

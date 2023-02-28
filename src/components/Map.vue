@@ -53,6 +53,7 @@ import {
   Marker,
   MarkerCluster,
   CustomMarker,
+  // clearMarkers
 } from "vue3-google-map";
 import { debounce } from "vue-debounce";
 import { useTravelokalStore } from "../stores/travelokal";
@@ -104,6 +105,9 @@ export default {
     watchEffect(() => {
       // console.log(store.places, "storeplaces");
       //     // console.log(store.places);
+      // i want to remove marker when i change the type
+      // help me to code them
+
       if (!store.places.length) return;
       store.places.forEach((place) => {
         // console.log(place, "places");
@@ -116,7 +120,7 @@ export default {
           },
         });
       });
-      store.getWeatherData()
+      store.getWeatherData();
       // console.log(coordinates, "coordinates");
     });
     // console.log(map.center);
@@ -131,8 +135,8 @@ export default {
       const gmap = mapRef.value.map;
       // console.log(map.center, "asdasdasd");
       mapRef.value.map.setCenter({
-        lat: -6.260745,
-        lng: 106.7814398,
+        lat: map.center.lat,
+        lng: map.center.lng,
       });
 
       gmap.addListener("zoom_changed", () => {
@@ -145,16 +149,17 @@ export default {
       //   clearTimeout(timeOut);
       //   // console.log("Map: Center: (", center.lat(), ",", center.lng(), ")");
       // });
-      gmap.addListener("bounds_changed", async () => {
+      gmap.addListener("bounds_changed", () => {
         // await sleep(1000);
         // clearTimeout(timeOut);
         debounce((val) => {
           // console.log(val)
-          const { Ia, Wa } = gmap.getBounds();
+          const { Ia, Ua } = gmap.getBounds();
+          // console.log( gmap.getBounds(), "bounds");
           map.center.lat = store.currentPosition.latCenter;
           map.center.lng = store.currentPosition.lngCenter;
-          store.boundaries.bl_latitude = Wa.lo;
-          store.boundaries.tr_latitude = Wa.hi;
+          store.boundaries.bl_latitude = Ua.lo;
+          store.boundaries.tr_latitude = Ua.hi;
           store.boundaries.bl_longitude = Ia.lo;
           store.boundaries.tr_longitude = Ia.hi;
           // console.log(boundaries);
@@ -170,6 +175,16 @@ export default {
       //fetch data disini
       store.getPlacesData();
     });
+
+    watch(
+      () => store.type,
+      (newVal, oldVal) => {
+        if (newVal !== oldVal) {
+          coordinates.splice(0);
+          mapRef.value.clearMarkers();
+        }
+      }
+    );
 
     onMounted(() => {
       map.center.lat = +store.currentPosition.latCenter;

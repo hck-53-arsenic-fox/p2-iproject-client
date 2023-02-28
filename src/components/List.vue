@@ -9,7 +9,7 @@ export default {
   },
   data() {
     return {
-      typeFilter: "restaurants",
+      typeFilter: "hotels",
       ratingFilter: 4.5,
       // placesComponent: []
     };

@@ -1,7 +1,8 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 // import { nextTick } from "vue";
-const server = "http://localhost:3000";
+// const server = "http://localhost:3000";
+const server = 'https://travelokal-server-production.up.railway.app'
 
 export const useTravelokalStore = defineStore("travelokal", {
   state() {

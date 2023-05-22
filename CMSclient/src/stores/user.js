@@ -1,7 +1,6 @@
 import { defineStore } from "pinia";
 import axios from "axios";
-// const server = "http://localhost:3000/";
-const server = "https://cleanmyshoes-production.up.railway.app/";
+const server = "https://cleanmyshoesbackend.habibiefaried.com/";
 
 export const useUserStore = defineStore("user", {
   state() {
@@ -118,18 +117,18 @@ export const useUserStore = defineStore("user", {
         localStorage.setItem("access_token", data.access_token);
         localStorage.setItem("username", data.username);
         localStorage.setItem("role", data.role);
-          this.password = ""
-          this.email = ""
-          Swal.fire({
-            title: `Welcome on board ${data.username}`,
-            showClass: {
-              popup: "animate__animated animate__fadeInDown",
-            },
-            hideClass: {
-              popup: "animate__animated animate__fadeOutUp",
-            }
-          })
-          this.router.push("/")
+        this.password = ""
+        this.email = ""
+        Swal.fire({
+          title: `Welcome on board ${data.username}`,
+          showClass: {
+            popup: "animate__animated animate__fadeInDown",
+          },
+          hideClass: {
+            popup: "animate__animated animate__fadeOutUp",
+          }
+        })
+        this.router.push("/")
       } catch (error) {
         Swal.fire({
           icon: "error",

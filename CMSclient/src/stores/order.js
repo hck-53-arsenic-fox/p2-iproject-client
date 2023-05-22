@@ -2,9 +2,7 @@ import { defineStore, mapActions } from "pinia";
 import axios from "axios";
 import { useFetchStore } from "./fetchData";
 // const server = "http://localhost:3000/";
-
-
-const server = "https://cleanmyshoes-production.up.railway.app/";
+const server = "https://cleanmyshoesbackend.habibiefaried.com/";
 
 export const useOrderStore = defineStore("order", {
   state() {

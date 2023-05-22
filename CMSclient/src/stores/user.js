@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import axios from "axios";
-const server = "https://cleanmyshoesbackend.habibiefaried.com/";
+const server = "https://cleanmyshoes-server.ibnusyadzali.com/";
 
 export const useUserStore = defineStore("user", {
   state() {
